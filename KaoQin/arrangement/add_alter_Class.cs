@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace KaoQin.users
+namespace KaoQin.arrangement
 {
-    public partial class AddDep : Form
+    public partial class add_alter_Class : Form
     {
-        public AddDep()
+        public add_alter_Class()
         {
             InitializeComponent();
         }
@@ -23,24 +23,13 @@ namespace KaoQin.users
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("请输入部门名称！");
-                return;
-            }
-
             string sql = "";
-
 
 
         }
 
-        private void AddDep_Load(object sender, EventArgs e)
+        private void add_alter_Class_Load(object sender, EventArgs e)
         {
-            string sql = "";
-
-            DataTable Department = new DataTable();
-
 
         }
     }

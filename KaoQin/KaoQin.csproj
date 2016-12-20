@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{51EAEF60-3323-4A52-BFA2-CBC49D47508F}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KaoQin</RootNamespace>
     <AssemblyName>KaoQin</AssemblyName>
@@ -32,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v14.2, Version=14.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -62,6 +65,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="arrangement\add_alter_Class.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="arrangement\add_alter_Class.Designer.cs">
+      <DependentUpon>add_alter_Class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="arrangement\add_alter_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="arrangement\add_alter_Item.Designer.cs">
+      <DependentUpon>add_alter_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="arrangement\arrange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="arrangement\arrange.Designer.cs">
+      <DependentUpon>arrange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="machine\machine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="machine\machine.Designer.cs">
+      <DependentUpon>machine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +127,18 @@
     <Compile Include="users\MainUsers.Designer.cs">
       <DependentUpon>MainUsers.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="arrangement\add_alter_Class.resx">
+      <DependentUpon>add_alter_Class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="arrangement\add_alter_Item.resx">
+      <DependentUpon>add_alter_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="arrangement\arrange.resx">
+      <DependentUpon>arrange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="machine\machine.resx">
+      <DependentUpon>machine.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +181,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

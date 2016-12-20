@@ -101,7 +101,7 @@
             // searchControl2
             // 
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl2.Location = new System.Drawing.Point(17, 7);
+            this.searchControl2.Location = new System.Drawing.Point(17, 10);
             this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -257,7 +257,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "工号";
+            this.gridColumn3.Caption = "考勤号";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
@@ -266,6 +266,8 @@
             // 
             this.gridColumn4.Caption = "姓名";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "", "总计：{0}")});
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
             // 
@@ -278,7 +280,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "gridColumn6";
+            this.gridColumn6.Caption = "说明";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 4;
@@ -382,6 +384,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainUsers";
             this.Text = "员工设置";
+            this.Load += new System.EventHandler(this.MainUsers_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -417,7 +420,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraEditors.SimpleButton ButtonAdd;
-        private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraEditors.SimpleButton ButtonAlter;
         private DevExpress.XtraEditors.SearchControl searchControl2;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -429,5 +431,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraEditors.SimpleButton ButtonDelete;
     }
 }

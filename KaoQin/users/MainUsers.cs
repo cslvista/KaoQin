@@ -12,6 +12,7 @@ namespace KaoQin.users
     public partial class MainUsers : Form
     {
         DataTable Staff = new DataTable();
+        DataTable Department = new DataTable();
         public MainUsers()
         {
             InitializeComponent();
@@ -24,14 +25,13 @@ namespace KaoQin.users
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-
+            SearchStaff();
         }
 
         private void SearchStaff()
         {
             string sql = "select ";
-
-            
+           
             try
             {
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
@@ -44,6 +44,9 @@ namespace KaoQin.users
             }
         }
 
-
+        private void MainUsers_Load(object sender, EventArgs e)
+        {
+            searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
+        }
     }
 }
