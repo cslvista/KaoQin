@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace KaoQin.users
+namespace KaoQin.arrangement
 {
-    public partial class AddUsers : Form
+    public partial class add_alter_Type : Form
     {
-        public AddUsers()
+        public add_alter_Type()
         {
             InitializeComponent();
         }
@@ -22,6 +22,14 @@ namespace KaoQin.users
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            string sql = "select max(ID) from KQ_PBType";
+
+
+
+        }
+
+        private void add_alter_Class_Load(object sender, EventArgs e)
         {
 
         }

@@ -11,6 +11,7 @@ namespace KaoQin.arrangement
 {
     public partial class arrange : Form
     {
+        DataTable Type = new DataTable();
         public arrange()
         {
             InitializeComponent();

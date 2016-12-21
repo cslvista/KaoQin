@@ -47,6 +47,7 @@ namespace test
                 {
                     KaoQin.Main form = new KaoQin.Main();
                     form.Show();
+                    
                 }
             }
         }

@@ -9,9 +9,10 @@ using System.Windows.Forms;
 
 namespace KaoQin.users
 {
-    public partial class AddDep : Form
+    public partial class add_alter_Users : Form
     {
-        public AddDep()
+        public bool alter = false;
+        public add_alter_Users()
         {
             InitializeComponent();
         }
@@ -23,25 +24,21 @@ namespace KaoQin.users
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("请输入部门名称！");
-                return;
-            }
-
-            string sql = "";
-
-
 
         }
 
-        private void AddDep_Load(object sender, EventArgs e)
+        private void AddUsers_Load(object sender, EventArgs e)
         {
-            string sql = "";
+            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
 
-            DataTable Department = new DataTable();
+            if (alter == true)
+            {
 
+            }else
+            {
 
+            }
         }
     }
 }

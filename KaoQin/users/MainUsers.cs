@@ -25,7 +25,7 @@ namespace KaoQin.users
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            SearchStaff();
+            
         }
 
         private void SearchStaff()
@@ -47,6 +47,34 @@ namespace KaoQin.users
         private void MainUsers_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
+            searchControl2.Properties.NullValuePrompt = " ";
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            add_alter_Users form = new add_alter_Users();
+            form.Show(this);
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            SearchStaff();
+        }
+
+        private void ButtonAlter_Click(object sender, EventArgs e)
+        {
+            add_alter_Users form = new add_alter_Users();
+            form.Show(this);
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -52,6 +52,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\GlobalHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.zkemkeeper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.zkemkeeper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,11 +70,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="arrangement\add_alter_Class.cs">
+    <Compile Include="arrangement\add_alter_Type.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="arrangement\add_alter_Class.Designer.cs">
-      <DependentUpon>add_alter_Class.cs</DependentUpon>
+    <Compile Include="arrangement\add_alter_Type.Designer.cs">
+      <DependentUpon>add_alter_Type.cs</DependentUpon>
     </Compile>
     <Compile Include="arrangement\add_alter_Item.cs">
       <SubType>Form</SubType>
@@ -82,6 +87,12 @@
     </Compile>
     <Compile Include="arrangement\arrange.Designer.cs">
       <DependentUpon>arrange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="machine\add_alter_machine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="machine\add_alter_machine.Designer.cs">
+      <DependentUpon>add_alter_machine.cs</DependentUpon>
     </Compile>
     <Compile Include="machine\machine.cs">
       <SubType>Form</SubType>
@@ -109,17 +120,17 @@
     <Compile Include="SignInTime.Designer.cs">
       <DependentUpon>SignInTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="users\AddDep.cs">
+    <Compile Include="users\add_alter_Dep.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="users\AddDep.Designer.cs">
-      <DependentUpon>AddDep.cs</DependentUpon>
+    <Compile Include="users\add_alter_Dep.Designer.cs">
+      <DependentUpon>add_alter_Dep.cs</DependentUpon>
     </Compile>
-    <Compile Include="users\AddUsers.cs">
+    <Compile Include="users\add_alter_Users.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="users\AddUsers.Designer.cs">
-      <DependentUpon>AddUsers.cs</DependentUpon>
+    <Compile Include="users\add_alter_Users.Designer.cs">
+      <DependentUpon>add_alter_Users.cs</DependentUpon>
     </Compile>
     <Compile Include="users\MainUsers.cs">
       <SubType>Form</SubType>
@@ -127,14 +138,17 @@
     <Compile Include="users\MainUsers.Designer.cs">
       <DependentUpon>MainUsers.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="arrangement\add_alter_Class.resx">
-      <DependentUpon>add_alter_Class.cs</DependentUpon>
+    <EmbeddedResource Include="arrangement\add_alter_Type.resx">
+      <DependentUpon>add_alter_Type.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="arrangement\add_alter_Item.resx">
       <DependentUpon>add_alter_Item.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="arrangement\arrange.resx">
       <DependentUpon>arrange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="machine\add_alter_machine.resx">
+      <DependentUpon>add_alter_machine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="machine\machine.resx">
       <DependentUpon>machine.cs</DependentUpon>
@@ -159,11 +173,11 @@
     <EmbeddedResource Include="SignInTime.resx">
       <DependentUpon>SignInTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="users\AddDep.resx">
-      <DependentUpon>AddDep.cs</DependentUpon>
+    <EmbeddedResource Include="users\add_alter_Dep.resx">
+      <DependentUpon>add_alter_Dep.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="users\AddUsers.resx">
-      <DependentUpon>AddUsers.cs</DependentUpon>
+    <EmbeddedResource Include="users\add_alter_Users.resx">
+      <DependentUpon>add_alter_Users.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="users\MainUsers.resx">
       <DependentUpon>MainUsers.cs</DependentUpon>
