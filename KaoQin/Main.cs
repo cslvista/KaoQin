@@ -27,7 +27,7 @@ namespace KaoQin
 
         private void SearchDepartment()
         {
-            string sql = "select * from KQ_BM";
+            string sql = "select BMID,BMMC,BMLX from KQ_BM";
 
             try
             {

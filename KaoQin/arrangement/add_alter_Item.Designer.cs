@@ -69,6 +69,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(71, 31);
             this.simpleButton1.TabIndex = 36;
             this.simpleButton1.Text = "保存";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // textBox4
             // 

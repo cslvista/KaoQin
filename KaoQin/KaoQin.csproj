@@ -59,6 +59,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -138,6 +139,12 @@
     <Compile Include="users\MainUsers.Designer.cs">
       <DependentUpon>MainUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="users\Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="users\Search.Designer.cs">
+      <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="arrangement\add_alter_Type.resx">
       <DependentUpon>add_alter_Type.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="users\MainUsers.resx">
       <DependentUpon>MainUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="users\Search.resx">
+      <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

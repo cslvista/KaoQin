@@ -33,10 +33,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.员工设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.机器设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.排班维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.修改排班表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,16 +50,15 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            this.排班维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -88,8 +89,8 @@
             // 员工设置ToolStripMenuItem
             // 
             this.员工设置ToolStripMenuItem.Name = "员工设置ToolStripMenuItem";
-            this.员工设置ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
-            this.员工设置ToolStripMenuItem.Text = "员工设置";
+            this.员工设置ToolStripMenuItem.Size = new System.Drawing.Size(96, 24);
+            this.员工设置ToolStripMenuItem.Text = "部门与员工";
             this.员工设置ToolStripMenuItem.Click += new System.EventHandler(this.员工设置ToolStripMenuItem_Click);
             // 
             // 机器设置ToolStripMenuItem
@@ -98,6 +99,13 @@
             this.机器设置ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.机器设置ToolStripMenuItem.Text = "设备管理";
             this.机器设置ToolStripMenuItem.Click += new System.EventHandler(this.机器设置ToolStripMenuItem_Click);
+            // 
+            // 排班维护ToolStripMenuItem
+            // 
+            this.排班维护ToolStripMenuItem.Name = "排班维护ToolStripMenuItem";
+            this.排班维护ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.排班维护ToolStripMenuItem.Text = "班次管理";
+            this.排班维护ToolStripMenuItem.Click += new System.EventHandler(this.排班维护ToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -137,7 +145,8 @@
             this.gridView1.Appearance.Row.Options.UseFont = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn8});
+            this.gridColumn8,
+            this.gridColumn9});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -148,6 +157,12 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "部门编号";
+            this.gridColumn8.FieldName = "BMID";
+            this.gridColumn8.Name = "gridColumn8";
             // 
             // gridControl2
             // 
@@ -167,12 +182,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改排班表ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 30);
             // 
             // 修改排班表ToolStripMenuItem
             // 
             this.修改排班表ToolStripMenuItem.Name = "修改排班表ToolStripMenuItem";
-            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.修改排班表ToolStripMenuItem.Text = "修改排班表";
             // 
             // gridView2
@@ -248,6 +263,30 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(765, 54);
             this.panelControl1.TabIndex = 3;
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton3.Appearance.Options.UseFont = true;
+            this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
+            this.simpleButton3.Location = new System.Drawing.Point(389, 14);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(97, 29);
+            this.simpleButton3.TabIndex = 24;
+            this.simpleButton3.Text = "出勤记录";
+            // 
+            // ButtonDelete
+            // 
+            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonDelete.Appearance.Options.UseFont = true;
+            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
+            this.ButtonDelete.Location = new System.Drawing.Point(209, 14);
+            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonDelete.Name = "ButtonDelete";
+            this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
+            this.ButtonDelete.TabIndex = 23;
+            this.ButtonDelete.Text = "删除";
             // 
             // simpleButton2
             // 
@@ -326,42 +365,11 @@
             this.searchControl1.TabIndex = 12;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
-            // 排班维护ToolStripMenuItem
+            // gridColumn9
             // 
-            this.排班维护ToolStripMenuItem.Name = "排班维护ToolStripMenuItem";
-            this.排班维护ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
-            this.排班维护ToolStripMenuItem.Text = "班次管理";
-            this.排班维护ToolStripMenuItem.Click += new System.EventHandler(this.排班维护ToolStripMenuItem_Click);
-            // 
-            // ButtonDelete
-            // 
-            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonDelete.Appearance.Options.UseFont = true;
-            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(209, 14);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
-            this.ButtonDelete.TabIndex = 23;
-            this.ButtonDelete.Text = "删除";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton3.Appearance.Options.UseFont = true;
-            this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(389, 14);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(97, 29);
-            this.simpleButton3.TabIndex = 24;
-            this.simpleButton3.Text = "出勤记录";
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "部门编号";
-            this.gridColumn8.FieldName = "BMID";
-            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn9.Caption = "部门类型";
+            this.gridColumn9.FieldName = "BMLX";
+            this.gridColumn9.Name = "gridColumn9";
             // 
             // Main
             // 
@@ -424,6 +432,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }
 

@@ -17,6 +17,7 @@ namespace KaoQin.machine
         public machine()
         {
             InitializeComponent();
+
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -59,14 +60,35 @@ namespace KaoQin.machine
         }
 
         private void machine_Load(object sender, EventArgs e)
-        {
+        {            
+            Machine.Columns.Add("ID", typeof(string));
+            Machine.Columns.Add("Machine", typeof(string));
+            Machine.Columns.Add("IP", typeof(string));
+            Machine.Columns.Add("Port", typeof(string));
+            Machine.Columns.Add("Password", typeof(string));            
             simpleButton1_Click(null, null);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
+            if (Machine.Rows.Count == 0)
+            {
+                MessageBox.Show("没有可用设备！");
+                return;
+            }
+
             bool bIsConnected = false;//判断设备是否可连接
 
+            try
+            {
+                //判断存不存在这一列
+                string test = Machine.Rows[0]["Status"].ToString();
+            }
+            catch
+            {
+                Machine.Columns.Add("Status", typeof(string));
+            }
+            
             for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 try
@@ -75,10 +97,10 @@ namespace KaoQin.machine
                     bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
                     if (bIsConnected==false)
                     {
-
+                        Machine.Rows[i]["Status"] = "连接失败";
                     }else
                     {
-
+                        Machine.Rows[i]["Status"] = "连接成功";
                     }
                 }
                 catch (Exception ex)
@@ -93,13 +115,21 @@ namespace KaoQin.machine
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否删除？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            string sql = "";
+            try
             {
-                return;
+                if (MessageBox.Show(string.Format("是否删除设备'{0}'?", gridView1.GetFocusedRowCellValue("Machine").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)                    
+                {
+                    return;
+                }
+
+                sql = string.Format("Delete from KQ_Machine where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
             }
+            catch
+            {
 
-            string sql = string.Format("Delete from KQ_Machine");
-
+            }
+            
             try
             {
                 GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
@@ -110,6 +140,25 @@ namespace KaoQin.machine
                 return;
             }
 
+            simpleButton1_Click(null, null);
+
+        }
+
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "Status")
+            {
+                string Status = gridView1.GetRowCellDisplayText(e.RowHandle, gridView1.Columns["Status"]);
+
+                if (Status == "连接成功")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+                else if (Status == "连接失败")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

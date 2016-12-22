@@ -20,7 +20,7 @@ namespace KaoQin
 
         private void Schedual_Load(object sender, EventArgs e)
         {
-            string sql = "select * from T_HZXX";
+            string sql = "select * from KQ_YG";
 
             try
             {

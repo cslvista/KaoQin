@@ -11,6 +11,9 @@ namespace KaoQin.users
 {
     public partial class add_alter_Dep : Form
     {
+        public bool alter = false;
+        bool success = false;
+        public string BMID = "";
         public add_alter_Dep()
         {
             InitializeComponent();
@@ -29,17 +32,100 @@ namespace KaoQin.users
                 return;
             }
 
-            string sql = "";
 
+            if (alter == true)
+            {
+                success = Alter();
+            }
+            else
+            {
+                success = Add();
+            }
 
+            //更新主界面
+            if (success == true)
+            {
+                MainUsers form = (MainUsers)this.Owner;
+                this.Close();
+            }
+        }
 
+        private bool Add()
+        {
+
+            string sql = "select max(ID) from KQ_Machine";
+
+            DataTable Max_ID = new DataTable();
+            string ID = "";
+            try
+            {
+                Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                if (Max_ID.Rows[0][0].ToString() == "")
+                {
+                    ID = "1";
+                }
+                else
+                {
+                    ID = (Convert.ToInt32(Max_ID.Rows[0][0].ToString()) + 1).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return false;
+            }
+
+            string sql1 = string.Format("insert into KQ_BM (BMID,BMMC,BMLB) values ('{0}','{1}','{2}')", BMID, textBox1.Text.Trim(),comboBox1.SelectedValue);
+
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message, "提示");
+                return false;
+            }
+        }
+
+        private bool Alter()
+        {
+            //更新或插入数据
+            string sql = string.Format("update KQ_BM set BMMC='{0}',BMLB='{1}' where BMID='{2}'", textBox1.Text.Trim(),comboBox1.SelectedValue,BMID);
+
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         private void AddDep_Load(object sender, EventArgs e)
         {
-            string sql = "";
+            string sql = "select BMID,BMLB form KQ_BMLB";
 
             DataTable Department = new DataTable();
+            Department.Columns.Add("BMID");
+            Department.Columns.Add("BMLB");
+
+            try
+            {
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                comboBox1.DataSource = Department;
+                comboBox1.DisplayMember = "BMLB";
+                comboBox1.ValueMember = "BMID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
 
 
         }
