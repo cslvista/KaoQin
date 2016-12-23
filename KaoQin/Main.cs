@@ -90,5 +90,15 @@ namespace KaoQin
             arrangement.arrange form = new arrangement.arrange();
             form.Show();
         }
+
+        private void ButtonAlter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

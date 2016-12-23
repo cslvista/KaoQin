@@ -19,10 +19,11 @@ namespace KaoQin.arrangement
 
         private void arrange_Load(object sender, EventArgs e)
         {
-            SearchType();
+            toolStripButtonRefresh_Click(null, null);
         }
 
-        private void SearchType()
+
+        public void ButtonRefresh_Click(object sender, EventArgs e)
         {
             string sql = "select ID,BMLB from KQ_BMLB";
 
@@ -38,11 +39,6 @@ namespace KaoQin.arrangement
             }
         }
 
-        public void simpleButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
 
@@ -50,11 +46,61 @@ namespace KaoQin.arrangement
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
-
+            add_alter_Item form = new add_alter_Item();
+            form.Show(this);
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            add_alter_Item form = new add_alter_Item();
+            form.Show(this);
+        }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            add_alter_Type form = new add_alter_Type();
+            form.Show(this);
+        }
+
+        private void toolStripButtonAlter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                add_alter_Type form = new add_alter_Type();
+                form.alter = true;
+                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.ID = gridView1.GetFocusedRowCellDisplayText("ID").ToString();
+                form.Show(this);
+            }
+            catch { }
+            
+        }
+
+        public void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            string sql = "select ID,BMLB from KQ_BMLB";
+
+            try
+            {
+                Type = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                gridControl1.DataSource = Type;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误:" + ex.Message);
+                return;
+            }
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
+            string sql = "";
+
 
         }
     }

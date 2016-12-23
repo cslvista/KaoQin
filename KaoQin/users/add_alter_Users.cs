@@ -42,7 +42,14 @@ namespace KaoQin.users
             }
 
             //更新主界面
-            if (success == true)
+            if (success == true && alter==false)
+            {
+                textBox2.Text = "";
+                textBox3.Text = "";
+                dateEdit1.Text = "";
+                textBox1.Text = "";
+                MessageBox.Show("更新成功！");
+            }else if (success == true && alter == true)
             {
                 MainUsers form = (MainUsers)this.Owner;
                 this.Close();
@@ -113,7 +120,8 @@ namespace KaoQin.users
             {
                 comboBox1.Text = "在职";
                 comboBox1.Enabled = false;
-            }           
+            }
+                 
         }
     }
 }

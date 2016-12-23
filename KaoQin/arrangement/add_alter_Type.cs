@@ -46,7 +46,7 @@ namespace KaoQin.arrangement
             if (success == true)
             {
                 arrange form = (arrange)this.Owner;
-                form.simpleButton1_Click(null,null);
+                form.ButtonRefresh_Click(null,null);
                 this.Close();
             }      
 
@@ -55,7 +55,7 @@ namespace KaoQin.arrangement
         private bool Alter()
         {
 
-            string sql = string.Format("update KQ_Machine set Machine='{0}',IP='{1}',Port='{2}',Password='{3}' where ID='{4}'", textBox1.Text.Trim(), ID);
+            string sql = string.Format("update KQ_BMLB set BMLB='{0}' where ID='{1}'", textBox1.Text.Trim(), ID);
 
             try
             {
@@ -71,7 +71,7 @@ namespace KaoQin.arrangement
 
         private bool Add()
         {
-            string sql = "select max(ID) from KQ_Machine";
+            string sql = "select max(ID) from KQ_BMLB";
 
             DataTable Max_ID = new DataTable();
             string ID = "";
@@ -93,7 +93,7 @@ namespace KaoQin.arrangement
                 return false;
             }
 
-            string sql1 = string.Format("insert into KQ_Machine (ID,Machine,IP,Port,Password) values ('{0}','{1}','{2}','{3}','{4}')", ID, textBox1.Text.Trim());
+            string sql1 = string.Format("insert into KQ_BMLB (ID,BMLB) values ('{0}','{1}')", ID, textBox1.Text.Trim());
 
             try
             {
@@ -109,7 +109,10 @@ namespace KaoQin.arrangement
 
         private void add_alter_Class_Load(object sender, EventArgs e)
         {
-
+            if (alter == true)
+            {
+                this.Text = "修改类别";
+            }
         }
     }
 }

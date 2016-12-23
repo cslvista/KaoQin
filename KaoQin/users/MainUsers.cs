@@ -32,24 +32,9 @@ namespace KaoQin.users
         {
             searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
             searchControl2.Properties.NullValuePrompt = " ";
-            SearchDepartment();
+            toolStripButtonRefresh_Click(null, null);
         }
 
-        private void SearchDepartment()
-        {
-            string sql = "select BMID,BMMC,BMLX from KQ_BM";
-
-            try
-            {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                gridControl1.DataSource = Department;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误1:" + ex.Message, "提示");
-                return;
-            }
-        }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -119,8 +104,40 @@ namespace KaoQin.users
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
-            Search form = new Search();
+            SearchMachine form = new SearchMachine();
             form.Show();
+        }
+
+        private void searchControl2_TextChanged(object sender, EventArgs e)
+        {
+            Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl2.Text);
+        }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            add_alter_Dep form = new add_alter_Dep();
+            form.Show(this);
+        }
+
+        public void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            string sql = "select a.BMID,a.BMMC,b.BMLB from KQ_BM a left join KQ_BMLB b on a.BMLX=b.ID";
+
+            try
+            {
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                gridControl1.DataSource = Department;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+            }
+        }
+
+        private void toolStripButtonAlter_Click(object sender, EventArgs e)
+        {
+            add_alter_Dep form = new add_alter_Dep();
+            form.Show(this);
         }
     }
 }

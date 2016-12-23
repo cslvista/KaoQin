@@ -46,6 +46,7 @@ namespace KaoQin.users
             if (success == true)
             {
                 MainUsers form = (MainUsers)this.Owner;
+                form.toolStripButtonRefresh_Click(null, null);
                 this.Close();
             }
         }
@@ -53,7 +54,7 @@ namespace KaoQin.users
         private bool Add()
         {
 
-            string sql = "select max(ID) from KQ_Machine";
+            string sql = "select max(BMID) from KQ_BM";
 
             DataTable Max_ID = new DataTable();
             string ID = "";
@@ -75,7 +76,7 @@ namespace KaoQin.users
                 return false;
             }
 
-            string sql1 = string.Format("insert into KQ_BM (BMID,BMMC,BMLB) values ('{0}','{1}','{2}')", BMID, textBox1.Text.Trim(),comboBox1.SelectedValue);
+            string sql1 = string.Format("insert into KQ_BM (BMID,BMMC,BMLX) values ('{0}','{1}','{2}')", ID, textBox1.Text.Trim(),comboBox1.SelectedValue);
 
             try
             {
@@ -108,23 +109,28 @@ namespace KaoQin.users
 
         private void AddDep_Load(object sender, EventArgs e)
         {
-            string sql = "select BMID,BMLB form KQ_BMLB";
+            string sql = "select ID,BMLB from KQ_BMLB";
 
-            DataTable Department = new DataTable();
-            Department.Columns.Add("BMID");
-            Department.Columns.Add("BMLB");
+            DataTable Type = new DataTable();
+            Type.Columns.Add("ID");
+            Type.Columns.Add("BMLB");
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                comboBox1.DataSource = Department;
+                Type = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                comboBox1.DataSource = Type;
                 comboBox1.DisplayMember = "BMLB";
-                comboBox1.ValueMember = "BMID";
+                comboBox1.ValueMember = "ID";
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
                 return;
+            }
+
+            if (alter == true)
+            {
+                this.Text = "修改部门";
             }
 
 

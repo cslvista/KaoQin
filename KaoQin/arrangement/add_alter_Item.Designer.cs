@@ -192,9 +192,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "add_alter_Item";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "添加班次";
             this.Load += new System.EventHandler(this.AddItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.timeEdit2.Properties)).EndInit();

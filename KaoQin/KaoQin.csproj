@@ -139,11 +139,11 @@
     <Compile Include="users\MainUsers.Designer.cs">
       <DependentUpon>MainUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="users\Search.cs">
+    <Compile Include="users\SearchMachine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="users\Search.Designer.cs">
-      <DependentUpon>Search.cs</DependentUpon>
+    <Compile Include="users\SearchMachine.Designer.cs">
+      <DependentUpon>SearchMachine.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="arrangement\add_alter_Type.resx">
       <DependentUpon>add_alter_Type.cs</DependentUpon>
@@ -189,8 +189,8 @@
     <EmbeddedResource Include="users\MainUsers.resx">
       <DependentUpon>MainUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="users\Search.resx">
-      <DependentUpon>Search.cs</DependentUpon>
+    <EmbeddedResource Include="users\SearchMachine.resx">
+      <DependentUpon>SearchMachine.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

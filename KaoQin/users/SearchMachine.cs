@@ -10,13 +10,13 @@ using System.Threading;
 
 namespace KaoQin.users
 {
-    public partial class Search : Form
+    public partial class SearchMachine : Form
     {
         zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
         delegate void UpdateUI();
         string sql = "";
         DataTable User = new DataTable();
-        public Search()
+        public SearchMachine()
         {
             InitializeComponent();
         }
@@ -46,7 +46,6 @@ namespace KaoQin.users
             comboBox1.DataSource = Machine;
             comboBox1.DisplayMember = "Machine";
             comboBox1.ValueMember = "ID";
-            comboBox1.Text = null;
         }
 
         private void SearchStaff()
