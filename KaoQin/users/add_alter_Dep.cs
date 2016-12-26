@@ -109,7 +109,7 @@ namespace KaoQin.users
 
         private void AddDep_Load(object sender, EventArgs e)
         {
-            string sql = "select ID,BMLB from KQ_BMLB";
+            string sql = "select ID,BMLB from KQ_BMLB where ID>0";
 
             DataTable Type = new DataTable();
             Type.Columns.Add("ID");
@@ -121,6 +121,7 @@ namespace KaoQin.users
                 comboBox1.DataSource = Type;
                 comboBox1.DisplayMember = "BMLB";
                 comboBox1.ValueMember = "ID";
+                comboBox1.Text = null;
             }
             catch (Exception ex)
             {

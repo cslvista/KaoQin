@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace KaoQin.arrangement
 {
     public partial class arrange : Form
     {
         DataTable Type = new DataTable();
+        DataTable WorkShift = new DataTable();
+        delegate void UpdateUI();
+
         public arrange()
         {
             InitializeComponent();
@@ -19,46 +23,93 @@ namespace KaoQin.arrangement
 
         private void arrange_Load(object sender, EventArgs e)
         {
+            searchControl1.Properties.NullValuePrompt = " ";
             toolStripButtonRefresh_Click(null, null);
         }
 
 
         public void ButtonRefresh_Click(object sender, EventArgs e)
         {
-            string sql = "select ID,BMLB from KQ_BMLB";
+            SearchWorkShift();
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show(string.Format("是否删除'{0}'？", gridView2.GetFocusedRowCellDisplayText("NAME").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
+            }
+            catch { }           
+
+            string sql = string.Format("delete from KQ_BC where ID='{0}'", gridView2.GetFocusedRowCellValue("ID").ToString());
 
             try
             {
-                Type = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                gridControl1.DataSource = Type;
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误:" + ex.Message);
                 return;
             }
-        }
 
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-
+            SearchWorkShift();
         }
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
-            add_alter_Item form = new add_alter_Item();
-            form.Show(this);
+            try
+            {
+                add_alter_Item form = new add_alter_Item();
+                form.alter = true;
+                form.LBID= gridView1.GetFocusedRowCellValue("ID").ToString();
+                form.ID = gridView2.GetFocusedRowCellValue("ID").ToString();
+                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.textBox2.Text = gridView2.GetFocusedRowCellDisplayText("GZR").ToString();
+                form.textBox3.Text = gridView2.GetFocusedRowCellDisplayText("NAME").ToString(); 
+                form.textBox4.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                if (gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString() == "")
+                {
+                    form.checkBox1.Checked = true;
+                }
+                else
+                {
+                    form.timeEdit1.EditValue = gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString();
+                }
+
+                if (gridView2.GetFocusedRowCellDisplayText("XBSJ").ToString() == "")
+                {
+                    form.checkBox2.Checked = true;
+                }else
+                {
+                    form.timeEdit2.EditValue = gridView2.GetFocusedRowCellDisplayText("XBSJ").ToString();
+                }
+                form.Show(this);
+            }
+            catch { }
+            
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            add_alter_Item form = new add_alter_Item();
-            form.Show(this);
+            try
+            {
+                add_alter_Item form = new add_alter_Item();
+                form.LBID= gridView1.GetFocusedRowCellDisplayText("ID").ToString();
+                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.Show(this);
+            }
+            catch { }
+            
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             add_alter_Type form = new add_alter_Type();
+            
             form.Show(this);
         }
 
@@ -66,6 +117,12 @@ namespace KaoQin.arrangement
         {
             try
             {
+                if (gridView1.GetFocusedRowCellDisplayText("ID").ToString()=="0")
+                {
+                    MessageBox.Show("'部门共用'不可修改！");
+                    return;
+                }
+
                 add_alter_Type form = new add_alter_Type();
                 form.alter = true;
                 form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
@@ -94,14 +151,83 @@ namespace KaoQin.arrangement
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            if (gridView1.GetFocusedRowCellDisplayText("ID").ToString() == "0")
+            {
+                MessageBox.Show("'部门共用'不可删除！");
+                return;
+            }
+
+
+            if (MessageBox.Show(string.Format("是否删除{0}？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;
             }
 
-            string sql = "";
+            string sql = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString())
+                + " union all "      
+                + string.Format("delete from KQ_BC   where LBID='{0}'",gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误:" + ex.Message);
+                return;
+            }
+            //刷新界面
+            toolStripButtonRefresh_Click(null, null);
+
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+            Thread t1 = new Thread(SearchWorkShift);
+            t1.IsBackground = true;
+            t1.Start();
+        }
+
+        private void SearchWorkShift()
+        {
+            this.BeginInvoke(new UpdateUI(delegate ()
+            {
+                string sql = string.Format("select ID,LBID,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                try
+                {
+                    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    gridControl2.DataSource = WorkShift;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误:" + ex.Message, "提示");
+                    return;
+                }
+
+            }));
+        }
+
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "BMLB")
+            {
+                string ZYZT = gridView1.GetRowCellDisplayText(e.RowHandle, gridView1.Columns["BMLB"]);
+
+                if (ZYZT == "部门共用")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+            }
+        }
 
 
+        private void gridControl2_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(null, null);
+        }
+
+        private void searchControl1_TextChanged(object sender, EventArgs e)
+        {
+            WorkShift.DefaultView.RowFilter = string.Format("NAME like '%{0}%'", searchControl1.Text);
         }
     }
 }

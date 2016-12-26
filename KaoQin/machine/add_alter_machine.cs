@@ -44,11 +44,6 @@ namespace KaoQin.machine
                 return;
             }
 
-            if (textBox4.Text.Length == 0)
-            {
-                MessageBox.Show("请输入密码");
-                return;
-            }
 
             if (alter == true)
             {

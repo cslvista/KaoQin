@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace KaoQin
 {
@@ -14,6 +15,7 @@ namespace KaoQin
     {
         DataTable Department = new DataTable();
         DataTable Attendance = new DataTable();
+        delegate void UpdateUI();
         public Main()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace KaoQin
 
         private void SearchDepartment()
         {
-            string sql = "select BMID,BMMC,BMLX from KQ_BM";
+            string sql = "select BMID,BMMC,BMLX from KQ_BM where BMID>0";
 
             try
             {
@@ -71,18 +73,28 @@ namespace KaoQin
 
         private void gridControl1_Click(object sender, EventArgs e)
         {
-            string sql = string.Format("select * from a");
+            Thread t1 = new Thread(SearchAttendance);
+            t1.IsBackground = true;
+            t1.Start();
+        }
 
-            try
+        private void SearchAttendance()
+        {
+            string sql = string.Format("select ID,BMID,KSSJ,JSSJ,CJRID,CJSJ,XGRID,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+
+            this.BeginInvoke(new UpdateUI(delegate ()
             {
+                try
+                {
                 Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl2.DataSource = Attendance;
-            }
-            catch (Exception ex)
-            {
+                }
+                catch (Exception ex)
+                {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
                 return;
-            }
+                }
+            }));
         }
 
         private void 排班维护ToolStripMenuItem_Click(object sender, EventArgs e)

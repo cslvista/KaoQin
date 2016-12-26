@@ -46,7 +46,7 @@ namespace KaoQin.arrangement
             if (success == true)
             {
                 arrange form = (arrange)this.Owner;
-                form.ButtonRefresh_Click(null,null);
+                form.toolStripButtonRefresh_Click(null,null);
                 this.Close();
             }      
 

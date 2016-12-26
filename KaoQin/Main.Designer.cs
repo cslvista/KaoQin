@@ -34,6 +34,7 @@
             this.员工设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.机器设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.排班维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.考勤管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -51,7 +52,6 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
@@ -79,7 +79,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.员工设置ToolStripMenuItem,
             this.机器设置ToolStripMenuItem,
-            this.排班维护ToolStripMenuItem});
+            this.排班维护ToolStripMenuItem,
+            this.考勤管理ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
@@ -106,6 +107,12 @@
             this.排班维护ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.排班维护ToolStripMenuItem.Text = "班次管理";
             this.排班维护ToolStripMenuItem.Click += new System.EventHandler(this.排班维护ToolStripMenuItem_Click);
+            // 
+            // 考勤管理ToolStripMenuItem
+            // 
+            this.考勤管理ToolStripMenuItem.Name = "考勤管理ToolStripMenuItem";
+            this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.考勤管理ToolStripMenuItem.Text = "考勤管理";
             // 
             // tableLayoutPanel1
             // 
@@ -262,7 +269,6 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.simpleButton3);
             this.panelControl1.Controls.Add(this.ButtonDelete);
             this.panelControl1.Controls.Add(this.ButtonRefresh);
             this.panelControl1.Controls.Add(this.ButtonAdd);
@@ -272,18 +278,6 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(765, 54);
             this.panelControl1.TabIndex = 3;
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton3.Appearance.Options.UseFont = true;
-            this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(389, 14);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(97, 29);
-            this.simpleButton3.TabIndex = 24;
-            this.simpleButton3.Text = "出勤记录";
             // 
             // ButtonDelete
             // 
@@ -434,10 +428,10 @@
         private DevExpress.XtraEditors.SimpleButton ButtonAlter;
         private System.Windows.Forms.ToolStripMenuItem 机器设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 排班维护ToolStripMenuItem;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private System.Windows.Forms.ToolStripMenuItem 考勤管理ToolStripMenuItem;
     }
 }
 

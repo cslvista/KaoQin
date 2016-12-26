@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace KaoQin.users
 {
@@ -13,6 +14,7 @@ namespace KaoQin.users
     {
         DataTable Staff = new DataTable();
         DataTable Department = new DataTable();
+        delegate void UpdateUI();
         public MainUsers()
         {
             InitializeComponent();
@@ -136,8 +138,69 @@ namespace KaoQin.users
 
         private void toolStripButtonAlter_Click(object sender, EventArgs e)
         {
-            add_alter_Dep form = new add_alter_Dep();
-            form.Show(this);
+            try
+            {
+                if (gridView1.GetFocusedRowCellDisplayText("BMID").ToString() == "0")
+                {
+                    MessageBox.Show("该项不可修改！");
+                    return;
+                }
+
+                add_alter_Dep form = new add_alter_Dep();
+                form.Show(this);
+            }
+            catch { }
+            
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+            Thread t1 = new Thread(SearchUsers);
+            t1.IsBackground = true;
+            t1.Start();
+        }
+
+        private void SearchUsers()
+        {
+            string sql =string.Format( "");
+            this.BeginInvoke(new UpdateUI(delegate ()
+            {
+                try
+                {
+                    //Reservation = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    //gridControl1.DataSource = Reservation;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误:" + ex.Message, "提示");
+                    return;
+                }
+
+            }));
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (gridView1.GetFocusedRowCellDisplayText("BMID").ToString() == "0")
+            {
+                MessageBox.Show("该项不可删除！");
+                return;
+            }
+
+
+        }
+
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "BMMC")
+            {
+                string BMMC = gridView1.GetRowCellDisplayText(e.RowHandle, gridView1.Columns["BMMC"]);
+
+                if (BMMC == "未分类员工")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }
