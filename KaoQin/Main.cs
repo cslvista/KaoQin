@@ -112,5 +112,11 @@ namespace KaoQin
         {
 
         }
+
+        private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Attendance form = new Attendance();
+            form.Show();
+        }
     }
 }

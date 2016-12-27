@@ -191,7 +191,7 @@ namespace KaoQin.arrangement
         {
             this.BeginInvoke(new UpdateUI(delegate ()
             {
-                string sql = string.Format("select ID,LBID,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                string sql = string.Format("select ID,LBID,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
@@ -228,6 +228,37 @@ namespace KaoQin.arrangement
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
             WorkShift.DefaultView.RowFilter = string.Format("NAME like '%{0}%'", searchControl1.Text);
+        }
+
+        private void gridView2_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "KT")
+            {
+                switch (e.Value.ToString())
+                {
+                    case "0": e.DisplayText = "否"; break;
+                    case "1": e.DisplayText = "是"; break;
+                }
+            }
+
+        }
+
+        private void gridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "KT")
+            {
+                string KT = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["KT"]);
+
+                if (KT == "是")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+                else if (KT == "否")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+            }
+
         }
     }
 }

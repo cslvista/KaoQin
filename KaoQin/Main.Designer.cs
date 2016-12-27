@@ -83,7 +83,7 @@
             this.考勤管理ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1079, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,6 +113,7 @@
             this.考勤管理ToolStripMenuItem.Name = "考勤管理ToolStripMenuItem";
             this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.考勤管理ToolStripMenuItem.Text = "考勤管理";
+            this.考勤管理ToolStripMenuItem.Click += new System.EventHandler(this.考勤管理ToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -129,7 +130,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1047, 680);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1079, 680);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // gridControl1
@@ -186,7 +187,7 @@
             this.gridControl2.Location = new System.Drawing.Point(279, 63);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(765, 614);
+            this.gridControl2.Size = new System.Drawing.Size(797, 614);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -276,7 +277,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(279, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(765, 54);
+            this.panelControl1.Size = new System.Drawing.Size(797, 54);
             this.panelControl1.TabIndex = 3;
             // 
             // ButtonDelete
@@ -374,14 +375,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 708);
+            this.ClientSize = new System.Drawing.Size(1079, 708);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "考勤管理";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

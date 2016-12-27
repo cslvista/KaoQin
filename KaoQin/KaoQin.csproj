@@ -89,6 +89,12 @@
     <Compile Include="arrangement\arrange.Designer.cs">
       <DependentUpon>arrange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Attendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Attendance.Designer.cs">
+      <DependentUpon>Attendance.cs</DependentUpon>
+    </Compile>
     <Compile Include="machine\add_alter_machine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="arrangement\arrange.resx">
       <DependentUpon>arrange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Attendance.resx">
+      <DependentUpon>Attendance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="machine\add_alter_machine.resx">
       <DependentUpon>add_alter_machine.cs</DependentUpon>

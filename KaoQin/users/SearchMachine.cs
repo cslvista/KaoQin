@@ -99,7 +99,7 @@ namespace KaoQin.users
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             sql = string.Format("select IP,Port,Password from KQ_Machine where ID='{0}'", comboBox1.SelectedValue);
-            gridControl1.DataSource = null;
+            User.Clear();
             Thread t1 = new Thread(SearchStaff);
             t1.IsBackground = true;
             t1.Start();

@@ -76,7 +76,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 310F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.gridControl1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.gridControl2, 1, 1);
@@ -84,9 +84,10 @@
             this.tableLayoutPanel1.Controls.Add(this.panelControl2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1175, 705);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -94,10 +95,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 83);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridControl1.Location = new System.Drawing.Point(3, 91);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(304, 619);
+            this.gridControl1.Size = new System.Drawing.Size(327, 612);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -145,10 +148,12 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(313, 83);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridControl2.Location = new System.Drawing.Point(336, 91);
             this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(859, 619);
+            this.gridControl2.Size = new System.Drawing.Size(836, 612);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -230,9 +235,10 @@
             this.panelControl1.Controls.Add(this.searchControl2);
             this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(3, 3);
+            this.panelControl1.Location = new System.Drawing.Point(3, 2);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(304, 74);
+            this.panelControl1.Size = new System.Drawing.Size(327, 85);
             this.panelControl1.TabIndex = 3;
             // 
             // toolStrip1
@@ -244,9 +250,9 @@
             this.toolStripButtonAlter,
             this.toolStripButtonDelete,
             this.toolStripButtonRefresh});
-            this.toolStrip1.Location = new System.Drawing.Point(2, 45);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 56);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(300, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(323, 27);
             this.toolStrip1.TabIndex = 35;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -289,7 +295,7 @@
             // searchControl2
             // 
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl2.Location = new System.Drawing.Point(64, 10);
+            this.searchControl2.Location = new System.Drawing.Point(64, 16);
             this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -307,7 +313,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(9, 13);
+            this.label4.Location = new System.Drawing.Point(9, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 20);
             this.label4.TabIndex = 34;
@@ -323,9 +329,10 @@
             this.panelControl2.Controls.Add(this.searchControl1);
             this.panelControl2.Controls.Add(this.simpleButton2);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(313, 3);
+            this.panelControl2.Location = new System.Drawing.Point(336, 2);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(859, 74);
+            this.panelControl2.Size = new System.Drawing.Size(836, 85);
             this.panelControl2.TabIndex = 4;
             // 
             // simpleButton1
@@ -333,10 +340,10 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(352, 24);
+            this.simpleButton1.Location = new System.Drawing.Point(352, 30);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(114, 30);
+            this.simpleButton1.Size = new System.Drawing.Size(115, 30);
             this.simpleButton1.TabIndex = 29;
             this.simpleButton1.Text = "查询考勤机";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click_1);
@@ -346,7 +353,7 @@
             this.simpleButton3.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton3.Appearance.Options.UseFont = true;
             this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(269, 24);
+            this.simpleButton3.Location = new System.Drawing.Point(269, 30);
             this.simpleButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(69, 30);
@@ -359,7 +366,7 @@
             this.ButtonAdd.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAdd.Appearance.Options.UseFont = true;
             this.ButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAdd.Image")));
-            this.ButtonAdd.Location = new System.Drawing.Point(20, 24);
+            this.ButtonAdd.Location = new System.Drawing.Point(20, 30);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(69, 30);
@@ -372,7 +379,7 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(186, 24);
+            this.ButtonDelete.Location = new System.Drawing.Point(187, 30);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
@@ -385,7 +392,7 @@
             this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAlter.Appearance.Options.UseFont = true;
             this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(103, 24);
+            this.ButtonAlter.Location = new System.Drawing.Point(103, 30);
             this.ButtonAlter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAlter.Name = "ButtonAlter";
             this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
@@ -396,7 +403,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(596, 25);
+            this.searchControl1.Location = new System.Drawing.Point(596, 31);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -415,7 +422,7 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(480, 24);
+            this.simpleButton2.Location = new System.Drawing.Point(480, 30);
             this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(100, 30);
@@ -429,6 +436,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1175, 705);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部门与员工设置";

@@ -22,11 +22,26 @@ namespace KaoQin.arrangement
 
         private void AddItem_Load(object sender, EventArgs e)
         {
+            UILocation();
+
             textBox1.Enabled = false;
             if (alter == false)
             {
                 textBox2.Text = "1";
+                comboBox1.Text = "否";
+                comboBox2.Text = "在用";
+                comboBox2.Enabled = false;
             }
+            else
+            {
+            }
+        }
+
+        private void UILocation()
+        {
+            int x = 3;
+            int y = 2;
+            label1.Location = new Point(timeEdit2.Location.X - label1.Width - x, timeEdit2.Location.Y + y);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -48,7 +63,7 @@ namespace KaoQin.arrangement
                 return;
             }
 
-            if (checkBox1.Checked==false && checkBox2.Checked == false)
+            if (checkBox1.Checked==false && checkBox2.Checked == false && comboBox1.Text=="否")
             {
                 if (timeEdit1.Text == timeEdit2.Text)
                 {
@@ -56,7 +71,7 @@ namespace KaoQin.arrangement
                     return;
                 }
 
-                if (DateTime.Compare(Convert.ToDateTime(timeEdit1.Text), Convert.ToDateTime(timeEdit2.Text)) >= 0)
+                if (comboBox1.Text == "否" && DateTime.Compare(Convert.ToDateTime(timeEdit1.Text), Convert.ToDateTime(timeEdit2.Text)) >= 0)
                 {
                     MessageBox.Show("下班时间不能大于或等于上班时间！");
                     return;
@@ -130,7 +145,7 @@ namespace KaoQin.arrangement
                 XBSJ = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
             }
 
-            string sql1 = string.Format("insert into KQ_BC (ID,LBID,NAME,SBSJ,XBSJ,GZR,SM,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')", ID, LBID, textBox3.Text.Trim(),SBSJ,XBSJ, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
+            string sql1 = string.Format("insert into KQ_BC (ID,LBID,KT,NAME,SBSJ,XBSJ,GZR,SM,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')", ID, LBID, comboBox1.SelectedIndex,textBox3.Text.Trim(),SBSJ,XBSJ, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
             try
             {
@@ -183,5 +198,31 @@ namespace KaoQin.arrangement
         {
             timeEdit2.Enabled = !checkBox2.Checked;
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "是")
+            {
+                label1.Text = "下班时间(明)：";
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                UILocation();
+            }
+            else
+            {
+                label1.Text = "下班时间(今)：";
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
+                UILocation();
+            }
+        }
+
+
+
+
     }
 }
