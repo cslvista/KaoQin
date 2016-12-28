@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace KaoQin
 {
@@ -22,6 +23,11 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("查询需要1-2分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+                
             //读取考勤机数据
             string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
@@ -63,7 +69,7 @@ namespace KaoQin
             }
             
             //读取员工信息
-            string sql1 =string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'",comboBoxDep.SelectedValue);
+            string sql1 =string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'");
 
             try
             {
@@ -120,24 +126,109 @@ namespace KaoQin
 
         private void Attendance_Load(object sender, EventArgs e)
         {
-            string sql = "select BMID,BMMC from KQ_BM where BMID>0";
+            searchControl1.Properties.NullValuePrompt = "请输入部门名称";
+            searchControl2.Properties.NullValuePrompt = "请输入考勤号或姓名";
+            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
+            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
 
-            Department.Columns.Add("ID");
-            Department.Columns.Add("BMLB");
+            SearchDepartment();
+        }
+
+        private void SearchDepartment()
+        {
+            string sql = "select BMID,BMMC from KQ_BM where BMID>0";
 
             try
             {
                 Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                comboBoxDep.DataSource = Department;
-                comboBoxDep.DisplayMember = "BMMC";
-                comboBoxDep.ValueMember = "BMID";
-                comboBoxDep.Text = null;
+                gridControl1.DataSource = Department;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
                 return;
             }
+        }
+
+        private void searchControl1_TextChanged(object sender, EventArgs e)
+        {
+            Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
+        }
+
+        private void panelControl2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            //
+            //TimeSpan timespan = Convert.ToDateTime(dateEdit2.Text).CompareTo(Convert.ToDateTime(dateEdit2.Text));
+
+            //if (timespan.TotalDays > 61)
+            //{
+            //    MessageBox.Show("不能生成超过两个月的计划!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
+
+        }
+
+        private string Week(DateTime Day)
+        {
+            string[] weekdays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            return weekdays[Convert.ToInt32(Day.DayOfWeek)];
+        }
+        private void InitGridBandData()
+        {
+            bandedGridView1.Columns.Clear();
+            bandedGridView1.Bands.Clear();
+
+            GridBand Staff = new GridBand();
+            Staff.Caption = " ";
+            Staff.Width = 80;
+
+            BandedGridColumn column = new BandedGridColumn();
+            column.Caption = "考勤号";
+            column.FieldName = "KQID";
+            column.Visible = true;
+            column.Width = 40;
+            Staff.Columns.Add(column);
+            bandedGridView1.Columns.Add(column);
+
+            column = new BandedGridColumn();
+            column.Caption = "姓名";
+            column.FieldName = "YGXM";
+            column.OptionsColumn.AllowEdit = false;
+            column.Visible = true;
+            column.Width = 40;
+            Staff.Columns.Add(column);
+            bandedGridView1.Columns.Add(column);
+
+            DateTime time = DateTime.Now;
+            DataRow[] rows;
+
+            for (int i=0;i<10;i++)
+            {
+                GridBand Day = new GridBand();
+                Day.Caption = string.Format(time.ToString("yyyy-MM-dd")+"({0})", Week(time));
+                BandedGridColumn Morning = new BandedGridColumn();
+                Morning.Caption = "上午";
+                Morning.OptionsColumn.AllowEdit = false;
+                BandedGridColumn Afternoon = new BandedGridColumn();
+                Afternoon.Caption = "下午";
+                Afternoon.OptionsColumn.AllowEdit = false;
+                Day.Columns.Add(Morning);
+                Day.Columns.Add(Afternoon);              
+            }
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            SearchDepartment();
         }
     }
 }

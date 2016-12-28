@@ -39,9 +39,23 @@ namespace KaoQin.users
 
 
         private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            add_alter_Users form = new add_alter_Users();
-            form.Show(this);
+        {           
+            try
+            {
+                if (gridView1.GetFocusedRowCellDisplayText("BMID") == "0")
+                {
+                    return;
+                }else
+                {
+                    add_alter_Users form = new add_alter_Users();
+                    form.department = gridView1.GetFocusedRowCellDisplayText("BMMC");
+                    form.Show(this);
+                    form.textBox2.Focus();
+                }
+                
+            }
+            catch { }
+            
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)

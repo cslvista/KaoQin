@@ -12,6 +12,7 @@ namespace KaoQin.users
     public partial class add_alter_Users : Form
     {
         public bool alter = false;
+        public string department;
         bool success = false;
         public add_alter_Users()
         {
@@ -25,9 +26,15 @@ namespace KaoQin.users
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
+            if (textBox2.Text == "")
             {
-                MessageBox.Show("请输入部门名称！");
+                MessageBox.Show("请输入考勤号！");
+                return;
+            }
+
+            if (textBox3.Text == "")
+            {
+                MessageBox.Show("请输入姓名！");
                 return;
             }
 
@@ -60,8 +67,8 @@ namespace KaoQin.users
         private bool Add()
         {
 
-            //检查编号是否有误
-            string sql = string.Format("select HBFL from DM_BB_LX where HBFL='{0}'", textBox1.Text.Trim());
+            //检查考勤号是否有误
+            string sql = string.Format("select KQID from KQ_YG where KQID='{0}'", textBox2.Text.Trim());
 
             DataTable isExist = new DataTable();
             try
@@ -76,11 +83,11 @@ namespace KaoQin.users
 
             if (isExist.Rows.Count > 0)
             {
-                MessageBox.Show("该编号已存在，请更换其他编号！");
+                MessageBox.Show("该考勤号已存在，请更换其他考勤号！");
                 return false;
             }
 
-            string sql1 = string.Format("insert into DM_BB_LX (HBFL,MC) values ('{0}','{1}')", textBox1.Text.Trim());
+            string sql1 = string.Format("insert into KQ_YG (KQID,YGXM,BMID,RZSJ,ZT,SM) values ('{0}','{1}','{2}','{3}','{4}','{5}')", textBox1.Text.Trim());
 
             try
             {
@@ -115,13 +122,47 @@ namespace KaoQin.users
         {
             dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
 
             if (alter == false)
             {
                 comboBox1.Text = "在职";
                 comboBox1.Enabled = false;
+                dateEdit2.Enabled = false;
             }
-                 
+
+            string sql = "select BMID,BMMC from KQ_BM where BMID>0";
+
+            DataTable Department = new DataTable();
+            Department.Columns.Add("BMID");
+            Department.Columns.Add("BMMC");
+
+            try
+            {
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                comboBox2.DataSource = Department;
+                comboBox2.DisplayMember = "BMMC";
+                comboBox2.ValueMember = "BMID";
+                comboBox2.Text = department;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "离职")
+            {
+                dateEdit2.Enabled = true;
+            }else
+            {
+                dateEdit2.Enabled = false;
+            }
         }
     }
 }

@@ -162,17 +162,29 @@ namespace KaoQin.arrangement
             {
                 return;
             }
+            //查询是否有
+            string sql = "select top 1 from ";
+            DataTable dd = new DataTable();
+            try
+            {
+                dd=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message);
+                return;
+            }
 
-            string sql = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString())
+            string sql1 = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString())
                 + " union all "      
                 + string.Format("delete from KQ_BC   where LBID='{0}'",gridView1.GetFocusedRowCellDisplayText("ID").ToString());
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误:" + ex.Message);
+                MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
             //刷新界面

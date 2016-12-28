@@ -100,6 +100,7 @@ namespace KaoQin.users
         {
             sql = string.Format("select IP,Port,Password from KQ_Machine where ID='{0}'", comboBox1.SelectedValue);
             User.Clear();
+            gridControl1.DataSource = null;
             Thread t1 = new Thread(SearchStaff);
             t1.IsBackground = true;
             t1.Start();
