@@ -33,7 +33,7 @@ namespace KaoQin
             }
             else
             {
-                if (MessageBox.Show("查询需要1分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show("从考勤机下载数据需要约1分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
                 }

@@ -31,7 +31,30 @@ namespace KaoQin
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
-            this.Text = string.Format("排班计划({0})", DepartmentName);
+            SearchDepartment();
+        }
+
+        private void SearchDepartment()
+        {
+            Department.Columns.Add("BMID");
+            Department.Columns.Add("BMMC");
+
+            string sql = "select BMID,BMMC from KQ_BM where BMID>0";
+
+            try
+            {
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                comboBox1.DataSource = Department;
+                comboBox1.DisplayMember = "BMMC";
+                comboBox1.ValueMember = "BMID";
+                comboBox1.Text = DepartmentName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+
         }
 
         private string Week(DateTime Day)
