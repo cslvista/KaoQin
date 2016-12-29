@@ -16,6 +16,7 @@ namespace KaoQin
         DataTable Machine = new DataTable();
         DataTable Department = new DataTable();
         DataTable Staff = new DataTable();
+        bool HasDownload = false;
         public Attendance()
         {
             InitializeComponent();
@@ -23,11 +24,22 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("查询需要1-2分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            if (HasDownload)
             {
-                return;
+                if (MessageBox.Show("数据已经下载到本地，是否还需要重新下载？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
             }
-                
+            else
+            {
+                if (MessageBox.Show("查询需要1分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
+            }
+            
+                        
             //读取考勤机数据
             string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
@@ -229,6 +241,12 @@ namespace KaoQin
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             SearchDepartment();
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+            gridControl2.DataSource = null;
+            gridControl3.DataSource = null;
         }
     }
 }

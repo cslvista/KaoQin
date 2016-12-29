@@ -41,7 +41,14 @@ namespace KaoQin.arrangement
         {
             int x = 3;
             int y = 2;
-            label1.Location = new Point(timeEdit2.Location.X - label1.Width - x, timeEdit2.Location.Y + y);
+            label4.Location = new Point(textBox1.Location.X - label4.Width - x, textBox1.Location.Y + y);
+            label9.Location = new Point(comboBox2.Location.X - label9.Width - x, comboBox2.Location.Y + y);
+            label8.Location = new Point(comboBox1.Location.X - label8.Width - x, comboBox1.Location.Y + y);
+            label7.Location = new Point(textBox3.Location.X - label7.Width - x, textBox3.Location.Y + y);
+            label3.Location = new Point(timeEdit1.Location.X - label3.Width - x, timeEdit1.Location.Y );
+            label1.Location = new Point(timeEdit2.Location.X - label1.Width - x, timeEdit2.Location.Y );
+            label5.Location = new Point(textBox2.Location.X - label5.Width - x, textBox2.Location.Y + y);
+            label2.Location = new Point(textBox4.Location.X - label2.Width - x, textBox4.Location.Y + y);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)

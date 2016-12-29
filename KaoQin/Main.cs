@@ -45,8 +45,15 @@ namespace KaoQin
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            Schedual form = new Schedual();
-            form.Show(this);
+            try
+            {
+                Schedual form = new Schedual();
+                form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
+                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+                form.Show(this);
+            }
+            catch { }
+            
         }
 
         private void 机器设置ToolStripMenuItem_Click(object sender, EventArgs e)

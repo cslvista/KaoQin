@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace KaoQin
 {
@@ -14,6 +15,9 @@ namespace KaoQin
     {
         DataTable Department = new DataTable();
         DataTable Staff = new DataTable();
+        DataTable WorkShift = new DataTable();
+        public string DepartmentID;
+        public string DepartmentName;
         public Schedual()
         {
             InitializeComponent();
@@ -21,52 +25,136 @@ namespace KaoQin
 
         private void Schedual_Load(object sender, EventArgs e)
         {
+            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
+            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+            this.Text = string.Format("排班计划({0})", DepartmentName);
+        }
 
+        private string Week(DateTime Day)
+        {
+            string[] weekdays = { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
+            return weekdays[Convert.ToInt32(Day.DayOfWeek)];
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            //校验日期
+            DateTime StartDate;
+            DateTime StopDate;
+            TimeSpan Timespan;
             try
             {
-               // TimeSpan timespan = (StartTime.Value - StopTime.Value);
+                StartDate =Convert.ToDateTime(dateEdit1.Text);
+                StopDate = Convert.ToDateTime(dateEdit2.Text);
+                Timespan = StopDate-StartDate;
 
-                //if (timespan.TotalDays > 61)
-                //{
-                //    MessageBox.Show("不能生成超过两个月的计划!");
-                //    return;
-                //}
+                if (Timespan.Days < 0)
+                {
+                    MessageBox.Show("结束时间不得小于开始时间！");
+                    return;
+                }
 
-                DataTable depts = new DataTable();
-                //string ksid = depts.Rows[KS.SelectedIndex]["UT_ID"].ToString();
-                //gridControl1.DataSource = BuildGridData(jhid, ksid, KSSJ.Value, JSSJ.Value);
-                gridControl1.ForceInitialize();
-                gridView1.BestFitColumns();
+                if (Timespan.Days > 62)
+                {
+                    MessageBox.Show("不能生成超过两个月的计划！");
+                    return;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("生成排班计划出错:{0} \r\n{1}", ex.Message, ex.StackTrace), "错误"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("错误1:"+ex.Message);
+                return;                   
             }
-        }
 
-        //private DataTable BuildGridData(DateTime StartTime, DateTime StopTime)
-        //{
-
-        //}
-
-        private void comboBoxDep_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string sql = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'");
+            //读取员工信息
+            string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'",DepartmentID);
 
             try
             {
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Staff=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误1:" + ex.Message, "提示");
+                MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
+
+            //读取班次信息
+            //string sql2 = string.Format("select ID,YGXM from KQ_YG where BMID='{0}'", DepartmentID);
+            //try
+            //{
+            //    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("错误3:" + ex.Message);
+            //    return;
+            //}
+            bandedGridView1.Columns.Clear();
+            bandedGridView1.Bands.Clear();
+
+            GridBand band = new GridBand();
+            band.Caption = "员工信息";
+            band.Width = 80;
+            bandedGridView1.Bands.Add(band);
+
+            //生成列
+            BandedGridColumn Staff_ID = new BandedGridColumn();
+            Staff_ID.Caption = "考勤号";
+            Staff_ID.Name = "Staff_ID";
+            Staff_ID.FieldName = "KQID";
+            Staff_ID.Visible = true;
+            Staff_ID.OptionsColumn.AllowEdit = false;
+            band.Columns.Add(Staff_ID);
+            bandedGridView1.Columns.Add(Staff_ID);
+
+            BandedGridColumn Staff_Name = new BandedGridColumn();
+            Staff_Name.Caption = "姓名";
+            Staff_Name.Name = "Staff_Name";
+            Staff_Name.Visible = true;
+            Staff_Name.FieldName = "YGXM";
+            Staff_Name.OptionsColumn.AllowEdit = false;
+            band.Columns.Add(Staff_Name);
+            bandedGridView1.Columns.Add(Staff_Name);
+
+            for (int i = 0; i <= Timespan.Days; i++)
+            {
+                GridBand Day_band = new GridBand();
+                Day_band.Caption = Week(StartDate);
+                bandedGridView1.Bands.Add(Day_band);
+                BandedGridColumn Day_Column = new BandedGridColumn();
+                Day_Column.Caption = StartDate.ToString("yyyy-MM-dd");
+                Day_Column.FieldName = StartDate.ToString("yyyy-MM-dd");
+                Day_Column.Name= Day_Column.FieldName;
+                Day_Column.Visible = true;
+                Day_Column.OptionsColumn.AllowEdit = true;
+                Day_band.Columns.Add(Day_Column);
+                bandedGridView1.Columns.Add(Day_Column);
+                StartDate =StartDate.AddDays(1);
+            }
+
+            bandedGridView1.BestFitColumns();
+
+        }
+
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
