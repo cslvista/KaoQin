@@ -139,14 +139,14 @@ namespace KaoQin
         private void Attendance_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
-            searchControl2.Properties.NullValuePrompt = "请输入考勤号或姓名";
+            searchControl2.Properties.NullValuePrompt = "请输入姓名";
             dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
-
+            simpleButton4.Enabled = false;
             SearchDepartment();
         }
 

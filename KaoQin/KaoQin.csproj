@@ -121,11 +121,11 @@
     <Compile Include="Schedual.Designer.cs">
       <DependentUpon>Schedual.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignInTime.cs">
+    <Compile Include="Loading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignInTime.Designer.cs">
-      <DependentUpon>SignInTime.cs</DependentUpon>
+    <Compile Include="Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
     <Compile Include="users\add_alter_Dep.cs">
       <SubType>Form</SubType>
@@ -186,8 +186,8 @@
     <EmbeddedResource Include="Schedual.resx">
       <DependentUpon>Schedual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignInTime.resx">
-      <DependentUpon>SignInTime.cs</DependentUpon>
+    <EmbeddedResource Include="Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="users\add_alter_Dep.resx">
       <DependentUpon>add_alter_Dep.cs</DependentUpon>
@@ -214,7 +214,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\0.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

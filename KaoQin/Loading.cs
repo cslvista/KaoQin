@@ -9,11 +9,18 @@ using System.Windows.Forms;
 
 namespace KaoQin
 {
-    public partial class SignInTime : Form
+    public partial class Loading : Form
     {
-        public SignInTime()
+        public Loading()
         {
             InitializeComponent();
+        }
+
+        private void Loading_Load(object sender, EventArgs e)
+        {
+            this.Height = pictureBox1.Height;
+            this.Width = pictureBox1.Width;
+            
         }
     }
 }

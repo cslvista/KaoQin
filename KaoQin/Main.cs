@@ -112,7 +112,15 @@ namespace KaoQin
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Schedual form = new Schedual();
+                form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
+                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+                form.alter = true;
+                form.Show(this);
+            }
+            catch { }
         }
 
         private void ButtonRefresh_Click(object sender, EventArgs e)
@@ -123,6 +131,12 @@ namespace KaoQin
         private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Attendance form = new Attendance();
+            form.Show();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            Loading form = new Loading();
             form.Show();
         }
     }

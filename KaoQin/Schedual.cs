@@ -16,8 +16,10 @@ namespace KaoQin
         DataTable Department = new DataTable();
         DataTable Staff = new DataTable();
         DataTable WorkShift = new DataTable();
+        DataTable Staff_WorkShift = new DataTable();
         public string DepartmentID;
         public string DepartmentName;
+        public bool alter = false;
         public Schedual()
         {
             InitializeComponent();
@@ -31,6 +33,11 @@ namespace KaoQin
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+            if (alter == true)
+            {
+                comboBox1.Enabled = false;
+                simpleButton1.Enabled = false;
+            }
             SearchDepartment();
         }
 
@@ -94,7 +101,7 @@ namespace KaoQin
             }
 
             //读取员工信息
-            string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'",DepartmentID);
+            string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}'",comboBox1.SelectedValue);
 
             try
             {
@@ -119,10 +126,12 @@ namespace KaoQin
             //}
             bandedGridView1.Columns.Clear();
             bandedGridView1.Bands.Clear();
+            Staff_WorkShift.Columns.Clear();
+            Staff_WorkShift.Clear();
 
             GridBand band = new GridBand();
-            band.Caption = "员工信息";
-            band.Width = 80;
+            band.Caption = " ";
+            band.Width = 30;
             bandedGridView1.Bands.Add(band);
 
             //生成列
@@ -130,10 +139,11 @@ namespace KaoQin
             Staff_ID.Caption = "考勤号";
             Staff_ID.Name = "Staff_ID";
             Staff_ID.FieldName = "KQID";
-            Staff_ID.Visible = true;
+            Staff_ID.Visible = false;
             Staff_ID.OptionsColumn.AllowEdit = false;
             band.Columns.Add(Staff_ID);
             bandedGridView1.Columns.Add(Staff_ID);
+            Staff_WorkShift.Columns.Add("KQID");
 
             BandedGridColumn Staff_Name = new BandedGridColumn();
             Staff_Name.Caption = "姓名";
@@ -143,6 +153,7 @@ namespace KaoQin
             Staff_Name.OptionsColumn.AllowEdit = false;
             band.Columns.Add(Staff_Name);
             bandedGridView1.Columns.Add(Staff_Name);
+            Staff_WorkShift.Columns.Add("YGXM");
 
             for (int i = 0; i <= Timespan.Days; i++)
             {
@@ -157,9 +168,16 @@ namespace KaoQin
                 Day_Column.OptionsColumn.AllowEdit = true;
                 Day_band.Columns.Add(Day_Column);
                 bandedGridView1.Columns.Add(Day_Column);
+                Staff_WorkShift.Columns.Add(Day_Column.FieldName);
                 StartDate =StartDate.AddDays(1);
             }
 
+            foreach (DataRow Row in Staff.Rows)
+            {
+                Staff_WorkShift.Rows.Add(new object[] {Row["KQID"],Row["YGXM"]});
+            }
+
+            gridControl1.DataSource = Staff_WorkShift;
             bandedGridView1.BestFitColumns();
 
         }

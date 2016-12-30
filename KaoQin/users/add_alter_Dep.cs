@@ -13,6 +13,7 @@ namespace KaoQin.users
     {
         public bool alter = false;
         bool success = false;
+        public string type = "";
         public string BMID = "";
         public add_alter_Dep()
         {
@@ -132,6 +133,7 @@ namespace KaoQin.users
             if (alter == true)
             {
                 this.Text = "修改部门";
+                comboBox1.Text = type;
             }
 
 

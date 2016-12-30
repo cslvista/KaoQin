@@ -42,36 +42,26 @@ namespace KaoQin.users
         {           
             try
             {
+                add_alter_Users form = new add_alter_Users();
                 if (gridView1.GetFocusedRowCellDisplayText("BMID") == "0")
                 {
-                    return;
-                }else
-                {
-                    add_alter_Users form = new add_alter_Users();
-                    form.department = gridView1.GetFocusedRowCellDisplayText("BMMC");
-                    form.Show(this);
-                    form.textBox2.Focus();
+                    form.department = "";
                 }
+                else
+                {
+                    form.department = gridView1.GetFocusedRowCellDisplayText("BMMC");
+                }                
+                form.Show(this);
+                form.textBox2.Focus();
                 
             }
             catch { }
             
         }
 
-        private void simpleButton3_Click(object sender, EventArgs e)
+        public void simpleButton3_Click(object sender, EventArgs e)
         {
-            string sql = "select KQID,YGXM,BMID,RZSJ,ZT,SM from KQ_YG where BMID ";
-
-            try
-            {
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                gridControl2.DataSource = Staff;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            gridControl1_Click(null, null);
         }
 
         private void ButtonAlter_Click(object sender, EventArgs e)
@@ -80,12 +70,13 @@ namespace KaoQin.users
             {
                 add_alter_Users form = new add_alter_Users();
                 form.alter = true;
-                form.comboBox1.Text =  gridView1.GetFocusedRowCellDisplayText("").ToString();
-                form.comboBox2.Text= gridView1.GetFocusedRowCellDisplayText("").ToString();
-                form.textBox2.Text= gridView1.GetFocusedRowCellDisplayText("").ToString();
-                form.textBox3.Text= gridView1.GetFocusedRowCellDisplayText("").ToString();
-                form.dateEdit1.Text= gridView1.GetFocusedRowCellDisplayText("").ToString();
-                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("").ToString();
+                form.comboBox1.Text =  gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
+                form.department = gridView2.GetFocusedRowCellDisplayText("BMMC").ToString();
+                form.textBox2.Text= gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
+                form.textBox3.Text= gridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
+                form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("RZSJ").ToString();
+                form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("LZSJ").ToString();
+                form.textBox1.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
                 form.Show(this);
             }
             catch { }
@@ -94,12 +85,31 @@ namespace KaoQin.users
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (MessageBox.Show(string.Format("是否删除员工'{0}'？", gridView2.GetFocusedRowCellDisplayText("YGXM").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
+            }
+            catch { }
+            
+            try
+            {
+                string sql = string.Format("delete from KQ_YG where KQID='{0}'", gridView2.GetFocusedRowCellValue("KQID").ToString());
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                gridControl1_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message);
+                return;
+            }
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            string sql = "select a.KQID,a.YGXM,a.BMID,a.RZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID";
+            string sql = "select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID";
 
             try
             {
@@ -161,6 +171,10 @@ namespace KaoQin.users
                 }
 
                 add_alter_Dep form = new add_alter_Dep();
+                form.alter = true;
+                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMMC").ToString();
+                form.type= gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.BMID= gridView1.GetFocusedRowCellDisplayText("BMID").ToString();
                 form.Show(this);
             }
             catch { }
@@ -169,24 +183,32 @@ namespace KaoQin.users
 
         private void gridControl1_Click(object sender, EventArgs e)
         {
-            Thread t1 = new Thread(SearchUsers);
-            t1.IsBackground = true;
-            t1.Start();
+            if (gridView1.RowCount == 0)
+            {
+                return;
+            }
+            else
+            {
+                Thread t1 = new Thread(SearchStaff);
+                t1.IsBackground = true;
+                t1.Start();
+            }            
         }
 
-        private void SearchUsers()
+        private void SearchStaff()
         {
-            string sql =string.Format( "");
+            
             this.BeginInvoke(new UpdateUI(delegate ()
             {
                 try
                 {
-                    //Reservation = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
-                    //gridControl1.DataSource = Reservation;
+                    string sql = string.Format("select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID where a.BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                    Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    gridControl2.DataSource = Staff;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("错误:" + ex.Message, "提示");
+                    MessageBox.Show("错误1:" + ex.Message, "提示");
                     return;
                 }
 
@@ -215,6 +237,23 @@ namespace KaoQin.users
                     e.Appearance.ForeColor = Color.Red;
                 }
             }
+        }
+
+        private void gridView2_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "ZT")
+            {               
+              switch (e.Value.ToString())
+              {
+                 case "0": e.DisplayText = "在职"; break;
+                 case "1": e.DisplayText = "离职"; break;
+              }
+            }
+        }
+
+        private void gridControl2_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(null, null);
         }
     }
 }

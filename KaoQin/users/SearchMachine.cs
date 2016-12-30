@@ -105,5 +105,28 @@ namespace KaoQin.users
             t1.IsBackground = true;
             t1.Start();
         }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Filter = "电子表格(*.xls)|*.xls";
+            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    string path = sf.FileName.ToString();
+                    gridControl1.ExportToXlsx(path);
+                    MessageBox.Show("导出成功！");
+                }               
+                catch { }
+                if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                    return;
+                try
+                {
+                    System.Diagnostics.Process.Start(sf.FileName);
+                }
+                catch { }
+            }
+        }
     }
 }
