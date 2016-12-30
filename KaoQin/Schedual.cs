@@ -17,6 +17,7 @@ namespace KaoQin
         DataTable Staff = new DataTable();
         DataTable WorkShift = new DataTable();
         DataTable Staff_WorkShift = new DataTable();
+        DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit Shift=new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
         public string DepartmentID;
         public string DepartmentName;
         public bool alter = false;
@@ -114,16 +115,16 @@ namespace KaoQin
             }
 
             //读取班次信息
-            //string sql2 = string.Format("select ID,YGXM from KQ_YG where BMID='{0}'", DepartmentID);
-            //try
-            //{
-            //    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("错误3:" + ex.Message);
-            //    return;
-            //}
+            string sql2 = string.Format("select ID,NAME from KQ_BC where LBID='{0}'", "0");
+            try
+            {
+                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误3:" + ex.Message);
+                return;
+            }
             bandedGridView1.Columns.Clear();
             bandedGridView1.Bands.Clear();
             Staff_WorkShift.Columns.Clear();
@@ -155,6 +156,16 @@ namespace KaoQin
             bandedGridView1.Columns.Add(Staff_Name);
             Staff_WorkShift.Columns.Add("YGXM");
 
+            Shift.DataSource = WorkShift;
+            Shift.DisplayMember = "NAME";
+            Shift.ValueMember = "ID";
+            Shift.Name = "Shift";
+            Shift.NullText = "";
+            Shift.PopupWidth = 100;
+            Shift.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "类型")});
+
             for (int i = 0; i <= Timespan.Days; i++)
             {
                 GridBand Day_band = new GridBand();
@@ -165,6 +176,8 @@ namespace KaoQin
                 Day_Column.FieldName = StartDate.ToString("yyyy-MM-dd");
                 Day_Column.Name= Day_Column.FieldName;
                 Day_Column.Visible = true;
+                Day_Column.ColumnEdit = Shift;
+                //Day_Column.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
                 Day_Column.OptionsColumn.AllowEdit = true;
                 Day_band.Columns.Add(Day_Column);
                 bandedGridView1.Columns.Add(Day_Column);
@@ -196,6 +209,19 @@ namespace KaoQin
         private void simpleButton2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bandedGridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                string name = Week(DateTime.Parse(e.Column.Caption));
+                if (name == "周六" || name == "周日")
+                {
+                    e.Appearance.BackColor = Color.AliceBlue;
+                }
+            }
+            catch { }
         }
     }
 }
