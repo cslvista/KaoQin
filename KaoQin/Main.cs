@@ -23,7 +23,7 @@ namespace KaoQin
 
         private void Main_Load(object sender, EventArgs e)
         {
-            searchControl1.Properties.NullValuePrompt = " ";
+            searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             SearchDepartment();//查找部门
         }
 

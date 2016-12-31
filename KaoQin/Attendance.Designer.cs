@@ -38,19 +38,20 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ButtonFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonDownload = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
             this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.bandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
@@ -60,6 +61,7 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -76,7 +78,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -98,7 +100,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1411, 790);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1501, 790);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -125,7 +127,8 @@
             this.gridView1.Appearance.Row.Options.UseFont = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn8});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -188,12 +191,13 @@
             // 
             // panelControl2
             // 
-            this.panelControl2.Controls.Add(this.simpleButton5);
-            this.panelControl2.Controls.Add(this.simpleButton4);
+            this.panelControl2.Controls.Add(this.comboBox1);
+            this.panelControl2.Controls.Add(this.ButtonFilter);
+            this.panelControl2.Controls.Add(this.ButtonCal);
             this.panelControl2.Controls.Add(this.searchControl2);
             this.panelControl2.Controls.Add(this.label1);
-            this.panelControl2.Controls.Add(this.simpleButton1);
-            this.panelControl2.Controls.Add(this.simpleButton2);
+            this.panelControl2.Controls.Add(this.ButtonDownload);
+            this.panelControl2.Controls.Add(this.ButtonSave);
             this.panelControl2.Controls.Add(this.dateEdit2);
             this.panelControl2.Controls.Add(this.dateEdit1);
             this.panelControl2.Controls.Add(this.label4);
@@ -201,39 +205,53 @@
             this.panelControl2.Location = new System.Drawing.Point(283, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1125, 66);
+            this.panelControl2.Size = new System.Drawing.Size(1215, 66);
             this.panelControl2.TabIndex = 5;
             this.panelControl2.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl2_Paint);
             // 
-            // simpleButton5
+            // comboBox1
             // 
-            this.simpleButton5.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton5.Appearance.Options.UseFont = true;
-            this.simpleButton5.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.Image")));
-            this.simpleButton5.Location = new System.Drawing.Point(876, 20);
-            this.simpleButton5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(73, 32);
-            this.simpleButton5.TabIndex = 50;
-            this.simpleButton5.Text = "过滤";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "全部员工",
+            "在职员工",
+            "离职员工"});
+            this.comboBox1.Location = new System.Drawing.Point(181, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(106, 28);
+            this.comboBox1.TabIndex = 51;
             // 
-            // simpleButton4
+            // ButtonFilter
             // 
-            this.simpleButton4.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton4.Appearance.Options.UseFont = true;
-            this.simpleButton4.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.Image")));
-            this.simpleButton4.Location = new System.Drawing.Point(633, 20);
-            this.simpleButton4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(100, 32);
-            this.simpleButton4.TabIndex = 49;
-            this.simpleButton4.Text = "查询计算";
-            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonFilter.Appearance.Options.UseFont = true;
+            this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
+            this.ButtonFilter.Location = new System.Drawing.Point(958, 20);
+            this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonFilter.Name = "ButtonFilter";
+            this.ButtonFilter.Size = new System.Drawing.Size(73, 32);
+            this.ButtonFilter.TabIndex = 50;
+            this.ButtonFilter.Text = "过滤";
+            // 
+            // ButtonCal
+            // 
+            this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonCal.Appearance.Options.UseFont = true;
+            this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
+            this.ButtonCal.Location = new System.Drawing.Point(715, 20);
+            this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonCal.Name = "ButtonCal";
+            this.ButtonCal.Size = new System.Drawing.Size(100, 32);
+            this.ButtonCal.TabIndex = 49;
+            this.ButtonCal.Text = "查询计算";
+            this.ButtonCal.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // searchControl2
             // 
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl2.Location = new System.Drawing.Point(32, 22);
+            this.searchControl2.Location = new System.Drawing.Point(19, 22);
             this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -243,48 +261,49 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl2.Properties.FindDelay = 100;
             this.searchControl2.Properties.NullValuePrompt = "E";
-            this.searchControl2.Size = new System.Drawing.Size(161, 26);
+            this.searchControl2.Size = new System.Drawing.Size(140, 26);
             this.searchControl2.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(455, 23);
+            this.label1.Location = new System.Drawing.Point(543, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 23);
             this.label1.TabIndex = 48;
             this.label1.Text = "-";
             // 
-            // simpleButton1
+            // ButtonDownload
             // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(755, 20);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(100, 32);
-            this.simpleButton1.TabIndex = 37;
-            this.simpleButton1.Text = "下载数据";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonDownload.Appearance.Options.UseFont = true;
+            this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
+            this.ButtonDownload.Location = new System.Drawing.Point(837, 20);
+            this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonDownload.Name = "ButtonDownload";
+            this.ButtonDownload.Size = new System.Drawing.Size(100, 32);
+            this.ButtonDownload.TabIndex = 37;
+            this.ButtonDownload.Text = "下载数据";
+            this.ButtonDownload.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
-            // simpleButton2
+            // ButtonSave
             // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(971, 20);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(75, 32);
-            this.simpleButton2.TabIndex = 38;
-            this.simpleButton2.Text = "导出";
+            this.ButtonSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonSave.Appearance.Options.UseFont = true;
+            this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
+            this.ButtonSave.Location = new System.Drawing.Point(1053, 20);
+            this.ButtonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(75, 32);
+            this.ButtonSave.TabIndex = 38;
+            this.ButtonSave.Text = "导出";
+            this.ButtonSave.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(476, 23);
+            this.dateEdit2.Location = new System.Drawing.Point(564, 23);
             this.dateEdit2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -299,7 +318,7 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(321, 23);
+            this.dateEdit1.Location = new System.Drawing.Point(409, 23);
             this.dateEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -315,7 +334,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(222, 23);
+            this.label4.Location = new System.Drawing.Point(310, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 45;
@@ -331,7 +350,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1125, 716);
+            this.tabControl1.Size = new System.Drawing.Size(1215, 716);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -341,7 +360,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1117, 683);
+            this.tabPage1.Size = new System.Drawing.Size(1207, 683);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "考勤明细";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -351,22 +370,30 @@
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Location = new System.Drawing.Point(3, 2);
-            this.gridControl2.MainView = this.bandedGridView1;
+            this.gridControl2.MainView = this.bandedGridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1111, 679);
+            this.gridControl2.Size = new System.Drawing.Size(1201, 679);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.bandedGridView1});
+            this.bandedGridView2});
             // 
-            // bandedGridView1
+            // bandedGridView2
             // 
-            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.bandedGridView2.Appearance.BandPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bandedGridView2.Appearance.BandPanel.Options.UseFont = true;
+            this.bandedGridView2.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bandedGridView2.Appearance.HeaderPanel.Options.UseFont = true;
+            this.bandedGridView2.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bandedGridView2.Appearance.Row.Options.UseFont = true;
+            this.bandedGridView2.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand1});
-            this.bandedGridView1.GridControl = this.gridControl2;
-            this.bandedGridView1.Name = "bandedGridView1";
-            this.bandedGridView1.OptionsBehavior.Editable = false;
-            this.bandedGridView1.OptionsView.ShowGroupPanel = false;
+            this.bandedGridView2.GridControl = this.gridControl2;
+            this.bandedGridView2.Name = "bandedGridView2";
+            this.bandedGridView2.OptionsBehavior.Editable = false;
+            this.bandedGridView2.OptionsView.ColumnAutoWidth = false;
+            this.bandedGridView2.OptionsView.ShowGroupPanel = false;
+            this.bandedGridView2.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.bandedGridView2_RowCellStyle);
             // 
             // gridBand1
             // 
@@ -382,7 +409,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1117, 682);
+            this.tabPage2.Size = new System.Drawing.Size(1207, 683);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "考勤汇总";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -395,7 +422,7 @@
             this.gridControl3.MainView = this.gridView2;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1111, 678);
+            this.gridControl3.Size = new System.Drawing.Size(1201, 679);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -452,11 +479,17 @@
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 4;
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "部门类型";
+            this.gridColumn8.FieldName = "BMLX";
+            this.gridColumn8.Name = "gridColumn8";
+            // 
             // Attendance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1411, 790);
+            this.ClientSize = new System.Drawing.Size(1501, 790);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Attendance";
@@ -481,7 +514,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
@@ -493,10 +526,10 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton ButtonDownload;
+        private DevExpress.XtraEditors.SimpleButton ButtonSave;
         private DevExpress.XtraEditors.DateEdit dateEdit2;
         private DevExpress.XtraEditors.DateEdit dateEdit1;
         private System.Windows.Forms.Label label4;
@@ -510,8 +543,8 @@
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.SearchControl searchControl2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton5;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton ButtonFilter;
+        private DevExpress.XtraEditors.SimpleButton ButtonCal;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -522,5 +555,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

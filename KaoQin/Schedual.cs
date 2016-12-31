@@ -161,7 +161,7 @@ namespace KaoQin
             Shift.ValueMember = "ID";
             Shift.Name = "Shift";
             Shift.NullText = "";
-            Shift.PopupWidth = 100;
+            Shift.AutoHeight = false;
             Shift.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "类型")});
