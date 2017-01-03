@@ -101,6 +101,7 @@ namespace KaoQin
             MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
             HasDownload = true;
             ButtonCal.Enabled = true;
+            ButtonOrignData.Enabled = true;
         }
 
         private void Attendance_Load(object sender, EventArgs e)
@@ -115,7 +116,7 @@ namespace KaoQin
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
             comboBox1.Text = "在职员工";
             ButtonCal.Enabled = true;
-
+            ButtonOrignData.Enabled = false;
             Record_DKJ.Columns.Add("ID", typeof(string));
             Record_DKJ.Columns.Add("Time", typeof(string));
             Record_DKJ.Columns.Add("Source", typeof(string));
@@ -339,6 +340,14 @@ namespace KaoQin
                 }
             }
             catch { }
+        }
+
+        private void ButtonOrignData_Click(object sender, EventArgs e)
+        {            
+            OrignData form = new OrignData();
+            form.Record_DKJ = Record_DKJ.Clone();
+            form.Machine = Machine.Clone();
+            form.Show();
         }
     }
 }

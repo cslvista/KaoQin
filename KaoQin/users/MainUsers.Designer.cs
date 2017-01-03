@@ -51,7 +51,6 @@
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
-            this.label4 = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
@@ -260,7 +259,6 @@
             // 
             this.panelControl1.Controls.Add(this.toolStrip1);
             this.panelControl1.Controls.Add(this.searchControl2);
-            this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(3, 2);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -322,7 +320,7 @@
             // searchControl2
             // 
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl2.Location = new System.Drawing.Point(64, 11);
+            this.searchControl2.Location = new System.Drawing.Point(25, 19);
             this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -335,16 +333,6 @@
             this.searchControl2.Size = new System.Drawing.Size(203, 26);
             this.searchControl2.TabIndex = 18;
             this.searchControl2.TextChanged += new System.EventHandler(this.searchControl2_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(9, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 20);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "搜索：";
             // 
             // panelControl2
             // 
@@ -511,7 +499,6 @@
         private DevExpress.XtraEditors.SimpleButton ButtonAlter;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;

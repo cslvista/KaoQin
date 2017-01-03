@@ -1,6 +1,6 @@
 ﻿namespace KaoQin
 {
-    partial class Loading
+    partial class LoadingForm
     {
         /// <summary>
         /// Required designer variable.

@@ -87,7 +87,7 @@ namespace KaoQin
 
         private void SearchAttendance()
         {
-            string sql = string.Format("select ID,BMID,KSSJ,JSSJ,CJRID,CJSJ,XGRID,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+            string sql = string.Format("select PBID,BMID,KSSJ,JSSJ,CJRID,CJSJ,XGRID,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
 
             this.BeginInvoke(new UpdateUI(delegate ()
             {
@@ -116,7 +116,7 @@ namespace KaoQin
             {
                 Schedual form = new Schedual();
                 form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
-                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();               
                 form.alter = true;
                 form.Show(this);
             }
@@ -136,7 +136,7 @@ namespace KaoQin
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Loading form = new Loading();
+            LoadingForm form = new LoadingForm();
             form.Show();
         }
     }

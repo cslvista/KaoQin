@@ -34,10 +34,12 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.ButtonOrignData = new DevExpress.XtraEditors.SimpleButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.ButtonFilter = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
@@ -61,7 +63,6 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -100,7 +101,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1501, 790);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1573, 790);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -148,6 +149,12 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "部门类型";
+            this.gridColumn8.FieldName = "BMLX";
+            this.gridColumn8.Name = "gridColumn8";
+            // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.simpleButton3);
@@ -191,6 +198,7 @@
             // 
             // panelControl2
             // 
+            this.panelControl2.Controls.Add(this.ButtonOrignData);
             this.panelControl2.Controls.Add(this.comboBox1);
             this.panelControl2.Controls.Add(this.ButtonFilter);
             this.panelControl2.Controls.Add(this.ButtonCal);
@@ -205,9 +213,22 @@
             this.panelControl2.Location = new System.Drawing.Point(283, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1215, 66);
+            this.panelControl2.Size = new System.Drawing.Size(1287, 66);
             this.panelControl2.TabIndex = 5;
             this.panelControl2.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl2_Paint);
+            // 
+            // ButtonOrignData
+            // 
+            this.ButtonOrignData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonOrignData.Appearance.Options.UseFont = true;
+            this.ButtonOrignData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonOrignData.Image")));
+            this.ButtonOrignData.Location = new System.Drawing.Point(834, 21);
+            this.ButtonOrignData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonOrignData.Name = "ButtonOrignData";
+            this.ButtonOrignData.Size = new System.Drawing.Size(100, 32);
+            this.ButtonOrignData.TabIndex = 52;
+            this.ButtonOrignData.Text = "原始记录";
+            this.ButtonOrignData.Click += new System.EventHandler(this.ButtonOrignData_Click);
             // 
             // comboBox1
             // 
@@ -228,7 +249,7 @@
             this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonFilter.Appearance.Options.UseFont = true;
             this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
-            this.ButtonFilter.Location = new System.Drawing.Point(958, 20);
+            this.ButtonFilter.Location = new System.Drawing.Point(1072, 21);
             this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonFilter.Name = "ButtonFilter";
             this.ButtonFilter.Size = new System.Drawing.Size(73, 32);
@@ -240,7 +261,7 @@
             this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonCal.Appearance.Options.UseFont = true;
             this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(715, 20);
+            this.ButtonCal.Location = new System.Drawing.Point(715, 21);
             this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonCal.Name = "ButtonCal";
             this.ButtonCal.Size = new System.Drawing.Size(100, 32);
@@ -279,7 +300,7 @@
             this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDownload.Appearance.Options.UseFont = true;
             this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
-            this.ButtonDownload.Location = new System.Drawing.Point(837, 20);
+            this.ButtonDownload.Location = new System.Drawing.Point(953, 21);
             this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDownload.Name = "ButtonDownload";
             this.ButtonDownload.Size = new System.Drawing.Size(100, 32);
@@ -292,7 +313,7 @@
             this.ButtonSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonSave.Appearance.Options.UseFont = true;
             this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
-            this.ButtonSave.Location = new System.Drawing.Point(1053, 20);
+            this.ButtonSave.Location = new System.Drawing.Point(1164, 21);
             this.ButtonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(75, 32);
@@ -350,7 +371,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1215, 716);
+            this.tabControl1.Size = new System.Drawing.Size(1287, 716);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -360,7 +381,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1207, 683);
+            this.tabPage1.Size = new System.Drawing.Size(1279, 683);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "考勤明细";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -373,7 +394,7 @@
             this.gridControl2.MainView = this.bandedGridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1201, 679);
+            this.gridControl2.Size = new System.Drawing.Size(1273, 679);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView2});
@@ -409,7 +430,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1207, 683);
+            this.tabPage2.Size = new System.Drawing.Size(1279, 683);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "考勤汇总";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -422,7 +443,7 @@
             this.gridControl3.MainView = this.gridView2;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1201, 679);
+            this.gridControl3.Size = new System.Drawing.Size(1273, 679);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -479,17 +500,11 @@
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 4;
             // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "部门类型";
-            this.gridColumn8.FieldName = "BMLX";
-            this.gridColumn8.Name = "gridColumn8";
-            // 
             // Attendance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1501, 790);
+            this.ClientSize = new System.Drawing.Size(1573, 790);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Attendance";
@@ -557,5 +572,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private System.Windows.Forms.ComboBox comboBox1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.SimpleButton ButtonOrignData;
     }
 }

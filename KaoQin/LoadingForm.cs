@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace KaoQin
 {
-    public partial class Loading : Form
+    public partial class LoadingForm : Form
     {
-        public Loading()
+        public LoadingForm()
         {
             InitializeComponent();
         }

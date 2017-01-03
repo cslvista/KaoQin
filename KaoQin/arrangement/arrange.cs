@@ -23,7 +23,7 @@ namespace KaoQin.arrangement
 
         private void arrange_Load(object sender, EventArgs e)
         {
-            searchControl1.Properties.NullValuePrompt = " ";
+            searchControl1.Properties.NullValuePrompt = "请输入时段名称";
             toolStripButtonRefresh_Click(null, null);
         }
 
@@ -67,6 +67,8 @@ namespace KaoQin.arrangement
                 form.alter = true;
                 form.LBID= gridView1.GetFocusedRowCellValue("ID").ToString();
                 form.ID = gridView2.GetFocusedRowCellValue("ID").ToString();
+                form.comboBox2.Text= gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
+                form.comboBox1.Text = gridView2.GetFocusedRowCellDisplayText("KT").ToString();
                 form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
                 form.textBox2.Text = gridView2.GetFocusedRowCellDisplayText("GZR").ToString();
                 form.textBox3.Text = gridView2.GetFocusedRowCellDisplayText("NAME").ToString(); 
@@ -158,16 +160,21 @@ namespace KaoQin.arrangement
             }
 
 
-            if (MessageBox.Show(string.Format("是否删除{0}？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            if (MessageBox.Show(string.Format("是否删除'{0}'？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;
             }
-            //查询是否有
-            string sql = "select top 1 from ";
-            DataTable dd = new DataTable();
+            //查询是否有子项
+            string sql = string.Format("select ID from KQ_BC where LBID='{0}'", gridView1.GetFocusedRowCellValue("ID").ToString());
+            DataTable isExists = new DataTable();
             try
             {
-                dd=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                isExists = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                if (isExists.Rows.Count > 0)
+                {
+                    MessageBox.Show("请先删除该类别中的所有时段！");
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -175,9 +182,8 @@ namespace KaoQin.arrangement
                 return;
             }
 
-            string sql1 = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString())
-                + " union all "      
-                + string.Format("delete from KQ_BC   where LBID='{0}'",gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+            string sql1 = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+               
             try
             {
                 GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
@@ -203,7 +209,7 @@ namespace KaoQin.arrangement
         {
             this.BeginInvoke(new UpdateUI(delegate ()
             {
-                string sql = string.Format("select ID,LBID,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                string sql = string.Format("select ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
@@ -253,6 +259,15 @@ namespace KaoQin.arrangement
                 }
             }
 
+            if (e.Column.FieldName == "ZT")
+            {
+                switch (e.Value.ToString())
+                {
+                    case "0": e.DisplayText = "在用"; break;
+                    case "1": e.DisplayText = "停用"; break;
+                }
+            }
+
         }
 
         private void gridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -263,9 +278,23 @@ namespace KaoQin.arrangement
 
                 if (KT == "是")
                 {
-                    e.Appearance.ForeColor = Color.Red;
+                    e.Appearance.ForeColor = Color.Green;
                 }
                 else if (KT == "否")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+            }
+
+            if (e.Column.FieldName == "ZT")
+            {
+                string ZT = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["ZT"]);
+
+                if (ZT == "停用")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+                else if (ZT == "在用")
                 {
                     e.Appearance.ForeColor = Color.Blue;
                 }
