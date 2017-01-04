@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+using System.Data.OleDb;
 using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace KaoQin
@@ -18,8 +19,10 @@ namespace KaoQin
         DataTable Department = new DataTable();//部门
         DataTable AttendanceResult = new DataTable();//考勤结果
         DataTable Staff = new DataTable();//员工信息
-        DataTable Staff_Data = new DataTable();//选定部门员工的打卡数据
+        DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
+        DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         DataTable Record_DKJ = new DataTable();//考勤机原始数据
+        DataTable Record_Person = new DataTable();//个人单日打卡数据
         bool HasDownload = false;//是否已下载数据
         public Attendance()
         {
@@ -42,6 +45,8 @@ namespace KaoQin
                     return;
                 }
             }
+            Staff_Orign.Clear();
+            Record_DKJ.Clear();
             this.Text = "正在从考勤机下载数据，请稍候...";
            //读取考勤机数据
            string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
@@ -62,7 +67,23 @@ namespace KaoQin
                 return;
             }
 
-            bool bIsConnected = false;//判断设备是否可连接                        
+
+            DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
+            DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
+            bool bIsConnected = false;//判断设备是否可连接   
+            string sdwEnrollNumber = "";
+            string sName = "";
+            string sPassword = "";
+            int iPrivilege = 0;
+            bool bEnabled = false;
+
+            DKJ.ReadAllUserID(0);
+            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+            {
+                int position = sName.IndexOf("\0");
+                string name = sName.Substring(0, position);//过滤sName中多余字符
+                Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
+            }
 
             int iMachineNumber = 0;
             int VerifyMode = 0;
@@ -121,10 +142,16 @@ namespace KaoQin
             Record_DKJ.Columns.Add("Time", typeof(string));
             Record_DKJ.Columns.Add("Source", typeof(string));
 
-            Staff_Data.Columns.Add("ID", typeof(string));
-            Staff_Data.Columns.Add("Name", typeof(string));
-            Staff_Data.Columns.Add("Time", typeof(string));
-            Staff_Data.Columns.Add("Source", typeof(string));
+            Record_Dep.Columns.Add("ID", typeof(string));
+            Record_Dep.Columns.Add("Name", typeof(string));
+            Record_Dep.Columns.Add("Time", typeof(string));
+            Record_Dep.Columns.Add("Source", typeof(string));
+
+            Record_Person.Columns.Add("Time", typeof(string));
+            Record_Person.Columns.Add("Source", typeof(string));
+
+            Staff_Orign.Columns.Add("ID", typeof(string));
+            Staff_Orign.Columns.Add("Name", typeof(string));
 
             SearchDepartment();
         }
@@ -150,18 +177,13 @@ namespace KaoQin
             Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
         }
 
-        private void panelControl2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void simpleButton4_Click(object sender, EventArgs e)
         {
             bandedGridView2.Columns.Clear();
             bandedGridView2.Bands.Clear();
             AttendanceResult.Columns.Clear();
             searchControl2.Text = "";
-            Staff_Data.Clear();
+            Record_Dep.Clear();
 
             DateTime StartDate;
             DateTime StopDate;
@@ -250,8 +272,8 @@ namespace KaoQin
                 bandedGridView2.Bands.Add(Day_band);
                 BandedGridColumn Day_Column = new BandedGridColumn();
                 Day_Column.Caption = StartDate.ToString("yyyy-MM-dd");
-                Day_Column.FieldName = StartDate.ToString("yyyy-MM-dd");
-                Day_Column.Name = Day_Column.FieldName;
+                Day_Column.FieldName = Day_Column.Caption;
+                Day_Column.Name = Day_Column.Caption;
                 Day_Column.Visible = true;
                 Day_Column.OptionsColumn.AllowEdit = true;
                 Day_band.Columns.Add(Day_Column);
@@ -275,7 +297,7 @@ namespace KaoQin
 
            foreach (var obj in query)
            {
-               Staff_Data.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
+               Record_Dep.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
             }
             
             //进行数据分析
@@ -324,10 +346,6 @@ namespace KaoQin
             gridControl3.DataSource = null;
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void bandedGridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
@@ -345,9 +363,95 @@ namespace KaoQin
         private void ButtonOrignData_Click(object sender, EventArgs e)
         {            
             OrignData form = new OrignData();
-            form.Record_DKJ = Record_DKJ.Clone();
-            form.Machine = Machine.Clone();
+            form.Record_DKJ = Record_DKJ.Copy();
+            form.Staff = Staff_Orign.Copy();
             form.Show();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";//过滤文件类型
+            ofd.RestoreDirectory = true; //记忆上次浏览路径
+            string FileName = "";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileName = ofd.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+            string FileExtension = "";
+            DataTable dtExcel = new DataTable(); //数据表   
+            DataSet ds = new DataSet();
+            OleDbConnection ExcelConn = null;
+
+            try
+            {
+                FileExtension = System.IO.Path.GetExtension(FileName);
+                switch (FileExtension)
+                {
+                    case ".xls": ExcelConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + FileName + ";" + "Extended Properties=\"Excel 8.0;HDR=NO;IMEX=1;\""); break;
+                    case ".xlsx": ExcelConn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + FileName + ";" + "Extended Properties=\"Excel 12.0;HDR=NO;IMEX=1;\""); break;
+                    default: ExcelConn = null; break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message);
+                return;
+            }
+
+            try
+            {
+                ExcelConn.Open();
+                //获取Excel中所有Sheet表的信息
+                DataTable schemaTable = ExcelConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                //获取Excel的第一个Sheet表名
+                string tableName = schemaTable.Rows[0][2].ToString().Trim();
+                string strSql = "select * from [" + tableName + "]";
+                //获取Excel指定Sheet表中的信息
+                OleDbDataAdapter myData = new OleDbDataAdapter(strSql, ExcelConn);
+                myData.Fill(ds, tableName);//填充数据
+                dtExcel = ds.Tables[tableName];
+                ExcelConn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message);
+                return;
+            }
+        }
+
+        private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Record_Person.Clear();
+            
+            try
+            {
+                string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
+                string Date = bandedGridView2.FocusedColumn.Caption;
+                var query = from rec in Record_Dep.AsEnumerable()
+                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                            select new
+                            {
+                                Time = rec.Field<string>("Time"),
+                                Source = rec.Field<string>("Source"),
+                            };
+                foreach (var obj in query)
+                {
+                    Record_Person.Rows.Add(obj.Time, obj.Source);
+                }
+
+                PersonData form = new PersonData();
+                form.PersonRecord = Record_Person.Copy();
+                form.Show();
+            }
+            catch { }
+            
         }
     }
 }

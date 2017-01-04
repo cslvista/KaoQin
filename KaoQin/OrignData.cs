@@ -13,11 +13,9 @@ namespace KaoQin
     public partial class OrignData : Form
     {
         public DataTable Record_DKJ = new DataTable();
-        public DataTable Machine = new DataTable();
-        DataTable Record_DKJ_new = new DataTable();
-        DataTable Staff = new DataTable();
-        
-        zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();
+        public DataTable Staff = new DataTable();//打卡机上的员工数据
+        DataTable Record_DKJ_new = new DataTable();//连接Record_DKJ和Staff数据后的表
+        bool allowVisit = false;//是否允许访问Record_DKJ_new
         public OrignData()
         {
             InitializeComponent();
@@ -30,29 +28,11 @@ namespace KaoQin
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
-            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
             Record_DKJ_new.Columns.Add("ID", typeof(string));
             Record_DKJ_new.Columns.Add("Name", typeof(string));
             Record_DKJ_new.Columns.Add("Time", typeof(string));
             Record_DKJ_new.Columns.Add("Source", typeof(string));
-
-            //读取员工信息
-            string sdwEnrollNumber = "";
-            string sName = "";
-            string sPassword = "";
-            int iPrivilege = 0;
-            bool bEnabled = false;
-
-            DKJ.ReadAllUserID(0);
-            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))
-            {
-                int a;
-                a = sName.IndexOf("\0");
-                string name = sName.Substring(0, a);//过滤sName中多余字符
-                Staff.Rows.Add(new object[] { sdwEnrollNumber, name });
-            }
-
+            
             //联结两个表
             var query = from rec in Record_DKJ.AsEnumerable()
                         join staff in Staff.AsEnumerable()
@@ -60,24 +40,32 @@ namespace KaoQin
                         select new
                         {
                             ID = staff.Field<string>("ID"),
-                            NAME = staff.Field<string>("NAME"),
+                            Name = staff.Field<string>("Name"),
                             Time = rec.Field<string>("Time"),
-                            LY = rec.Field<string>("LY"),
+                            Source = rec.Field<string>("Source"),
                         };
-
 
             foreach (var obj in query)
             {
-                Record_DKJ_new.Rows.Add(obj.ID, obj.NAME, obj.Time, obj.LY);
+                Record_DKJ_new.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
             }
 
             gridControl1.DataSource = Record_DKJ_new;
+            allowVisit = false;
+            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
+            allowVisit = true;
+            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+            
         }
 
         private void SearchInfo()
         {
-            string StopTime = Convert.ToDateTime(DateTime.Today).AddDays(1).ToString("yyyy-MM-dd");
-            Record_DKJ.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( ID like '%{2}%' or NAME like '%{2}%' )", dateEdit1.Text, StopTime, searchControl1.Text);
+            if (allowVisit == true)
+            {
+                string StopTime = Convert.ToDateTime(DateTime.Today).AddDays(1).ToString("yyyy-MM-dd");
+                Record_DKJ_new.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( ID like '%{2}%' or Name like '%{2}%' )", dateEdit1.Text, StopTime, searchControl1.Text);
+            }
+            
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -116,5 +104,6 @@ namespace KaoQin
         {
             SearchInfo();
         }
+
     }
 }

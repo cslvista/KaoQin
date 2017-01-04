@@ -329,7 +329,7 @@ namespace KaoQin
                 row = -1;
                 for (int j = 0; j < dtExcel.Rows.Count; j++)
                 {
-                    string Name = dtExcel.Rows[j][1].ToString().Replace(" ", ""); //去掉空格
+                    string Name = dtExcel.Rows[j][0].ToString().Replace(" ", ""); //去掉空格
                     if (Name== Staff.Rows[i][1].ToString())
                     {
                         row = j;
@@ -341,14 +341,14 @@ namespace KaoQin
                 if (row >= 0)
                 {
                     //指定的时间段
-                    for (int k = 2; k <= Timespan.Days+2; k++)
+                    for (int k = 0; k <= Timespan.Days; k++)
                     {
                         //检验Excel中的排班是否和系统中的排班相同
                         for (int n = 0; n < WorkShift.Rows.Count; n++)
                         {
-                            if (dtExcel.Rows[row][k + 2].ToString()== WorkShift.Rows[n][1].ToString())
+                            if (dtExcel.Rows[row][k + 3].ToString()== WorkShift.Rows[n][1].ToString())
                             {
-                                Staff_WorkShift.Rows[i][k] = WorkShift.Rows[n][0].ToString();
+                                Staff_WorkShift.Rows[i][k+2] = WorkShift.Rows[n][0].ToString();
                                 break;
                             }                             
                         }                     
@@ -369,6 +369,7 @@ namespace KaoQin
                 }
             }
             catch { }
+
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
