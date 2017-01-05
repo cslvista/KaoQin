@@ -33,8 +33,22 @@ namespace KaoQin.users
         private void MainUsers_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
-            searchControl2.Properties.NullValuePrompt = " ";
+            searchControl2.Properties.NullValuePrompt = "请输入部门名称";
+            UILocation();
             toolStripButtonRefresh_Click(null, null);
+        }
+
+        private void UILocation()
+        {
+            tableLayoutPanel1.RowStyles[0].Height = searchControl2.Height + toolStrip1.Height + 15;
+            int height =(panelControl2.Height-ButtonAdd.Height)/2;
+            ButtonAdd.Location=new Point(ButtonAdd.Location.X, height);
+            ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);
+            ButtonDelete.Location = new Point(ButtonDelete.Location.X, height);
+            ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
+            ButtonSearch.Location = new Point(ButtonSearch.Location.X, height);
+            ButtonAll.Location = new Point(ButtonAll.Location.X, height);
+            searchControl1.Location = new Point(searchControl1.Location.X, height);
         }
 
 

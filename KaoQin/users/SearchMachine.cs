@@ -128,5 +128,17 @@ namespace KaoQin.users
                 catch { }
             }
         }
+
+        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clipboard.SetDataObject(gridView1.GetFocusedDisplayText());
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

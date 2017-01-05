@@ -324,7 +324,7 @@ namespace KaoQin
 
         private string Result()
         {
-            return "a";
+            return "正常";
         }
 
         private string Week(DateTime Day)
@@ -424,6 +424,24 @@ namespace KaoQin
                 MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
+
+            try
+            {
+                for (int i = 1; i < dtExcel.Rows.Count; i++)
+                {
+                    Record_DKJ.Rows.Add(new object[] { dtExcel.Rows[i][0].ToString(), dtExcel.Rows[i][2].ToString(), dtExcel.Rows[i][3].ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("文件格式错误！" );
+                return;
+            }
+            
+
+            ButtonOrignData.Enabled = true;
+            MessageBox.Show("导入成功！");
+
         }
 
         private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -435,7 +453,7 @@ namespace KaoQin
                 string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
                 string Date = bandedGridView2.FocusedColumn.Caption;
                 var query = from rec in Record_Dep.AsEnumerable()
-                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0 
                             select new
                             {
                                 Time = rec.Field<string>("Time"),
@@ -446,12 +464,28 @@ namespace KaoQin
                     Record_Person.Rows.Add(obj.Time, obj.Source);
                 }
 
-                PersonData form = new PersonData();
-                form.PersonRecord = Record_Person.Copy();
-                form.Show();
+                if (Record_Person.Rows.Count==0)
+                {
+                    MessageBox.Show(string.Format("{0}在{1}没有签到记录！",Name,Date));
+                    return;
+                }else
+                {
+                    PersonData form = new PersonData();
+                    form.PersonRecord = Record_Person.Copy();
+                    form.Name = Name;
+                    form.Date = Date;
+                    form.Show();
+                }
+
+                
             }
             catch { }
             
+        }
+
+        private void panelControl2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

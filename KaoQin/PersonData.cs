@@ -12,6 +12,8 @@ namespace KaoQin
     public partial class PersonData : Form
     {
         public DataTable PersonRecord = new DataTable();
+        public string Name = "";
+        public string Date="";
         public PersonData()
         {
             InitializeComponent();
@@ -19,7 +21,9 @@ namespace KaoQin
 
         private void SearchDetail_Load(object sender, EventArgs e)
         {
+            this.Text = Name + "签到记录";
             gridControl1.DataSource = PersonRecord;
+            gridView1.BestFitColumns();
         }
     }
 }
