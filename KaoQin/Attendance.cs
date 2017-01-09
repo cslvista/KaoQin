@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Linq;
 using System.Data.OleDb;
 using DevExpress.XtraGrid.Views.BandedGrid;
 
@@ -29,7 +28,7 @@ namespace KaoQin
             InitializeComponent();
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void ButtonDownload_Click(object sender, EventArgs e)
         {
             if (HasDownload)
             {
@@ -48,8 +47,8 @@ namespace KaoQin
             Staff_Orign.Clear();
             Record_DKJ.Clear();
             this.Text = "正在从考勤机下载数据，请稍候...";
-           //读取考勤机数据
-           string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
+            //读取考勤机数据
+            string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
             try
             {
@@ -96,7 +95,7 @@ namespace KaoQin
             int Second = 0;
             int Workcode = 0;
             string dwEnrollNumber = "";
-           
+
             for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
@@ -113,8 +112,8 @@ namespace KaoQin
                     j++;
                     string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
                     string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
-                    Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString()});
-                    this.Text = string.Format("正在读取{0}第{1}条数据",Machine.Rows[i]["Machine"].ToString(),j);
+                    Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
+                    this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
                 }
             }
             //下载数据完毕
@@ -127,6 +126,7 @@ namespace KaoQin
 
         private void Attendance_Load(object sender, EventArgs e)
         {
+            UILocation();
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             searchControl2.Properties.NullValuePrompt = "请输入姓名";
             dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
@@ -156,6 +156,18 @@ namespace KaoQin
             SearchDepartment();
         }
 
+        private void UILocation()
+        {
+            int height = (panelControl2.Height - ButtonCal.Height) / 2;
+            ButtonCal.Location = new Point(ButtonCal.Location.X, height);
+            ButtonOrignData.Location = new Point(ButtonOrignData.Location.X, height);
+            ButtonDownload.Location = new Point(ButtonDownload.Location.X, height);
+            ButtonFilter.Location = new Point(ButtonFilter.Location.X, height);
+            ButtonImport.Location = new Point(ButtonImport.Location.X, height);
+            ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
+            comboBox1.Location = new Point(comboBox1.Location.X, (panelControl2.Height - comboBox1.Height) / 2);
+        }
         private void SearchDepartment()
         {
             string sql = "select BMID,BMMC,BMLX from KQ_BM where BMID>0";
@@ -177,7 +189,7 @@ namespace KaoQin
             Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
         }
 
-        private void simpleButton4_Click(object sender, EventArgs e)
+        private void ButtonCal_Click(object sender, EventArgs e)
         {
             bandedGridView2.Columns.Clear();
             bandedGridView2.Bands.Clear();
@@ -223,7 +235,7 @@ namespace KaoQin
             //读取员工信息            
             try
             {
-                string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT{1}", gridView1.GetFocusedRowCellValue("BMID").ToString(),StaffState);
+                string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT{1}", gridView1.GetFocusedRowCellValue("BMID").ToString(), StaffState);
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
             }
             catch (Exception ex)
@@ -283,23 +295,23 @@ namespace KaoQin
             }
 
             //从原始打卡数据中得到指定部门的员工打卡数据
-          var query = from rec in Record_DKJ.AsEnumerable()
-                      join staff in Staff.AsEnumerable()
-                      on rec.Field<string>("ID") equals staff.Field<string>("KQID")
-                      where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text))>0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1))<0
-                      select new
-                      {
-                          ID = rec.Field<string>("ID"),
-                          Name = staff.Field<string>("YGXM"),
-                          Time = rec.Field<string>("Time"),
-                          Source = rec.Field<string>("Source"),
-                       };
+            var query = from rec in Record_DKJ.AsEnumerable()
+                        join staff in Staff.AsEnumerable()
+                        on rec.Field<string>("ID") equals staff.Field<string>("KQID")
+                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text)) > 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1)) < 0
+                        select new
+                        {
+                            ID = rec.Field<string>("ID"),
+                            Name = staff.Field<string>("YGXM"),
+                            Time = rec.Field<string>("Time"),
+                            Source = rec.Field<string>("Source"),
+                        };
 
-           foreach (var obj in query)
-           {
-               Record_Dep.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
+            foreach (var obj in query)
+            {
+                Record_Dep.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
             }
-            
+
             //进行数据分析
             AnalysisData(Convert.ToDateTime(dateEdit1.Text), Timespan.Days);
         }
@@ -309,13 +321,13 @@ namespace KaoQin
             AttendanceResult.Clear();
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
-                AttendanceResult.Rows.Add(new object[] {});
+                AttendanceResult.Rows.Add(new object[] { });
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];//考勤ID
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];//姓名
-                for (int j = 2; j <= Timespan+2; j++)
+                for (int j = 0; j <= Timespan ; j++)
                 {
                     //按天进行计算
-                    AttendanceResult.Rows[i][j] = Result();
+                    AttendanceResult.Rows[i][j+2] = Result();
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -332,7 +344,7 @@ namespace KaoQin
             string[] weekdays = { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
             return weekdays[Convert.ToInt32(Day.DayOfWeek)];
         }
-       
+
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             SearchDepartment();
@@ -361,17 +373,62 @@ namespace KaoQin
         }
 
         private void ButtonOrignData_Click(object sender, EventArgs e)
-        {            
+        {
             OrignData form = new OrignData();
             form.Record_DKJ = Record_DKJ.Copy();
             form.Staff = Staff_Orign.Copy();
             form.Show();
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+        private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Record_Person.Clear();
+
+            try
+            {
+                string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
+                string Date = bandedGridView2.FocusedColumn.Caption;
+                var query = from rec in Record_Dep.AsEnumerable()
+                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                            select new
+                            {
+                                Time = rec.Field<string>("Time"),
+                                Source = rec.Field<string>("Source"),
+                            };
+                foreach (var obj in query)
+                {
+                    Record_Person.Rows.Add(obj.Time, obj.Source);
+                }
+
+                if (Record_Person.Rows.Count == 0)
+                {
+                    MessageBox.Show(string.Format("{0}在{1}没有签到记录！", Name, Convert.ToDateTime(Date).ToString("yyyy年MM月dd日")));
+                    return;
+                }
+                else
+                {
+                    PersonData form = new PersonData();
+                    form.PersonRecord = Record_Person.Copy();
+                    form.name = Name;
+                    form.Date = Date;
+                    form.Show();
+                }
+
+
+            }
+            catch { }
+
+        }
+
+        private void panelControl2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ButtonImport_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";//过滤文件类型
+            ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
             ofd.RestoreDirectory = true; //记忆上次浏览路径
             string FileName = "";
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -434,56 +491,21 @@ namespace KaoQin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("文件格式错误！" );
+                MessageBox.Show("文件格式错误！");
                 return;
             }
-            
+
 
             ButtonOrignData.Enabled = true;
             MessageBox.Show("导入成功！");
-
         }
 
-        private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ButtonExport_Click(object sender, EventArgs e)
         {
-            Record_Person.Clear();
-            
-            try
-            {
-                string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
-                string Date = bandedGridView2.FocusedColumn.Caption;
-                var query = from rec in Record_Dep.AsEnumerable()
-                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0 
-                            select new
-                            {
-                                Time = rec.Field<string>("Time"),
-                                Source = rec.Field<string>("Source"),
-                            };
-                foreach (var obj in query)
-                {
-                    Record_Person.Rows.Add(obj.Time, obj.Source);
-                }
 
-                if (Record_Person.Rows.Count==0)
-                {
-                    MessageBox.Show(string.Format("{0}在{1}没有签到记录！",Name,Date));
-                    return;
-                }else
-                {
-                    PersonData form = new PersonData();
-                    form.PersonRecord = Record_Person.Copy();
-                    form.Name = Name;
-                    form.Date = Date;
-                    form.Show();
-                }
-
-                
-            }
-            catch { }
-            
         }
 
-        private void panelControl2_Paint(object sender, PaintEventArgs e)
+        private void ButtonFilter_Click(object sender, EventArgs e)
         {
 
         }

@@ -66,7 +66,7 @@ namespace KaoQin.users
                     form.department = gridView1.GetFocusedRowCellDisplayText("BMMC");
                 }                
                 form.Show(this);
-                form.textBox2.Focus();
+                form.textBoxID.Focus();
                 
             }
             catch { }
@@ -83,14 +83,15 @@ namespace KaoQin.users
             try
             {
                 add_alter_Users form = new add_alter_Users();
-                form.alter = true;
-                form.comboBox1.Text =  gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
+                form.alter = true;                
+                form.comboBoxState.Text =  gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
                 form.department = gridView2.GetFocusedRowCellDisplayText("BMMC").ToString();
-                form.textBox2.Text= gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
-                form.textBox3.Text= gridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
+                form.KQID = gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
+                form.textBoxID.Text= gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
+                form.textBoxName.Text= gridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
                 form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("RZSJ").ToString();
                 form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("LZSJ").ToString();
-                form.textBox1.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                form.textBoxRemark.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
                 form.Show(this);
             }
             catch { }
@@ -268,6 +269,24 @@ namespace KaoQin.users
         private void gridControl2_DoubleClick(object sender, EventArgs e)
         {
             ButtonAlter_Click(null, null);
+        }
+
+        private void gridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "ZT")
+            {
+                string State = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["ZT"]);
+
+                if (State == "在职")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+                else if (State == "离职")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+            }
+
         }
     }
 }
