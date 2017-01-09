@@ -60,6 +60,7 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -219,7 +220,8 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn10});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
@@ -230,6 +232,9 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "开始时间";
+            this.gridColumn2.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn2.FieldName = "KSSJ";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
@@ -237,6 +242,9 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "结束时间";
+            this.gridColumn3.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.gridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn3.FieldName = "JSSJ";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
@@ -244,6 +252,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "创建人";
+            this.gridColumn4.FieldName = "CJR";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
@@ -251,6 +260,9 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "创建时间";
+            this.gridColumn5.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn5.FieldName = "CJSJ";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 3;
@@ -258,6 +270,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "修改人";
+            this.gridColumn6.FieldName = "XGR";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 4;
@@ -265,6 +278,9 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "修改时间";
+            this.gridColumn7.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn7.FieldName = "XGSJ";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 5;
@@ -386,6 +402,12 @@
             this.searchControl1.TabIndex = 12;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "排班ID";
+            this.gridColumn10.FieldName = "PBID";
+            this.gridColumn10.Name = "gridColumn10";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -448,6 +470,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private System.Windows.Forms.ToolStripMenuItem 考勤管理ToolStripMenuItem;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
     }
 }
 

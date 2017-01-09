@@ -87,14 +87,15 @@ namespace KaoQin
 
         private void SearchAttendance()
         {
-            string sql = string.Format("select PBID,BMID,KSSJ,JSSJ,CJRID,CJSJ,XGRID,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+            string sql = string.Format("select PBID,BMID,KSSJ,JSSJ,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
 
             this.BeginInvoke(new UpdateUI(delegate ()
             {
                 try
                 {
-                Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-                gridControl2.DataSource = Attendance;
+                    Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                    gridControl2.DataSource = Attendance;
+                    gridView2.BestFitColumns();
                 }
                 catch (Exception ex)
                 {

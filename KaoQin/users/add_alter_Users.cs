@@ -97,7 +97,7 @@ namespace KaoQin.users
                 return false;
             }
 
-            string EntryDate = "null";
+            string EntryDate = "";
             if (dateEdit1.Text != "")
             {
                 EntryDate = "'" + Convert.ToDateTime(dateEdit1.Text).ToString("yyyy-MM-dd")+"'" ;
@@ -107,7 +107,7 @@ namespace KaoQin.users
                 EntryDate = "null";
             }
 
-            string sql1 = string.Format("insert into KQ_YG (KQID,YGXM,BMID,RZSJ,ZT,SM) values ('{0}','{1}','{2}','{3}','{4}','{5}')", textBoxID.Text.Trim(), textBoxName.Text.Trim(), comboBoxDep.SelectedValue, EntryDate, "0", textBoxRemark.Text.Trim());
+            string sql1 = string.Format("insert into KQ_YG (KQID,YGXM,BMID,RZSJ,ZT,SM) values ('{0}','{1}','{2}',{3},'{4}','{5}')", textBoxID.Text.Trim(), textBoxName.Text.Trim(), comboBoxDep.SelectedValue, EntryDate, "0", textBoxRemark.Text.Trim());
 
             try
             {
