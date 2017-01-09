@@ -37,24 +37,44 @@ namespace KaoQin
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
-            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+
+            SearchDepartment();
+
             if (alter == true)
             {
                 comboBox1.Enabled = false;
+                comboBox1.Text = DepartmentName;
                 simpleButton1.Enabled = false;
-                string sql = string.Format("");
+                dateEdit1.Enabled = false;
+                dateEdit2.Enabled = false;
+                string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {
-                    Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                    Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("错误1:" + ex.Message, "提示");
                     return;
                 }
+                
+                //形成排班计划
+                simpleButton1_Click(null, null);
+
+                for (int i = 0; i < Staff.Rows.Count; i++)
+                {
+                    for (int j=2;j<=Timespan.Days+2; j++)
+                    {
+                        Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[i][j+1].ToString();
+                    }
+                }
+            }else
+            {
+                //如果是新增
+                dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
+                dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
             }
-            SearchDepartment();
+            
         }
 
         private void SearchDepartment()

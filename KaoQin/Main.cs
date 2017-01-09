@@ -117,7 +117,10 @@ namespace KaoQin
             {
                 Schedual form = new Schedual();
                 form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
-                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();               
+                form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+                form.PBID= gridView2.GetFocusedRowCellValue("PBID").ToString();
+                form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("KSSJ").ToString();
+                form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("JSSJ").ToString();
                 form.alter = true;
                 form.Show(this);
             }
