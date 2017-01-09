@@ -51,6 +51,7 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
@@ -60,7 +61,6 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -193,6 +193,7 @@
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
+            this.gridControl2.DoubleClick += new System.EventHandler(this.gridControl2_DoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -284,6 +285,12 @@
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 5;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "排班ID";
+            this.gridColumn10.FieldName = "PBID";
+            this.gridColumn10.Name = "gridColumn10";
             // 
             // panelControl1
             // 
@@ -401,12 +408,6 @@
             this.searchControl1.Size = new System.Drawing.Size(166, 26);
             this.searchControl1.TabIndex = 12;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "排班ID";
-            this.gridColumn10.FieldName = "PBID";
-            this.gridColumn10.Name = "gridColumn10";
             // 
             // Main
             // 

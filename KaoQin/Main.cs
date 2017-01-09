@@ -143,5 +143,10 @@ namespace KaoQin
             LoadingForm form = new LoadingForm();
             form.Show();
         }
+
+        private void gridControl2_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(null, null);
+        }
     }
 }

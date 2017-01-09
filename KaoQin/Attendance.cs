@@ -252,6 +252,7 @@ namespace KaoQin
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;
+            band.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             bandedGridView2.Bands.Add(band);
 
             //生成列

@@ -37,6 +37,7 @@
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,7 +58,7 @@
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -69,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -85,7 +87,7 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1103, 654);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -94,11 +96,11 @@
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl1.Location = new System.Drawing.Point(3, 62);
+            this.gridControl1.Location = new System.Drawing.Point(3, 72);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(229, 590);
+            this.gridControl1.Size = new System.Drawing.Size(229, 580);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -139,11 +141,11 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl2.Location = new System.Drawing.Point(238, 62);
+            this.gridControl2.Location = new System.Drawing.Point(238, 72);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(862, 590);
+            this.gridControl2.Size = new System.Drawing.Size(862, 580);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -178,6 +180,16 @@
             this.gridColumn10.Caption = "编号";
             this.gridColumn10.FieldName = "ID";
             this.gridColumn10.Name = "gridColumn10";
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.gridColumn12.Caption = "状态";
+            this.gridColumn12.FieldName = "ZT";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 0;
             // 
             // gridColumn3
             // 
@@ -249,12 +261,13 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.searchControl2);
             this.panelControl1.Controls.Add(this.toolStrip1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(3, 2);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(229, 56);
+            this.panelControl1.Size = new System.Drawing.Size(229, 66);
             this.panelControl1.TabIndex = 4;
             // 
             // toolStrip1
@@ -266,7 +279,7 @@
             this.toolStripButtonAlter,
             this.toolStripButtonDelete,
             this.toolStripButtonRefresh});
-            this.toolStrip1.Location = new System.Drawing.Point(2, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 37);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(225, 27);
             this.toolStrip1.TabIndex = 2;
@@ -323,13 +336,13 @@
             this.panelControl2.Location = new System.Drawing.Point(238, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(862, 56);
+            this.panelControl2.Size = new System.Drawing.Size(862, 66);
             this.panelControl2.TabIndex = 5;
             // 
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(389, 15);
+            this.searchControl1.Location = new System.Drawing.Point(389, 20);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -348,7 +361,7 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(207, 14);
+            this.ButtonRefresh.Location = new System.Drawing.Point(207, 19);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
             this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
@@ -361,7 +374,7 @@
             this.ButtonAdd.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAdd.Appearance.Options.UseFont = true;
             this.ButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAdd.Image")));
-            this.ButtonAdd.Location = new System.Drawing.Point(29, 14);
+            this.ButtonAdd.Location = new System.Drawing.Point(29, 19);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(69, 30);
@@ -374,7 +387,7 @@
             this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAlter.Appearance.Options.UseFont = true;
             this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(117, 14);
+            this.ButtonAlter.Location = new System.Drawing.Point(117, 19);
             this.ButtonAlter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAlter.Name = "ButtonAlter";
             this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
@@ -387,7 +400,7 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(296, 14);
+            this.ButtonDelete.Location = new System.Drawing.Point(296, 19);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
@@ -395,15 +408,22 @@
             this.ButtonDelete.Text = "删除";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
-            // gridColumn12
+            // searchControl2
             // 
-            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.gridColumn12.Caption = "状态";
-            this.gridColumn12.FieldName = "ZT";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 0;
+            this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
+            this.searchControl2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchControl2.Location = new System.Drawing.Point(2, 2);
+            this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchControl2.Name = "searchControl2";
+            this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.searchControl2.Properties.Appearance.Options.UseFont = true;
+            this.searchControl2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl2.Properties.FindDelay = 100;
+            this.searchControl2.Properties.NullValuePrompt = "E";
+            this.searchControl2.Size = new System.Drawing.Size(225, 26);
+            this.searchControl2.TabIndex = 26;
             // 
             // arrange
             // 
@@ -429,6 +449,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -464,5 +485,6 @@
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraEditors.SearchControl searchControl2;
     }
 }

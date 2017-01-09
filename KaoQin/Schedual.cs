@@ -58,7 +58,7 @@ namespace KaoQin
                     return;
                 }
                 
-                //形成排班计划
+                //点击生成计划按钮
                 simpleButton1_Click(null, null);
 
                 for (int i = 0; i < Staff.Rows.Count; i++)
@@ -199,6 +199,7 @@ namespace KaoQin
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;
+            band.Fixed= DevExpress.XtraGrid.Columns.FixedStyle.Left;
             bandedGridView1.Bands.Add(band);
 
             //生成列
@@ -259,7 +260,6 @@ namespace KaoQin
 
             gridControl1.DataSource = Staff_WorkShift;
             bandedGridView1.BestFitColumns();
-
         }
 
 
@@ -395,13 +395,15 @@ namespace KaoQin
 
                 for (int i = 0; i < Staff.Rows.Count; i++)
                 {
-                    sql.Append("insert into KQ_PB_XB (PBID,BMID,KQID,D1T,D2T,D3T,D4T,D5T,D6T,D7T,D8T,"
-                        + "D9T,D10T,D11T,D12T,D13T,D14T,D15T,D16T,D17T,D18T,D19T,D20T,"
-                        + "D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T)"
+                    sql.Append("insert into KQ_PB_XB (PBID,BMID,KQID,"
+                        + "D1T,D2T,D3T,D4T,D5T,D6T,D7T,D8T,D9T,"
+                        + "D10T,D11T,D12T,D13T,D14T,D15T,D16T,D17T,D18T,D19T,"
+                        + "D20T,D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T)"
                         + string.Format(" values ('{0}','{1}',{2},{3},{4},{5},{6},{7},{8},{9},{10},"
                         + "{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},"
                         + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33});",
-                        ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(), Staff_WorkShift_SQL.Rows[i][2].ToString(),
+                        ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(), 
+                        Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
                         Staff_WorkShift_SQL.Rows[i][5].ToString(), Staff_WorkShift_SQL.Rows[i][6].ToString(),
                         Staff_WorkShift_SQL.Rows[i][7].ToString(), Staff_WorkShift_SQL.Rows[i][8].ToString(),

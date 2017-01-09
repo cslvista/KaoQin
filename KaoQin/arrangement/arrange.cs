@@ -24,6 +24,7 @@ namespace KaoQin.arrangement
         private void arrange_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入时段名称";
+            searchControl2.Properties.NullValuePrompt = "请输入部门类别";
             toolStripButtonRefresh_Click(null, null);
         }
 
