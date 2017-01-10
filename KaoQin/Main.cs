@@ -129,7 +129,7 @@ namespace KaoQin
 
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
-
+            gridControl1_Click(null, null);
         }
 
         private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,6 +147,11 @@ namespace KaoQin
         private void gridControl2_DoubleClick(object sender, EventArgs e)
         {
             ButtonAlter_Click(null, null);
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

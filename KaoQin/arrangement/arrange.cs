@@ -74,6 +74,7 @@ namespace KaoQin.arrangement
                 form.textBox2.Text = gridView2.GetFocusedRowCellDisplayText("GZR").ToString();
                 form.textBox3.Text = gridView2.GetFocusedRowCellDisplayText("NAME").ToString(); 
                 form.textBox4.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                form.colorPickEdit1.Text= gridView2.GetFocusedRowCellDisplayText("COLOR").ToString();
                 if (gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString() == "")
                 {
                     form.checkBox1.Checked = true;
@@ -210,11 +211,12 @@ namespace KaoQin.arrangement
         {
             this.BeginInvoke(new UpdateUI(delegate ()
             {
-                string sql = string.Format("select ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                string sql = string.Format("select ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR,COLOR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
                     gridControl2.DataSource = WorkShift;
+                    gridView2.BestFitColumns();
                 }
                 catch (Exception ex)
                 {

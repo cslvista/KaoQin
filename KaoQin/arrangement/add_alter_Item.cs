@@ -31,9 +31,11 @@ namespace KaoQin.arrangement
                 comboBox1.Text = "否";
                 comboBox2.Text = "在用";
                 comboBox2.Enabled = false;
+                colorPickEdit1.EditValue = Color.Black;
             }
             else
             {
+                
             }
         }
 
@@ -139,28 +141,28 @@ namespace KaoQin.arrangement
                 return false;
             }
 
-            string SBSJ = "";//上班时间
-            string XBSJ = "";//下班时间
+            string WorkTime = "";//上班时间
+            string OffWorkTime = "";//下班时间
 
             if (checkBox1.Checked == false)
             {
-                SBSJ = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
+                WorkTime = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
             }
             else
             {
-                SBSJ = "";
+                WorkTime = "";
             }
 
             if (checkBox2.Checked == false)
             {
-                XBSJ = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
+                OffWorkTime = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
             }
             else
             {
-                XBSJ = "";
+                OffWorkTime = "";
             }
 
-            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')", ID, LBID, "0",comboBox1.SelectedIndex,textBox3.Text.Trim(),SBSJ,XBSJ, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
+            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,COLOR,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')", ID, LBID, "0",comboBox1.SelectedIndex,textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), ColorTranslator.ToHtml(colorPickEdit1.Color) ,GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
             try
             {
@@ -176,29 +178,29 @@ namespace KaoQin.arrangement
 
         private bool Alter()
         {
-            string SBSJ = "";//上班时间
-            string XBSJ = "";//下班时间
+            string WorkTime = "";//上班时间
+            string OffWorkTime = "";//下班时间
 
             if (checkBox1.Checked == false)
             {
-                SBSJ = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
+                WorkTime = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
             }else
             {
-                SBSJ = "";
+                WorkTime = "";
             }
 
             if (checkBox2.Checked == false)
             {
-                XBSJ = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
+                OffWorkTime = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
             }
             else
             {
-                XBSJ = "";
+                OffWorkTime = "";
             }
 
             //更新或插入数据
             
-            string sql = string.Format("update KQ_BC set NAME='{0}',SBSJ='{1}',XBSJ='{2}',GZR='{3}',SM='{4}',XGRID='{5}',XGR='{6}',XGSJ='{7}',ZT='{8}',KT='{9}' where ID='{10}'", textBox3.Text.Trim(),SBSJ,XBSJ, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),comboBox2.SelectedIndex,comboBox1.SelectedIndex,ID);
+            string sql = string.Format("update KQ_BC set NAME='{0}',SBSJ='{1}',XBSJ='{2}',GZR='{3}',SM='{4}',XGRID='{5}',XGR='{6}',XGSJ='{7}',ZT='{8}',KT='{9}',COLOR='{10}' where ID='{11}'", textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),comboBox2.SelectedIndex,comboBox1.SelectedIndex, ColorTranslator.ToHtml(colorPickEdit1.Color), ID);
 
             try
             {
@@ -243,9 +245,6 @@ namespace KaoQin.arrangement
                 UILocation();
             }
         }
-
-
-
 
     }
 }

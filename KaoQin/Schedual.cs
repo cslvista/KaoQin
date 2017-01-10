@@ -150,7 +150,7 @@ namespace KaoQin
             }
 
             //读取部门共用班次信息
-            string sql2 = string.Format("select ID,NAME from KQ_BC where LBID='{0}'", "0");
+            string sql2 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}'", "0");
             try
             {
                 WorkShift_Common = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
@@ -160,6 +160,7 @@ namespace KaoQin
                 MessageBox.Show("错误3:" + ex.Message);
                 return;
             }
+
             //读取指定部门班次信息
             string sql3 = string.Format("select BMLX from KQ_BM where BMID='{0}'",comboBox1.SelectedValue);
             DataTable DepartmentType = new DataTable();
@@ -175,7 +176,7 @@ namespace KaoQin
 
             if (DepartmentType.Rows[0][0].ToString()!="")
             {
-                string sql4 = string.Format("select ID,NAME from KQ_BC where LBID='{0}'",DepartmentType.Rows[0][0].ToString());
+                string sql4 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}'",DepartmentType.Rows[0][0].ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
@@ -269,6 +270,19 @@ namespace KaoQin
 
             if (alter == true)
             {
+                //写入排班主表
+                string sql1 = string.Format("update KQ_PB set XGRID='{0}',XGR='{1}',XGSJ='{2}' where PBID='{3}'", GlobalHelper.UserHelper.User["U_ID"].ToString(),
+                    GlobalHelper.UserHelper.User["U_NAME"].ToString(), Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()),PBID);
+
+                try
+                {
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误1:" + ex.Message);
+                    return;
+                }
 
                 //构建用于操作SQL语句的表，将表Staff_WorkShift的时间扩充为31天，没有排班的设为null
                 Staff_WorkShift_SQL.Rows.Clear();
@@ -302,7 +316,7 @@ namespace KaoQin
                 {
                     sql.Append(string.Format("update KQ_PB_XB set D1T={0},D2T={1},D3T={2},D4T={3},D5T={4},D6T={5},D7T={6},D8T={7},"
                         + "D9T={8},D10T={9},D11T={10},D12T={11},D13T={12},D14T={13},D15T={14},D16T={15},D17T={16},D18T={17},D19T={18},D20T={19},"
-                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30} where PBID='{31}' and KQID='{32}';",
+                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30} where PBID='{31}' and KQID={32};",
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
                         Staff_WorkShift_SQL.Rows[i][5].ToString(), Staff_WorkShift_SQL.Rows[i][6].ToString(),
@@ -321,6 +335,17 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString(),
                         PBID,Staff_WorkShift_SQL.Rows[i][0].ToString()
                         ));
+                }
+
+                try
+                {
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    MessageBox.Show("保存成功！");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误2:" + ex.Message);
+                    return;
                 }
 
             }
@@ -571,6 +596,15 @@ namespace KaoQin
             }
             catch { }
 
+            for (int i=0;i< WorkShift.Rows.Count; i++)
+            {
+                if (e.CellValue.ToString() == WorkShift.Rows[i]["ID"].ToString())
+                {
+                    e.Appearance.ForeColor = ColorTranslator.FromHtml(WorkShift.Rows[i]["COLOR"].ToString());
+                    break;
+                }
+            }
+            
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
