@@ -51,6 +51,7 @@ namespace KaoQin.arrangement
             label1.Location = new Point(timeEdit2.Location.X - label1.Width - x, timeEdit2.Location.Y );
             label5.Location = new Point(textBox2.Location.X - label5.Width - x, textBox2.Location.Y + y);
             label2.Location = new Point(textBox4.Location.X - label2.Width - x, textBox4.Location.Y + y);
+            label10.Location = new Point(colorPickEdit1.Location.X - label10.Width - x, colorPickEdit1.Location.Y + y);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)

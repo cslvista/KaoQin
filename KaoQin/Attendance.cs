@@ -19,6 +19,10 @@ namespace KaoQin
         DataTable AttendanceResult = new DataTable();//考勤结果
         DataTable Staff = new DataTable();//员工信息
         DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
+        DataTable WorkShift = new DataTable();//班次信息
+        DataTable PBID = new DataTable();//排班ID
+        DataTable ArrangementItem = new DataTable();//排班细表
+        DataTable PersonShift = new DataTable();//个人单日的排班
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
@@ -45,8 +49,7 @@ namespace KaoQin
                 }
             }
             Staff_Orign.Clear();
-            Record_DKJ.Clear();
-            this.Text = "正在从考勤机下载数据，请稍候...";
+            Record_DKJ.Clear();            
             //读取考勤机数据
             string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
@@ -76,12 +79,14 @@ namespace KaoQin
             int iPrivilege = 0;
             bool bEnabled = false;
 
+            this.Text = "正在读取员工数据...";
             DKJ.ReadAllUserID(0);
             while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
             {
                 int position = sName.IndexOf("\0");
                 string name = sName.Substring(0, position);//过滤sName中多余字符
                 Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
+                
             }
 
             int iMachineNumber = 0;
@@ -96,6 +101,7 @@ namespace KaoQin
             int Workcode = 0;
             string dwEnrollNumber = "";
 
+            this.Text = "正在下载考勤数据，请稍候...";
             for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
@@ -129,12 +135,7 @@ namespace KaoQin
             UILocation();
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             searchControl2.Properties.NullValuePrompt = "请输入姓名";
-            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
-            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+
             comboBox1.Text = "在职员工";
             ButtonCal.Enabled = true;
             ButtonOrignData.Enabled = false;
@@ -153,6 +154,13 @@ namespace KaoQin
             Staff_Orign.Columns.Add("ID", typeof(string));
             Staff_Orign.Columns.Add("Name", typeof(string));
 
+            string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
+            comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
+            comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-1).Year.ToString() + "年");
+            comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-2).Year.ToString() + "年");
+            comboBoxYear.Text = Convert.ToDateTime(TimeNow).Year.ToString() + "年";
+            comboBoxMonth.Text = Convert.ToDateTime(TimeNow).Month.ToString() + "月";
+
             SearchDepartment();
         }
 
@@ -170,7 +178,7 @@ namespace KaoQin
         }
         private void SearchDepartment()
         {
-            string sql = "select BMID,BMMC,BMLX from KQ_BM where BMID>0";
+            string sql = "select BMID,BMMC,BMLB from KQ_BM where BMID>0";
 
             try
             {
@@ -202,8 +210,11 @@ namespace KaoQin
             TimeSpan Timespan;
             try
             {
-                StartDate = Convert.ToDateTime(dateEdit1.Text);
-                StopDate = Convert.ToDateTime(dateEdit2.Text);
+                string year = comboBoxYear.Text.Substring(0, 4);
+                string month = comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"));
+                string startDate = Convert.ToDateTime(year + "-" + month + "-" + "1").ToString("yyyy-MM-dd");
+                StartDate = Convert.ToDateTime(startDate);
+                StopDate = StartDate.AddMonths(1).AddDays(-1);
                 Timespan = StopDate - StartDate;
 
                 if (Timespan.Days < 0)
@@ -244,11 +255,46 @@ namespace KaoQin
                 return;
             }
 
+
+            //读取班次信息
+            string sql2 = string.Format("select ID,NAME,SBSJ,XBSJ,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0",gridView1.GetFocusedRowCellValue("BMLB").ToString());
+            try
+            {
+                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误3:" + ex.Message);
+                return;
+            }
+
             //读取排班主表
+            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}',MONTH='{1}'",comboBoxYear.Text, comboBoxMonth.Text);
+            try
+            {
+                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误4:" + ex.Message);
+                return;
+            }
 
             //读取排班细表
-
-
+            if (PBID.Rows.Count > 0)
+            {
+                string sql4 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                try
+                {
+                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误5:" + ex.Message);
+                    return;
+                }
+            }
+            
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;
@@ -299,7 +345,7 @@ namespace KaoQin
             var query = from rec in Record_DKJ.AsEnumerable()
                         join staff in Staff.AsEnumerable()
                         on rec.Field<string>("ID") equals staff.Field<string>("KQID")
-                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text)) > 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1)) < 0
+                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(StartDate) > 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(StopDate.AddDays(1)) < 0
                         select new
                         {
                             ID = rec.Field<string>("ID"),
@@ -314,7 +360,7 @@ namespace KaoQin
             }
 
             //进行数据分析
-            AnalysisData(Convert.ToDateTime(dateEdit1.Text), Timespan.Days);
+            AnalysisData(StartDate, Timespan.Days);
         }
 
         private void AnalysisData(DateTime StartDate, int Timespan)
@@ -323,20 +369,83 @@ namespace KaoQin
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceResult.Rows.Add(new object[] { });
-                AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];//考勤ID
-                AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];//姓名
                 for (int j = 0; j <= Timespan ; j++)
                 {
-                    //按天进行计算
-                    AttendanceResult.Rows[i][j+2] = Result();
+                    //查询当日考勤数据
+                    Record_Person.Clear();
+                    string KQID = Staff.Rows[i]["KQID"].ToString();
+                    string Date = StartDate.AddDays(Timespan).ToString("yyyy-MM-dd");
+                    var query = from rec in Record_Dep.AsEnumerable()
+                                where rec.Field<string>("KQID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                                select new
+                                {
+                                    Time = rec.Field<string>("Time"),
+                                    Source = rec.Field<string>("Source"),
+                                };
+                    foreach (var obj in query)
+                    {
+                        Record_Person.Rows.Add(obj.Time, obj.Source);
+                    }
+
+                    //查询当日和昨日排班记录，查昨日是因为有跨天的情况
+                    PersonShift.Clear();
+                    if (j == 0)
+                    {
+                        //第一日只查当日排班数据
+                        var query1 = from arrangement in ArrangementItem.AsEnumerable()
+                                     join workshift in WorkShift.AsEnumerable()
+                                     on arrangement.Field<string>("ID") equals workshift.Field<string>("ID")
+                                     select new
+                                     {
+                                         ID = arrangement.Field<string>("ID"),//ID号
+                                         Name = arrangement.Field<string>("ID"),
+                                         SBSJ = arrangement.Field<string>("ID"),//上班时间
+                                         XBSJ = arrangement.Field<string>("ID"),//下班时间
+                                         KT = arrangement.Field<string>("ID"),//跨天
+                                     };
+                        foreach (var obj in query1)
+                        {
+                            PersonShift.Rows.Add(obj.ID, obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                        }
+
+                    }
+                    else
+                    {
+                        //第二日查昨日和当日排班数据
+                        var query1 = from arrangement in ArrangementItem.AsEnumerable()
+                                     join workshift in WorkShift.AsEnumerable()
+                                     on arrangement.Field<string>("ID") equals workshift.Field<string>("ID")
+                                     select new
+                                     {
+                                         ID = arrangement.Field<string>("ID"),//ID号
+                                         Name = arrangement.Field<string>("ID"),
+                                         SBSJ = arrangement.Field<string>("ID"),//上班时间
+                                         XBSJ = arrangement.Field<string>("ID"),//下班时间
+                                         KT = arrangement.Field<string>("ID"),//跨天
+                                     };
+                        foreach (var obj in query1)
+                        {
+                            PersonShift.Rows.Add(obj.ID, obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                        }
+                    }
+
+                    AttendanceResult.Rows[i][j+2] = Result(Record_Person,PersonShift);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
             bandedGridView2.BestFitColumns();
         }
 
-        private string Result()
+        private string Result(DataTable Record_Person,DataTable PersonShift)
         {
+           
+            if (Record_Person.Rows.Count == 0)
+            {
+                //MessageBox.Show(string.Format("{0}在{1}没有签到记录！", Name, Convert.ToDateTime(Date).ToString("yyyy年MM月dd日")));              
+            }
+            else
+            {
+            }
             return "正常";
         }
 
@@ -498,7 +607,7 @@ namespace KaoQin
 
 
             ButtonOrignData.Enabled = true;
-            MessageBox.Show("导入成功！");
+            MessageBox.Show("导入成功，请点击‘查询计算’查看考勤结果！");
         }
 
         private void ButtonExport_Click(object sender, EventArgs e)

@@ -162,7 +162,7 @@ namespace KaoQin.users
 
         public void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            string sql = "select a.BMID,a.BMMC,b.BMLB from KQ_BM a left join KQ_BMLB b on a.BMLX=b.ID";
+            string sql = "select a.BMID,a.BMMC,b.BMLB from KQ_BM a left join KQ_BMLB b on a.BMLB=b.ID";
 
             try
             {

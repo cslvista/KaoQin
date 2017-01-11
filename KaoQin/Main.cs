@@ -29,7 +29,7 @@ namespace KaoQin
 
         private void SearchDepartment()
         {
-            string sql = "select BMID,BMMC,BMLX from KQ_BM where BMID>0";
+            string sql = "select BMID,BMMC,BMLB from KQ_BM where BMID>0";
 
             try
             {
@@ -80,14 +80,18 @@ namespace KaoQin
 
         private void gridControl1_Click(object sender, EventArgs e)
         {
-            Thread t1 = new Thread(SearchAttendance);
-            t1.IsBackground = true;
-            t1.Start();
+            if (gridView1.RowCount > 0)
+            {
+                Thread t1 = new Thread(SearchAttendance);
+                t1.IsBackground = true;
+                t1.Start();
+            }
+            
         }
 
         private void SearchAttendance()
         {
-            string sql = string.Format("select PBID,BMID,KSSJ,JSSJ,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+            string sql = string.Format("select PBID,BMID,YEAR,MONTH,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
 
             this.BeginInvoke(new UpdateUI(delegate ()
             {
@@ -119,8 +123,6 @@ namespace KaoQin
                 form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
                 form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
                 form.PBID= gridView2.GetFocusedRowCellValue("PBID").ToString();
-                form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("KSSJ").ToString();
-                form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("JSSJ").ToString();
                 form.alter = true;
                 form.Show(this);
             }

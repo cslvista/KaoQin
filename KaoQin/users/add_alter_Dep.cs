@@ -77,7 +77,7 @@ namespace KaoQin.users
                 return false;
             }
 
-            string sql1 = string.Format("insert into KQ_BM (BMID,BMMC,BMLX) values ('{0}','{1}','{2}')", ID, textBox1.Text.Trim(),comboBox1.SelectedValue);
+            string sql1 = string.Format("insert into KQ_BM (BMID,BMMC,BMLB) values ('{0}','{1}','{2}')", ID, textBox1.Text.Trim(),comboBox1.SelectedValue);
 
             try
             {

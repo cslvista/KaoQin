@@ -87,7 +87,7 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1175, 705);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -96,11 +96,11 @@
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl1.Location = new System.Drawing.Point(3, 83);
+            this.gridControl1.Location = new System.Drawing.Point(3, 72);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(327, 620);
+            this.gridControl1.Size = new System.Drawing.Size(327, 631);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -149,11 +149,11 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl2.Location = new System.Drawing.Point(336, 83);
+            this.gridControl2.Location = new System.Drawing.Point(336, 72);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(836, 620);
+            this.gridControl2.Size = new System.Drawing.Size(836, 631);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -264,7 +264,7 @@
             this.panelControl1.Location = new System.Drawing.Point(3, 2);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(327, 77);
+            this.panelControl1.Size = new System.Drawing.Size(327, 66);
             this.panelControl1.TabIndex = 3;
             // 
             // toolStrip1
@@ -276,7 +276,7 @@
             this.toolStripButtonAlter,
             this.toolStripButtonDelete,
             this.toolStripButtonRefresh});
-            this.toolStrip1.Location = new System.Drawing.Point(2, 48);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 37);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(323, 27);
             this.toolStrip1.TabIndex = 35;
@@ -349,7 +349,7 @@
             this.panelControl2.Location = new System.Drawing.Point(336, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(836, 77);
+            this.panelControl2.Size = new System.Drawing.Size(836, 66);
             this.panelControl2.TabIndex = 4;
             // 
             // ButtonSearch
@@ -357,7 +357,7 @@
             this.ButtonSearch.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonSearch.Appearance.Options.UseFont = true;
             this.ButtonSearch.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSearch.Image")));
-            this.ButtonSearch.Location = new System.Drawing.Point(356, 25);
+            this.ButtonSearch.Location = new System.Drawing.Point(356, 20);
             this.ButtonSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonSearch.Name = "ButtonSearch";
             this.ButtonSearch.Size = new System.Drawing.Size(116, 30);
@@ -370,7 +370,7 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(272, 25);
+            this.ButtonRefresh.Location = new System.Drawing.Point(272, 20);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
             this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
@@ -383,7 +383,7 @@
             this.ButtonAdd.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAdd.Appearance.Options.UseFont = true;
             this.ButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAdd.Image")));
-            this.ButtonAdd.Location = new System.Drawing.Point(20, 25);
+            this.ButtonAdd.Location = new System.Drawing.Point(20, 20);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(69, 30);
@@ -396,7 +396,7 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(188, 25);
+            this.ButtonDelete.Location = new System.Drawing.Point(188, 20);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
@@ -409,7 +409,7 @@
             this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAlter.Appearance.Options.UseFont = true;
             this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(104, 25);
+            this.ButtonAlter.Location = new System.Drawing.Point(104, 20);
             this.ButtonAlter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAlter.Name = "ButtonAlter";
             this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
@@ -420,7 +420,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(608, 26);
+            this.searchControl1.Location = new System.Drawing.Point(608, 21);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -439,7 +439,7 @@
             this.ButtonAll.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAll.Appearance.Options.UseFont = true;
             this.ButtonAll.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAll.Image")));
-            this.ButtonAll.Location = new System.Drawing.Point(487, 25);
+            this.ButtonAll.Location = new System.Drawing.Point(487, 20);
             this.ButtonAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAll.Name = "ButtonAll";
             this.ButtonAll.Size = new System.Drawing.Size(100, 30);

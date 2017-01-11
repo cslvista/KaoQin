@@ -33,11 +33,6 @@ namespace KaoQin
 
         private void Schedual_Load(object sender, EventArgs e)
         {
-            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
-
             SearchDepartment();
 
             if (alter == true)
@@ -45,8 +40,6 @@ namespace KaoQin
                 comboBox1.Enabled = false;
                 comboBox1.Text = DepartmentName;
                 simpleButton1.Enabled = false;
-                dateEdit1.Enabled = false;
-                dateEdit2.Enabled = false;
                 string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {
@@ -71,8 +64,12 @@ namespace KaoQin
             }else
             {
                 //如果是新增
-                dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
-                dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
+                string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
+                comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
+                comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-1).Year.ToString() + "年");
+                comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-2).Year.ToString() + "年");
+                comboBoxYear.Text = Convert.ToDateTime(TimeNow).Year.ToString() + "年";
+                comboBoxMonth.Text= Convert.ToDateTime(TimeNow).Month.ToString() + "月";
             }
             
         }
@@ -114,8 +111,11 @@ namespace KaoQin
             
             try
             {
-                StartDate =Convert.ToDateTime(dateEdit1.Text);
-                StopDate = Convert.ToDateTime(dateEdit2.Text);
+                string year = comboBoxYear.Text.Substring(0, 4);
+                string month = comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"));
+                string startDate = Convert.ToDateTime(year + "-" + month + "-" + "1").ToString("yyyy-MM-dd");
+                StartDate =Convert.ToDateTime(startDate);
+                StopDate = StartDate.AddMonths(1).AddDays(-1);
                 Timespan = StopDate-StartDate;
 
                 if (Timespan.Days < 0)
@@ -162,7 +162,7 @@ namespace KaoQin
             }
 
             //读取指定部门班次信息
-            string sql3 = string.Format("select BMLX from KQ_BM where BMID='{0}'",comboBox1.SelectedValue);
+            string sql3 = string.Format("select BMLB from KQ_BM where BMID='{0}'",comboBox1.SelectedValue);
             DataTable DepartmentType = new DataTable();
             try
             {
@@ -376,9 +376,9 @@ namespace KaoQin
                 }
 
                 //写入排班主表
-                string sql2 = string.Format("insert into KQ_PB (PBID,BMID,KSSJ,JSSJ,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                    ID,comboBox1.SelectedValue, Convert.ToDateTime(dateEdit1.Text).ToString("yyyy-MM-dd"),
-                    Convert.ToDateTime(dateEdit2.Text).ToString("yyyy-MM-dd"), GlobalHelper.UserHelper.User["U_ID"].ToString(),
+                string sql2 = string.Format("insert into KQ_PB (PBID,BMID,YEAR,MONTH,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
+                    ID,comboBox1.SelectedValue, comboBoxYear.Text,
+                    comboBoxMonth.Text, GlobalHelper.UserHelper.User["U_ID"].ToString(),
                     GlobalHelper.UserHelper.User["U_NAME"].ToString(), Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()));
 
                 try

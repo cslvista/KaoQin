@@ -179,7 +179,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "部门类型";
-            this.gridColumn9.FieldName = "BMLX";
+            this.gridColumn9.FieldName = "BMLB";
             this.gridColumn9.Name = "gridColumn9";
             // 
             // gridControl2
@@ -232,20 +232,16 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "开始时间";
-            this.gridColumn2.DisplayFormat.FormatString = "yyyy-MM-dd";
-            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn2.FieldName = "KSSJ";
+            this.gridColumn2.Caption = "年份";
+            this.gridColumn2.FieldName = "YEAR";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "结束时间";
-            this.gridColumn3.DisplayFormat.FormatString = "yyyy-MM-dd";
-            this.gridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn3.FieldName = "JSSJ";
+            this.gridColumn3.Caption = "月份";
+            this.gridColumn3.FieldName = "MONTH";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;

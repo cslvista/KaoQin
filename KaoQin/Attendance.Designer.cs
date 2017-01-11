@@ -39,6 +39,9 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
+            this.comboBoxYear = new System.Windows.Forms.ComboBox();
             this.ButtonExport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonImport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonOrignData = new DevExpress.XtraEditors.SimpleButton();
@@ -46,10 +49,7 @@
             this.ButtonFilter = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
-            this.label1 = new System.Windows.Forms.Label();
             this.ButtonDownload = new DevExpress.XtraEditors.SimpleButton();
-            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -76,10 +76,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
@@ -156,7 +152,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "部门类型";
-            this.gridColumn8.FieldName = "BMLX";
+            this.gridColumn8.FieldName = "BMLB";
             this.gridColumn8.Name = "gridColumn8";
             // 
             // panelControl1
@@ -202,6 +198,9 @@
             // 
             // panelControl2
             // 
+            this.panelControl2.Controls.Add(this.label2);
+            this.panelControl2.Controls.Add(this.comboBoxMonth);
+            this.panelControl2.Controls.Add(this.comboBoxYear);
             this.panelControl2.Controls.Add(this.ButtonExport);
             this.panelControl2.Controls.Add(this.ButtonImport);
             this.panelControl2.Controls.Add(this.ButtonOrignData);
@@ -209,10 +208,7 @@
             this.panelControl2.Controls.Add(this.ButtonFilter);
             this.panelControl2.Controls.Add(this.ButtonCal);
             this.panelControl2.Controls.Add(this.searchControl2);
-            this.panelControl2.Controls.Add(this.label1);
             this.panelControl2.Controls.Add(this.ButtonDownload);
-            this.panelControl2.Controls.Add(this.dateEdit2);
-            this.panelControl2.Controls.Add(this.dateEdit1);
             this.panelControl2.Controls.Add(this.label4);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(283, 2);
@@ -221,12 +217,55 @@
             this.panelControl2.Size = new System.Drawing.Size(1438, 66);
             this.panelControl2.TabIndex = 5;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(512, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 23);
+            this.label2.TabIndex = 57;
+            this.label2.Text = "-";
+            // 
+            // comboBoxMonth
+            // 
+            this.comboBoxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMonth.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBoxMonth.FormattingEnabled = true;
+            this.comboBoxMonth.Items.AddRange(new object[] {
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月"});
+            this.comboBoxMonth.Location = new System.Drawing.Point(534, 19);
+            this.comboBoxMonth.Name = "comboBoxMonth";
+            this.comboBoxMonth.Size = new System.Drawing.Size(101, 28);
+            this.comboBoxMonth.TabIndex = 56;
+            // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxYear.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(407, 19);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(101, 28);
+            this.comboBoxYear.TabIndex = 55;
+            // 
             // ButtonExport
             // 
             this.ButtonExport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
-            this.ButtonExport.Location = new System.Drawing.Point(1288, 22);
+            this.ButtonExport.Location = new System.Drawing.Point(1232, 19);
             this.ButtonExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(108, 30);
@@ -239,7 +278,7 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(1163, 22);
+            this.ButtonImport.Location = new System.Drawing.Point(1107, 19);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(108, 30);
@@ -252,7 +291,7 @@
             this.ButtonOrignData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonOrignData.Appearance.Options.UseFont = true;
             this.ButtonOrignData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonOrignData.Image")));
-            this.ButtonOrignData.Location = new System.Drawing.Point(837, 21);
+            this.ButtonOrignData.Location = new System.Drawing.Point(781, 18);
             this.ButtonOrignData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonOrignData.Name = "ButtonOrignData";
             this.ButtonOrignData.Size = new System.Drawing.Size(100, 32);
@@ -280,7 +319,7 @@
             this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonFilter.Appearance.Options.UseFont = true;
             this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
-            this.ButtonFilter.Location = new System.Drawing.Point(1072, 21);
+            this.ButtonFilter.Location = new System.Drawing.Point(1016, 18);
             this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonFilter.Name = "ButtonFilter";
             this.ButtonFilter.Size = new System.Drawing.Size(73, 32);
@@ -293,7 +332,7 @@
             this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonCal.Appearance.Options.UseFont = true;
             this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(720, 21);
+            this.ButtonCal.Location = new System.Drawing.Point(664, 18);
             this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonCal.Name = "ButtonCal";
             this.ButtonCal.Size = new System.Drawing.Size(100, 32);
@@ -317,58 +356,18 @@
             this.searchControl2.Size = new System.Drawing.Size(140, 26);
             this.searchControl2.TabIndex = 16;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(543, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 23);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "-";
-            // 
             // ButtonDownload
             // 
             this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDownload.Appearance.Options.UseFont = true;
             this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
-            this.ButtonDownload.Location = new System.Drawing.Point(955, 21);
+            this.ButtonDownload.Location = new System.Drawing.Point(899, 18);
             this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDownload.Name = "ButtonDownload";
             this.ButtonDownload.Size = new System.Drawing.Size(100, 32);
             this.ButtonDownload.TabIndex = 37;
             this.ButtonDownload.Text = "下载数据";
             this.ButtonDownload.Click += new System.EventHandler(this.ButtonDownload_Click);
-            // 
-            // dateEdit2
-            // 
-            this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(564, 22);
-            this.dateEdit2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateEdit2.Name = "dateEdit2";
-            this.dateEdit2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateEdit2.Properties.Appearance.Options.UseFont = true;
-            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Size = new System.Drawing.Size(129, 26);
-            this.dateEdit2.TabIndex = 47;
-            // 
-            // dateEdit1
-            // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(409, 22);
-            this.dateEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateEdit1.Properties.Appearance.Options.UseFont = true;
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(129, 26);
-            this.dateEdit1.TabIndex = 46;
             // 
             // label4
             // 
@@ -566,10 +565,6 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
@@ -588,8 +583,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraEditors.SimpleButton ButtonDownload;
-        private DevExpress.XtraEditors.DateEdit dateEdit2;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -599,7 +592,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraEditors.SearchControl searchControl1;
-        private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.SearchControl searchControl2;
         private DevExpress.XtraEditors.SimpleButton ButtonFilter;
         private DevExpress.XtraEditors.SimpleButton ButtonCal;
@@ -621,5 +613,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraEditors.SimpleButton ButtonExport;
         private DevExpress.XtraEditors.SimpleButton ButtonImport;
+        private System.Windows.Forms.ComboBox comboBoxMonth;
+        private System.Windows.Forms.ComboBox comboBoxYear;
+        private System.Windows.Forms.Label label2;
     }
 }
