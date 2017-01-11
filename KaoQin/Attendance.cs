@@ -154,6 +154,12 @@ namespace KaoQin
             Staff_Orign.Columns.Add("ID", typeof(string));
             Staff_Orign.Columns.Add("Name", typeof(string));
 
+            PersonShift.Columns.Add("PD", typeof(string));//判断，昨日或今日
+            PersonShift.Columns.Add("ID", typeof(string));
+            PersonShift.Columns.Add("SBSJ", typeof(string));//上班时间
+            PersonShift.Columns.Add("XBSJ", typeof(string));//下班时间
+            PersonShift.Columns.Add("KT", typeof(string));//跨天
+            
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-1).Year.ToString() + "年");
@@ -269,10 +275,10 @@ namespace KaoQin
             }
 
             //读取排班主表
-            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}',MONTH='{1}'",comboBoxYear.Text, comboBoxMonth.Text);
+            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}'",comboBoxYear.Text, comboBoxMonth.Text);
             try
             {
-                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql3);
             }
             catch (Exception ex)
             {
@@ -286,7 +292,7 @@ namespace KaoQin
                 string sql4 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
                 try
                 {
-                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
                 }
                 catch (Exception ex)
                 {
@@ -369,14 +375,14 @@ namespace KaoQin
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceResult.Rows.Add(new object[] { });
-                for (int j = 0; j <= Timespan ; j++)
+                for (int j = 0; j < Timespan ; j++)
                 {
                     //查询当日考勤数据
                     Record_Person.Clear();
                     string KQID = Staff.Rows[i]["KQID"].ToString();
                     string Date = StartDate.AddDays(Timespan).ToString("yyyy-MM-dd");
                     var query = from rec in Record_Dep.AsEnumerable()
-                                where rec.Field<string>("KQID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                                where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
                                 select new
                                 {
                                     Time = rec.Field<string>("Time"),
@@ -389,47 +395,66 @@ namespace KaoQin
 
                     //查询当日和昨日排班记录，查昨日是因为有跨天的情况
                     PersonShift.Clear();
+                    PersonShift.Rows.Add(new object[] { });
+                    PersonShift.Rows.Add(new object[] { });
                     if (j == 0)
                     {
-                        //第一日只查当日排班数据
-                        var query1 = from arrangement in ArrangementItem.AsEnumerable()
-                                     join workshift in WorkShift.AsEnumerable()
-                                     on arrangement.Field<string>("ID") equals workshift.Field<string>("ID")
+                        //第一天的排班
+                        string yesterday = string.Format("D{0}T", j + 1);
+                        var query1 = from Item in ArrangementItem.AsEnumerable()
+                                     where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
                                      {
-                                         ID = arrangement.Field<string>("ID"),//ID号
-                                         Name = arrangement.Field<string>("ID"),
-                                         SBSJ = arrangement.Field<string>("ID"),//上班时间
-                                         XBSJ = arrangement.Field<string>("ID"),//下班时间
-                                         KT = arrangement.Field<string>("ID"),//跨天
+                                         Today = Item.Field<int>(yesterday).ToString(),
                                      };
                         foreach (var obj in query1)
                         {
-                            PersonShift.Rows.Add(obj.ID, obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                            PersonShift.Rows[0]["ID"] = "";
+                            PersonShift.Rows[0]["PD"] = "0";
+                            PersonShift.Rows[1]["ID"] = obj.Today;
+                            PersonShift.Rows[1]["PD"] = "1";
                         }
-
                     }
-                    else
+                    else 
                     {
-                        //第二日查昨日和当日排班数据
-                        var query1 = from arrangement in ArrangementItem.AsEnumerable()
-                                     join workshift in WorkShift.AsEnumerable()
-                                     on arrangement.Field<string>("ID") equals workshift.Field<string>("ID")
+                        string yesterday = string.Format("D{0}T", j + 1);
+                        string today = string.Format("D{0}T", j + 2);
+                        var query1 = from Item in ArrangementItem.AsEnumerable()
+                                     where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
                                      {
-                                         ID = arrangement.Field<string>("ID"),//ID号
-                                         Name = arrangement.Field<string>("ID"),
-                                         SBSJ = arrangement.Field<string>("ID"),//上班时间
-                                         XBSJ = arrangement.Field<string>("ID"),//下班时间
-                                         KT = arrangement.Field<string>("ID"),//跨天
+                                         Yesterday = Item.Field<int>(yesterday).ToString(),
+                                         Today = Item.Field<int>(today).ToString(),
                                      };
                         foreach (var obj in query1)
                         {
-                            PersonShift.Rows.Add(obj.ID, obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                            PersonShift.Rows[0]["ID"] = obj.Yesterday;
+                            PersonShift.Rows[0]["PD"] = "0";
+                            PersonShift.Rows[1]["ID"] = obj.Today;
+                            PersonShift.Rows[1]["PD"] = "1";
                         }
                     }
 
-                    AttendanceResult.Rows[i][j+2] = Result(Record_Person,PersonShift);
+                    //将个人排班添加上下班时间和跨天说明
+                    var query2 = from personshift in PersonShift.AsEnumerable()
+                                 join workshift in WorkShift.AsEnumerable().DefaultIfEmpty()
+                                 on personshift.Field<string>("ID") equals workshift.Field<int>("ID").ToString()
+                                 select new
+                                 {
+                                     ID = personshift.Field<string>("ID"),
+                                     PD= personshift.Field<string>("PD"),
+                                     SBSJ = workshift.Field<string>("SBSJ"),
+                                     XBSJ = workshift.Field<string>("XBSJ"),
+                                     KT = workshift.Field<string>("KT"),
+                                 };
+
+                    PersonShift.Clear();
+                    foreach (var obj in query2)
+                    {
+                        PersonShift.Rows.Add(obj.PD,obj.ID, obj.SBSJ, obj.XBSJ, obj.KT);
+                    }
+
+                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShift);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -438,15 +463,29 @@ namespace KaoQin
 
         private string Result(DataTable Record_Person,DataTable PersonShift)
         {
-           
-            if (Record_Person.Rows.Count == 0)
+
+            if (Record_Person.Rows.Count == 0 && PersonShift.Rows.Count == 0)
             {
-                //MessageBox.Show(string.Format("{0}在{1}没有签到记录！", Name, Convert.ToDateTime(Date).ToString("yyyy年MM月dd日")));              
+                return "";       
             }
-            else
+
+            if (Record_Person.Rows.Count > 0 && PersonShift.Rows.Count == 0)
             {
+                return "未排班";
             }
-            return "正常";
+
+            if (Record_Person.Rows.Count == 0 && PersonShift.Rows.Count > 0)
+            {
+                return "全天未签";
+            }
+
+            if (Record_Person.Rows.Count > 0 && PersonShift.Rows.Count > 0)
+            {
+                return "";
+            }
+
+            return  "";
+
         }
 
         private string Week(DateTime Day)

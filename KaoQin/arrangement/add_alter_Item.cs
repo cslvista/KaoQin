@@ -163,7 +163,7 @@ namespace KaoQin.arrangement
                 OffWorkTime = "";
             }
 
-            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,COLOR,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')", ID, LBID, "0",comboBox1.SelectedIndex,textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), ColorTranslator.ToHtml(colorPickEdit1.Color) ,GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
+            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,COLOR,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')", ID, LBID, "0",comboBox1.SelectedIndex,textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), ColorTranslator.ToHtml(colorPickEdit1.Color) ,GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
             try
             {
