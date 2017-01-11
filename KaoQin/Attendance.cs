@@ -23,6 +23,7 @@ namespace KaoQin
         DataTable PBID = new DataTable();//排班ID
         DataTable ArrangementItem = new DataTable();//排班细表
         DataTable PersonShift = new DataTable();//个人单日的排班
+        DataTable PersonShiftAll = new DataTable();//个人单日的排班的所有信息
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
@@ -156,10 +157,13 @@ namespace KaoQin
 
             PersonShift.Columns.Add("PD", typeof(string));//判断，昨日或今日
             PersonShift.Columns.Add("ID", typeof(string));
-            PersonShift.Columns.Add("SBSJ", typeof(string));//上班时间
-            PersonShift.Columns.Add("XBSJ", typeof(string));//下班时间
-            PersonShift.Columns.Add("KT", typeof(string));//跨天
-            
+
+            PersonShiftAll.Columns.Add("PD", typeof(string));
+            PersonShiftAll.Columns.Add("ID", typeof(string));
+            PersonShiftAll.Columns.Add("SBSJ", typeof(string));
+            PersonShiftAll.Columns.Add("XBSJ", typeof(string));
+            PersonShiftAll.Columns.Add("KT", typeof(string));
+
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-1).Year.ToString() + "年");
@@ -330,13 +334,14 @@ namespace KaoQin
             bandedGridView2.Columns.Add(Staff_Name);
 
             //生成日期列
+            DateTime day = StartDate;
             for (int i = 0; i <= Timespan.Days; i++)
             {
                 GridBand Day_band = new GridBand();
-                Day_band.Caption = Week(StartDate);
+                Day_band.Caption = Week(day);
                 bandedGridView2.Bands.Add(Day_band);
                 BandedGridColumn Day_Column = new BandedGridColumn();
-                Day_Column.Caption = StartDate.ToString("yyyy-MM-dd");
+                Day_Column.Caption = day.ToString("yyyy-MM-dd");
                 Day_Column.FieldName = Day_Column.Caption;
                 Day_Column.Name = Day_Column.Caption;
                 Day_Column.Visible = true;
@@ -344,7 +349,7 @@ namespace KaoQin
                 Day_band.Columns.Add(Day_Column);
                 AttendanceResult.Columns.Add(Day_Column.Name);
                 bandedGridView2.Columns.Add(Day_Column);
-                StartDate = StartDate.AddDays(1);
+                day = day.AddDays(1);
             }
 
             //从原始打卡数据中得到指定部门的员工打卡数据
@@ -375,12 +380,16 @@ namespace KaoQin
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceResult.Rows.Add(new object[] { });
+                //添加姓名与考勤号
+                AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
+                AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
                 for (int j = 0; j < Timespan ; j++)
                 {
+                                       
                     //查询当日考勤数据
                     Record_Person.Clear();
                     string KQID = Staff.Rows[i]["KQID"].ToString();
-                    string Date = StartDate.AddDays(Timespan).ToString("yyyy-MM-dd");
+                    string Date = StartDate.AddDays(j).ToString("yyyy-MM-dd");
                     var query = from rec in Record_Dep.AsEnumerable()
                                 where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
                                 select new
@@ -405,7 +414,7 @@ namespace KaoQin
                                      where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
                                      {
-                                         Today = Item.Field<int>(yesterday).ToString(),
+                                         Today = Item.Field<string>(yesterday).ToString(),
                                      };
                         foreach (var obj in query1)
                         {
@@ -423,8 +432,8 @@ namespace KaoQin
                                      where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
                                      {
-                                         Yesterday = Item.Field<int>(yesterday).ToString(),
-                                         Today = Item.Field<int>(today).ToString(),
+                                         Yesterday = Item.Field<string>(yesterday),
+                                         Today = Item.Field<string>(today),
                                      };
                         foreach (var obj in query1)
                         {
@@ -445,16 +454,16 @@ namespace KaoQin
                                      PD= personshift.Field<string>("PD"),
                                      SBSJ = workshift.Field<string>("SBSJ"),
                                      XBSJ = workshift.Field<string>("XBSJ"),
-                                     KT = workshift.Field<string>("KT"),
+                                     KT = workshift.Field<int>("KT").ToString(),
                                  };
 
-                    PersonShift.Clear();
+                    PersonShiftAll.Clear();
                     foreach (var obj in query2)
                     {
-                        PersonShift.Rows.Add(obj.PD,obj.ID, obj.SBSJ, obj.XBSJ, obj.KT);
+                        PersonShiftAll.Rows.Add(obj.PD,obj.ID, obj.SBSJ, obj.XBSJ, obj.KT);
                     }
 
-                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShift);
+                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShiftAll);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -464,25 +473,15 @@ namespace KaoQin
         private string Result(DataTable Record_Person,DataTable PersonShift)
         {
 
-            if (Record_Person.Rows.Count == 0 && PersonShift.Rows.Count == 0)
-            {
-                return "";       
-            }
-
-            if (Record_Person.Rows.Count > 0 && PersonShift.Rows.Count == 0)
-            {
-                return "未排班";
-            }
-
             if (Record_Person.Rows.Count == 0 && PersonShift.Rows.Count > 0)
             {
                 return "全天未签";
             }
 
-            if (Record_Person.Rows.Count > 0 && PersonShift.Rows.Count > 0)
-            {
-                return "";
-            }
+            //if (PersonShift.Rows[0]["KT"].ToString() == "0")
+            //{
+
+            //}
 
             return  "";
 
@@ -569,10 +568,6 @@ namespace KaoQin
 
         }
 
-        private void panelControl2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void ButtonImport_Click(object sender, EventArgs e)
         {
