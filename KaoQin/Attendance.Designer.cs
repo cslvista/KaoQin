@@ -265,7 +265,7 @@
             this.ButtonExport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
-            this.ButtonExport.Location = new System.Drawing.Point(1232, 19);
+            this.ButtonExport.Location = new System.Drawing.Point(1230, 19);
             this.ButtonExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(108, 30);
@@ -278,7 +278,7 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(1107, 19);
+            this.ButtonImport.Location = new System.Drawing.Point(1105, 19);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(108, 30);
@@ -291,7 +291,7 @@
             this.ButtonOrignData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonOrignData.Appearance.Options.UseFont = true;
             this.ButtonOrignData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonOrignData.Image")));
-            this.ButtonOrignData.Location = new System.Drawing.Point(781, 18);
+            this.ButtonOrignData.Location = new System.Drawing.Point(781, 19);
             this.ButtonOrignData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonOrignData.Name = "ButtonOrignData";
             this.ButtonOrignData.Size = new System.Drawing.Size(100, 32);
@@ -319,7 +319,7 @@
             this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonFilter.Appearance.Options.UseFont = true;
             this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
-            this.ButtonFilter.Location = new System.Drawing.Point(1016, 18);
+            this.ButtonFilter.Location = new System.Drawing.Point(1015, 19);
             this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonFilter.Name = "ButtonFilter";
             this.ButtonFilter.Size = new System.Drawing.Size(73, 32);
@@ -332,7 +332,7 @@
             this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonCal.Appearance.Options.UseFont = true;
             this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(664, 18);
+            this.ButtonCal.Location = new System.Drawing.Point(664, 19);
             this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonCal.Name = "ButtonCal";
             this.ButtonCal.Size = new System.Drawing.Size(100, 32);
@@ -361,7 +361,7 @@
             this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDownload.Appearance.Options.UseFont = true;
             this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
-            this.ButtonDownload.Location = new System.Drawing.Point(899, 18);
+            this.ButtonDownload.Location = new System.Drawing.Point(898, 19);
             this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDownload.Name = "ButtonDownload";
             this.ButtonDownload.Size = new System.Drawing.Size(100, 32);
@@ -377,7 +377,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 45;
-            this.label4.Text = "考勤日期：";
+            this.label4.Text = "考勤时间：";
             // 
             // tabControl1
             // 

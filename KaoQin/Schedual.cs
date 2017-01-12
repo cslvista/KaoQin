@@ -41,7 +41,6 @@ namespace KaoQin
                 comboBox1.Text = DepartmentName;
                 comboBoxMonth.Enabled = false;
                 comboBoxYear.Enabled = false;
-                simpleButton1.Enabled = false;
                 string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {

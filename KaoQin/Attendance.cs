@@ -226,18 +226,6 @@ namespace KaoQin
                 StartDate = Convert.ToDateTime(startDate);
                 StopDate = StartDate.AddMonths(1).AddDays(-1);
                 Timespan = StopDate - StartDate;
-
-                if (Timespan.Days < 0)
-                {
-                    MessageBox.Show("结束时间不得小于开始时间！");
-                    return;
-                }
-
-                if (Timespan.Days > 62)
-                {
-                    MessageBox.Show("时间跨度不能超过两个月！");
-                    return;
-                }
             }
             catch (Exception ex)
             {
@@ -303,6 +291,10 @@ namespace KaoQin
                     MessageBox.Show("错误5:" + ex.Message);
                     return;
                 }
+            }else
+            {
+                MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！",gridView1.GetFocusedRowCellValue("BMMC").ToString(),comboBoxYear.Text,comboBoxMonth.Text));
+                return;
             }
             
             GridBand band = new GridBand();
@@ -370,10 +362,13 @@ namespace KaoQin
                 Record_Dep.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
             }
 
-            //进行数据分析
+            //进行考勤数据分析
             AnalysisData(StartDate, Timespan.Days);
         }
 
+        /// <summary>
+        /// 分析考勤数据
+        /// </summary>
         private void AnalysisData(DateTime StartDate, int Timespan)
         {
             AttendanceResult.Clear();
@@ -426,8 +421,8 @@ namespace KaoQin
                     }
                     else 
                     {
-                        string yesterday = string.Format("D{0}T", j + 1);
-                        string today = string.Format("D{0}T", j + 2);
+                        string yesterday = string.Format("D{0}T", j);
+                        string today = string.Format("D{0}T", j + 1);
                         var query1 = from Item in ArrangementItem.AsEnumerable()
                                      where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
@@ -470,21 +465,167 @@ namespace KaoQin
             bandedGridView2.BestFitColumns();
         }
 
-        private string Result(DataTable Record_Person,DataTable PersonShift)
+        private string Result(DataTable Record_Person, DataTable PersonShiftAll)
         {
 
-            if (Record_Person.Rows.Count == 0 && PersonShift.Rows.Count > 0)
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < PersonShiftAll.Rows.Count; i++)
             {
-                return "全天未签";
+                //昨日
+                if (PersonShiftAll.Rows[i]["PD"].ToString() == "0")
+                {
+
+                    if (PersonShiftAll.Rows[i]["KT"].ToString() == "0")
+                    {
+                        //不跨天
+                        continue;
+                    }
+                    else
+                    {
+                        //跨天，只判断下班时间
+                        for (int j = 0; j < Record_Person.Rows.Count; j++)
+                        {
+                            if (Record_Person.Rows.Count == 0)
+                            {
+                                result.Append("/下班未签");
+                                break;
+                            }
+
+                            DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
+                            DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
+                            double subtract = (record - XBSJ).TotalMinutes;
+                            if (subtract >= 0)
+                            {
+                                result.Append("/准点下班");
+                                break;
+                            }
+                            else if (subtract < 0 && subtract > -60)
+                            {
+                                result.Append("/早退");
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                //今日
+                if (PersonShiftAll.Rows[i]["PD"].ToString() == "1")
+                {
+                    if (PersonShiftAll.Rows[i]["KT"].ToString() == "0")
+                    {
+                        //不跨天，判断上下班时间
+
+                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString()=="" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "" && Record_Person.Rows.Count == 0)
+                        {
+                            result.Append("休");
+                            continue;
+                        }
+
+                        if ((PersonShiftAll.Rows[i]["SBSJ"].ToString() != "" || PersonShiftAll.Rows[i]["XBSJ"].ToString() != "") && Record_Person.Rows.Count == 0)
+                        {
+                            result.Append("全天未签");
+                            continue;
+                        }
+
+                        //上班时间
+                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() != "")
+                        {
+                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
+                            for (int j = 0; j < Record_Person.Rows.Count; j++)
+                            {
+                                DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());                                
+                                double subtract = (SBSJ - record).TotalMinutes;
+                                if (subtract >= 0 && subtract < 120)
+                                {
+                                    result.Append("/准点上班");
+                                    break;
+                                }
+                                else if (subtract < 0 && subtract > -90)
+                                {
+                                    result.Append("/迟到");
+                                    break;
+                                }else if (j== Record_Person.Rows.Count-1)
+                                {
+                                    result.Append("/上班未签");
+                                }
+                            }
+                        }
+
+                        //下班时间
+                        if (PersonShiftAll.Rows[i]["XBSJ"].ToString() != "")
+                        {
+                            for (int j = 0; j < Record_Person.Rows.Count; j++)
+                            {
+                                DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
+                                DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
+                                double subtract = (record - XBSJ).TotalMinutes;
+                                if (subtract >= 0)
+                                {
+                                    result.Append("/正常下班");
+                                    break;
+                                }
+                                else if (subtract < 0 && subtract > -90 )
+                                {
+                                    result.Append("/早退");
+                                    break;
+                                }
+                                else if (j == Record_Person.Rows.Count-1)
+                                {
+                                    result.Append("/下班未签");
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        //跨天，只判断上班时间
+                        if (Record_Person.Rows.Count == 0)
+                        {
+                            result.Append("/上班未签");
+                            continue;
+                        }
+                        for (int j = 0; j < Record_Person.Rows.Count; j++)
+                        {
+                            DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
+                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
+                            double subtract = (SBSJ - record).TotalMinutes;
+                            if (subtract >=0 && subtract< 120)
+                            {
+                                result.Append("/准点");
+                                break;
+                            }
+                            else if (subtract < 0 && subtract > -120)
+                            {
+                                result.Append("/迟到");
+                                break;
+                            }
+                            else if (j == Record_Person.Rows.Count - 1)
+                            {
+                                result.Append("/下班未签");
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
+            if (result.ToString() == "/准点上班/正常下班")
+            {
+                result.Clear();
+                result.Append("正常");
+            } 
+            
+            if (result.ToString().IndexOf("/") == 0)
+            {
+                string str = result.ToString().Remove(0, 1);
+                result.Clear();
+                result.Append(str);
             }
 
-            //if (PersonShift.Rows[0]["KT"].ToString() == "0")
-            //{
-
-            //}
-
-            return  "";
-
+                                           
+            return result.ToString();
         }
 
         private string Week(DateTime Day)
@@ -518,6 +659,14 @@ namespace KaoQin
                 }
             }
             catch { }
+
+
+            if (e.CellValue.ToString() == "休")
+            {
+                e.Appearance.ForeColor = Color.Red;
+            }
+
+
         }
 
         private void ButtonOrignData_Click(object sender, EventArgs e)
@@ -530,14 +679,19 @@ namespace KaoQin
 
         private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            //还要考虑点击名字的时候
             Record_Person.Clear();
-
+            PersonShift.Clear();
+            PersonShift.Rows.Add(new object[] { });
+            PersonShift.Rows.Add(new object[] { });
+            PersonShiftAll.Clear();
             try
             {
+                string KQID = bandedGridView2.GetFocusedRowCellDisplayText("KQID").ToString();
                 string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
                 string Date = bandedGridView2.FocusedColumn.Caption;
                 var query = from rec in Record_Dep.AsEnumerable()
-                            where rec.Field<string>("Name") == Name && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                            where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
                             select new
                             {
                                 Time = rec.Field<string>("Time"),
@@ -548,23 +702,77 @@ namespace KaoQin
                     Record_Person.Rows.Add(obj.Time, obj.Source);
                 }
 
-                if (Record_Person.Rows.Count == 0)
+                int day = Convert.ToDateTime(Date).Day;                
+                string today = "D" + (day) + "T";
+                string yesterday = "D" + (day-1) + "T";
+
+                if (day == 1)
                 {
-                    MessageBox.Show(string.Format("{0}在{1}没有签到记录！", Name, Convert.ToDateTime(Date).ToString("yyyy年MM月dd日")));
-                    return;
+                    //第一天的排班
+                    var query1 = from Item in ArrangementItem.AsEnumerable()
+                                 where Item.Field<string>("KQID") == KQID
+                                 select new
+                                 {
+                                     Today = Item.Field<string>(today).ToString(),
+                                 };
+                    foreach (var obj in query1)
+                    {
+                        PersonShift.Rows[0]["ID"] = "";
+                        PersonShift.Rows[0]["PD"] = "0";
+                        PersonShift.Rows[1]["ID"] = obj.Today;
+                        PersonShift.Rows[1]["PD"] = "1";
+                    }
                 }
                 else
                 {
-                    PersonData form = new PersonData();
-                    form.PersonRecord = Record_Person.Copy();
-                    form.name = Name;
-                    form.Date = Date;
-                    form.Show();
+                    var query1 = from Item in ArrangementItem.AsEnumerable()
+                                 where Item.Field<string>("KQID") == KQID
+                                 select new
+                                 {
+                                     Yesterday = Item.Field<string>(yesterday),
+                                     Today = Item.Field<string>(today),
+                                 };
+                    foreach (var obj in query1)
+                    {
+                        PersonShift.Rows[0]["ID"] = obj.Yesterday;
+                        PersonShift.Rows[0]["PD"] = "0";
+                        PersonShift.Rows[1]["ID"] = obj.Today;
+                        PersonShift.Rows[1]["PD"] = "1";
+                    }
                 }
 
+                //将个人排班添加上下班时间和跨天说明
+                var query2 = from personshift in PersonShift.AsEnumerable()
+                             join workshift in WorkShift.AsEnumerable().DefaultIfEmpty()
+                             on personshift.Field<string>("ID") equals workshift.Field<int>("ID").ToString()
+                             select new
+                             {
+                                 ID = personshift.Field<string>("ID"),
+                                 PD = personshift.Field<string>("PD"),
+                                 SBSJ = workshift.Field<string>("SBSJ"),
+                                 XBSJ = workshift.Field<string>("XBSJ"),
+                                 KT = workshift.Field<int>("KT").ToString(),
+                             };
+
+                PersonShiftAll.Clear();
+                foreach (var obj in query2)
+                {
+                    PersonShiftAll.Rows.Add(obj.PD, obj.ID, obj.SBSJ, obj.XBSJ, obj.KT);
+                }
+
+                PersonData form = new PersonData();
+                form.PersonRecord = Record_Person.Copy();
+                form.PersonShift = PersonShiftAll.Copy();
+                form.WorkShift = WorkShift.Copy();
+                form.name = Name;
+                form.Date = Date;
+                form.Show();
 
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -646,7 +854,51 @@ namespace KaoQin
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
+            if (tabPage1.Focused == true)
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.Filter = "电子表格(*.xls)|*.xls";
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string path = sf.FileName.ToString();
+                        gridControl2.ExportToXlsx(path);
+                        MessageBox.Show("导出成功！");
+                    }
+                    catch { }
+                    if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                        return;
+                    try
+                    {
+                        System.Diagnostics.Process.Start(sf.FileName);
+                    }
+                    catch { }
+                }
 
+            }
+            else if (tabPage2.Focused == true)
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.Filter = "电子表格(*.xls)|*.xls";
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string path = sf.FileName.ToString();
+                        gridControl3.ExportToXlsx(path);
+                        MessageBox.Show("导出成功！");
+                    }
+                    catch { }
+                    if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                        return;
+                    try
+                    {
+                        System.Diagnostics.Process.Start(sf.FileName);
+                    }
+                    catch { }
+                }
+            }
         }
 
         private void ButtonFilter_Click(object sender, EventArgs e)
