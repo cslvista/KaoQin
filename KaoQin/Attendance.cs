@@ -17,6 +17,7 @@ namespace KaoQin
         DataTable Machine = new DataTable();//机器信息
         DataTable Department = new DataTable();//部门
         DataTable AttendanceResult = new DataTable();//考勤结果
+        DataTable AttendanceCollect = new DataTable();//考勤汇总
         DataTable Staff = new DataTable();//员工信息
         DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
         DataTable WorkShift = new DataTable();//班次信息
@@ -44,7 +45,7 @@ namespace KaoQin
             }
             else
             {
-                if (MessageBox.Show("从考勤机下载数据需要约1分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show("从考勤机下载数据需要约1-3分钟的时间，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
                 }
@@ -163,6 +164,13 @@ namespace KaoQin
             PersonShiftAll.Columns.Add("SBSJ", typeof(string));
             PersonShiftAll.Columns.Add("XBSJ", typeof(string));
             PersonShiftAll.Columns.Add("KT", typeof(string));
+
+            AttendanceCollect.Columns.Add("KQID", typeof(string));
+            AttendanceCollect.Columns.Add("YGXM", typeof(string));
+            AttendanceCollect.Columns.Add("TotalDays", typeof(string));
+            AttendanceCollect.Columns.Add("Normal", typeof(string));
+            AttendanceCollect.Columns.Add("Absent", typeof(string));
+            AttendanceCollect.Columns.Add("Rest", typeof(string));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
@@ -362,12 +370,14 @@ namespace KaoQin
                 Record_Dep.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
             }
 
-            //进行考勤数据分析
+            //进行考勤明细分析
             AnalysisData(StartDate, Timespan.Days);
+            //进行考勤汇总分析
+            DataCollect(StartDate, Timespan.Days);
         }
 
         /// <summary>
-        /// 分析考勤数据
+        /// 考勤明细分析
         /// </summary>
         private void AnalysisData(DateTime StartDate, int Timespan)
         {
@@ -463,6 +473,44 @@ namespace KaoQin
             }
             gridControl2.DataSource = AttendanceResult;
             bandedGridView2.BestFitColumns();
+        }
+
+        private void DataCollect(DateTime StartDate, int Timespan)
+        {
+            AttendanceCollect.Clear();
+            int normal;
+            int late;
+            int absent;
+            int rest;
+            for (int i = 0; i < Staff.Rows.Count; i++)
+            {
+                AttendanceCollect.Rows.Add(new object[] {});
+                normal = 0;
+                late = 0;
+                absent = 0;
+                rest = 0;
+
+                for (int j=0;j<=Timespan; j++)
+                {
+                    switch (AttendanceResult.Rows[i][j].ToString())
+                    {
+                        case "正常":normal = normal + 1;break;
+                        case "休": rest = rest + 1; break;
+                        case "全天未签":absent = absent + 1;break;
+                        case "迟到": late = late + 1; break;
+                    }
+                        
+                }
+                AttendanceCollect.Rows[i]["KQID"] = AttendanceResult.Rows[i]["KQID"];
+                AttendanceCollect.Rows[i]["YGXM"] = AttendanceResult.Rows[i]["YGXM"];
+                AttendanceCollect.Rows[i]["TotalDays"] = (Timespan+1).ToString();
+                AttendanceCollect.Rows[i] ["Normal"] = normal.ToString();
+                AttendanceCollect.Rows[i]["Rest"] = rest.ToString();
+                AttendanceCollect.Rows[i]["Absent"] = absent.ToString();
+            }
+            gridControl3.DataSource = AttendanceCollect;
+            gridView3.BestFitColumns();
+            
         }
 
         private string Result(DataTable Record_Person, DataTable PersonShiftAll)
@@ -919,6 +967,15 @@ namespace KaoQin
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void searchControl2_TextChanged(object sender, EventArgs e)
+        {
+            if (AttendanceResult.Rows.Count > 0)
+            {
+                AttendanceResult.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
+            }
+            
         }
     }
 }

@@ -23,10 +23,9 @@ namespace KaoQin
 
         private void SearchDetail_Load(object sender, EventArgs e)
         {
-            int year = Convert.ToDateTime(Date).Year;
             int month = Convert.ToDateTime(Date).Month;
             int day= Convert.ToDateTime(Date).Day;
-            string date = year + "年" + month + "月" + day + "日";
+            string date = month + "月" + day + "日";
             this.Text = name + " 排班与签到 "+string.Format("({0})",date);
             gridControl1.DataSource = PersonRecord;
             gridView1.BestFitColumns();
