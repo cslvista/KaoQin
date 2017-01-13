@@ -378,7 +378,7 @@ namespace KaoQin
                 //添加姓名与考勤号
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
-                for (int j = 0; j < Timespan ; j++)
+                for (int j = 0; j <= Timespan ; j++)
                 {
                                        
                     //查询当日考勤数据
@@ -497,7 +497,7 @@ namespace KaoQin
                             double subtract = (record - XBSJ).TotalMinutes;
                             if (subtract >= 0)
                             {
-                                result.Append("/准点下班");
+                                result.Append("/正常下班");
                                 break;
                             }
                             else if (subtract < 0 && subtract > -60)
@@ -519,6 +519,12 @@ namespace KaoQin
                         if (PersonShiftAll.Rows[i]["SBSJ"].ToString()=="" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "" && Record_Person.Rows.Count == 0)
                         {
                             result.Append("休");
+                            continue;
+                        }
+
+                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "" && Record_Person.Rows.Count != 0)
+                        {
+                            result.Append("加班");
                             continue;
                         }
 
@@ -610,21 +616,24 @@ namespace KaoQin
                     }
                 }
             }
-            
-            if (result.ToString() == "/准点上班/正常下班")
+
+            switch (result.ToString())
             {
-                result.Clear();
-                result.Append("正常");
-            } 
-            
+                case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;
+                case "/迟到/正常下班": result.Clear(); result.Append("迟到"); break;
+                case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
+                case "/准点上班/下班未签": result.Clear(); result.Append("下班未签"); break;
+                case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
+            }
+
+         
             if (result.ToString().IndexOf("/") == 0)
             {
                 string str = result.ToString().Remove(0, 1);
                 result.Clear();
                 result.Append(str);
             }
-
-                                           
+                                          
             return result.ToString();
         }
 
@@ -660,12 +669,16 @@ namespace KaoQin
             }
             catch { }
 
-
-            if (e.CellValue.ToString() == "休")
+            if (e.Column.FieldName != "YGXM")
+            switch (e.CellValue.ToString())
             {
-                e.Appearance.ForeColor = Color.Red;
+                case "休": e.Appearance.ForeColor = Color.DarkGreen; break;
+                case "加班": e.Appearance.ForeColor = Color.DarkMagenta; break;
+                case "正常": e.Appearance.ForeColor = Color.Blue; break;
+                case "准点上班": e.Appearance.ForeColor = Color.Black; break;
+                case "正常下班": e.Appearance.ForeColor = Color.Black; break;
+                default: e.Appearance.ForeColor = Color.Red; break;
             }
-
 
         }
 
@@ -779,18 +792,20 @@ namespace KaoQin
 
         private void ButtonImport_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
-            ofd.RestoreDirectory = true; //记忆上次浏览路径
             string FileName = "";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                FileName = ofd.FileName;
-            }
-            else
-            {
-                return;
-            }
+
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
+            //ofd.RestoreDirectory = true; //记忆上次浏览路径            
+            //if (ofd.ShowDialog() == DialogResult.OK)
+            //{
+            //    FileName = ofd.FileName;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
 
             string FileExtension = "";
             DataTable dtExcel = new DataTable(); //数据表   

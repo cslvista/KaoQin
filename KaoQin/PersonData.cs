@@ -23,7 +23,11 @@ namespace KaoQin
 
         private void SearchDetail_Load(object sender, EventArgs e)
         {
-            this.Text = name + "签到记录";
+            int year = Convert.ToDateTime(Date).Year;
+            int month = Convert.ToDateTime(Date).Month;
+            int day= Convert.ToDateTime(Date).Day;
+            string date = year + "年" + month + "月" + day + "日";
+            this.Text = name + " 排班与签到 "+string.Format("({0})",date);
             gridControl1.DataSource = PersonRecord;
             gridView1.BestFitColumns();
 
@@ -73,6 +77,24 @@ namespace KaoQin
                         e.DisplayText = WorkShift.Rows[i]["NAME"].ToString();
                         break;
                     }
+                }
+            }
+
+        }
+
+        private void gridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "KT")
+            {
+                string KT = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["KT"]);
+
+                if (KT == "否")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+                else 
+                {
+                    e.Appearance.ForeColor = Color.Red;
                 }
             }
 

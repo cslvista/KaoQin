@@ -281,7 +281,7 @@ namespace KaoQin.arrangement
 
                 if (KT == "是")
                 {
-                    e.Appearance.ForeColor = Color.Green;
+                    e.Appearance.ForeColor = Color.DarkGreen;
                 }
                 else if (KT == "否")
                 {

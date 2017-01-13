@@ -157,6 +157,20 @@ namespace KaoQin
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                string sql = string.Format("delete from KQ_PB  where PBID='{0}';", gridView2.GetFocusedRowCellValue("PBID").ToString())
+               + string.Format("delete from KQ_PB_XB  where PBID='{0}'", gridView2.GetFocusedRowCellValue("PBID").ToString());
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+
+            //刷新
+            gridControl1_Click(null, null);
         }
     }
 }
