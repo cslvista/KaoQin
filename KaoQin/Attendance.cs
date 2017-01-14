@@ -16,7 +16,7 @@ namespace KaoQin
         zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
         DataTable Machine = new DataTable();//机器信息
         DataTable Department = new DataTable();//部门
-        DataTable AttendanceResult = new DataTable();//考勤结果
+        public DataTable AttendanceResult = new DataTable();//考勤结果
         DataTable AttendanceCollect = new DataTable();//考勤汇总
         DataTable Staff = new DataTable();//员工信息
         DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
@@ -28,6 +28,9 @@ namespace KaoQin
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
+        DateTime StartDate;
+        DateTime StopDate;
+        TimeSpan Timespan;
         bool HasDownload = false;//是否已下载数据
         public Attendance()
         {
@@ -228,9 +231,7 @@ namespace KaoQin
             searchControl2.Text = "";
             Record_Dep.Clear();
 
-            DateTime StartDate;
-            DateTime StopDate;
-            TimeSpan Timespan;
+
             try
             {
                 string year = comboBoxYear.Text.Substring(0, 4);
@@ -491,7 +492,7 @@ namespace KaoQin
             bandedGridView2.BestFitColumns();
         }
 
-        private void DataCollect(DateTime StartDate, int Timespan)
+        public void DataCollect(DateTime StartDate, int Timespan)
         {
             AttendanceCollect.Clear();
             int normal;
@@ -1040,6 +1041,23 @@ namespace KaoQin
                 AttendanceResult.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
                 AttendanceCollect.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
             }
+            
+        }
+
+        private void 修改为ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AttendanceAlter form = new AttendanceAlter();
+                form.Name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
+                form.Date = bandedGridView2.FocusedColumn.Caption;
+                form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString(); ;
+                form.Row = bandedGridView2.GetDataSourceRowIndex(bandedGridView2.FocusedRowHandle);
+                form.StartDate = StartDate;
+                form.Timespan = Timespan.Days;
+                form.Show(this);
+            }
+            catch { }
             
         }
     }

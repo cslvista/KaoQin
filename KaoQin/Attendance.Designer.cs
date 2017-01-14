@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Attendance));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
@@ -54,6 +55,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.修改为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -83,6 +86,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
@@ -411,6 +415,7 @@
             // 
             // gridControl2
             // 
+            this.gridControl2.ContextMenuStrip = this.contextMenuStrip1;
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Location = new System.Drawing.Point(3, 2);
@@ -422,6 +427,21 @@
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView2});
             this.gridControl2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gridControl2_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.修改为ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(182, 58);
+            // 
+            // 修改为ToolStripMenuItem
+            // 
+            this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.修改为ToolStripMenuItem.Text = "修改";
+            this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
             // bandedGridView2
             // 
@@ -615,6 +635,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
@@ -667,5 +688,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 修改为ToolStripMenuItem;
     }
 }
