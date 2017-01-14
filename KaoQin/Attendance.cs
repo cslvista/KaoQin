@@ -171,6 +171,11 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("Normal", typeof(string));
             AttendanceCollect.Columns.Add("Absent", typeof(string));
             AttendanceCollect.Columns.Add("Rest", typeof(string));
+            AttendanceCollect.Columns.Add("Late", typeof(string));
+            AttendanceCollect.Columns.Add("LeaveEarly", typeof(string));
+            AttendanceCollect.Columns.Add("Morning", typeof(string));
+            AttendanceCollect.Columns.Add("Afternoon", typeof(string));
+            AttendanceCollect.Columns.Add("OverTime", typeof(string));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
@@ -230,9 +235,20 @@ namespace KaoQin
             {
                 string year = comboBoxYear.Text.Substring(0, 4);
                 string month = comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"));
+                string timeNow = GlobalHelper.IDBHelper.GetServerDateTime();
+                string yearNow = Convert.ToDateTime(timeNow).Year.ToString()+"年";
+                string monthNow= Convert.ToDateTime(timeNow).Month.ToString()+"月";                
                 string startDate = Convert.ToDateTime(year + "-" + month + "-" + "1").ToString("yyyy-MM-dd");
                 StartDate = Convert.ToDateTime(startDate);
-                StopDate = StartDate.AddMonths(1).AddDays(-1);
+                //如果查询本月的记录，则最终日期是今天
+                if (yearNow == comboBoxYear.Text && monthNow == comboBoxMonth.Text)
+                {
+                    StopDate =Convert.ToDateTime(Convert.ToDateTime(timeNow).ToString("yyyy-MM-dd"));
+                }
+                else
+                {
+                    StopDate = StartDate.AddMonths(1).AddDays(-1);
+                }               
                 Timespan = StopDate - StartDate;
             }
             catch (Exception ex)
@@ -482,6 +498,10 @@ namespace KaoQin
             int late;
             int absent;
             int rest;
+            int leaveEarly;
+            int morning;
+            int afternoon;
+            int overTime;
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceCollect.Rows.Add(new object[] {});
@@ -489,17 +509,56 @@ namespace KaoQin
                 late = 0;
                 absent = 0;
                 rest = 0;
-
+                leaveEarly = 0;
+                morning = 0;
+                afternoon = 0;
+                overTime = 0;
                 for (int j=0;j<=Timespan; j++)
                 {
-                    switch (AttendanceResult.Rows[i][j].ToString())
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "正常")
                     {
-                        case "正常":normal = normal + 1;break;
-                        case "休": rest = rest + 1; break;
-                        case "全天未签":absent = absent + 1;break;
-                        case "迟到": late = late + 1; break;
+                        normal = normal + 1;
+                        continue;
                     }
-                        
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "休")
+                    {
+                        rest = rest + 1;
+                        continue;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "加班")
+                    {
+                        overTime = overTime + 1;
+                        continue;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "全天未签")
+                    {
+                        absent = absent + 1;
+                        continue;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString().IndexOf("迟到") > -1)
+                    {
+                        late = late + 1;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString().IndexOf("早退") > -1)
+                    {
+                        leaveEarly = leaveEarly + 1;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString().IndexOf("上班未签") > -1)
+                    {
+                        morning = morning + 1;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString().IndexOf("下班未签") > -1)
+                    {
+                        afternoon = afternoon + 1;
+                    }
+
                 }
                 AttendanceCollect.Rows[i]["KQID"] = AttendanceResult.Rows[i]["KQID"];
                 AttendanceCollect.Rows[i]["YGXM"] = AttendanceResult.Rows[i]["YGXM"];
@@ -507,6 +566,11 @@ namespace KaoQin
                 AttendanceCollect.Rows[i] ["Normal"] = normal.ToString();
                 AttendanceCollect.Rows[i]["Rest"] = rest.ToString();
                 AttendanceCollect.Rows[i]["Absent"] = absent.ToString();
+                AttendanceCollect.Rows[i]["Late"] =late.ToString();
+                AttendanceCollect.Rows[i]["LeaveEarly"] = leaveEarly.ToString();
+                AttendanceCollect.Rows[i]["Morning"] =morning.ToString();
+                AttendanceCollect.Rows[i]["Afternoon"] =afternoon .ToString();
+                AttendanceCollect.Rows[i]["OverTime"] = overTime.ToString();
             }
             gridControl3.DataSource = AttendanceCollect;
             gridView3.BestFitColumns();
@@ -723,8 +787,8 @@ namespace KaoQin
                 case "休": e.Appearance.ForeColor = Color.DarkGreen; break;
                 case "加班": e.Appearance.ForeColor = Color.DarkMagenta; break;
                 case "正常": e.Appearance.ForeColor = Color.Blue; break;
-                case "准点上班": e.Appearance.ForeColor = Color.Black; break;
-                case "正常下班": e.Appearance.ForeColor = Color.Black; break;
+                case "准点上班": e.Appearance.ForeColor = Color.Blue; break;
+                case "正常下班": e.Appearance.ForeColor = Color.Blue; break;
                 default: e.Appearance.ForeColor = Color.Red; break;
             }
 
@@ -917,7 +981,7 @@ namespace KaoQin
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
-            if (tabPage1.Focused == true)
+            if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 SaveFileDialog sf = new SaveFileDialog();
                 sf.Filter = "电子表格(*.xls)|*.xls";
@@ -940,7 +1004,7 @@ namespace KaoQin
                 }
 
             }
-            else if (tabPage2.Focused == true)
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 SaveFileDialog sf = new SaveFileDialog();
                 sf.Filter = "电子表格(*.xls)|*.xls";
@@ -974,6 +1038,7 @@ namespace KaoQin
             if (AttendanceResult.Rows.Count > 0)
             {
                 AttendanceResult.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
+                AttendanceCollect.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
             }
             
         }

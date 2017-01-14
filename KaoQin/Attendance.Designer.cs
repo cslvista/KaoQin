@@ -66,8 +66,11 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -483,8 +486,11 @@
             this.gridColumn7,
             this.gridColumn12,
             this.gridColumn9,
+            this.gridColumn13,
+            this.gridColumn14,
             this.gridColumn10,
-            this.gridColumn11});
+            this.gridColumn11,
+            this.gridColumn15});
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.Editable = false;
@@ -515,7 +521,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "正常天数";
+            this.gridColumn6.Caption = "正常";
             this.gridColumn6.FieldName = "Normal";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -524,6 +530,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "迟到";
+            this.gridColumn7.FieldName = "Late";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 3;
@@ -539,9 +546,26 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "早退";
+            this.gridColumn9.FieldName = "LeaveEarly";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 4;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "上班未签";
+            this.gridColumn13.FieldName = "Morning";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 8;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "下班未签";
+            this.gridColumn14.FieldName = "Afternoon";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 9;
             // 
             // gridColumn10
             // 
@@ -549,14 +573,22 @@
             this.gridColumn10.FieldName = "Rest";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 5;
+            this.gridColumn10.VisibleIndex = 6;
             // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "工作年限";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 6;
+            this.gridColumn11.VisibleIndex = 10;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "加班";
+            this.gridColumn15.FieldName = "OverTime";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 5;
             // 
             // Attendance
             // 
@@ -632,5 +664,8 @@
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
     }
 }
