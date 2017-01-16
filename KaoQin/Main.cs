@@ -15,6 +15,11 @@ namespace KaoQin
     {
         DataTable Department = new DataTable();
         DataTable Attendance = new DataTable();
+        DataTable Authority = new DataTable();
+        bool Authority_Dep = false;
+        bool Authority_Device = false;
+        bool Authority_Arrangement = false;
+        bool Authority_Mangement = false;
         delegate void UpdateUI();
         public Main()
         {
@@ -24,9 +29,25 @@ namespace KaoQin
         private void Main_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
+            SearchAuthority();//授权管理
             SearchDepartment();//查找部门
         }
 
+
+        private void SearchAuthority()
+        {
+            string sql = "select * from KQ_SQ";
+
+            try
+            {
+                Authority = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+        }
         private void SearchDepartment()
         {
             string sql = "select BMID,BMMC,BMLB from KQ_BM where BMID>0";
@@ -170,6 +191,18 @@ namespace KaoQin
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+
+            string Record = string.Format("{0}删除了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(), gridView1.GetFocusedRowCellValue("BMMC").ToString(), gridView2.GetFocusedRowCellValue("YEAR").ToString(), gridView2.GetFocusedRowCellValue("MONTH").ToString());
+            string sql1 = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
+            try
+            {
+               GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message, "提示");
                 return;
             }
 

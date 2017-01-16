@@ -47,8 +47,8 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemColorEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorEdit();
             this.repositoryItemColorPickEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorPickEdit();
+            this.repositoryItemColorEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -67,8 +67,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorPickEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
@@ -277,19 +277,19 @@
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 6;
             // 
-            // repositoryItemColorEdit1
-            // 
-            this.repositoryItemColorEdit1.AutoHeight = false;
-            this.repositoryItemColorEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemColorEdit1.Name = "repositoryItemColorEdit1";
-            // 
             // repositoryItemColorPickEdit1
             // 
             this.repositoryItemColorPickEdit1.AutoHeight = false;
             this.repositoryItemColorPickEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemColorPickEdit1.Name = "repositoryItemColorPickEdit1";
+            // 
+            // repositoryItemColorEdit1
+            // 
+            this.repositoryItemColorEdit1.AutoHeight = false;
+            this.repositoryItemColorEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemColorEdit1.Name = "repositoryItemColorEdit1";
             // 
             // panelControl1
             // 
@@ -318,6 +318,7 @@
             this.searchControl2.Properties.NullValuePrompt = "E";
             this.searchControl2.Size = new System.Drawing.Size(225, 26);
             this.searchControl2.TabIndex = 26;
+            this.searchControl2.TextChanged += new System.EventHandler(this.searchControl2_TextChanged);
             // 
             // toolStrip1
             // 
@@ -473,8 +474,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorPickEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();

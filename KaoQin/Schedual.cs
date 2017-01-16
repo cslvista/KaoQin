@@ -349,6 +349,20 @@ namespace KaoQin
                     return;
                 }
 
+                //写日志
+                string Record = string.Format("{0}更改了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(),comboBox1.Text,comboBoxYear.Text,comboBoxMonth.Text);
+                string sql2 = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
+
+                try
+                {
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql2);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误3:" + ex.Message);
+                    return;
+                }
+
             }
             else
             {

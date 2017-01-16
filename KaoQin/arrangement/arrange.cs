@@ -326,5 +326,13 @@ namespace KaoQin.arrangement
             }
 
         }
+
+        private void searchControl2_TextChanged(object sender, EventArgs e)
+        {
+            if (Type.Rows.Count > 0)
+            {
+                Type.DefaultView.RowFilter = string.Format("BMLB like '%{0}%'", searchControl2.Text);
+            }
+        }
     }
 }

@@ -190,7 +190,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(13, 21);
+            this.searchControl1.Location = new System.Drawing.Point(9, 21);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -200,7 +200,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.FindDelay = 100;
             this.searchControl1.Properties.NullValuePrompt = "E";
-            this.searchControl1.Size = new System.Drawing.Size(165, 26);
+            this.searchControl1.Size = new System.Drawing.Size(169, 26);
             this.searchControl1.TabIndex = 14;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
@@ -434,12 +434,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改为ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(182, 58);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(115, 30);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
