@@ -36,6 +36,14 @@ namespace KaoQin
 
         private void SearchAuthority()
         {
+            if (GlobalHelper.UserHelper.User["U_NAME"].ToString() == "MZSYS")
+            {
+                Authority_Dep = true;
+                Authority_Device = true;
+                Authority_Arrangement = true;
+                Authority_Mangement = true;
+            }
+
             string sql = "select * from KQ_SQ";
 
             try
@@ -79,12 +87,24 @@ namespace KaoQin
 
         private void 机器设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Authority_Device == false)
+            {
+                MessageBox.Show("您没有修改设备信息的权利！");
+                return;
+            }
+
             machine.machine form = new machine.machine();
             form.Show();
         }
 
         private void 员工设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep == false)
+            {
+                MessageBox.Show("您没有修改部门与员工信息的权利！");
+                return;
+            }
+
             users.MainUsers form = new users.MainUsers();
             form.Show();
         }
