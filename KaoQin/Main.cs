@@ -75,7 +75,11 @@ namespace KaoQin
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
+            if (Department.Rows.Count > 0)
+            {
+                Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
+            }
+            
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
@@ -171,6 +175,12 @@ namespace KaoQin
 
             //刷新
             gridControl1_Click(null, null);
+        }
+
+        private void 授权管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            authority.Authority form = new authority.Authority();
+            form.Show();
         }
     }
 }

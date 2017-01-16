@@ -35,6 +35,7 @@
             this.机器设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.排班维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.考勤管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.授权管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -61,7 +62,6 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            this.授权管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -118,6 +118,13 @@
             this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.考勤管理ToolStripMenuItem.Text = "考勤管理";
             this.考勤管理ToolStripMenuItem.Click += new System.EventHandler(this.考勤管理ToolStripMenuItem_Click);
+            // 
+            // 授权管理ToolStripMenuItem
+            // 
+            this.授权管理ToolStripMenuItem.Name = "授权管理ToolStripMenuItem";
+            this.授权管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.授权管理ToolStripMenuItem.Text = "授权管理";
+            this.授权管理ToolStripMenuItem.Click += new System.EventHandler(this.授权管理ToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -203,12 +210,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改排班表ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 30);
             // 
             // 修改排班表ToolStripMenuItem
             // 
             this.修改排班表ToolStripMenuItem.Name = "修改排班表ToolStripMenuItem";
-            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.修改排班表ToolStripMenuItem.Text = "修改排班表";
             // 
             // gridView2
@@ -408,12 +415,6 @@
             this.searchControl1.Size = new System.Drawing.Size(166, 26);
             this.searchControl1.TabIndex = 12;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
-            // 
-            // 授权管理ToolStripMenuItem
-            // 
-            this.授权管理ToolStripMenuItem.Name = "授权管理ToolStripMenuItem";
-            this.授权管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
-            this.授权管理ToolStripMenuItem.Text = "授权管理";
             // 
             // Main
             // 

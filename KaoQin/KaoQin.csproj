@@ -102,6 +102,18 @@
     <Compile Include="Attendance.Designer.cs">
       <DependentUpon>Attendance.cs</DependentUpon>
     </Compile>
+    <Compile Include="authority\Authority.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="authority\Authority.Designer.cs">
+      <DependentUpon>Authority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="authority\add_alter_authority.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="authority\add_alter_authority.Designer.cs">
+      <DependentUpon>add_alter_authority.cs</DependentUpon>
+    </Compile>
     <Compile Include="machine\add_alter_machine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +197,12 @@
     <EmbeddedResource Include="AttendanceAlter.resx">
       <DependentUpon>AttendanceAlter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="authority\add_alter_authority.resx">
+      <DependentUpon>add_alter_authority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="authority\Authority.resx">
+      <DependentUpon>Authority.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="machine\add_alter_machine.resx">
       <DependentUpon>add_alter_machine.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,9 +263,7 @@
   <ItemGroup>
     <None Include="Resources\0.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

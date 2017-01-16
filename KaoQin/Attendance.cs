@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 using System.Data.OleDb;
 using DevExpress.XtraGrid.Views.BandedGrid;
 
@@ -53,6 +54,10 @@ namespace KaoQin
                     return;
                 }
             }
+
+            LoadingForm form = new LoadingForm();
+            form.ShowDialog();
+
             Staff_Orign.Clear();
             Record_DKJ.Clear();            
             //读取考勤机数据
@@ -220,7 +225,11 @@ namespace KaoQin
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
+            if (Department.Rows.Count>0)
+            {
+                Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
+            }
+            
         }
 
         private void ButtonCal_Click(object sender, EventArgs e)

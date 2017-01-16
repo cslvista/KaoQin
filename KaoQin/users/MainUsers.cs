@@ -140,7 +140,11 @@ namespace KaoQin.users
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            Staff.DefaultView.RowFilter = string.Format("YGXM like '%{0}%' or KQID like '%{0}%'", searchControl1.Text);
+            if (Staff.Rows.Count>0)
+            {
+                Staff.DefaultView.RowFilter = string.Format("YGXM like '%{0}%' or KQID like '%{0}%'", searchControl1.Text);
+            }
+            
         }
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
@@ -151,7 +155,11 @@ namespace KaoQin.users
 
         private void searchControl2_TextChanged(object sender, EventArgs e)
         {
-            Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl2.Text);
+            if (Department.Rows.Count > 0)
+            {
+                Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl2.Text);
+            }
+                
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)

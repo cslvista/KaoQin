@@ -43,17 +43,35 @@ namespace KaoQin.arrangement
                     return;
                 }
             }
-            catch { }           
+            catch { }
 
-            string sql = string.Format("delete from KQ_BC where ID='{0}'", gridView2.GetFocusedRowCellValue("ID").ToString());
-
+            string sql = string.Format("select top 1 PBID from KQ_PB_XB where D1T='{0}' or D2T='{0}' or D3T='{0}' or D4T='{0}' or D5T='{0}' or D6T='{0}' or D7T='{0}' or D8T='{0}' or D9T='{0}' or D10T='{0}'", gridView2.GetFocusedRowCellValue("ID").ToString());
+            DataTable isExists = new DataTable();
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                isExists=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误:" + ex.Message);
+                MessageBox.Show("错误1:" + ex.Message);
+                return;
+            }
+
+            if (isExists.Rows.Count != 0)
+            {
+                MessageBox.Show("该班次不可删除！");
+                return;
+            }
+
+            string sql1 = string.Format("delete from KQ_BC where ID='{0}'", gridView2.GetFocusedRowCellValue("ID").ToString());
+
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
 
@@ -248,7 +266,11 @@ namespace KaoQin.arrangement
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            WorkShift.DefaultView.RowFilter = string.Format("NAME like '%{0}%'", searchControl1.Text);
+            if (WorkShift.Rows.Count>0)
+            {
+                WorkShift.DefaultView.RowFilter = string.Format("NAME like '%{0}%'", searchControl1.Text);
+            }
+            
         }
 
         private void gridView2_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)

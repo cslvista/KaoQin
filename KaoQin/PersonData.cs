@@ -25,8 +25,9 @@ namespace KaoQin
         {
             int month = Convert.ToDateTime(Date).Month;
             int day= Convert.ToDateTime(Date).Day;
+            string weekdays = Week(Convert.ToDateTime(Date));
             string date = month + "月" + day + "日";
-            this.Text = name + " 排班与签到 "+string.Format("({0})",date);
+            this.Text = name + " 排班与签到 "+string.Format("({0} {1})",date,weekdays);
             gridControl1.DataSource = PersonRecord;
             gridView1.BestFitColumns();
 
@@ -45,6 +46,12 @@ namespace KaoQin
             gridControl2.DataSource = PersonShift;
             gridView2.BestFitColumns();
             
+        }
+
+        private string Week(DateTime Day)
+        {
+            string[] weekdays = { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
+            return weekdays[Convert.ToInt32(Day.DayOfWeek)];
         }
 
         private void gridView2_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
