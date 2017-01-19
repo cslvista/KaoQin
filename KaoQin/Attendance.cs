@@ -19,15 +19,15 @@ namespace KaoQin
         DataTable Department = new DataTable();//部门
         public DataTable AttendanceResult = new DataTable();//考勤结果
         DataTable AttendanceCollect = new DataTable();//考勤汇总
-        DataTable Staff = new DataTable();//员工信息
-        DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
+        DataTable Staff = new DataTable();//整个部门的所有员工，包括在职离职
+        public DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
         DataTable WorkShift = new DataTable();//班次信息
         DataTable PBID = new DataTable();//排班ID
         DataTable ArrangementItem = new DataTable();//排班细表
         DataTable PersonShift = new DataTable();//个人单日的排班
         DataTable PersonShiftAll = new DataTable();//个人单日的排班的所有信息
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
-        DataTable Record_DKJ = new DataTable();//考勤机原始数据
+        public DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
         DateTime StartDate;
         DateTime StopDate;
@@ -55,86 +55,84 @@ namespace KaoQin
                 }
             }
 
-            LoadingForm form = new LoadingForm();
-            form.ShowDialog();
-
             Staff_Orign.Clear();
-            Record_DKJ.Clear();            
+            Record_DKJ.Clear();
             //读取考勤机数据
-            string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
+            LoadingForm form = new LoadingForm();
+            form.ShowDialog(this);
+            //string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
-            try
-            {
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误1:" + ex.Message);
-                return;
-            }
+            //try
+            //{
+            //    Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("错误1:" + ex.Message);
+            //    return;
+            //}
 
-            if (Machine.Rows.Count == 0)
-            {
-                MessageBox.Show("没有可用设备！");
-                return;
-            }
+            //if (Machine.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("没有可用设备！");
+            //    return;
+            //}
 
 
-            DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
-            DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
-            bool bIsConnected = false;//判断设备是否可连接   
-            string sdwEnrollNumber = "";
-            string sName = "";
-            string sPassword = "";
-            int iPrivilege = 0;
-            bool bEnabled = false;
+            //DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
+            //DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
+            //bool bIsConnected = false;//判断设备是否可连接   
+            //string sdwEnrollNumber = "";
+            //string sName = "";
+            //string sPassword = "";
+            //int iPrivilege = 0;
+            //bool bEnabled = false;
 
-            this.Text = "正在读取员工数据...";
-            DKJ.ReadAllUserID(0);
-            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
-            {
-                int position = sName.IndexOf("\0");
-                string name = sName.Substring(0, position);//过滤sName中多余字符
-                Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
+            //this.Text = "正在读取员工数据...";
+            //DKJ.ReadAllUserID(0);
+            //while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+            //{
+            //    int position = sName.IndexOf("\0");
+            //    string name = sName.Substring(0, position);//过滤sName中多余字符
+            //    Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
                 
-            }
+            //}
 
-            int iMachineNumber = 0;
-            int VerifyMode = 0;
-            int InOutMode = 0;
-            int Year = 0;
-            int Month = 0;
-            int Day = 0;
-            int Hour = 0;
-            int Minute = 0;
-            int Second = 0;
-            int Workcode = 0;
-            string dwEnrollNumber = "";
+            //int iMachineNumber = 0;
+            //int VerifyMode = 0;
+            //int InOutMode = 0;
+            //int Year = 0;
+            //int Month = 0;
+            //int Day = 0;
+            //int Hour = 0;
+            //int Minute = 0;
+            //int Second = 0;
+            //int Workcode = 0;
+            //string dwEnrollNumber = "";
 
-            this.Text = "正在下载考勤数据，请稍候...";
-            for (int i = 0; i < Machine.Rows.Count; i++)
-            {
-                DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
-                bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
-                if (bIsConnected == false)
-                {
-                    MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
-                    return;
-                }
-                int j = 0;
-                DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
-                while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
-                {
-                    j++;
-                    string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
-                    string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
-                    Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
-                    this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
-                }
-            }
+            //this.Text = "正在下载考勤数据，请稍候...";
+            //for (int i = 0; i < Machine.Rows.Count; i++)
+            //{
+            //    DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+            //    bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
+            //    if (bIsConnected == false)
+            //    {
+            //        MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
+            //        return;
+            //    }
+            //    int j = 0;
+            //    DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
+            //    while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
+            //    {
+            //        j++;
+            //        string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
+            //        string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
+            //        Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
+            //        this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
+            //    }
+            //}
             //下载数据完毕
-            this.Text = "考勤管理";
-            MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
+
             HasDownload = true;
             ButtonCal.Enabled = true;
             ButtonOrignData.Enabled = true;
@@ -146,7 +144,6 @@ namespace KaoQin
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             searchControl2.Properties.NullValuePrompt = "请输入姓名";
 
-            comboBox1.Text = "在职员工";
             ButtonCal.Enabled = true;
             ButtonOrignData.Enabled = false;
             Record_DKJ.Columns.Add("ID", typeof(string));
@@ -205,7 +202,7 @@ namespace KaoQin
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
             searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
-            comboBox1.Location = new Point(comboBox1.Location.X, (panelControl2.Height - comboBox1.Height) / 2);
+            
         }
         private void SearchDepartment()
         {
@@ -267,25 +264,7 @@ namespace KaoQin
                 return;
             }
 
-            string StaffState = "";
-            switch (comboBox1.Text)
-            {
-                case "全部员工": StaffState = ">='0'"; break;
-                case "在职员工": StaffState = "='0'"; break;
-                case "离职员工": StaffState = "='1'"; break;
-            }
 
-            //读取员工信息            
-            try
-            {
-                string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT{1}", gridView1.GetFocusedRowCellValue("BMID").ToString(), StaffState);
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误2:" + ex.Message);
-                return;
-            }
 
 
             //读取班次信息
@@ -312,6 +291,7 @@ namespace KaoQin
                 return;
             }
 
+
             //读取排班细表
             if (PBID.Rows.Count > 0)
             {
@@ -330,7 +310,19 @@ namespace KaoQin
                 MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！",gridView1.GetFocusedRowCellValue("BMMC").ToString(),comboBoxYear.Text,comboBoxMonth.Text));
                 return;
             }
-            
+
+            //读取员工信息            
+            try
+            {
+                string sql1 = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message);
+                return;
+            }
+
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;

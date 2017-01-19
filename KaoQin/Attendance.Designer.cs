@@ -46,7 +46,6 @@
             this.ButtonExport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonImport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonOrignData = new DevExpress.XtraEditors.SimpleButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.ButtonFilter = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
@@ -212,7 +211,6 @@
             this.panelControl2.Controls.Add(this.ButtonExport);
             this.panelControl2.Controls.Add(this.ButtonImport);
             this.panelControl2.Controls.Add(this.ButtonOrignData);
-            this.panelControl2.Controls.Add(this.comboBox1);
             this.panelControl2.Controls.Add(this.ButtonFilter);
             this.panelControl2.Controls.Add(this.ButtonCal);
             this.panelControl2.Controls.Add(this.searchControl2);
@@ -229,7 +227,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(500, 22);
+            this.label2.Location = new System.Drawing.Point(368, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 23);
             this.label2.TabIndex = 57;
@@ -253,7 +251,7 @@
             "10月",
             "11月",
             "12月"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(522, 19);
+            this.comboBoxMonth.Location = new System.Drawing.Point(390, 21);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(90, 28);
             this.comboBoxMonth.TabIndex = 56;
@@ -263,7 +261,7 @@
             this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxYear.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(407, 19);
+            this.comboBoxYear.Location = new System.Drawing.Point(275, 21);
             this.comboBoxYear.Name = "comboBoxYear";
             this.comboBoxYear.Size = new System.Drawing.Size(90, 28);
             this.comboBoxYear.TabIndex = 55;
@@ -273,7 +271,7 @@
             this.ButtonExport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
-            this.ButtonExport.Location = new System.Drawing.Point(1208, 19);
+            this.ButtonExport.Location = new System.Drawing.Point(1077, 19);
             this.ButtonExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(108, 30);
@@ -286,7 +284,7 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(1083, 19);
+            this.ButtonImport.Location = new System.Drawing.Point(952, 19);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(108, 30);
@@ -299,7 +297,7 @@
             this.ButtonOrignData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonOrignData.Appearance.Options.UseFont = true;
             this.ButtonOrignData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonOrignData.Image")));
-            this.ButtonOrignData.Location = new System.Drawing.Point(759, 19);
+            this.ButtonOrignData.Location = new System.Drawing.Point(628, 19);
             this.ButtonOrignData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonOrignData.Name = "ButtonOrignData";
             this.ButtonOrignData.Size = new System.Drawing.Size(100, 32);
@@ -307,27 +305,12 @@
             this.ButtonOrignData.Text = "原始记录";
             this.ButtonOrignData.Click += new System.EventHandler(this.ButtonOrignData_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "全部员工",
-            "在职员工",
-            "离职员工"});
-            this.comboBox1.Location = new System.Drawing.Point(181, 21);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(105, 28);
-            this.comboBox1.TabIndex = 51;
-            // 
             // ButtonFilter
             // 
             this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonFilter.Appearance.Options.UseFont = true;
             this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
-            this.ButtonFilter.Location = new System.Drawing.Point(993, 19);
+            this.ButtonFilter.Location = new System.Drawing.Point(862, 19);
             this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonFilter.Name = "ButtonFilter";
             this.ButtonFilter.Size = new System.Drawing.Size(73, 32);
@@ -340,7 +323,7 @@
             this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonCal.Appearance.Options.UseFont = true;
             this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(642, 19);
+            this.ButtonCal.Location = new System.Drawing.Point(511, 19);
             this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonCal.Name = "ButtonCal";
             this.ButtonCal.Size = new System.Drawing.Size(100, 32);
@@ -370,7 +353,7 @@
             this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDownload.Appearance.Options.UseFont = true;
             this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
-            this.ButtonDownload.Location = new System.Drawing.Point(876, 19);
+            this.ButtonDownload.Location = new System.Drawing.Point(745, 19);
             this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDownload.Name = "ButtonDownload";
             this.ButtonDownload.Size = new System.Drawing.Size(100, 32);
@@ -382,7 +365,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(309, 22);
+            this.label4.Location = new System.Drawing.Point(177, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 45;
@@ -673,7 +656,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private System.Windows.Forms.ComboBox comboBox1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.SimpleButton ButtonOrignData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
