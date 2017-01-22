@@ -55,7 +55,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.修改为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改全列ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -415,16 +418,38 @@
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.修改为ToolStripMenuItem});
+            this.toolStripMenuItem1,
+            this.toolStripSeparator1,
+            this.修改为ToolStripMenuItem,
+            this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(115, 30);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 116);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 26);
+            this.toolStripMenuItem1.Text = "查看排班与考勤";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
+            // 
+            // 修改全列ToolStripMenuItem
+            // 
+            this.修改全列ToolStripMenuItem.Name = "修改全列ToolStripMenuItem";
+            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.修改全列ToolStripMenuItem.Text = "修改全列";
+            this.修改全列ToolStripMenuItem.Click += new System.EventHandler(this.修改全列ToolStripMenuItem_Click);
             // 
             // bandedGridView2
             // 
@@ -672,5 +697,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 修改为ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改全列ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

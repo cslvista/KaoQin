@@ -34,7 +34,7 @@ namespace KaoQin
             
 
             t1 = new Thread(DownloadData);
-            t1.IsBackground = true;
+            t1.IsBackground = false;
             t1.Start();
         }
 
@@ -100,7 +100,6 @@ namespace KaoQin
             int Second = 0;
             int Workcode = 0;
             string dwEnrollNumber = "";
-            MessageBox.Show("开始下载数据！");
             for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
@@ -139,8 +138,11 @@ namespace KaoQin
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
-            t1.Abort();
-            this.Close();
+            if (MessageBox.Show("注意：强制停止会关闭所有的窗体，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            Application.ExitThread();
         }
     }
 }

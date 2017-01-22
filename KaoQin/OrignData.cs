@@ -55,7 +55,7 @@ namespace KaoQin
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             allowVisit = true;
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
-            
+            SearchInfo();
         }
 
         private void SearchInfo()

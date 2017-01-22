@@ -320,7 +320,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 423);
+            this.ClientSize = new System.Drawing.Size(366, 423);
             this.Controls.Add(this.colorPickEdit1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox2);

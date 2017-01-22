@@ -17,6 +17,7 @@ namespace KaoQin
         public int Row;
         public DateTime StartDate;
         public int Timespan;
+        public bool AlterColumn;
         public AttendanceAlter()
         {
             InitializeComponent();
@@ -29,18 +30,34 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            Attendance form = (Attendance)this.Owner;
-            form.AttendanceResult.Rows[Row][Date] = comboBox1.Text;
-            form.DataCollect(StartDate,Timespan);
-            this.Close();
+            if (AlterColumn == true)
+            {
+                Attendance form = (Attendance)this.Owner;
+                form.AttendanceResult.Rows[Row][Date] = comboBox1.Text;
+                form.DataCollect(StartDate, Timespan);                
+            }
+            else
+            {
+                Attendance form = (Attendance)this.Owner;
+                form.AttendanceResult.Rows[Row][Date] = comboBox1.Text;
+                form.DataCollect(StartDate, Timespan);                
+            }
 
+            this.Close();        
         }
 
         private void AttendanceAlter_Load(object sender, EventArgs e)
         {
-            label3.Text =  Name;
-            label5.Text = Convert.ToDateTime(Date).Year + "年"+ Convert.ToDateTime(Date).Month+"月" + Convert.ToDateTime(Date).Day + "日";
-            comboBox1.Text = Result;
+            if (AlterColumn == true)
+            {
+                label4.Text = "部门名称";
+            }else
+            {
+                label3.Text = Name;
+                label5.Text = Convert.ToDateTime(Date).Year + "年" + Convert.ToDateTime(Date).Month + "月" + Convert.ToDateTime(Date).Day + "日";
+                comboBox1.Text = Result;
+            }
+            
         }
     }
 }

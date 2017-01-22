@@ -34,6 +34,7 @@ namespace KaoQin.users
         {
             searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
             searchControl2.Properties.NullValuePrompt = "请输入部门名称";
+            gridView2.OptionsBehavior.AutoExpandAllGroups = true;
             UILocation();
             toolStripButtonRefresh_Click(null, null);
         }
@@ -102,7 +103,7 @@ namespace KaoQin.users
         {
             try
             {
-                if (MessageBox.Show(string.Format("是否删除员工'{0}'？", gridView2.GetFocusedRowCellDisplayText("YGXM").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show(string.Format("是否删除员工 '{0}'？", gridView2.GetFocusedRowCellDisplayText("YGXM").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
                 }
@@ -111,7 +112,8 @@ namespace KaoQin.users
             
             try
             {
-                string sql = string.Format("delete from KQ_YG where KQID='{0}'", gridView2.GetFocusedRowCellValue("KQID").ToString());
+                string sql = string.Format("delete from KQ_YG where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString())
+                           + string.Format("delete from KQ_PB_XB where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString());
                 GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl1_Click(null, null);
             }
@@ -246,6 +248,28 @@ namespace KaoQin.users
                 return;
             }
 
+            try
+            {
+                if (MessageBox.Show(string.Format("是否删除'{0}'？", gridView1.GetFocusedRowCellDisplayText("BMMC").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
+            }
+            catch { }
+
+            
+            string sql = string.Format("delete from KQ_BM where BMID='{0}';",gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("delete from KQ_PB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("delete from KQ_PB_XB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString());
+            try
+            {                
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
 
         }
 
@@ -281,19 +305,6 @@ namespace KaoQin.users
 
         private void gridView2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
-            if (e.Column.FieldName == "ZT")
-            {
-                string State = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["ZT"]);
-
-                if (State == "在职")
-                {
-                    e.Appearance.ForeColor = Color.Blue;
-                }
-                else if (State == "离职")
-                {
-                    e.Appearance.ForeColor = Color.Red;
-                }
-            }
 
         }
     }

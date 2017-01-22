@@ -54,7 +54,6 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
@@ -300,7 +299,6 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.simpleButton2);
             this.panelControl1.Controls.Add(this.ButtonDelete);
             this.panelControl1.Controls.Add(this.ButtonRefresh);
             this.panelControl1.Controls.Add(this.ButtonAdd);
@@ -310,19 +308,6 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(797, 54);
             this.panelControl1.TabIndex = 3;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(392, 13);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(69, 29);
-            this.simpleButton2.TabIndex = 24;
-            this.simpleButton2.Text = "test";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // ButtonDelete
             // 
@@ -477,7 +462,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private System.Windows.Forms.ToolStripMenuItem 考勤管理ToolStripMenuItem;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private System.Windows.Forms.ToolStripMenuItem 授权管理ToolStripMenuItem;
     }

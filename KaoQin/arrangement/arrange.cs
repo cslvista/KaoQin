@@ -180,7 +180,7 @@ namespace KaoQin.arrangement
             }
 
 
-            if (MessageBox.Show(string.Format("是否删除'{0}'？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            if (MessageBox.Show(string.Format("是否删除 '{0}'？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;
             }
