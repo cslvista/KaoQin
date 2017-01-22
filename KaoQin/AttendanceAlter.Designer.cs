@@ -77,7 +77,7 @@
             "准点下班"});
             this.comboBox1.Location = new System.Drawing.Point(117, 96);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(108, 28);
+            this.comboBox1.Size = new System.Drawing.Size(118, 28);
             this.comboBox1.TabIndex = 38;
             // 
             // label4

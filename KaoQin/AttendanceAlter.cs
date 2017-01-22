@@ -33,14 +33,17 @@ namespace KaoQin
             if (AlterColumn == true)
             {
                 Attendance form = (Attendance)this.Owner;
-                form.AttendanceResult.Rows[Row][Date] = comboBox1.Text;
+                for (int i = 0; i < form.AttendanceResult.Rows.Count; i++)
+                {
+                    form.AttendanceResult.Rows[i][Date] = comboBox1.Text;
+                }                
                 form.DataCollect(StartDate, Timespan);                
             }
             else
             {
                 Attendance form = (Attendance)this.Owner;
                 form.AttendanceResult.Rows[Row][Date] = comboBox1.Text;
-                form.DataCollect(StartDate, Timespan);                
+                form.DataCollect(StartDate, Timespan);
             }
 
             this.Close();        
@@ -50,8 +53,11 @@ namespace KaoQin
         {
             if (AlterColumn == true)
             {
-                label4.Text = "部门名称";
-            }else
+                label4.Text = "部门名称：";
+                label3.Text = Name;
+                label5.Text = Convert.ToDateTime(Date).Year + "年" + Convert.ToDateTime(Date).Month + "月" + Convert.ToDateTime(Date).Day + "日";
+            }
+            else
             {
                 label3.Text = Name;
                 label5.Text = Convert.ToDateTime(Date).Year + "年" + Convert.ToDateTime(Date).Month + "月" + Convert.ToDateTime(Date).Day + "日";

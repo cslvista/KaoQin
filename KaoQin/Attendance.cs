@@ -1067,9 +1067,8 @@ namespace KaoQin
             try
             {
                 AttendanceAlter form = new AttendanceAlter();
-                form.Name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
+                form.Name = gridView1.GetFocusedRowCellValue("BMMC").ToString();
                 form.Date = bandedGridView2.FocusedColumn.Caption;
-                form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString(); ;
                 form.Row = bandedGridView2.GetDataSourceRowIndex(bandedGridView2.FocusedRowHandle);
                 form.StartDate = StartDate;
                 form.Timespan = Timespan.Days;
