@@ -33,8 +33,7 @@ namespace KaoQin
             Record_DKJ_new.Columns.Add("Name", typeof(string));
             Record_DKJ_new.Columns.Add("Time", typeof(string));
             Record_DKJ_new.Columns.Add("Source", typeof(string));
-            
-           
+                       
             if (fromExcel == false)
             {
                 //联结两个表

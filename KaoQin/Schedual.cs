@@ -603,6 +603,13 @@ namespace KaoQin
                 return;
             }
 
+            //检查Excel中的列数是否存在错误
+            if ((Timespan.Days+PBColumn)> dtExcel.Columns.Count)
+            {
+                MessageBox.Show("Excel文件或导入设置存在错误！");
+                return;
+            }
+
             //将Excel文件内容插入DataTable
             int row;
             for (int i = 0; i < Staff.Rows.Count; i++)
@@ -624,7 +631,8 @@ namespace KaoQin
                 {
                     //指定的时间段
                     for (int k = 0; k <= Timespan.Days; k++)
-                    {
+                    {                       
+
                         //检验Excel中的排班是否和系统中的排班相同
                         for (int n = 0; n < WorkShift.Rows.Count; n++)
                         {

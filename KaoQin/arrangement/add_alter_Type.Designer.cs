@@ -38,20 +38,19 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(86, 22);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Location = new System.Drawing.Point(115, 28);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 25);
+            this.textBox1.Size = new System.Drawing.Size(183, 30);
             this.textBox1.TabIndex = 34;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(10, 24);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(13, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 35;
             this.label4.Text = "类别名称：";
             // 
@@ -60,10 +59,10 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(134, 61);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(227, 76);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(53, 25);
+            this.simpleButton2.Size = new System.Drawing.Size(71, 31);
             this.simpleButton2.TabIndex = 37;
             this.simpleButton2.Text = "退出";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -73,25 +72,25 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(56, 61);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(114, 76);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(53, 25);
+            this.simpleButton1.Size = new System.Drawing.Size(71, 31);
             this.simpleButton1.TabIndex = 36;
             this.simpleButton1.Text = "保存";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // add_alter_Type
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 98);
+            this.ClientSize = new System.Drawing.Size(331, 122);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "add_alter_Type";

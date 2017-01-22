@@ -61,7 +61,6 @@
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -161,6 +160,8 @@
             // 
             // gridView2
             // 
+            this.gridView2.Appearance.GroupRow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView2.Appearance.GroupRow.Options.UseFont = true;
             this.gridView2.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView2.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -178,9 +179,12 @@
             this.gridColumn8,
             this.gridColumn13});
             this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.GroupCount = 1;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn12, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView2.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView2_RowCellStyle);
             this.gridView2.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView2_CustomColumnDisplayText);
             // 
@@ -206,7 +210,7 @@
             this.gridColumn3.FieldName = "NAME";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn11
             // 
@@ -216,7 +220,7 @@
             this.gridColumn11.FieldName = "KT";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 2;
+            this.gridColumn11.VisibleIndex = 1;
             // 
             // gridColumn4
             // 
@@ -224,7 +228,7 @@
             this.gridColumn4.FieldName = "SBSJ";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 2;
             // 
             // gridColumn5
             // 
@@ -232,7 +236,7 @@
             this.gridColumn5.FieldName = "XBSJ";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             // 
             // gridColumn9
             // 
@@ -242,7 +246,7 @@
             this.gridColumn9.FieldName = "GZR";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.VisibleIndex = 4;
             // 
             // gridColumn6
             // 
@@ -250,7 +254,7 @@
             this.gridColumn6.FieldName = "CJR";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.VisibleIndex = 7;
             // 
             // gridColumn7
             // 
@@ -258,7 +262,7 @@
             this.gridColumn7.FieldName = "XGR";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
+            this.gridColumn7.VisibleIndex = 8;
             // 
             // gridColumn8
             // 
@@ -266,7 +270,7 @@
             this.gridColumn8.FieldName = "SM";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 6;
             // 
             // gridColumn13
             // 
@@ -275,7 +279,7 @@
             this.gridColumn13.FieldName = "COLOR";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
+            this.gridColumn13.VisibleIndex = 5;
             // 
             // repositoryItemColorPickEdit1
             // 
@@ -381,7 +385,6 @@
             this.panelControl2.Controls.Add(this.ButtonRefresh);
             this.panelControl2.Controls.Add(this.ButtonAdd);
             this.panelControl2.Controls.Add(this.ButtonAlter);
-            this.panelControl2.Controls.Add(this.ButtonDelete);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(238, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -392,7 +395,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(389, 20);
+            this.searchControl1.Location = new System.Drawing.Point(304, 20);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -445,19 +448,6 @@
             this.ButtonAlter.Text = "修改";
             this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
             // 
-            // ButtonDelete
-            // 
-            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonDelete.Appearance.Options.UseFont = true;
-            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(296, 19);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
-            this.ButtonDelete.TabIndex = 22;
-            this.ButtonDelete.Text = "删除";
-            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
-            // 
             // arrange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -499,7 +489,6 @@
         private DevExpress.XtraEditors.SimpleButton ButtonRefresh;
         private DevExpress.XtraEditors.SimpleButton ButtonAdd;
         private DevExpress.XtraEditors.SimpleButton ButtonAlter;
-        private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;

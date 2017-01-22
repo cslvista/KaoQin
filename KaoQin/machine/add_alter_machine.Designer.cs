@@ -122,7 +122,7 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(185, 206);
+            this.simpleButton2.Location = new System.Drawing.Point(219, 205);
             this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(71, 32);
@@ -135,7 +135,7 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(84, 206);
+            this.simpleButton1.Location = new System.Drawing.Point(118, 205);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(71, 32);

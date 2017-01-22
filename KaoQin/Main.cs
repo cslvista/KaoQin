@@ -62,7 +62,7 @@ namespace KaoQin
 
             try
             {
-                Department=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl1.DataSource = Department;
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace KaoQin
                 form.Show(this);
             }
             catch { }
-            
+
         }
 
         private void 机器设置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace KaoQin
             {
                 Department.DefaultView.RowFilter = string.Format("BMMC like '%{0}%'", searchControl1.Text);
             }
-            
+
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace KaoQin
                 t1.IsBackground = true;
                 t1.Start();
             }
-            
+
         }
 
         private void SearchAttendance()
@@ -148,8 +148,8 @@ namespace KaoQin
                 }
                 catch (Exception ex)
                 {
-                MessageBox.Show("错误1:" + ex.Message, "提示");
-                return;
+                    MessageBox.Show("错误1:" + ex.Message, "提示");
+                    return;
                 }
             }));
         }
@@ -168,9 +168,9 @@ namespace KaoQin
                 form.DepartmentID = gridView1.GetFocusedRowCellValue("BMID").ToString();
                 form.DepartmentName = gridView1.GetFocusedRowCellValue("BMMC").ToString();
                 form.comboBoxYear.Items.Add(gridView2.GetFocusedRowCellValue("YEAR").ToString());
-                form.comboBoxYear.Text= gridView2.GetFocusedRowCellValue("YEAR").ToString();
+                form.comboBoxYear.Text = gridView2.GetFocusedRowCellValue("YEAR").ToString();
                 form.comboBoxMonth.Text = gridView2.GetFocusedRowCellValue("MONTH").ToString();
-                form.PBID= gridView2.GetFocusedRowCellValue("PBID").ToString();
+                form.PBID = gridView2.GetFocusedRowCellValue("PBID").ToString();
                 form.alter = true;
                 form.Show(this);
             }
@@ -201,6 +201,11 @@ namespace KaoQin
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (gridView1.RowCount == 0 || gridView2.RowCount == 0)
+            {
+                return;
+            }
+
             if (MessageBox.Show(string.Format("是否删除 {0}{1}{2}的排班计划？", gridView1.GetFocusedRowCellDisplayText("BMMC").ToString(), gridView2.GetFocusedRowCellDisplayText("YEAR").ToString(), gridView2.GetFocusedRowCellDisplayText("MONTH").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;

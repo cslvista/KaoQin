@@ -89,6 +89,8 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn2, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gridColumn1
             // 
@@ -134,6 +136,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit2.Size = new System.Drawing.Size(129, 26);
             this.dateEdit2.TabIndex = 48;
+            this.dateEdit2.TextChanged += new System.EventHandler(this.dateEdit2_TextChanged);
             // 
             // dateEdit1
             // 
@@ -148,6 +151,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Size = new System.Drawing.Size(129, 26);
             this.dateEdit1.TabIndex = 47;
+            this.dateEdit1.TextChanged += new System.EventHandler(this.dateEdit1_TextChanged);
             // 
             // label2
             // 
@@ -174,6 +178,7 @@
             this.searchControl1.Properties.NullValuePrompt = "E";
             this.searchControl1.Size = new System.Drawing.Size(198, 26);
             this.searchControl1.TabIndex = 44;
+            this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
             // label4
             // 

@@ -25,6 +25,7 @@ namespace KaoQin.arrangement
         {
             searchControl1.Properties.NullValuePrompt = "请输入时段名称";
             searchControl2.Properties.NullValuePrompt = "请输入部门类别";
+            gridView2.OptionsBehavior.AutoExpandAllGroups = true;
             toolStripButtonRefresh_Click(null, null);
         }
 
@@ -50,16 +51,15 @@ namespace KaoQin.arrangement
             try
             {
                 isExists=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                if (isExists.Rows.Count > 0)
+                {
+                    MessageBox.Show("该班次不可删除！");
+                    return;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message);
-                return;
-            }
-
-            if (isExists.Rows.Count != 0)
-            {
-                MessageBox.Show("该班次不可删除！");
                 return;
             }
 
@@ -179,11 +179,12 @@ namespace KaoQin.arrangement
                 return;
             }
 
-
             if (MessageBox.Show(string.Format("是否删除 '{0}'？", gridView1.GetFocusedRowCellDisplayText("BMLB").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;
             }
+
+
             //查询是否有子项
             string sql = string.Format("select ID from KQ_BC where LBID='{0}'", gridView1.GetFocusedRowCellValue("ID").ToString());
             DataTable isExists = new DataTable();
@@ -202,15 +203,33 @@ namespace KaoQin.arrangement
                 return;
             }
 
-            string sql1 = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
-               
+            //查找部门表中该类别是否已经使用
+            string sql1 = string.Format("select BMLB from KQ_BM where BMLB='{0}'",gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+            DataTable isExists_LB = new DataTable();
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                isExists_LB=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+                if (isExists_LB.Rows.Count > 0)
+                {
+                    MessageBox.Show("该类别仍被使用，不允许删除!");
+                    return;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误2:" + ex.Message);
+                return;
+            }
+            
+            string sql2 = string.Format("delete from KQ_BMLB where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+               
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误3:" + ex.Message);
                 return;
             }
             //刷新界面
@@ -303,23 +322,9 @@ namespace KaoQin.arrangement
 
                 if (KT == "是")
                 {
-                    e.Appearance.ForeColor = Color.DarkGreen;
-                }
-                else if (KT == "否")
-                {
-                    e.Appearance.ForeColor = Color.Blue;
-                }
-            }
-
-            if (e.Column.FieldName == "ZT")
-            {
-                string ZT = gridView2.GetRowCellDisplayText(e.RowHandle, gridView2.Columns["ZT"]);
-
-                if (ZT == "停用")
-                {
                     e.Appearance.ForeColor = Color.Red;
                 }
-                else if (ZT == "在用")
+                else if (KT == "否")
                 {
                     e.Appearance.ForeColor = Color.Blue;
                 }

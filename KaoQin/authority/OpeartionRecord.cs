@@ -19,13 +19,15 @@ namespace KaoQin.authority
 
         private void OpeartionRecord_Load(object sender, EventArgs e)
         {
-            searchControl1.Properties.NullValuePrompt = " ";
+            searchControl1.Properties.NullValuePrompt = "搜索操作记录";
             dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
+            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
 
-            string sql = "select * from KQ_LOG";
+            string sql = "select top 1000 * from KQ_LOG";
             
             try
             {
@@ -37,6 +39,38 @@ namespace KaoQin.authority
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
             }
+
+            SearchInfo();
+        }
+
+        private void SearchInfo()
+        {
+            if (Record.Rows.Count>0)
+            {
+                try
+                {
+                    string StopTime = Convert.ToDateTime(dateEdit2.Text).AddDays(1).ToString("yyyy-MM-dd");
+                    Record.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( Record like '%{2}%')", dateEdit1.Text, StopTime, searchControl1.Text);
+                }
+                catch { }
+                
+            }
+
+        }
+
+        private void searchControl1_TextChanged(object sender, EventArgs e)
+        {
+            SearchInfo();
+        }
+
+        private void dateEdit1_TextChanged(object sender, EventArgs e)
+        {
+            SearchInfo();
+        }
+
+        private void dateEdit2_TextChanged(object sender, EventArgs e)
+        {
+            SearchInfo();
         }
     }
 }

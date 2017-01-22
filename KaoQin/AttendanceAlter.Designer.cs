@@ -29,41 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttendanceAlter));
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(150, 142);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(71, 32);
-            this.simpleButton2.TabIndex = 37;
-            this.simpleButton2.Text = "退出";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(42, 142);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(71, 32);
-            this.simpleButton1.TabIndex = 36;
-            this.simpleButton1.Text = "确认";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // comboBox1
             // 
@@ -73,6 +47,8 @@
             "正常",
             "休",
             "加班",
+            "迟到",
+            "早退",
             "准点上班",
             "准点下班"});
             this.comboBox1.Location = new System.Drawing.Point(117, 96);
@@ -129,6 +105,32 @@
             this.label5.Size = new System.Drawing.Size(60, 23);
             this.label5.TabIndex = 50;
             this.label5.Text = "label5";
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
+            this.simpleButton2.Location = new System.Drawing.Point(150, 142);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(71, 32);
+            this.simpleButton2.TabIndex = 37;
+            this.simpleButton2.Text = "退出";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(42, 142);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(71, 32);
+            this.simpleButton1.TabIndex = 36;
+            this.simpleButton1.Text = "确认";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // AttendanceAlter
             // 
