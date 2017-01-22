@@ -25,6 +25,9 @@ namespace KaoQin
         public string DepartmentID;
         public string DepartmentName;
         public string PBID;//排班ID
+        public int PBColumn;//Excel中排班的起始列
+        public int NameColumn;//Excel中的姓名列
+        public bool ColumnLocation = false;
         public bool alter = false;
         public Schedual()
         {
@@ -369,6 +372,25 @@ namespace KaoQin
             {
                 //新增排班的语句
 
+                //查找主表中是否已经添加过
+                string search_PB =string.Format("select PBID from  KQ_PB where Year='{0}' and Month='{1}' and BMID='{2}'",comboBoxYear.Text,comboBoxMonth.Text,comboBox1.SelectedValue);
+                DataTable isExists = new DataTable();
+                try
+                {
+                    isExists=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, search_PB);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误0:" + ex.Message);
+                    return;
+                }
+
+                if (isExists.Rows.Count > 0)
+                {
+                    MessageBox.Show("已经添加过该排班记录，无需重复添加！" );
+                    return;
+                }
+
                 //查找最大ID，然后自增
                 string sql1 = "select max(PBID) from KQ_PB";
                 DataTable Max_ID = new DataTable();
@@ -475,13 +497,20 @@ namespace KaoQin
                     MessageBox.Show("错误3:" + ex.Message);
                     return;
                 }
+
+                //禁止再更改 
+                comboBox1.Enabled = false;
+                comboBoxMonth.Enabled = false;
+                comboBoxYear.Enabled = false;
+                simpleButton1.Enabled = false;
+                alter = true;
             }
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "电子表格(*.xls)|*.xls";
+            sf.Filter = "Excel文件(*.xlsx)|*.xlsx";
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -509,8 +538,19 @@ namespace KaoQin
                 return;
             }
 
+            SchedualLocation form = new SchedualLocation();
+            form.ShowDialog(this);
+
+            if (ColumnLocation == false)
+            {
+                return;
+            }else
+            {
+                ColumnLocation = false;
+            }
+
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";//过滤文件类型
+            ofd.Filter = "Excel文件(*.xls; *.xlsx)| *.xls; *.xlsx";//过滤文件类型
             ofd.RestoreDirectory = true; //记忆上次浏览路径
             string FileName = "";
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -571,7 +611,7 @@ namespace KaoQin
                 row = -1;
                 for (int j = 0; j < dtExcel.Rows.Count; j++)
                 {
-                    string Name = dtExcel.Rows[j][0].ToString().Replace(" ", ""); //去掉空格
+                    string Name = dtExcel.Rows[j][NameColumn].ToString().Replace(" ", ""); //去掉空格
                     if (Name== Staff.Rows[i][1].ToString())
                     {
                         row = j;
@@ -588,7 +628,7 @@ namespace KaoQin
                         //检验Excel中的排班是否和系统中的排班相同
                         for (int n = 0; n < WorkShift.Rows.Count; n++)
                         {
-                            if (dtExcel.Rows[row][k + 3].ToString()== WorkShift.Rows[n][1].ToString())
+                            if (dtExcel.Rows[row][k + PBColumn].ToString().Trim()== WorkShift.Rows[n][1].ToString())
                             {
                                 Staff_WorkShift.Rows[i][k+2] = WorkShift.Rows[n][0].ToString();
                                 break;

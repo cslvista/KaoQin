@@ -32,5 +32,11 @@ namespace KaoQin.authority
             string sql = "select * from KQ_QX";
 
         }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            OpeartionRecord form = new OpeartionRecord();
+            form.Show();
+        }
     }
 }

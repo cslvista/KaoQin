@@ -201,6 +201,10 @@ namespace KaoQin
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(string.Format("是否删除 {0}{1}{2}的排班计划？", gridView1.GetFocusedRowCellDisplayText("BMMC").ToString(), gridView2.GetFocusedRowCellDisplayText("YEAR").ToString(), gridView2.GetFocusedRowCellDisplayText("MONTH").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
 
             try
             {

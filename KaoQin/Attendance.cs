@@ -26,6 +26,7 @@ namespace KaoQin
         DataTable ArrangementItem = new DataTable();//排班细表
         DataTable PersonShift = new DataTable();//个人单日的排班
         DataTable PersonShiftAll = new DataTable();//个人单日的排班的所有信息
+        DataTable Filter = new DataTable();//过滤数据
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         public DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
@@ -181,6 +182,7 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("Morning", typeof(string));
             AttendanceCollect.Columns.Add("Afternoon", typeof(string));
             AttendanceCollect.Columns.Add("OverTime", typeof(string));
+            AttendanceCollect.Columns.Add("WorkYear", typeof(string));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
@@ -265,8 +267,6 @@ namespace KaoQin
             }
 
 
-
-
             //读取班次信息
             string sql2 = string.Format("select ID,NAME,SBSJ,XBSJ,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0",gridView1.GetFocusedRowCellValue("BMLB").ToString());
             try
@@ -275,7 +275,7 @@ namespace KaoQin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误3:" + ex.Message);
+                MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
 
@@ -287,7 +287,7 @@ namespace KaoQin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误4:" + ex.Message);
+                MessageBox.Show("错误3:" + ex.Message);
                 return;
             }
 
@@ -302,12 +302,24 @@ namespace KaoQin
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("错误5:" + ex.Message);
+                    MessageBox.Show("错误4:" + ex.Message);
                     return;
                 }
             }else
             {
                 MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！",gridView1.GetFocusedRowCellValue("BMMC").ToString(),comboBoxYear.Text,comboBoxMonth.Text));
+                return;
+            }
+
+            //读取过滤数据
+            string sql = "select Name,Time from KQ_FILTER";
+            try
+            {
+                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误5:" + ex.Message);
                 return;
             }
 
@@ -319,7 +331,7 @@ namespace KaoQin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误2:" + ex.Message);
+                MessageBox.Show("错误6:" + ex.Message);
                 return;
             }
 
@@ -400,6 +412,7 @@ namespace KaoQin
         private void AnalysisData(DateTime StartDate, int Timespan)
         {
             AttendanceResult.Clear();
+
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceResult.Rows.Add(new object[] { });
@@ -573,6 +586,28 @@ namespace KaoQin
                 AttendanceCollect.Rows[i]["Morning"] =morning.ToString();
                 AttendanceCollect.Rows[i]["Afternoon"] =afternoon .ToString();
                 AttendanceCollect.Rows[i]["OverTime"] = overTime.ToString();
+                if (string.IsNullOrEmpty(Staff.Rows[i]["RZSJ"].ToString()))
+                {
+                    AttendanceCollect.Rows[i]["WorkYear"] = "";
+                }else
+                {
+                    DateTime EntryDate = Convert.ToDateTime(Staff.Rows[i]["RZSJ"].ToString());
+                    DateTime NowDate   = Convert.ToDateTime(string.Format("{0}-{1}-01", comboBoxYear.Text.Substring(0, 4), comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"))));
+                    int TotalMonth = NowDate.Year*12+NowDate.Month-EntryDate.Year*12-EntryDate.Month;
+                    int year = TotalMonth / 12;
+                    int month = TotalMonth % 12;
+                    string workYear = "";
+                    if (year == 0)
+                    {
+                        workYear = string.Format("{0}个月",month);
+                    }
+                    else
+                    {
+                        workYear = string.Format("{0}年{1}个月", year, month);
+                    }
+                    
+                    AttendanceCollect.Rows[i]["WorkYear"] =  workYear;
+                }                                
             }
             gridControl3.DataSource = AttendanceCollect;
             gridView3.BestFitColumns();
@@ -583,6 +618,23 @@ namespace KaoQin
         {
 
             StringBuilder result = new StringBuilder();
+            //过滤，放宽迟到和早退的时间
+            int late = 0;
+            int leaveEarly = 0;
+            for (int i = 0; i < Filter.Rows.Count; i++)
+            {
+                if (Filter.Rows[i]["Name"].ToString() == "Late")
+                {
+                    late = Convert.ToInt32(Filter.Rows[i]["Time"].ToString());
+                    continue;
+                }
+
+                if (Filter.Rows[i]["Name"].ToString() == "LeaveEarly")
+                {
+                    leaveEarly = Convert.ToInt32(Filter.Rows[i]["Time"].ToString());
+                    continue;
+                }
+            }
 
             for (int i = 0; i < PersonShiftAll.Rows.Count; i++)
             {
@@ -607,7 +659,7 @@ namespace KaoQin
                             }
 
                             DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
-                            DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
+                            DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).AddMinutes(-leaveEarly).ToShortTimeString());
                             double subtract = (record - XBSJ).TotalMinutes;
                             if (subtract >= 0)
                             {
@@ -651,7 +703,7 @@ namespace KaoQin
                         //上班时间
                         if (PersonShiftAll.Rows[i]["SBSJ"].ToString() != "")
                         {
-                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
+                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).AddMinutes(late).ToShortTimeString());
                             for (int j = 0; j < Record_Person.Rows.Count; j++)
                             {
                                 DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());                                
@@ -678,7 +730,7 @@ namespace KaoQin
                             for (int j = 0; j < Record_Person.Rows.Count; j++)
                             {
                                 DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
-                                DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
+                                DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).AddMinutes(-leaveEarly).ToShortTimeString());
                                 double subtract = (record - XBSJ).TotalMinutes;
                                 if (subtract >= 0)
                                 {
@@ -709,11 +761,11 @@ namespace KaoQin
                         for (int j = 0; j < Record_Person.Rows.Count; j++)
                         {
                             DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Person.Rows[j]["Time"]).ToShortTimeString());
-                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
+                            DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).AddMinutes(late).ToShortTimeString());
                             double subtract = (SBSJ - record).TotalMinutes;
                             if (subtract >=0 && subtract< 120)
                             {
-                                result.Append("/准点");
+                                result.Append("/准点上班");
                                 break;
                             }
                             else if (subtract < 0 && subtract > -120)
@@ -723,7 +775,7 @@ namespace KaoQin
                             }
                             else if (j == Record_Person.Rows.Count - 1)
                             {
-                                result.Append("/下班未签");
+                                result.Append("/上班未签");
                             }
                         }
                         
@@ -734,6 +786,7 @@ namespace KaoQin
             switch (result.ToString())
             {
                 case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;
+                case "/准点上班/早退": result.Clear(); result.Append("早退"); break;
                 case "/迟到/正常下班": result.Clear(); result.Append("迟到"); break;
                 case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
                 case "/准点上班/下班未签": result.Clear(); result.Append("下班未签"); break;
@@ -976,7 +1029,6 @@ namespace KaoQin
                 return;
             }
 
-
             ButtonOrignData.Enabled = true;
             MessageBox.Show("导入成功，请点击‘查询计算’查看考勤结果！");
         }
@@ -986,7 +1038,7 @@ namespace KaoQin
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 SaveFileDialog sf = new SaveFileDialog();
-                sf.Filter = "电子表格(*.xls)|*.xls";
+                sf.Filter = "电子表格(*.xlsx)|*.xlsx";
                 if (sf.ShowDialog() == DialogResult.OK)
                 {
                     try
@@ -1009,7 +1061,7 @@ namespace KaoQin
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 SaveFileDialog sf = new SaveFileDialog();
-                sf.Filter = "电子表格(*.xls)|*.xls";
+                sf.Filter = "电子表格(*.xlsx)|*.xlsx";
                 if (sf.ShowDialog() == DialogResult.OK)
                 {
                     try
@@ -1019,6 +1071,7 @@ namespace KaoQin
                         MessageBox.Show("导出成功！");
                     }
                     catch { }
+
                     if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
                         return;
                     try
@@ -1032,7 +1085,8 @@ namespace KaoQin
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-
+            AttendanceFilter form = new AttendanceFilter();
+            form.Show();
         }
 
         private void searchControl2_TextChanged(object sender, EventArgs e)

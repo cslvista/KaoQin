@@ -230,7 +230,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(368, 24);
+            this.label2.Location = new System.Drawing.Point(369, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 23);
             this.label2.TabIndex = 57;
@@ -254,7 +254,7 @@
             "10月",
             "11月",
             "12月"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(390, 21);
+            this.comboBoxMonth.Location = new System.Drawing.Point(390, 20);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(90, 28);
             this.comboBoxMonth.TabIndex = 56;
@@ -264,7 +264,7 @@
             this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxYear.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(275, 21);
+            this.comboBoxYear.Location = new System.Drawing.Point(275, 20);
             this.comboBoxYear.Name = "comboBoxYear";
             this.comboBoxYear.Size = new System.Drawing.Size(90, 28);
             this.comboBoxYear.TabIndex = 55;
@@ -368,7 +368,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(177, 24);
+            this.label4.Location = new System.Drawing.Point(177, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 45;
@@ -423,7 +423,7 @@
             this.修改为ToolStripMenuItem,
             this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 116);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 88);
             // 
             // toolStripMenuItem1
             // 
@@ -606,6 +606,7 @@
             // gridColumn11
             // 
             this.gridColumn11.Caption = "工作年限";
+            this.gridColumn11.FieldName = "WorkYear";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 10;

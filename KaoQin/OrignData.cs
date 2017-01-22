@@ -16,6 +16,7 @@ namespace KaoQin
         public DataTable Staff = new DataTable();//打卡机上的员工数据
         DataTable Record_DKJ_new = new DataTable();//连接Record_DKJ和Staff数据后的表
         bool allowVisit = false;//是否允许访问Record_DKJ_new
+        bool fromExcel = false;
         public OrignData()
         {
             InitializeComponent();
@@ -33,23 +34,30 @@ namespace KaoQin
             Record_DKJ_new.Columns.Add("Time", typeof(string));
             Record_DKJ_new.Columns.Add("Source", typeof(string));
             
-            //联结两个表
-            var query = from rec in Record_DKJ.AsEnumerable()
-                        join staff in Staff.AsEnumerable()
-                        on rec.Field<string>("ID") equals staff.Field<string>("ID")
-                        select new
-                        {
-                            ID = staff.Field<string>("ID"),
-                            Name = staff.Field<string>("Name"),
-                            Time = rec.Field<string>("Time"),
-                            Source = rec.Field<string>("Source"),
-                        };
-
-            foreach (var obj in query)
+           
+            if (fromExcel == false)
             {
-                Record_DKJ_new.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
-            }
+                //联结两个表
+                var query = from rec in Record_DKJ.AsEnumerable()
+                            join staff in Staff.AsEnumerable()
+                            on rec.Field<string>("ID") equals staff.Field<string>("ID")
+                            select new
+                            {
+                                ID = staff.Field<string>("ID"),
+                                Name = staff.Field<string>("Name"),
+                                Time = rec.Field<string>("Time"),
+                                Source = rec.Field<string>("Source"),
+                            };
 
+                foreach (var obj in query)
+                {
+                    Record_DKJ_new.Rows.Add(obj.ID, obj.Name, obj.Time, obj.Source);
+                }
+            }else
+            {
+                Record_DKJ_new = Record_DKJ;
+            }
+            
             gridControl1.DataSource = Record_DKJ_new;
             allowVisit = false;
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");

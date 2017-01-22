@@ -102,6 +102,12 @@
     <Compile Include="Attendance.Designer.cs">
       <DependentUpon>Attendance.cs</DependentUpon>
     </Compile>
+    <Compile Include="AttendanceFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AttendanceFilter.Designer.cs">
+      <DependentUpon>AttendanceFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="authority\Authority.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,12 @@
     </Compile>
     <Compile Include="authority\add_alter_authority.Designer.cs">
       <DependentUpon>add_alter_authority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="authority\OpeartionRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="authority\OpeartionRecord.Designer.cs">
+      <DependentUpon>OpeartionRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="machine\add_alter_machine.cs">
       <SubType>Form</SubType>
@@ -158,6 +170,12 @@
     <Compile Include="PersonData.Designer.cs">
       <DependentUpon>PersonData.cs</DependentUpon>
     </Compile>
+    <Compile Include="SchedualLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedualLocation.Designer.cs">
+      <DependentUpon>SchedualLocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="users\add_alter_Dep.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,11 +215,17 @@
     <EmbeddedResource Include="AttendanceAlter.resx">
       <DependentUpon>AttendanceAlter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AttendanceFilter.resx">
+      <DependentUpon>AttendanceFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="authority\add_alter_authority.resx">
       <DependentUpon>add_alter_authority.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="authority\Authority.resx">
       <DependentUpon>Authority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="authority\OpeartionRecord.resx">
+      <DependentUpon>OpeartionRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="machine\add_alter_machine.resx">
       <DependentUpon>add_alter_machine.cs</DependentUpon>
@@ -234,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PersonData.resx">
       <DependentUpon>PersonData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedualLocation.resx">
+      <DependentUpon>SchedualLocation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="users\add_alter_Dep.resx">
       <DependentUpon>add_alter_Dep.cs</DependentUpon>

@@ -35,7 +35,7 @@ namespace KaoQin.arrangement
             }
             else
             {
-                
+                this.Text = "修改班次";
             }
         }
 
