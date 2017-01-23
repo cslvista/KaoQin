@@ -59,7 +59,7 @@
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonRefresh1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -363,7 +363,7 @@
             // 
             // panelControl2
             // 
-            this.panelControl2.Controls.Add(this.simpleButton1);
+            this.panelControl2.Controls.Add(this.ButtonRefresh1);
             this.panelControl2.Controls.Add(this.searchControl1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(3, 3);
@@ -371,18 +371,18 @@
             this.panelControl2.Size = new System.Drawing.Size(270, 54);
             this.panelControl2.TabIndex = 4;
             // 
-            // simpleButton1
+            // ButtonRefresh1
             // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(192, 13);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(69, 29);
-            this.simpleButton1.TabIndex = 13;
-            this.simpleButton1.Text = "刷新";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.ButtonRefresh1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonRefresh1.Appearance.Options.UseFont = true;
+            this.ButtonRefresh1.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh1.Image")));
+            this.ButtonRefresh1.Location = new System.Drawing.Point(192, 13);
+            this.ButtonRefresh1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonRefresh1.Name = "ButtonRefresh1";
+            this.ButtonRefresh1.Size = new System.Drawing.Size(69, 29);
+            this.ButtonRefresh1.TabIndex = 13;
+            this.ButtonRefresh1.Text = "刷新";
+            this.ButtonRefresh1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // searchControl1
             // 
@@ -447,7 +447,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton ButtonRefresh1;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 修改排班表ToolStripMenuItem;

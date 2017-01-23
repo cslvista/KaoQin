@@ -54,35 +54,36 @@ namespace KaoQin.authority
             TreeNode PB_Read = new TreeNode();
             PB_Read.Text = "查看";
             TreeNode PB_Edit = new TreeNode();                   
-            PB_Edit.Text = "编辑";
+            PB_Edit.Text = "修改";
+            TreeNode PB_Del = new TreeNode();
+            PB_Del.Text = "删除";
             //部门与员工
             TreeNode Dep_Read = new TreeNode();
             Dep_Read.Text = "查看";
             TreeNode Dep_Edit = new TreeNode();
-            Dep_Edit.Text = "编辑";
+            Dep_Edit.Text = "修改";
             //设备管理
             TreeNode Device_Read = new TreeNode();
             Device_Read.Text = "查看";
             TreeNode Device_Edit = new TreeNode();
-            Device_Edit.Text = "编辑";
+            Device_Edit.Text = "修改";
             //班次管理
             TreeNode Arrange_Read = new TreeNode();
             Arrange_Read.Text = "查看";
             TreeNode Arrange_Edit = new TreeNode();
-            Arrange_Edit.Text = "编辑";
+            Arrange_Edit.Text = "修改";
             //考勤管理
             TreeNode Attendance_Read = new TreeNode();
             Attendance_Read.Text = "查看";
-            TreeNode Attendance_Edit = new TreeNode();
-            Attendance_Edit.Text = "编辑";
             //授权管理
             TreeNode Autority_Read = new TreeNode();
             Autority_Read.Text = "查看";
             TreeNode Autority_Edit = new TreeNode();
-            Autority_Edit.Text = "编辑";
+            Autority_Edit.Text = "修改";
 
             PB.Nodes.Add(PB_Read);
             PB.Nodes.Add(PB_Edit);
+            PB.Nodes.Add(PB_Del);
             Dep.Nodes.Add(Dep_Read);
             Dep.Nodes.Add(Dep_Edit);
             Device.Nodes.Add(Device_Read);
@@ -90,7 +91,6 @@ namespace KaoQin.authority
             Arrange.Nodes.Add(Arrange_Read);
             Arrange.Nodes.Add(Arrange_Edit);
             Attendance.Nodes.Add(Attendance_Read);
-            Attendance.Nodes.Add(Attendance_Edit);
             Autority.Nodes.Add(Autority_Read);
             Autority.Nodes.Add(Autority_Edit);
 

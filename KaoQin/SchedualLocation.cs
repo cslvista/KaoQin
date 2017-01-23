@@ -18,8 +18,8 @@ namespace KaoQin
 
         private void SchedualLocation_Load(object sender, EventArgs e)
         {
-            comboBoxName.Text = "A";
-            comboBoxPB.Text = "C";
+            comboBoxName.Text = "B";
+            comboBoxPB.Text = "E";
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -32,6 +32,9 @@ namespace KaoQin
                 case "A": name = 0; break;
                 case "B": name = 1; break;
                 case "C": name = 2; break;
+                case "D": name = 3; break;
+                case "E": name = 4; break;
+                case "F": name = 5; break;
             }
 
             switch (comboBoxPB.Text)
@@ -41,6 +44,8 @@ namespace KaoQin
                 case "D": PB = 3; break;
                 case "E": PB = 4; break;
                 case "F": PB = 5; break;
+                case "G": PB = 6; break;
+                case "H": PB = 7; break;
             }
 
             if (PB <= name)

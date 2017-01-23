@@ -79,7 +79,10 @@
             this.comboBoxName.Items.AddRange(new object[] {
             "A",
             "B",
-            "C"});
+            "C",
+            "D",
+            "E",
+            "F"});
             this.comboBoxName.Location = new System.Drawing.Point(231, 24);
             this.comboBoxName.Name = "comboBoxName";
             this.comboBoxName.Size = new System.Drawing.Size(61, 28);
@@ -95,7 +98,9 @@
             "C",
             "D",
             "E",
-            "F"});
+            "F",
+            "G",
+            "H"});
             this.comboBoxPB.Location = new System.Drawing.Point(231, 65);
             this.comboBoxPB.Name = "comboBoxPB";
             this.comboBoxPB.Size = new System.Drawing.Size(61, 28);

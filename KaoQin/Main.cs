@@ -29,8 +29,21 @@ namespace KaoQin
         private void Main_Load(object sender, EventArgs e)
         {
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
+            UILocation();
             SearchAuthority();//授权管理
             SearchDepartment();//查找部门
+        }
+
+        private void UILocation()
+        {
+            int height = (panelControl2.Height - ButtonAdd.Height) / 2;
+            ButtonAdd.Location = new Point(ButtonAdd.Location.X, height);
+            ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);
+            ButtonDelete.Location = new Point(ButtonDelete.Location.X, height);
+            ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
+
+            ButtonRefresh1.Location = new Point(ButtonRefresh1.Location.X, height);
+            searchControl1.Location= new Point(searchControl1.Location.X, (panelControl2.Height - searchControl1.Height) / 2);
         }
 
 

@@ -37,6 +37,7 @@ namespace KaoQin
         private void Schedual_Load(object sender, EventArgs e)
         {
             SearchDepartment();
+            searchControl1.Properties.NullValuePrompt = "请输入姓名";
 
             if (alter == true)
             {
@@ -44,7 +45,7 @@ namespace KaoQin
                 comboBox1.Text = DepartmentName;
                 comboBoxMonth.Enabled = false;
                 comboBoxYear.Enabled = false;
-                simpleButton1.Enabled = false;
+                ButtonCreate.Enabled = false;
                 string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {
@@ -75,6 +76,9 @@ namespace KaoQin
                 comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-2).Year.ToString() + "年");
                 comboBoxYear.Text = Convert.ToDateTime(TimeNow).Year.ToString() + "年";
                 comboBoxMonth.Text= Convert.ToDateTime(TimeNow).Month.ToString() + "月";
+                ButtonSave.Enabled = false;
+                ButtonImport.Enabled = false;
+                ButtonExport.Enabled = false;
             }
             
         }
@@ -142,7 +146,15 @@ namespace KaoQin
             }
 
             //读取员工信息
-            string sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT='0'",comboBox1.SelectedValue);
+            string sql1 = "";
+            if (alter == true)
+            {
+                sql1 = string.Format("select a.KQID,a.YGXM from KQ_YG a inner join KQ_PB_XB b on a.KQID=b.KQID where b.PBID='{0}'",PBID);
+            }else
+            {
+                sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT='0'", comboBox1.SelectedValue);
+            }
+            
 
             try
             {
@@ -155,7 +167,7 @@ namespace KaoQin
             }
 
             //读取部门共用班次信息
-            string sql2 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}'", "0");
+            string sql2 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", "0");
             try
             {
                 WorkShift_Common = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
@@ -181,7 +193,7 @@ namespace KaoQin
 
             if (DepartmentType.Rows[0][0].ToString()!="")
             {
-                string sql4 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}'",DepartmentType.Rows[0][0].ToString());
+                string sql4 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", DepartmentType.Rows[0][0].ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
@@ -235,6 +247,7 @@ namespace KaoQin
             Shift.ValueMember = "ID";
             Shift.Name = "Shift";
             Shift.NullText = "";
+            Shift.DropDownRows = WorkShift.Rows.Count;
             Shift.AutoHeight = false;
             Shift.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
@@ -266,6 +279,14 @@ namespace KaoQin
 
             gridControl1.DataSource = Staff_WorkShift;
             bandedGridView1.BestFitColumns();
+            //禁止再更改
+            comboBox1.Enabled = false;
+            comboBoxMonth.Enabled = false;
+            comboBoxYear.Enabled = false;
+            ButtonCreate.Enabled = false;
+            ButtonSave.Enabled = true;
+            ButtonImport.Enabled = true;
+            ButtonExport.Enabled = true;
         }
 
 
@@ -387,7 +408,7 @@ namespace KaoQin
 
                 if (isExists.Rows.Count > 0)
                 {
-                    MessageBox.Show("已经添加过该排班记录，无需重复添加！" );
+                    MessageBox.Show("已经添加过该月排班记录，无需重复添加！" );
                     return;
                 }
 
@@ -491,6 +512,7 @@ namespace KaoQin
                     GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
                     alter = true;
                     MessageBox.Show("保存成功！");
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -498,29 +520,40 @@ namespace KaoQin
                     return;
                 }
 
-                //禁止再更改 
-                comboBox1.Enabled = false;
-                comboBoxMonth.Enabled = false;
-                comboBoxYear.Enabled = false;
-                simpleButton1.Enabled = false;
-                alter = true;
             }
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
+            //SaveFileDialog sf = new SaveFileDialog();
+            //sf.Filter = "Excel文件(*.xlsx)|*.xlsx";
+            //if (sf.ShowDialog() == DialogResult.OK)
+            //{
+            //    try
+            //    {
+            //        string path = sf.FileName.ToString();
+            //        gridControl1.ExportToXlsx(path);
+            //        MessageBox.Show("导出成功！");
+            //    }
+            //    catch { }
+            //    if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+            //        return;
+            //    try
+            //    {
+            //        System.Diagnostics.Process.Start(sf.FileName);
+            //    }
+            //    catch { }
+            //}
             SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "Excel文件(*.xlsx)|*.xlsx";
-            if (sf.ShowDialog() == DialogResult.OK)
+            sf.Filter = "电子表格(*.xls)|*.xls";
+            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                try
-                {
-                    string path = sf.FileName.ToString();
-                    gridControl1.ExportToXlsx(path);
-                    MessageBox.Show("导出成功！");
-                }
+                DevExpress.XtraExport.IExportProvider provider = new DevExpress.XtraExport.ExportXlsProvider(sf.FileName);
+                DevExpress.XtraGrid.Export.BaseExportLink link = bandedGridView1.CreateExportLink(provider);
+                link.ExportCellsAsDisplayText = true;
+                try { link.ExportTo(true); }
                 catch { }
-                if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                     return;
                 try
                 {
@@ -619,7 +652,7 @@ namespace KaoQin
                 for (int j = 0; j < dtExcel.Rows.Count; j++)
                 {
                     string Name = dtExcel.Rows[j][NameColumn].ToString().Replace(" ", ""); //去掉空格
-                    if (Name== Staff.Rows[i][1].ToString())
+                    if (Name.IndexOf(Staff.Rows[i][1].ToString())>=0)
                     {
                         row = j;
                         break;
@@ -678,6 +711,14 @@ namespace KaoQin
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void searchControl1_TextChanged(object sender, EventArgs e)
+        {
+            if (Staff_WorkShift.Rows.Count > 0)
+            {
+                Staff_WorkShift.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl1.Text);
+            }
         }
     }
 }

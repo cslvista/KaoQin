@@ -233,6 +233,8 @@ namespace KaoQin
 
         private void ButtonCal_Click(object sender, EventArgs e)
         {
+            gridControl2.DataSource = null;
+            gridControl3.DataSource = null;
             bandedGridView2.Columns.Clear();
             bandedGridView2.Bands.Clear();
             AttendanceResult.Columns.Clear();
@@ -244,10 +246,16 @@ namespace KaoQin
                 string year = comboBoxYear.Text.Substring(0, 4);
                 string month = comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"));
                 string timeNow = GlobalHelper.IDBHelper.GetServerDateTime();
-                string yearNow = Convert.ToDateTime(timeNow).Year.ToString()+"年";
-                string monthNow= Convert.ToDateTime(timeNow).Month.ToString()+"月";                
+                string yearNow = Convert.ToDateTime(timeNow).Year.ToString() + "年";
+                string monthNow = Convert.ToDateTime(timeNow).Month.ToString() + "月";
                 string startDate = Convert.ToDateTime(year + "-" + month + "-" + "1").ToString("yyyy-MM-dd");
                 StartDate = Convert.ToDateTime(startDate);
+                //判断是否大于本月
+                if (StartDate.CompareTo(Convert.ToDateTime(timeNow))>0)
+                {
+                    MessageBox.Show("无法查看此月考勤结果！");
+                    return;
+                }
                 //如果查询本月的记录，则最终日期是今天
                 if (yearNow == comboBoxYear.Text && monthNow == comboBoxMonth.Text)
                 {
@@ -788,11 +796,13 @@ namespace KaoQin
 
             switch (result.ToString())
             {
-                case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;
+                case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;               
                 case "/准点上班/早退": result.Clear(); result.Append("早退"); break;
+                case "/准点上班/下班未签": result.Clear(); result.Append("下班未签"); break;
+                case "/正常下班/准点上班": result.Clear(); result.Append("正常"); break;
                 case "/迟到/正常下班": result.Clear(); result.Append("迟到"); break;
                 case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
-                case "/准点上班/下班未签": result.Clear(); result.Append("下班未签"); break;
+                case "/早退/正常下班": result.Clear(); result.Append("早退"); break;
                 case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
             }
 
