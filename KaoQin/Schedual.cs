@@ -25,10 +25,12 @@ namespace KaoQin
         public string DepartmentID;
         public string DepartmentName;
         public string PBID;//排班ID
+        public string tableName = "";
         public int PBColumn;//Excel中排班的起始列
         public int NameColumn;//Excel中的姓名列
         public bool ColumnLocation = false;
         public bool alter = false;
+        public bool TableNameHasChoosed = false;
         public Schedual()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace KaoQin
         {
             SearchDepartment();
             searchControl1.Properties.NullValuePrompt = "请输入姓名";
-
+            bandedGridView1.IndicatorWidth = 40;
             if (alter == true)
             {
                 comboBox1.Enabled = false;
@@ -60,6 +62,7 @@ namespace KaoQin
                 //点击生成计划按钮
                 simpleButton1_Click(null, null);
 
+                //将排班内容填充
                 for (int i = 0; i < Staff.Rows.Count; i++)
                 {
                     for (int j=2;j<=Timespan.Days+2; j++)
@@ -67,6 +70,39 @@ namespace KaoQin
                         Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[i][j+1].ToString();
                     }
                 }
+
+                //从排班中保留停用中还存在的班次
+                for (int k = 0; k < WorkShift.Rows.Count; k++)
+                {
+                    //还在启用的班次保留
+                    if (WorkShift.Rows[k]["ZT"].ToString()=="0")
+                    {
+                        continue;
+                    }
+                    //检查停用的班次是否在使用
+                    for (int i = 0; i < Staff_WorkShift_SQL.Rows.Count; i++)
+                    {
+                        bool hasFound = false;
+                        for (int j = 0; j <= Timespan.Days; j++)
+                        {
+                            if (WorkShift.Rows[k]["ID"].ToString()== Staff_WorkShift_SQL.Rows[i][j + 3].ToString())
+                            {
+                                hasFound = true;
+                                break;
+                            }
+                            //如果还没找到，就删除
+                            if (i== Staff_WorkShift_SQL.Rows.Count-1 && j== Timespan.Days)
+                            {
+                                WorkShift.Rows.RemoveAt(k);
+                            }
+                        }
+                        if (hasFound == true)
+                        {
+                            break;
+                        }
+                    }
+                }
+                
             }else
             {
                 //如果是新增
@@ -167,7 +203,15 @@ namespace KaoQin
             }
 
             //读取部门共用班次信息
-            string sql2 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", "0");
+            string sql2 = "";
+            if (alter == true)
+            {
+                sql2 = string.Format("select ID,NAME,COLOR,ZT from KQ_BC where LBID='{0}'", "0");
+            }else
+            {
+                sql2 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", "0");
+            }
+            
             try
             {
                 WorkShift_Common = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
@@ -179,6 +223,7 @@ namespace KaoQin
             }
 
             //读取指定部门班次信息
+            //先获取此部门的类别
             string sql3 = string.Format("select BMLB from KQ_BM where BMID='{0}'",comboBox1.SelectedValue);
             DataTable DepartmentType = new DataTable();
             try
@@ -193,7 +238,15 @@ namespace KaoQin
 
             if (DepartmentType.Rows[0][0].ToString()!="")
             {
-                string sql4 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", DepartmentType.Rows[0][0].ToString());
+                string sql4 = "";
+                if (alter == true)
+                {
+                    sql4 = string.Format("select ID,NAME,COLOR,ZT from KQ_BC where LBID='{0}'", DepartmentType.Rows[0][0].ToString());
+                }else
+                {
+                    sql4 = string.Format("select ID,NAME,COLOR from KQ_BC where LBID='{0}' and ZT='0'", DepartmentType.Rows[0][0].ToString());
+                }
+                
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
@@ -565,12 +618,10 @@ namespace KaoQin
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            if (bandedGridView1.RowCount == 0)
-            {
-                MessageBox.Show("请先生成计划！");
-                return;
-            }
 
+            //MessageBox.Show("提示：在导入之前，请先关闭要读取的Excel文件!");
+
+            //用于定位姓名列与排班第一列
             SchedualLocation form = new SchedualLocation();
             form.ShowDialog(this);
 
@@ -581,7 +632,7 @@ namespace KaoQin
             {
                 ColumnLocation = false;
             }
-
+           
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Excel文件(*.xls; *.xlsx)| *.xls; *.xlsx";//过滤文件类型
             ofd.RestoreDirectory = true; //记忆上次浏览路径
@@ -621,8 +672,27 @@ namespace KaoQin
                 ExcelConn.Open();
                 //获取Excel中所有Sheet表的信息
                 DataTable schemaTable = ExcelConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                //获取Excel的第一个Sheet表名
-                string tableName = schemaTable.Rows[0][2].ToString().Trim();
+                //获取Excel的Sheet表名
+                if (schemaTable.Rows.Count == 1)
+                {
+                    tableName = schemaTable.Rows[0][2].ToString().Trim();
+                    TableNameHasChoosed = true;
+                }
+                else
+                {
+                    //多表时要选择
+                    SchedualTableName form1 = new SchedualTableName();
+                    form1.tableName = schemaTable.Copy();
+                    form1.ShowDialog(this);
+                }
+
+                if (TableNameHasChoosed == true)
+                {
+                    TableNameHasChoosed = false;
+                }else
+                {
+                    return;
+                }
                 string strSql = "select * from [" + tableName + "]";
                 //获取Excel指定Sheet表中的信息
                 OleDbDataAdapter myData = new OleDbDataAdapter(strSql, ExcelConn);
@@ -633,6 +703,7 @@ namespace KaoQin
             catch (Exception ex)
             {
                 MessageBox.Show("错误2:" + ex.Message);
+                ExcelConn.Close();
                 return;
             }
 
@@ -718,6 +789,14 @@ namespace KaoQin
             if (Staff_WorkShift.Rows.Count > 0)
             {
                 Staff_WorkShift.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl1.Text);
+            }
+        }
+
+        private void bandedGridView1_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString();
             }
         }
     }

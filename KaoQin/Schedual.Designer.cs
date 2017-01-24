@@ -34,6 +34,7 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.comboBoxYear = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,6 @@
             this.ButtonCreate = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonExport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonImport = new DevExpress.XtraEditors.SimpleButton();
-            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
@@ -98,6 +98,7 @@
             this.bandedGridView1.Name = "bandedGridView1";
             this.bandedGridView1.OptionsView.ColumnAutoWidth = false;
             this.bandedGridView1.OptionsView.ShowGroupPanel = false;
+            this.bandedGridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.bandedGridView1_CustomDrawRowIndicator);
             this.bandedGridView1.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.bandedGridView1_RowCellStyle);
             // 
             // gridBand1
@@ -126,6 +127,19 @@
             this.panel1.Size = new System.Drawing.Size(1382, 61);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Location = new System.Drawing.Point(22, 18);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchControl1.Properties.Appearance.Options.UseFont = true;
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Size = new System.Drawing.Size(146, 26);
+            this.searchControl1.TabIndex = 43;
+            this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
             // label2
             // 
@@ -251,19 +265,6 @@
             this.ButtonImport.TabIndex = 3;
             this.ButtonImport.Text = "导入Excel";
             this.ButtonImport.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Location = new System.Drawing.Point(22, 18);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchControl1.Properties.Appearance.Options.UseFont = true;
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(146, 26);
-            this.searchControl1.TabIndex = 43;
-            this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
             // Schedual
             // 

@@ -176,6 +176,12 @@
     <Compile Include="SchedualLocation.Designer.cs">
       <DependentUpon>SchedualLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="SchedualTableName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedualTableName.Designer.cs">
+      <DependentUpon>SchedualTableName.cs</DependentUpon>
+    </Compile>
     <Compile Include="users\add_alter_Dep.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SchedualLocation.resx">
       <DependentUpon>SchedualLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedualTableName.resx">
+      <DependentUpon>SchedualTableName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="users\add_alter_Dep.resx">
       <DependentUpon>add_alter_Dep.cs</DependentUpon>
