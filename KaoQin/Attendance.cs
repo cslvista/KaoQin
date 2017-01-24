@@ -235,6 +235,8 @@ namespace KaoQin
         {
             gridControl2.DataSource = null;
             gridControl3.DataSource = null;
+            bandedGridView2.IndicatorWidth = 40;
+            gridView3.IndicatorWidth = 40;
             bandedGridView2.Columns.Clear();
             bandedGridView2.Bands.Clear();
             AttendanceResult.Columns.Clear();
@@ -287,7 +289,7 @@ namespace KaoQin
             }
 
             //读取排班主表
-            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}'",comboBoxYear.Text, comboBoxMonth.Text);
+            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}' and BMID='{2}'",comboBoxYear.Text, comboBoxMonth.Text, gridView1.GetFocusedRowCellValue("BMID").ToString());
             try
             {
                 PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql3);
@@ -422,19 +424,19 @@ namespace KaoQin
 
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
-                AttendanceResult.Rows.Add(new object[] { });
+                AttendanceResult.Rows.Add(new object[] {});
                 //添加姓名与考勤号
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
                 for (int j = 0; j <= Timespan ; j++)
                 {
                                        
-                    //查询当日考勤数据
+                    //查询昨日、今日、明日的考勤数据
                     Record_Person.Clear();
                     string KQID = Staff.Rows[i]["KQID"].ToString();
                     string Date = StartDate.AddDays(j).ToString("yyyy-MM-dd");
                     var query = from rec in Record_Dep.AsEnumerable()
-                                where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
+                                where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(-1)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(2)) < 0
                                 select new
                                 {
                                     Time = rec.Field<string>("Time"),
@@ -457,7 +459,7 @@ namespace KaoQin
                                      where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
                                      select new
                                      {
-                                         Today = Item.Field<string>(yesterday).ToString(),
+                                         Today = Item.Field<string>(yesterday),
                                      };
                         foreach (var obj in query1)
                         {
@@ -506,7 +508,7 @@ namespace KaoQin
                         PersonShiftAll.Rows.Add(obj.PD,obj.ID, obj.SBSJ, obj.XBSJ, obj.KT);
                     }
 
-                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShiftAll);
+                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShiftAll,Date);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -625,13 +627,13 @@ namespace KaoQin
             
         }
 
-        private string Result(DataTable Record_Person, DataTable PersonShiftAll)
+        private string Result(DataTable Record_Person, DataTable PersonShiftAll,string Date)
         {
 
             StringBuilder result = new StringBuilder();
             //过滤，放宽迟到和早退的时间
             int late = 0;
-            int leaveEarly = 0;
+            int leaveEarly = 0;            
             for (int i = 0; i < Filter.Rows.Count; i++)
             {
                 if (Filter.Rows[i]["Name"].ToString() == "Late")
@@ -646,6 +648,46 @@ namespace KaoQin
                     continue;
                 }
             }
+            //昨日、今日、明日的记录
+            DataTable Record_Yesterday = new DataTable();
+            DataTable Record_Today = new DataTable();
+            DataTable Record_Tomorrow = new DataTable();
+            Record_Yesterday.Columns.Add("Time", typeof(string));
+            Record_Yesterday.Columns.Add("Source", typeof(string));
+            Record_Today.Columns.Add("Time", typeof(string));
+            Record_Today.Columns.Add("Source", typeof(string));
+            Record_Tomorrow.Columns.Add("Time", typeof(string));
+            Record_Tomorrow.Columns.Add("Source", typeof(string));
+
+            for (int i = -1; i < 1; i++)
+            {
+                var query = from rec in Record_Person.AsEnumerable()
+                            where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(i)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(i+1)) < 0
+                            select new
+                            {
+                                Time = rec.Field<string>("Time"),
+                                Source = rec.Field<string>("Source"),
+                            };
+
+                foreach (var obj in query)
+                {
+                    if (i == -1)
+                    {
+                        Record_Yesterday.Rows.Add(obj.Time, obj.Source);
+                    }
+
+                    if (i == 0)
+                    {
+                        Record_Today.Rows.Add(obj.Time, obj.Source);
+                    }
+
+                    if (i == 1)
+                    {
+                        Record_Tomorrow.Rows.Add(obj.Time, obj.Source);
+                    }
+                }
+            }
+            
 
             for (int i = 0; i < PersonShiftAll.Rows.Count; i++)
             {
@@ -797,8 +839,6 @@ namespace KaoQin
             switch (result.ToString())
             {
                 case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;               
-                case "/准点上班/早退": result.Clear(); result.Append("早退"); break;
-                case "/准点上班/下班未签": result.Clear(); result.Append("下班未签"); break;
                 case "/正常下班/准点上班": result.Clear(); result.Append("正常"); break;
                 case "/迟到/正常下班": result.Clear(); result.Append("迟到"); break;
                 case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
@@ -806,7 +846,20 @@ namespace KaoQin
                 case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
             }
 
-         
+            if (result.ToString().IndexOf("/准点上班/") == 0)
+            {
+                string str = result.ToString().Replace("/准点上班/", "");
+                result.Clear();
+                result.Append(str);
+            }
+
+            if (result.ToString().IndexOf("/正常下班/") == 0)
+            {
+                string str = result.ToString().Replace("/正常下班/", "");
+                result.Clear();
+                result.Append(str);
+            }
+
             if (result.ToString().IndexOf("/") == 0)
             {
                 string str = result.ToString().Remove(0, 1);
@@ -906,7 +959,7 @@ namespace KaoQin
                                  where Item.Field<string>("KQID") == KQID
                                  select new
                                  {
-                                     Today = Item.Field<string>(today).ToString(),
+                                     Today = Item.Field<string>(today),
                                  };
                     foreach (var obj in query1)
                     {
@@ -1148,6 +1201,22 @@ namespace KaoQin
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             gridControl2_MouseDoubleClick(null, null);
+        }
+
+        private void bandedGridView2_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
+        }
+
+        private void gridView3_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
         }
     }
 }

@@ -20,6 +20,9 @@ namespace KaoQin
         DataTable WorkShift_Common = new DataTable();
         DataTable Staff_WorkShift = new DataTable();
         DataTable Staff_WorkShift_SQL = new DataTable();
+        DataTable Staff_WorkShift_SQL_Copy = new DataTable();
+        DateTime StartDate;
+        DateTime StopDate;
         TimeSpan Timespan;
         DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit Shift=new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
         public string DepartmentID;
@@ -70,6 +73,7 @@ namespace KaoQin
                         Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[i][j+1].ToString();
                     }
                 }
+                Staff_WorkShift_SQL_Copy = Staff_WorkShift_SQL.Copy();
 
                 //从排班中保留停用中还存在的班次
                 for (int k = 0; k < WorkShift.Rows.Count; k++)
@@ -150,10 +154,7 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            //校验日期
-            DateTime StartDate;
-            DateTime StopDate;
-            
+            //校验日期            
             try
             {
                 string year = comboBoxYear.Text.Substring(0, 4);
@@ -345,8 +346,6 @@ namespace KaoQin
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-
-
             if (alter == true)
             {
                 //写入排班主表
@@ -426,21 +425,9 @@ namespace KaoQin
                     MessageBox.Show("错误2:" + ex.Message);
                     return;
                 }
-
                 //写日志
-                string Record = string.Format("{0}更改了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(),comboBox1.Text,comboBoxYear.Text,comboBoxMonth.Text);
-                string sql2 = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
-
-                try
-                {
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql2);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("错误3:" + ex.Message);
-                    return;
-                }
-
+                WriteLog();
+               
             }
             else
             {
@@ -576,6 +563,80 @@ namespace KaoQin
             }
         }
 
+        private void WriteLog()
+        {
+            string Record = string.Format("{0}更改了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(), comboBox1.Text, comboBoxYear.Text, comboBoxMonth.Text);
+            string sql = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
+
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误3:" + ex.Message);
+                return;
+            }
+
+            //对比更改了什么记录
+
+            StringBuilder sql1 = new StringBuilder();
+
+            //第一层循环是员工人数
+            for (int i=0;i< Staff_WorkShift.Rows.Count; i++)
+            {
+                //第二层循环是排班天数
+                for (int j = 0; j < Timespan.Days; j++)
+                {
+                    if (Staff_WorkShift.Rows[i][j+2].ToString()!= Staff_WorkShift_SQL_Copy.Rows[i][j+3].ToString())
+                    {
+                        DateTime startDate = StartDate.AddMonths(-1);
+                        string name = Staff_WorkShift.Rows[i]["YGXM"].ToString();
+                        string date = startDate.AddDays(j).Month.ToString() + "月" + startDate.AddDays(j).Day.ToString() + "日";
+                        string PB_num_origin = Staff_WorkShift_SQL_Copy.Rows[i][j + 3].ToString();
+                        string PB_num_change = Staff_WorkShift.Rows[i][j + 2].ToString();                   
+                        string PB_origin = "空";
+                        string PB_change = "";
+                        bool PB_origin_found = false;
+                        bool PB_change_found = false;
+                        //第三层循环是班次的名称
+                        for (int k = 0; k < WorkShift.Rows.Count; k++)
+                        {
+                            if (PB_origin_found == false && PB_num_origin == WorkShift.Rows[k]["ID"].ToString())
+                            {
+                                PB_origin = WorkShift.Rows[k]["NAME"].ToString();
+                                PB_origin_found = true;
+                            }
+
+                            if (PB_change_found == false && PB_num_change == WorkShift.Rows[k]["ID"].ToString())
+                            {
+                                PB_change = WorkShift.Rows[k]["NAME"].ToString();
+                                PB_change_found = true;
+                            }
+
+                            if (PB_origin_found==true && PB_change_found == true)
+                            {
+                                break;
+                            }
+                        }                        
+                        sql1.Append(string.Format("{0}{1}的记录从{2}变更为{3} \r\n",name,date,PB_origin,PB_change));
+                    }
+                }
+            }
+
+            try
+            {
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误4:" + ex.Message);
+                return;
+            }
+
+
+
+        }
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             //SaveFileDialog sf = new SaveFileDialog();
@@ -702,8 +763,8 @@ namespace KaoQin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误2:" + ex.Message);
                 ExcelConn.Close();
+                MessageBox.Show("错误2:" + ex.Message);                
                 return;
             }
 

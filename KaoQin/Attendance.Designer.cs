@@ -425,31 +425,31 @@
             this.修改为ToolStripMenuItem,
             this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 82);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 88);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 26);
             this.toolStripMenuItem1.Text = "查看排班与考勤";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
             // 修改全列ToolStripMenuItem
             // 
             this.修改全列ToolStripMenuItem.Name = "修改全列ToolStripMenuItem";
-            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改全列ToolStripMenuItem.Text = "修改全列";
             this.修改全列ToolStripMenuItem.Click += new System.EventHandler(this.修改全列ToolStripMenuItem_Click);
             // 
@@ -468,6 +468,7 @@
             this.bandedGridView2.OptionsBehavior.Editable = false;
             this.bandedGridView2.OptionsView.ColumnAutoWidth = false;
             this.bandedGridView2.OptionsView.ShowGroupPanel = false;
+            this.bandedGridView2.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.bandedGridView2_CustomDrawRowIndicator);
             this.bandedGridView2.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.bandedGridView2_RowCellStyle);
             // 
             // gridBand1
@@ -526,6 +527,7 @@
             this.gridView3.OptionsBehavior.Editable = false;
             this.gridView3.OptionsView.ColumnAutoWidth = false;
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView3_CustomDrawRowIndicator);
             // 
             // gridColumn3
             // 
