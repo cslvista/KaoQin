@@ -305,7 +305,7 @@ namespace KaoQin
             Shift.AutoHeight = false;
             Shift.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "类型")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "班次")});
 
             for (int i = 0; i <= Timespan.Days; i++)
             {
@@ -389,7 +389,7 @@ namespace KaoQin
                 }
 
                 StringBuilder sql = new StringBuilder();
-
+                StringBuilder sql_lastday = new StringBuilder();
                 for (int i = 0; i < Staff.Rows.Count; i++)
                 {
                     sql.Append(string.Format("update KQ_PB_XB set D1T={0},D2T={1},D3T={2},D4T={3},D5T={4},D6T={5},D7T={6},D8T={7},"
@@ -413,11 +413,13 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString(),
                         PBID,Staff_WorkShift_SQL.Rows[i][0].ToString()
                         ));
+                    sql_lastday.Append(string.Format("update KQ_PB_LD set LastDay={0} where PBID='{1}' and KQID={2};", Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString(), PBID, Staff_WorkShift_SQL.Rows[i][0].ToString()));
                 }
 
                 try
                 {
                     GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql_lastday.ToString());
                     MessageBox.Show("保存成功！");
                 }
                 catch (Exception ex)
@@ -516,7 +518,7 @@ namespace KaoQin
                 
                 //写入排班细表
                 StringBuilder sql = new StringBuilder();
-
+                StringBuilder sql_lastday = new StringBuilder();
                 for (int i = 0; i < Staff.Rows.Count; i++)
                 {
                     sql.Append("insert into KQ_PB_XB (PBID,BMID,KQID,"
@@ -544,12 +546,13 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][29].ToString(), Staff_WorkShift_SQL.Rows[i][30].ToString(),
                         Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString()
                         ));
-
+                    sql_lastday.Append(string.Format("insert into KQ_PB_LD (PBID,BMID,KQID,YEAR,MONTH,LastDay) values ('{0}','{1}',{2},'{3}','{4}',{5});", ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(),comboBoxYear.Text,comboBoxMonth.Text, Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString()));
                 }
 
                 try
                 {
                     GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql_lastday.ToString());
                     alter = true;
                     MessageBox.Show("保存成功！");
                     this.Close();
