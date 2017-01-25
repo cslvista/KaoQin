@@ -731,17 +731,8 @@ namespace KaoQin
                     else
                     {
                         //跨天，只判断下班时间
-                        DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
-                        DateTime value = Convert.ToDateTime("21:30");
-                        if (XBSJ.CompareTo(value) > 0) //如果时间大于21：30，则判断今日和明日的考勤数据
-                        {
-                            result.Append(JudgeOffWork(Record_Tomorrow,Record_Today,XBSJ,false));
-                        }
-                        else //如果时间小于21:30，则只判断今日的数据
-                        {
-                            XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).AddMinutes(-leaveEarly).ToShortTimeString());
-                            result.Append(JudgeOffWork(Record_Tomorrow, Record_Today, XBSJ,true));
-                        }
+                        DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());                       
+                        result.Append(JudgeOffWork(Record_Tomorrow, Record_Today, XBSJ,leaveEarly));
                     }
                 }
 
@@ -774,27 +765,14 @@ namespace KaoQin
                         if (PersonShiftAll.Rows[i]["SBSJ"].ToString() != "")
                         {
                             DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
-                            DateTime value1 = Convert.ToDateTime("02:00");
-                            DateTime value2 = Convert.ToDateTime("22:00");
-                            if (SBSJ.CompareTo(value1) < 0) //如果上班时间小于02：00，则判断今日和昨日的考勤数据
-                            {
-                                result.Append(JudgeWork(Record_Yesterday, Record_Today, Record_Tomorrow, SBSJ, false));
-                            }
-                            else if (SBSJ.CompareTo(value2)>0)//如果上班时间大于23:00，则判断今日和明日的数据
-                            {
-                                SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).AddMinutes(late).ToShortTimeString());
-                                result.Append(JudgeWork(Record_Yesterday, Record_Today, Record_Tomorrow, SBSJ, true));
-                            }else // 如果上班时间大于02:00，则只判断今日的数据
-                            {
-
-                            }
+                            result.Append(JudgeWork(Record_Yesterday, Record_Today, Record_Tomorrow, SBSJ, late));
                         }
 
                         //下班时间
                         if (PersonShiftAll.Rows[i]["XBSJ"].ToString() != "")
                         {
                             DateTime XBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["XBSJ"]).ToShortTimeString());
-                            result.Append(JudgeOffWork(Record_Tomorrow, Record_Today, XBSJ, true));
+                            result.Append(JudgeOffWork(Record_Tomorrow, Record_Today, XBSJ, leaveEarly));
                         }
 
                     }
@@ -802,16 +780,7 @@ namespace KaoQin
                     {
                         //跨天，只判断上班时间
                         DateTime SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).ToShortTimeString());
-                        DateTime value = Convert.ToDateTime("02:00");
-                        if (SBSJ.CompareTo(value) < 0) //如果上班时间小于02：00，则判断今日和昨日的考勤数据
-                        {
-                            result.Append(JudgeWork(Record_Yesterday, Record_Today,Record_Tomorrow, SBSJ, false));
-                        }
-                        else //如果上班时间大于02:00，则只判断今日的数据
-                        {
-                            SBSJ = Convert.ToDateTime(Convert.ToDateTime(PersonShiftAll.Rows[i]["SBSJ"]).AddMinutes(late).ToShortTimeString());
-                            result.Append(JudgeWork(Record_Yesterday, Record_Today, Record_Tomorrow, SBSJ, true));
-                        }                       
+                        result.Append(JudgeWork(Record_Yesterday, Record_Today, Record_Tomorrow, SBSJ, late));                    
                     }
                 }
             }
@@ -852,10 +821,12 @@ namespace KaoQin
         /// <summary>
         /// 判断下班
         /// </summary>
-        private string JudgeOffWork(DataTable Record_Tomorrow,DataTable Record_Today,DateTime XBSJ,bool Only_Today)
+        private string JudgeOffWork(DataTable Record_Tomorrow,DataTable Record_Today,DateTime XBSJ,int leaveEarly)
         {
-            if (Only_Today)
+            DateTime time1 = Convert.ToDateTime("22:00");
+            if (XBSJ.CompareTo(time1)<=0)
             {
+                DateTime XBTime = XBSJ.AddMinutes(-leaveEarly);
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     if (Record_Today.Rows.Count == 0)
@@ -864,7 +835,7 @@ namespace KaoQin
                     }
 
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
-                    double subtract = (record - XBSJ).TotalMinutes;
+                    double subtract = (record - XBTime).TotalMinutes;
                     if (subtract >= 0)
                     {
                         return "/正常下班";
@@ -880,10 +851,11 @@ namespace KaoQin
                 }
             }else
             {
+                DateTime XBTime = XBSJ.AddMinutes(-leaveEarly);
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
-                    double subtract = (record - XBSJ).TotalMinutes;
+                    double subtract = (record - XBTime).TotalMinutes;
                     if (subtract >= 0)
                     {
                         return "/正常下班";
@@ -911,9 +883,21 @@ namespace KaoQin
         /// <summary>
         /// 判断上班
         /// </summary>
-        private string JudgeWork(DataTable Record_Yesterday, DataTable Record_Today, DataTable Record_Tomorrow, DateTime SBSJ, bool Only_Today)
+        private string JudgeWork(DataTable Record_Yesterday, DataTable Record_Today, DataTable Record_Tomorrow, DateTime SBSJ, int late)
         {
-            if (Only_Today)
+            DateTime time1 = Convert.ToDateTime("02:00");
+            DateTime time2 = Convert.ToDateTime("22:00");
+            DateTime SBTime = new DateTime();
+      
+            if (SBSJ.AddMinutes(late).CompareTo(SBSJ) > 0)
+            {
+                SBTime = SBSJ.AddMinutes(late);
+            }else
+            {
+                SBTime= Convert.ToDateTime("23:59");
+            }
+
+            if (SBTime.CompareTo(time1)>0 && SBTime.CompareTo(time2) <= 0)
             {
                 if (Record_Today.Rows.Count == 0)
                 {
@@ -923,7 +907,7 @@ namespace KaoQin
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
-                    double subtract = (SBSJ - record).TotalMinutes;
+                    double subtract = (SBTime - record).TotalMinutes;
                     if (subtract >= 0 && subtract < 120)
                     {
                         return "/准点上班";          
@@ -938,17 +922,17 @@ namespace KaoQin
                     }
                 }
             }
-            else
+            else  if (SBTime.CompareTo(time1) <= 0)
             {
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
-                    double subtract = (SBSJ - record).TotalMinutes;
-                    if (subtract >= 0 && subtract < 120)
+                    double subtract = (SBTime - record).TotalMinutes;
+                    if (record.CompareTo(SBSJ)<0)
                     {
                         return "/准点上班";
                     }
-                    else if (subtract < 0 && subtract > -120)
+                    else if (subtract < 0 && subtract > -60)
                     {
                         return "/迟到";
                     }
@@ -957,10 +941,35 @@ namespace KaoQin
                 for (int j = 0; j < Record_Yesterday.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Yesterday.Rows[j]["Time"]).ToShortTimeString());
-                    DateTime value = Convert.ToDateTime("23:00");
+                    DateTime value = Convert.ToDateTime("22:30");
                     if (record.CompareTo(value) > 0)
                     {
                         return "/准点上班";
+                    }
+                }
+            }else if (SBTime.CompareTo(time2) > 0)
+            {
+                for (int j = 0; j < Record_Today.Rows.Count; j++)
+                {
+                    DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
+                    double subtract = (SBTime - record).TotalMinutes;
+                    if (record.CompareTo(SBTime) < 0)
+                    {
+                        return "/准点上班";
+                    }
+                    else if (subtract < 0 && subtract > -60)
+                    {
+                        return "/迟到";
+                    }
+                }
+
+                for (int j = 0; j < Record_Tomorrow.Rows.Count; j++)
+                {
+                    DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Tomorrow.Rows[j]["Time"]).ToShortTimeString());
+                    DateTime value = Convert.ToDateTime("02:00");
+                    if (record.CompareTo(value) < 0)
+                    {
+                        return "/迟到";
                     }
                 }
             }
