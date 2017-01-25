@@ -565,12 +565,20 @@ namespace KaoQin
 
         private void WriteLog()
         {
-            string Record = string.Format("{0}更改了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(), comboBox1.Text, comboBoxYear.Text, comboBoxMonth.Text);
-            string sql = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
-
+            string sql_del = string.Format("select max(ID) from KQ_LOG");
+            string ID = "";
+            DataTable MaxID = new DataTable();
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql_del);
+                if (MaxID.Rows[0][0].ToString() == "")
+                {
+                    ID = "1";
+                }
+                else
+                {
+                    ID = (Convert.ToInt32(MaxID.Rows[0][0].ToString()) + 1).ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -580,13 +588,13 @@ namespace KaoQin
 
             //对比更改了什么记录
 
-            StringBuilder sql1 = new StringBuilder();
+            StringBuilder details = new StringBuilder();
 
             //第一层循环是员工人数
             for (int i=0;i< Staff_WorkShift.Rows.Count; i++)
             {
                 //第二层循环是排班天数
-                for (int j = 0; j < Timespan.Days; j++)
+                for (int j = 0; j <= Timespan.Days; j++)
                 {
                     if (Staff_WorkShift.Rows[i][j+2].ToString()!= Staff_WorkShift_SQL_Copy.Rows[i][j+3].ToString())
                     {
@@ -618,23 +626,25 @@ namespace KaoQin
                             {
                                 break;
                             }
-                        }                        
-                        sql1.Append(string.Format("{0}{1}的记录从{2}变更为{3} \r\n",name,date,PB_origin,PB_change));
+                        }
+                        details.Append(string.Format("{0}{1}的记录从{2}变更为{3} \r\n",name,date,PB_origin,PB_change));
                     }
                 }
             }
 
+
+            string Record = string.Format("{0}更改了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(), comboBox1.Text, comboBoxYear.Text, comboBoxMonth.Text);
+            string sql = string.Format("insert into KQ_LOG (ID,Record,Time,Details) values ('{0}','{1}','{2}','{3}')",ID, Record, GlobalHelper.IDBHelper.GetServerDateTime(),details.ToString());
+
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1.ToString());
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误4:" + ex.Message);
                 return;
             }
-
-
 
         }
         private void simpleButton3_Click(object sender, EventArgs e)

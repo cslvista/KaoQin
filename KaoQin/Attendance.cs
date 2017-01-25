@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Data.OleDb;
+using System.Threading;
 using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace KaoQin
@@ -59,79 +60,81 @@ namespace KaoQin
             Staff_Orign.Clear();
             Record_DKJ.Clear();
             //读取考勤机数据
-            LoadingForm form = new LoadingForm();
-            form.ShowDialog(this);
-            //string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
+            //Thread t1 = new Thread(DownloadData);
+            //t1.IsBackground = false;
+            //t1.Start();
 
-            //try
-            //{
-            //    Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("错误1:" + ex.Message);
-            //    return;
-            //}
+            string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
-            //if (Machine.Rows.Count == 0)
-            //{
-            //    MessageBox.Show("没有可用设备！");
-            //    return;
-            //}
+            try
+            {
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message);
+                return;
+            }
+
+            if (Machine.Rows.Count == 0)
+            {
+                MessageBox.Show("没有可用设备！");
+                return;
+            }
 
 
-            //DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
-            //DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
-            //bool bIsConnected = false;//判断设备是否可连接   
-            //string sdwEnrollNumber = "";
-            //string sName = "";
-            //string sPassword = "";
-            //int iPrivilege = 0;
-            //bool bEnabled = false;
+            DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
+            DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
+            bool bIsConnected = false;//判断设备是否可连接   
+            string sdwEnrollNumber = "";
+            string sName = "";
+            string sPassword = "";
+            int iPrivilege = 0;
+            bool bEnabled = false;
 
-            //this.Text = "正在读取员工数据...";
-            //DKJ.ReadAllUserID(0);
-            //while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
-            //{
-            //    int position = sName.IndexOf("\0");
-            //    string name = sName.Substring(0, position);//过滤sName中多余字符
-            //    Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
+            this.Text = "正在读取员工数据...";
+            DKJ.ReadAllUserID(0);
+            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+            {
+                int position = sName.IndexOf("\0");
+                string name = sName.Substring(0, position);//过滤sName中多余字符
+                Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
 
-            //}
+            }
 
-            //int iMachineNumber = 0;
-            //int VerifyMode = 0;
-            //int InOutMode = 0;
-            //int Year = 0;
-            //int Month = 0;
-            //int Day = 0;
-            //int Hour = 0;
-            //int Minute = 0;
-            //int Second = 0;
-            //int Workcode = 0;
-            //string dwEnrollNumber = "";
+            int iMachineNumber = 0;
+            int VerifyMode = 0;
+            int InOutMode = 0;
+            int Year = 0;
+            int Month = 0;
+            int Day = 0;
+            int Hour = 0;
+            int Minute = 0;
+            int Second = 0;
+            int Workcode = 0;
+            string dwEnrollNumber = "";
 
-            //this.Text = "正在下载考勤数据，请稍候...";
-            //for (int i = 0; i < Machine.Rows.Count; i++)
-            //{
-            //    DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
-            //    bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
-            //    if (bIsConnected == false)
-            //    {
-            //        MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
-            //        return;
-            //    }
-            //    int j = 0;
-            //    DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
-            //    while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
-            //    {
-            //        j++;
-            //        string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
-            //        string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
-            //        Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
-            //        this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
-            //    }
-            //}
+            this.Text = "正在下载考勤数据，请稍候...";
+            for (int i = 0; i < Machine.Rows.Count; i++)
+            {
+                DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+                bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
+                if (bIsConnected == false)
+                {
+                    MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
+                    return;
+                }
+                int j = 0;
+                DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
+                while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
+                {
+                    j++;
+                    string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
+                    string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
+                    Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
+                    this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
+                }
+            }
             //下载数据完毕
             MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
             HasDownload = true;
@@ -205,6 +208,12 @@ namespace KaoQin
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
             searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
             
+        }
+
+        private void DownloadData()
+        {
+            LoadingForm form = new LoadingForm();
+            form.ShowDialog();
         }
         private void SearchDepartment()
         {

@@ -33,9 +33,9 @@ namespace KaoQin
             this.Height = pictureBox1.Height+simpleButton1.Height;
             
 
-            t1 = new Thread(DownloadData);
-            t1.IsBackground = false;
-            t1.Start();
+            //t1 = new Thread(DownloadData);
+            //t1.IsBackground = false;
+            //t1.Start();
         }
 
         private void DownloadData()

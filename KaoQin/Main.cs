@@ -236,8 +236,29 @@ namespace KaoQin
                 return;
             }
 
+            string sql_del = string.Format("select max(ID) from KQ_LOG");
+            string ID = "";
+            DataTable MaxID = new DataTable();
+            try
+            {
+                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql_del);
+                if (MaxID.Rows[0][0].ToString() == "")
+                {
+                    ID = "1";
+                }
+                else
+                {
+                    ID = (Convert.ToInt32(MaxID.Rows[0][0].ToString()) + 1).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:"+ex.Message);
+                return;
+            }
+
             string Record = string.Format("{0}删除了{1}{2}{3}的排班记录", GlobalHelper.UserHelper.User["U_NAME"].ToString(), gridView1.GetFocusedRowCellValue("BMMC").ToString(), gridView2.GetFocusedRowCellValue("YEAR").ToString(), gridView2.GetFocusedRowCellValue("MONTH").ToString());
-            string sql1 = string.Format("insert into KQ_LOG (Record,Time) values ('{0}','{1}')", Record, GlobalHelper.IDBHelper.GetServerDateTime());
+            string sql1 = string.Format("insert into KQ_LOG (ID,Record,Time) values ('{0}','{1}','{2}')", ID, Record, GlobalHelper.IDBHelper.GetServerDateTime());
             try
             {
                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);

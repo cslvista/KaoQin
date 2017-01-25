@@ -72,5 +72,12 @@ namespace KaoQin.authority
         {
             SearchInfo();
         }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            OpeartionDetails form = new OpeartionDetails();
+            form.Details = gridView1.GetFocusedRowCellDisplayText("Details").ToString();
+            form.Show();
+        }
     }
 }

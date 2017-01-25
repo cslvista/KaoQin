@@ -120,6 +120,12 @@
     <Compile Include="authority\add_alter_authority.Designer.cs">
       <DependentUpon>add_alter_authority.cs</DependentUpon>
     </Compile>
+    <Compile Include="authority\OpeartionDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="authority\OpeartionDetails.Designer.cs">
+      <DependentUpon>OpeartionDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="authority\OpeartionRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="authority\Authority.resx">
       <DependentUpon>Authority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="authority\OpeartionDetails.resx">
+      <DependentUpon>OpeartionDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="authority\OpeartionRecord.resx">
       <DependentUpon>OpeartionRecord.cs</DependentUpon>
