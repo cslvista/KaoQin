@@ -250,9 +250,12 @@ namespace KaoQin
             bandedGridView2.IndicatorWidth = 40;
             gridView3.IndicatorWidth = 40;
             bandedGridView2.Columns.Clear();
-            bandedGridView2.Bands.Clear();
-            AttendanceResult.Columns.Clear();
+            bandedGridView2.Bands.Clear();           
             searchControl2.Text = "";
+            //如果没有这一句，就会导致在增加新行的时候报错
+            AttendanceResult.DefaultView.RowFilter = "";
+            AttendanceResult.Clear();
+            AttendanceResult.Columns.Clear();        
             Record_Dep.Clear();
 
             try
@@ -288,77 +291,12 @@ namespace KaoQin
                 return;
             }
 
-
-            //读取班次信息
-            string sql2 = string.Format("select ID,NAME,SBSJ,XBSJ,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0",gridView1.GetFocusedRowCellValue("BMLB").ToString());
-            try
+            //读取数据库信息，包括班次、排班、员工信息、过滤信息
+            if (ReadDatabase()==false)
             {
-                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误2:" + ex.Message);
                 return;
             }
-
-            //读取排班主表
-            string sql3 = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}' and BMID='{2}'",comboBoxYear.Text, comboBoxMonth.Text, gridView1.GetFocusedRowCellValue("BMID").ToString());
-            try
-            {
-                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql3);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误3:" + ex.Message);
-                return;
-            }
-
-
-            //读取排班细表和上个月最后一天的排班情况
-            if (PBID.Rows.Count > 0)
-            {
-                string sql4 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
-                string sql5= string.Format( "select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", LastMonth.Year.ToString()+"年",LastMonth.Month.ToString()+"月", gridView1.GetFocusedRowCellValue("BMID").ToString());
-                try
-                {
-                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
-                    ArrangementItem_LastDay = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql5);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("错误4:" + ex.Message);
-                    return;
-                }
-            }else
-            {
-                MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！",gridView1.GetFocusedRowCellValue("BMMC").ToString(),comboBoxYear.Text,comboBoxMonth.Text));
-                return;
-            }
-
-            //读取过滤数据
-            string sql = "select Name,Time from KQ_FILTER";
-            try
-            {
-                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误5:" + ex.Message);
-                return;
-            }
-
-            //读取员工信息            
-            try
-            {
-                string sql1 = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误6:" + ex.Message);
-                return;
-            }
-
+            
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;
@@ -430,16 +368,92 @@ namespace KaoQin
             DataCollect(StartDate, Timespan.Days);
         }
 
+        private bool ReadDatabase()
+        {
+            //读取班次信息            
+            try
+            {
+                string sql = string.Format("select ID,NAME,SBSJ,XBSJ,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0", gridView1.GetFocusedRowCellValue("BMLB").ToString());
+                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取班次信息错误:" + ex.Message);
+                return false;
+            }
+
+            //读取排班主表            
+            try
+            {
+                string sql = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", comboBoxYear.Text, comboBoxMonth.Text, gridView1.GetFocusedRowCellValue("BMID").ToString());
+                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取排班主表错误:" + ex.Message);
+                return false;
+            }
+
+
+            //读取排班细表和上个月最后一天的排班情况
+            if (PBID.Rows.Count > 0)
+            {
+                string sql1 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                try
+                {
+                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+                    ArrangementItem_LastDay = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("读取排班细表错误:" + ex.Message);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！", gridView1.GetFocusedRowCellValue("BMMC").ToString(), comboBoxYear.Text, comboBoxMonth.Text));
+                return false;
+            }
+
+            //读取过滤数据          
+            try
+            {
+                string sql = "select Name,Time from KQ_FILTER";
+                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取过滤数据错误:" + ex.Message);
+                return false;
+            }
+
+            //读取员工信息            
+            try
+            {
+                string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取员工信息错误:" + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// 考勤明细分析
         /// </summary>
         private void AnalysisData(DateTime StartDate, int Timespan)
         {
-            AttendanceResult.Clear();
+           
 
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
-                AttendanceResult.Rows.Add(new object[] {});
+                AttendanceResult.Rows.Add();
                 //添加姓名与考勤号
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
@@ -468,7 +482,7 @@ namespace KaoQin
                     PersonShift.Rows.Add(new object[] { });
                     if (j == 0)
                     {
-                        //第一天的排班
+                        //第一天的排班，取两个数据表进行操作
                         string yesterday = string.Format("D{0}T", j + 1);
                         var query1 = from Item in ArrangementItem.AsEnumerable()
                                      where Item.Field<string>("KQID") == Staff.Rows[i]["KQID"].ToString()
@@ -687,6 +701,7 @@ namespace KaoQin
             Record_Tomorrow.Columns.Add("Time", typeof(string));
             Record_Tomorrow.Columns.Add("Source", typeof(string));
 
+ 
             for (int i = -1; i <= 1; i++)
             {
                 var query = from rec in Record_Person.AsEnumerable()
@@ -785,6 +800,7 @@ namespace KaoQin
                 }
             }
 
+            //结果处理
             switch (result.ToString())
             {
                 case "/准点上班/正常下班": result.Clear(); result.Append("正常");break;               
@@ -805,6 +821,13 @@ namespace KaoQin
             if (result.ToString().IndexOf("/正常下班/") == 0)
             {
                 string str = result.ToString().Replace("/正常下班/", "");
+                result.Clear();
+                result.Append(str);
+            }
+
+            if (result.ToString().IndexOf("休") > 1)
+            {
+                string str = result.ToString().Replace("休", "");
                 result.Clear();
                 result.Append(str);
             }
@@ -870,7 +893,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Tomorrow.Rows[j]["Time"]).ToShortTimeString());
                     DateTime value = Convert.ToDateTime("03:00");
-                    if (record.CompareTo(value) < 0)
+                    if (record.CompareTo(value) <= 0)
                     {
                         return "/正常下班";
                     }
@@ -885,7 +908,7 @@ namespace KaoQin
         /// </summary>
         private string JudgeWork(DataTable Record_Yesterday, DataTable Record_Today, DataTable Record_Tomorrow, DateTime SBSJ, int late)
         {
-            DateTime time1 = Convert.ToDateTime("02:00");
+            DateTime time1 = Convert.ToDateTime("03:00");
             DateTime time2 = Convert.ToDateTime("22:00");
             DateTime SBTime = new DateTime();
       
@@ -928,11 +951,11 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                     double subtract = (SBTime - record).TotalMinutes;
-                    if (record.CompareTo(SBSJ)<0)
+                    if (record.CompareTo(SBTime) <=0)
                     {
                         return "/准点上班";
                     }
-                    else if (subtract < 0 && subtract > -60)
+                    else if (subtract < 0 && subtract >= -60)
                     {
                         return "/迟到";
                     }
@@ -942,7 +965,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Yesterday.Rows[j]["Time"]).ToShortTimeString());
                     DateTime value = Convert.ToDateTime("22:30");
-                    if (record.CompareTo(value) > 0)
+                    if (record.CompareTo(value) >= 0)
                     {
                         return "/准点上班";
                     }
@@ -953,7 +976,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                     double subtract = (SBTime - record).TotalMinutes;
-                    if (record.CompareTo(SBTime) < 0)
+                    if (record.CompareTo(SBTime) <= 0)
                     {
                         return "/准点上班";
                     }
@@ -967,7 +990,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Tomorrow.Rows[j]["Time"]).ToShortTimeString());
                     DateTime value = Convert.ToDateTime("02:00");
-                    if (record.CompareTo(value) < 0)
+                    if (record.CompareTo(value) <= 0)
                     {
                         return "/迟到";
                     }
@@ -1274,7 +1297,7 @@ namespace KaoQin
             form.Show();
         }
 
-        private void searchControl2_TextChanged(object sender, EventArgs e)
+        public void searchControl2_TextChanged(object sender, EventArgs e)
         {
             if (AttendanceResult.Rows.Count > 0)
             {
@@ -1291,8 +1314,16 @@ namespace KaoQin
                 AttendanceAlter form = new AttendanceAlter();
                 form.Name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
                 form.Date = bandedGridView2.FocusedColumn.Caption;
-                form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString(); ;
-                form.Row = bandedGridView2.GetDataSourceRowIndex(bandedGridView2.FocusedRowHandle);
+                form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString(); 
+                for (int i = 0; i < AttendanceResult.Rows.Count; i++)
+                {
+                    if (bandedGridView2.GetFocusedRowCellValue("KQID").ToString() == AttendanceResult.Rows[i]["KQID"].ToString())
+                    {
+                        form.Row = i;
+                        break;
+                    }
+                        
+                }                
                 form.StartDate = StartDate;
                 form.Timespan = Timespan.Days;
                 form.Show(this);
@@ -1319,7 +1350,11 @@ namespace KaoQin
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            gridControl2_MouseDoubleClick(null, null);
+            try
+            {
+                gridControl2_MouseDoubleClick(null, null);
+            }
+            catch { }
         }
 
         private void bandedGridView2_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)

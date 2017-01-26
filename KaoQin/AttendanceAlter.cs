@@ -37,7 +37,8 @@ namespace KaoQin
                 {
                     form.AttendanceResult.Rows[i][Date] = comboBox1.Text;
                 }                
-                form.DataCollect(StartDate, Timespan);                
+                form.DataCollect(StartDate, Timespan);
+
             }
             else
             {

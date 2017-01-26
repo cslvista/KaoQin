@@ -193,7 +193,7 @@ namespace KaoQin.arrangement
                 isExists = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 if (isExists.Rows.Count > 0)
                 {
-                    MessageBox.Show("请先删除该类别中的所有时段！");
+                    MessageBox.Show("该类别不允许被删除！");
                     return;
                 }
             }

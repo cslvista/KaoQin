@@ -20,7 +20,8 @@ namespace KaoQin.authority
 
         private void OpeartionDetails_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Details;
+            textBox1.AppendText( Details);
+            textBox1.ReadOnly = true;
             this.Text = "操作详细信息";
         }
     }

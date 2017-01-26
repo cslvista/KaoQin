@@ -35,12 +35,24 @@ namespace KaoQin
                 return;
             }
 
+            if (Convert.ToInt32(txtLate.Text) > 60)
+            {
+                MessageBox.Show("填入的数字不能大于60！");
+                return;
+            }
 
-            string sql = string.Format("update KQ_FILTER set Time='{0}' where Name='Late';",txtLate.Text)
-                + string.Format("update KQ_FILTER set Time='{0}' where Name='LeaveEarly';",txtLeaveEarly.Text);
+            if (Convert.ToInt32(txtLeaveEarly.Text) > 60)
+            {
+                MessageBox.Show("填入的数字不能大于60！");
+                return;
+            }
+
+            
             try
             {
-               GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                string sql = string.Format("update KQ_FILTER set Time='{0}' where Name='Late';", txtLate.Text)
+                + string.Format("update KQ_FILTER set Time='{0}' where Name='LeaveEarly';", txtLeaveEarly.Text);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
@@ -54,9 +66,10 @@ namespace KaoQin
 
         private void AttendanceFilter_Load(object sender, EventArgs e)
         {
-            string sql = "select Name,Time from KQ_FILTER";
+            
             try
             {
+                string sql = "select Name,Time from KQ_FILTER";
                 Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)

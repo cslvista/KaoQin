@@ -182,6 +182,12 @@
     <Compile Include="SchedualLocation.Designer.cs">
       <DependentUpon>SchedualLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="SchedualRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedualRecord.Designer.cs">
+      <DependentUpon>SchedualRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="SchedualTableName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SchedualLocation.resx">
       <DependentUpon>SchedualLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedualRecord.resx">
+      <DependentUpon>SchedualRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SchedualTableName.resx">
       <DependentUpon>SchedualTableName.cs</DependentUpon>
