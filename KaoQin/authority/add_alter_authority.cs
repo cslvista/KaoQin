@@ -18,6 +18,104 @@ namespace KaoQin.authority
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            StringBuilder PB = new StringBuilder();
+            StringBuilder Dep = new StringBuilder();
+            StringBuilder Device = new StringBuilder();
+            StringBuilder Shift = new StringBuilder();
+            StringBuilder Attendance = new StringBuilder();
+            StringBuilder autority = new StringBuilder();
+
+            foreach(TreeNode FirstNode in treeView1.Nodes)
+            {
+                foreach (TreeNode SecondNode in FirstNode.Nodes)
+                {
+                    foreach (TreeNode ThirdNode in SecondNode.Nodes)
+                    {
+                        if (SecondNode.Name== "排班管理")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                PB.Append(ThirdNode.Checked == true ? "1" :"0");
+                            }
+                            if (ThirdNode.Text == "修改")
+                            {
+                                PB.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "删除")
+                            {
+                                PB.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+
+                        if (SecondNode.Name == "部门与员工")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                Dep.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "修改")
+                            {
+                                Dep.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "删除")
+                            {
+                                Dep.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+
+                        if (SecondNode.Name == "设备管理")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                Device.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "修改与删除")
+                            {
+                                Device.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+
+                        if (SecondNode.Name == "班次管理")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                Shift.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "修改")
+                            {
+                                Shift.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+
+                        if (SecondNode.Name == "考勤管理")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                Attendance.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+
+                        if (SecondNode.Name == "授权管理")
+                        {
+                            if (ThirdNode.Text == "查看")
+                            {
+                                autority.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            if (ThirdNode.Text == "修改与删除")
+                            {
+                                autority.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            continue;
+                        }
+                    }
+                }
+            }
+           
 
         }
 
@@ -33,11 +131,11 @@ namespace KaoQin.authority
             TreeNode PB = new TreeNode();
             PB.Text = "排班管理";
             TreeNode Dep = new TreeNode();
-            Dep.Text = "部门与员工管理";
+            Dep.Text = "部门与员工";
             TreeNode Device = new TreeNode();
             Device.Text = "设备管理";
-            TreeNode Arrange = new TreeNode();
-            Arrange.Text = "班次管理";
+            TreeNode Shift = new TreeNode();
+            Shift.Text = "班次管理";
             TreeNode Attendance = new TreeNode();
             Attendance.Text = "考勤管理";
             TreeNode Autority = new TreeNode();
@@ -46,7 +144,7 @@ namespace KaoQin.authority
             mainControl.Nodes.Add(PB);
             mainControl.Nodes.Add(Dep);
             mainControl.Nodes.Add(Device);
-            mainControl.Nodes.Add(Arrange);
+            mainControl.Nodes.Add(Shift);
             mainControl.Nodes.Add(Attendance);
             mainControl.Nodes.Add(Autority);
             //第三级权限
@@ -62,16 +160,18 @@ namespace KaoQin.authority
             Dep_Read.Text = "查看";
             TreeNode Dep_Edit = new TreeNode();
             Dep_Edit.Text = "修改";
+            TreeNode Dep_Del = new TreeNode();
+            Dep_Del.Text = "删除";
             //设备管理
             TreeNode Device_Read = new TreeNode();
             Device_Read.Text = "查看";
             TreeNode Device_Edit = new TreeNode();
-            Device_Edit.Text = "修改";
+            Device_Edit.Text = "修改与删除";
             //班次管理
-            TreeNode Arrange_Read = new TreeNode();
-            Arrange_Read.Text = "查看";
-            TreeNode Arrange_Edit = new TreeNode();
-            Arrange_Edit.Text = "修改";
+            TreeNode Shift_Read = new TreeNode();
+            Shift_Read.Text = "查看";
+            TreeNode Shift_Edit = new TreeNode();
+            Shift_Edit.Text = "修改";
             //考勤管理
             TreeNode Attendance_Read = new TreeNode();
             Attendance_Read.Text = "查看";
@@ -79,23 +179,36 @@ namespace KaoQin.authority
             TreeNode Autority_Read = new TreeNode();
             Autority_Read.Text = "查看";
             TreeNode Autority_Edit = new TreeNode();
-            Autority_Edit.Text = "修改";
+            Autority_Edit.Text = "修改与删除";
 
             PB.Nodes.Add(PB_Read);
             PB.Nodes.Add(PB_Edit);
             PB.Nodes.Add(PB_Del);
             Dep.Nodes.Add(Dep_Read);
             Dep.Nodes.Add(Dep_Edit);
+            Dep.Nodes.Add(Dep_Del);
             Device.Nodes.Add(Device_Read);
             Device.Nodes.Add(Device_Edit);
-            Arrange.Nodes.Add(Arrange_Read);
-            Arrange.Nodes.Add(Arrange_Edit);
+            Shift.Nodes.Add(Shift_Read);
+            Shift.Nodes.Add(Shift_Edit);
             Attendance.Nodes.Add(Attendance_Read);
             Autority.Nodes.Add(Autority_Read);
             Autority.Nodes.Add(Autority_Edit);
 
             treeView1.Nodes.Add(mainControl);
             treeView1.ExpandAll();
+
+            foreach (TreeNode FirstNode in treeView1.Nodes)
+            {
+                foreach (TreeNode SecondNode in FirstNode.Nodes)
+                {
+                    SecondNode.Name = SecondNode.Text;
+                    foreach (TreeNode ThirdNode in SecondNode.Nodes)
+                    {
+                        ThirdNode.Name = SecondNode.Text+"_"+ThirdNode.Text;                        
+                    }
+                }
+            }
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)

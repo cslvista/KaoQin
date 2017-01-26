@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(435, 423);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(435, 382);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // textBox1
@@ -63,7 +63,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(429, 367);
+            this.textBox1.Size = new System.Drawing.Size(429, 326);
             this.textBox1.TabIndex = 1;
             // 
             // panel1
@@ -71,7 +71,7 @@
             this.panel1.Controls.Add(this.simpleButton2);
             this.panel1.Controls.Add(this.simpleButton1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 376);
+            this.panel1.Location = new System.Drawing.Point(3, 335);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(429, 44);
             this.panel1.TabIndex = 2;
@@ -106,7 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 423);
+            this.ClientSize = new System.Drawing.Size(435, 382);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.Name = "SchedualRecord";
