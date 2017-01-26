@@ -393,6 +393,11 @@ namespace KaoQin
                         }
                     }
                 }
+                if (details.ToString() == "")
+                {
+                    MessageBox.Show("本次操作没有做任何修改！");
+                    return;
+                }
 
                 SchedualRecord form = new SchedualRecord();
                 form.details = details.ToString();

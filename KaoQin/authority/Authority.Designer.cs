@@ -35,11 +35,11 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -74,6 +74,7 @@
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // gridView1
             // 
@@ -86,11 +87,13 @@
             this.gridColumn2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "工号";
+            this.gridColumn1.FieldName = "ID";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -98,6 +101,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "姓名";
+            this.gridColumn2.FieldName = "Name";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -114,6 +118,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(511, 64);
             this.panel1.TabIndex = 1;
+            // 
+            // ButtonRefresh
+            // 
+            this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonRefresh.Appearance.Options.UseFont = true;
+            this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
+            this.ButtonRefresh.Location = new System.Drawing.Point(291, 18);
+            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonRefresh.Name = "ButtonRefresh";
+            this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
+            this.ButtonRefresh.TabIndex = 34;
+            this.ButtonRefresh.Text = "刷新";
             // 
             // simpleButton1
             // 
@@ -164,18 +180,6 @@
             this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
             this.ButtonAlter.TabIndex = 30;
             this.ButtonAlter.Text = "修改";
-            // 
-            // ButtonRefresh
-            // 
-            this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonRefresh.Appearance.Options.UseFont = true;
-            this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(291, 18);
-            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonRefresh.Name = "ButtonRefresh";
-            this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
-            this.ButtonRefresh.TabIndex = 34;
-            this.ButtonRefresh.Text = "刷新";
             // 
             // Authority
             // 

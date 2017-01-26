@@ -17,9 +17,21 @@ namespace KaoQin
         DataTable Attendance = new DataTable();
         DataTable Authority = new DataTable();
         bool Authority_Dep = false;
+        bool Authority_Dep_Edit = false;
+        bool Authority_Dep_Del = false;
         bool Authority_Device = false;
+        bool Authority_Device_Edit = false;
+        bool Authority_Device_Del = false;
+        bool Authority_Shift = false;
+        bool Authority_Shift_Edit = false;
+        bool Authority_Shift_Del = false;
         bool Authority_Arrangement = false;
+        bool Authority_Arrangement_Edit = false;
+        bool Authority_Arrangement_Del = false;
         bool Authority_Mangement = false;
+        bool Authority_Mangement_Edit = false;
+        bool Authority_Mangement_Del = false;
+        bool Authority_Attendance = false;
         delegate void UpdateUI();
         public Main()
         {
@@ -31,7 +43,11 @@ namespace KaoQin
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             UILocation();
             SearchAuthority();//授权管理
-            SearchDepartment();//查找部门
+            if (Authority_Arrangement==true)
+            {
+                SearchDepartment();//查找部门
+            }
+           
         }
 
         private void UILocation()
@@ -52,21 +68,131 @@ namespace KaoQin
             if (GlobalHelper.UserHelper.User["U_NAME"].ToString() == "MZSYS")
             {
                 Authority_Dep = true;
+                Authority_Dep_Edit = true;
+                Authority_Dep_Del = true;
                 Authority_Device = true;
+                Authority_Device_Edit = true;
+                Authority_Device_Del = true;
+                Authority_Shift = true;
+                Authority_Shift_Edit = true;
+                Authority_Shift_Del = true;
                 Authority_Arrangement = true;
+                Authority_Arrangement_Edit = true;
+                Authority_Arrangement_Del = true;
                 Authority_Mangement = true;
+                Authority_Mangement_Edit = true;
+                Authority_Mangement_Del = true;
+                Authority_Attendance = true;
+                return;
             }
-
-            string sql = "select * from KQ_SQ";
-
+            
             try
             {
+                string sql =string.Format("select * from KQ_SQ where ID='{0}'", GlobalHelper.UserHelper.User["U_ID"].ToString());
                 Authority = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
                 return;
+            }
+
+            if (Authority.Rows.Count == 0)
+            {
+                return;
+            }else
+            {
+                //排班
+                if (Authority.Rows[0]["PBGL"].ToString() == "111")
+                {
+                    Authority_Arrangement = true;
+                    Authority_Arrangement_Edit = true;
+                    Authority_Arrangement_Del = true;
+                }
+                else
+                {
+                    string s1 = Authority.Rows[0]["PBGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["PBGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["PBGL"].ToString().Substring(2, 1);
+                    Authority_Arrangement = s1 == "1" ? true : false;
+                    Authority_Arrangement_Edit = s2 == "1" ? true : false;
+                    Authority_Arrangement_Del = s3 == "1" ? true : false;
+                }
+                //员工
+                if (Authority.Rows[0]["YGGL"].ToString() == "111")
+                {
+                    Authority_Dep = true;
+                    Authority_Dep_Edit = true;
+                    Authority_Dep_Del = true;
+                }
+                else
+                {
+                    string s1 = Authority.Rows[0]["YGGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["YGGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["YGGL"].ToString().Substring(2, 1);
+                    Authority_Dep = s1 == "1" ? true : false;
+                    Authority_Dep_Edit = s2 == "1" ? true : false;
+                    Authority_Dep_Del = s3 == "1" ? true : false;
+                }
+                //设备
+                if (Authority.Rows[0]["SBGL"].ToString() == "111")
+                {
+                    Authority_Device = true;
+                    Authority_Device_Edit = true;
+                    Authority_Device_Del = true;
+                }
+                else
+                {
+                    string s1 = Authority.Rows[0]["SBGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["SBGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["SBGL"].ToString().Substring(2, 1);
+                    Authority_Device = s1 == "1" ? true : false;
+                    Authority_Device_Edit = s2 == "1" ? true : false;
+                    Authority_Device_Del = s3 == "1" ? true : false;
+                }
+                //班次
+                if (Authority.Rows[0]["BCGL"].ToString() == "111")
+                {
+                    Authority_Shift = true;
+                    Authority_Shift_Edit = true;
+                    Authority_Shift_Del = true;
+                }
+                else
+                {
+                    string s1 = Authority.Rows[0]["BCGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["BCGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["BCGL"].ToString().Substring(2, 1);
+                    Authority_Shift = s1 == "1" ? true : false;
+                    Authority_Shift_Edit = s2 == "1" ? true : false;
+                    Authority_Shift_Del = s3 == "1" ? true : false;
+                }
+
+                //考勤
+                if (Authority.Rows[0]["KQGL"].ToString() == "1")
+                {
+                    Authority_Attendance = true;
+                }
+                else
+                {
+                    Authority_Attendance = false;
+                }
+
+                //授权
+                if (Authority.Rows[0]["SQGL"].ToString() == "111")
+                {
+                    Authority_Mangement = true;
+                    Authority_Mangement_Edit = true;
+                    Authority_Mangement_Del = true;
+                }
+                else
+                {
+                    string s1 = Authority.Rows[0]["SQGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["SQGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["SQGL"].ToString().Substring(2, 1);
+                    Authority_Mangement = s1 == "1" ? true : false;
+                    Authority_Mangement_Edit = s2 == "1" ? true : false;
+                    Authority_Mangement_Del = s3 == "1" ? true : false;
+                }
             }
         }
         private void SearchDepartment()

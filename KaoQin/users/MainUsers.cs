@@ -14,6 +14,9 @@ namespace KaoQin.users
     {
         DataTable Staff = new DataTable();
         DataTable Department = new DataTable();
+        public bool Authority_Dep_Read = false;
+        public bool Authority_Dep_Edit = false;
+        public bool Authority_Dep_Del = false;
         delegate void UpdateUI();
         public MainUsers()
         {

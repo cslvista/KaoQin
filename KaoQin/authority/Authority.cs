@@ -11,6 +11,7 @@ namespace KaoQin.authority
 {
     public partial class Authority : Form
     {
+        DataTable users = new DataTable();
         public Authority()
         {
             InitializeComponent();
@@ -29,13 +30,32 @@ namespace KaoQin.authority
 
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
-            string sql = "select * from KQ_QX";
+            
+            try
+            {
+                string sql = "select * from KQ_SQ";
+                users = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                gridControl1.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
 
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             OpeartionRecord form = new OpeartionRecord();
+            form.Show();
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+            add_alter_authority form = new add_alter_authority();
+            form.alter = true;
+            form.ID = gridView1.GetFocusedRowCellValue("ID").ToString();
             form.Show();
         }
     }
