@@ -74,7 +74,7 @@
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
+            this.gridControl1.DoubleClick += new System.EventHandler(this.gridControl1_DoubleClick);
             // 
             // gridView1
             // 
@@ -130,6 +130,7 @@
             this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
             this.ButtonRefresh.TabIndex = 34;
             this.ButtonRefresh.Text = "刷新";
+            this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
             // simpleButton1
             // 
@@ -168,6 +169,7 @@
             this.ButtonDelete.Size = new System.Drawing.Size(69, 30);
             this.ButtonDelete.TabIndex = 31;
             this.ButtonDelete.Text = "删除";
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // ButtonAlter
             // 
@@ -180,6 +182,7 @@
             this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
             this.ButtonAlter.TabIndex = 30;
             this.ButtonAlter.Text = "修改";
+            this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
             // 
             // Authority
             // 

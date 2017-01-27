@@ -12,6 +12,7 @@ namespace KaoQin.authority
     public partial class add_alter_authority : Form
     {
         public bool alter = false;
+        DataTable users = new DataTable();
         public string ID = "";
         public string Name = "";
         DataTable Authority = new DataTable();
@@ -131,10 +132,11 @@ namespace KaoQin.authority
             ID = "G0203";
             Name = "陈淞霖";
             string sql = "";
+
             if (alter)
             {
-                sql = "";
-            }
+                sql =string.Format("update KQ_SQ set PBGL='{0}',YGGL='{1}',SBGL='{2}',BCGL='{3}',KQGL='{4}',SQGL='{5}' where ID='{6}'", PB.ToString(), Dep.ToString(), Device.ToString(), Shift.ToString(), Attendance.ToString(), Authority_s.ToString(),ID);
+            }            
             else
             {
                 sql = string.Format("insert into KQ_SQ (ID,Name,PBGL,YGGL,SBGL,BCGL,KQGL,SQGL) values ('{0}','{1},','{2}','{3}','{4}','{5}','{6}','{7}')"
@@ -155,6 +157,7 @@ namespace KaoQin.authority
 
         private void add_alter_authority_Load(object sender, EventArgs e)
         {
+            gridLookUpEdit1.Text = " ";
             treeView1.CheckBoxes = true;
 
             //第一级权限
@@ -355,6 +358,19 @@ namespace KaoQin.authority
                     treeView1.Nodes[0].Nodes[5].Nodes[0].Checked = s1 == "1" ? true : false;
                     treeView1.Nodes[0].Nodes[5].Nodes[1].Checked = s2 == "1" ? true : false;
                     treeView1.Nodes[0].Nodes[5].Nodes[2].Checked = s3 == "1" ? true : false;
+                }
+            }else
+            {
+                try
+                {
+                    string sql = "select U_ACCOUNT,U_NAME from USERS";
+                    users = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.USER, sql);
+                    gridLookUpEdit1.EditValue = users.Rows[0]["U_ACCOUNT"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误1:" + ex.Message, "提示");
+                    return;
                 }
             }
         }

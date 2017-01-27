@@ -51,12 +51,31 @@ namespace KaoQin.authority
             form.Show();
         }
 
-        private void gridControl1_Click(object sender, EventArgs e)
+
+        private void ButtonAlter_Click(object sender, EventArgs e)
         {
             add_alter_authority form = new add_alter_authority();
             form.alter = true;
             form.ID = gridView1.GetFocusedRowCellValue("ID").ToString();
             form.Show();
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(sender, e);
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sql = string.Format("delete from KQ_SQ where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+            }
         }
     }
 }
