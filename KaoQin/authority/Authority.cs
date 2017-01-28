@@ -12,6 +12,8 @@ namespace KaoQin.authority
     public partial class Authority : Form
     {
         DataTable users = new DataTable();
+        public bool Authority_Mangement_Edit = false;
+        public bool Authority_Mangement_Del = false;
         public Authority()
         {
             InitializeComponent();
@@ -24,11 +26,17 @@ namespace KaoQin.authority
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            if (Authority_Mangement_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             add_alter_authority form = new add_alter_authority();
-            form.Show();
+            form.Show(this);
         }
 
-        private void ButtonRefresh_Click(object sender, EventArgs e)
+        public void ButtonRefresh_Click(object sender, EventArgs e)
         {
             
             try
@@ -54,10 +62,17 @@ namespace KaoQin.authority
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Mangement_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             add_alter_authority form = new add_alter_authority();
             form.alter = true;
             form.ID = gridView1.GetFocusedRowCellValue("ID").ToString();
-            form.Show();
+            form.Name= gridView1.GetFocusedRowCellValue("Name").ToString();
+            form.Show(this);
         }
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
@@ -67,6 +82,12 @@ namespace KaoQin.authority
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Mangement_Del == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 string sql = string.Format("delete from KQ_SQ where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
@@ -75,7 +96,10 @@ namespace KaoQin.authority
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
             }
+
+            ButtonRefresh_Click(null, null);
         }
     }
 }

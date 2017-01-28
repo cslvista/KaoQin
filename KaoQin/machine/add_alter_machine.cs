@@ -123,10 +123,9 @@ namespace KaoQin.machine
             if (alter == true)
             {
                 this.Text = "修改设备信息";
-                simpleButton1.Text = "修改";
             }else
             {
-                this.Text = "添加设备";
+                this.Text = "添加设备信息";
             }
         }
     }

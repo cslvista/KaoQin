@@ -12,8 +12,9 @@ namespace KaoQin.machine
     public partial class machine : Form
     {
         public zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
-
         DataTable Machine = new DataTable();
+        public bool Authority_Device_Edit = false;
+        public bool Authority_Device_Del = false;
         public machine()
         {
             InitializeComponent();
@@ -22,12 +23,24 @@ namespace KaoQin.machine
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            if (Authority_Device_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             add_alter_machine form = new add_alter_machine();
             form.Show(this);
         }
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Device_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             add_alter_machine form = new add_alter_machine();
             try
             {
@@ -115,6 +128,12 @@ namespace KaoQin.machine
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Device_Del == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             string sql = "";
             try
             {

@@ -35,6 +35,7 @@ namespace KaoQin
         public bool alter = false;
         public bool TableNameHasChoosed = false;
         public bool ChangeAccept = false;
+        public bool Authority_Arrangement_Edit = false;
         public Schedual()
         {
             InitializeComponent();
@@ -347,6 +348,12 @@ namespace KaoQin
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
+            if (Authority_Arrangement_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             if (alter == true)
             {
                 //对比更改了什么记录

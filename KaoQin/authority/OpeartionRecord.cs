@@ -27,7 +27,7 @@ namespace KaoQin.authority
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
 
-            string sql = "select top 1000 * from KQ_LOG";
+            string sql = "select Top 1000 ID,Record,Time from KQ_LOG order by ID desc";
             
             try
             {
@@ -75,9 +75,30 @@ namespace KaoQin.authority
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
-            OpeartionDetails form = new OpeartionDetails();
-            form.Details = gridView1.GetFocusedRowCellDisplayText("Details").ToString();
-            form.Show();
+            try
+            {
+                if (Record.Rows.Count == 0)
+                {
+                    return;
+                }
+
+                string sql = string.Format("select Details from KQ_LOG where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
+                DataTable Details = new DataTable();
+                Details=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                if (Details.Rows.Count == 0)
+                {
+                    MessageBox.Show("该项操作没有记录！");
+                    return;
+                }
+                OpeartionDetails form = new OpeartionDetails();
+                form.details = Details.Rows[0][0].ToString();
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

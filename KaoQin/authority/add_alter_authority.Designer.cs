@@ -35,6 +35,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.label9 = new System.Windows.Forms.Label();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
@@ -46,7 +49,7 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(269, 12);
+            this.simpleButton1.Location = new System.Drawing.Point(248, 11);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(71, 31);
@@ -60,7 +63,7 @@
             this.treeView1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeView1.Location = new System.Drawing.Point(3, 63);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(360, 535);
+            this.treeView1.Size = new System.Drawing.Size(341, 535);
             this.treeView1.TabIndex = 40;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -77,42 +80,78 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(366, 601);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 601);
             this.tableLayoutPanel1.TabIndex = 41;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.gridLookUpEdit1);
             this.panel1.Controls.Add(this.simpleButton1);
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 54);
+            this.panel1.Size = new System.Drawing.Size(341, 54);
             this.panel1.TabIndex = 41;
             // 
             // gridLookUpEdit1
             // 
-            this.gridLookUpEdit1.EditValue = "";
-            this.gridLookUpEdit1.Location = new System.Drawing.Point(30, 15);
+            this.gridLookUpEdit1.EditValue = "[]";
+            this.gridLookUpEdit1.Location = new System.Drawing.Point(74, 13);
             this.gridLookUpEdit1.Name = "gridLookUpEdit1";
+            this.gridLookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1.Properties.Appearance.Options.UseFont = true;
             this.gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.gridLookUpEdit1.Properties.DisplayMember = "U_NAME";
+            this.gridLookUpEdit1.Properties.NullText = "";
+            this.gridLookUpEdit1.Properties.ValueMember = "U_ACCOUNT";
             this.gridLookUpEdit1.Properties.View = this.gridLookUpEdit1View;
-            this.gridLookUpEdit1.Size = new System.Drawing.Size(198, 24);
+            this.gridLookUpEdit1.Size = new System.Drawing.Size(157, 26);
             this.gridLookUpEdit1.TabIndex = 39;
+            this.gridLookUpEdit1.EditValueChanged += new System.EventHandler(this.gridLookUpEdit1_EditValueChanged);
             // 
             // gridLookUpEdit1View
             // 
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(15, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 23);
+            this.label9.TabIndex = 60;
+            this.label9.Text = "姓名：";
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "工号";
+            this.gridColumn1.FieldName = "U_ACCOUNT";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "姓名";
+            this.gridColumn2.FieldName = "U_NAME";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
             // add_alter_authority
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 601);
+            this.ClientSize = new System.Drawing.Size(347, 601);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -123,6 +162,7 @@
             this.Load += new System.EventHandler(this.add_alter_authority_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
@@ -136,5 +176,8 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private System.Windows.Forms.Label label9;
     }
 }

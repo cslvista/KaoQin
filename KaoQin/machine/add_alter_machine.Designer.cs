@@ -163,7 +163,7 @@
             this.MinimizeBox = false;
             this.Name = "add_alter_machine";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "添加设备";
+            this.Text = "添加设备信息";
             this.Load += new System.EventHandler(this.add_alter_machine_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

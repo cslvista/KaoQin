@@ -24,7 +24,6 @@ namespace KaoQin
         bool Authority_Device_Del = false;
         bool Authority_Shift = false;
         bool Authority_Shift_Edit = false;
-        bool Authority_Shift_Del = false;
         bool Authority_Arrangement = false;
         bool Authority_Arrangement_Edit = false;
         bool Authority_Arrangement_Del = false;
@@ -57,7 +56,6 @@ namespace KaoQin
             ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);
             ButtonDelete.Location = new Point(ButtonDelete.Location.X, height);
             ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
-
             ButtonRefresh1.Location = new Point(ButtonRefresh1.Location.X, height);
             searchControl1.Location= new Point(searchControl1.Location.X, (panelControl2.Height - searchControl1.Height) / 2);
         }
@@ -75,7 +73,6 @@ namespace KaoQin
                 Authority_Device_Del = true;
                 Authority_Shift = true;
                 Authority_Shift_Edit = true;
-                Authority_Shift_Del = true;
                 Authority_Arrangement = true;
                 Authority_Arrangement_Edit = true;
                 Authority_Arrangement_Del = true;
@@ -88,7 +85,7 @@ namespace KaoQin
             
             try
             {
-                string sql =string.Format("select * from KQ_SQ where ID='{0}'", GlobalHelper.UserHelper.User["U_ID"].ToString());
+                string sql =string.Format("select * from KQ_SQ where ID='{0}'", GlobalHelper.UserHelper.User["U_ACCOUNT"].ToString());
                 Authority = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
@@ -151,20 +148,17 @@ namespace KaoQin
                     Authority_Device_Del = s3 == "1" ? true : false;
                 }
                 //班次
-                if (Authority.Rows[0]["BCGL"].ToString() == "111")
+                if (Authority.Rows[0]["BCGL"].ToString() == "11")
                 {
                     Authority_Shift = true;
                     Authority_Shift_Edit = true;
-                    Authority_Shift_Del = true;
                 }
                 else
                 {
                     string s1 = Authority.Rows[0]["BCGL"].ToString().Substring(0, 1);
                     string s2 = Authority.Rows[0]["BCGL"].ToString().Substring(1, 1);
-                    string s3 = Authority.Rows[0]["BCGL"].ToString().Substring(2, 1);
                     Authority_Shift = s1 == "1" ? true : false;
                     Authority_Shift_Edit = s2 == "1" ? true : false;
-                    Authority_Shift_Del = s3 == "1" ? true : false;
                 }
 
                 //考勤
@@ -213,6 +207,12 @@ namespace KaoQin
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            if (Authority_Arrangement_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 Schedual form = new Schedual();
@@ -228,11 +228,13 @@ namespace KaoQin
         {
             if (Authority_Device == false)
             {
-                MessageBox.Show("您没有修改设备信息的权利！");
+                MessageBox.Show("您没有查看设备管理的权限！");
                 return;
             }
 
             machine.machine form = new machine.machine();
+            form.Authority_Device_Del = Authority_Device_Del;
+            form.Authority_Device_Edit = Authority_Device_Edit;
             form.Show();
         }
 
@@ -240,7 +242,7 @@ namespace KaoQin
         {
             if (Authority_Dep == false)
             {
-                MessageBox.Show("您没有修改部门与员工信息的权利！");
+                MessageBox.Show("您没有查看部门与员工的权限！");
                 return;
             }
 
@@ -250,7 +252,10 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            SearchDepartment();
+            if (Authority_Arrangement == true)
+            {
+                SearchDepartment();//查找部门
+            }
         }
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
@@ -295,12 +300,24 @@ namespace KaoQin
 
         private void 排班维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Authority_Shift == false)
+            {
+                MessageBox.Show("您没有查看班次管理的权限！");
+                return;
+            }
+
             arrangement.arrange form = new arrangement.arrange();
             form.Show();
         }
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Arrangement == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 Schedual form = new Schedual();
@@ -310,6 +327,7 @@ namespace KaoQin
                 form.comboBoxYear.Text = gridView2.GetFocusedRowCellValue("YEAR").ToString();
                 form.comboBoxMonth.Text = gridView2.GetFocusedRowCellValue("MONTH").ToString();
                 form.PBID = gridView2.GetFocusedRowCellValue("PBID").ToString();
+                form.Authority_Arrangement_Edit= Authority_Arrangement_Edit;
                 form.alter = true;
                 form.Show(this);
             }
@@ -323,8 +341,15 @@ namespace KaoQin
 
         private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Authority_Attendance == false)
+            {
+                MessageBox.Show("您没有查看考勤管理的权限！");
+                return;
+            }
+
             Attendance form = new Attendance();
             form.Show();
+
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -340,6 +365,12 @@ namespace KaoQin
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Arrangement_Del == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             if (gridView1.RowCount == 0 || gridView2.RowCount == 0)
             {
                 return;
@@ -402,7 +433,15 @@ namespace KaoQin
 
         private void 授权管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Authority_Mangement == false)
+            {
+                MessageBox.Show("您没有查看授权管理的权限！");
+                return;
+            }
+
             authority.Authority form = new authority.Authority();
+            form.Authority_Mangement_Del = Authority_Mangement_Del;
+            form.Authority_Mangement_Edit= Authority_Mangement_Edit;
             form.Show();
         }
     }

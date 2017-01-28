@@ -41,7 +41,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(445, 379);
+            this.textBox1.Size = new System.Drawing.Size(445, 409);
             this.textBox1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -54,14 +54,14 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(451, 385);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(451, 415);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // OpeartionDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 385);
+            this.ClientSize = new System.Drawing.Size(451, 415);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "OpeartionDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

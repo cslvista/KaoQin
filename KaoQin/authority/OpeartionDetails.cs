@@ -12,7 +12,7 @@ namespace KaoQin.authority
     
     public partial class OpeartionDetails : Form
     {
-        public string Details = "";
+        public string details = "";
         public OpeartionDetails()
         {
             InitializeComponent();
@@ -20,7 +20,7 @@ namespace KaoQin.authority
 
         private void OpeartionDetails_Load(object sender, EventArgs e)
         {
-            textBox1.AppendText( Details);
+            textBox1.AppendText(details);
             textBox1.ReadOnly = true;
             this.Text = "操作详细信息";
         }

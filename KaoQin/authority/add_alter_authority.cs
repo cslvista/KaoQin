@@ -129,8 +129,6 @@ namespace KaoQin.authority
                 }
             }
 
-            ID = "G0203";
-            Name = "陈淞霖";
             string sql = "";
 
             if (alter)
@@ -139,8 +137,8 @@ namespace KaoQin.authority
             }            
             else
             {
-                sql = string.Format("insert into KQ_SQ (ID,Name,PBGL,YGGL,SBGL,BCGL,KQGL,SQGL) values ('{0}','{1},','{2}','{3}','{4}','{5}','{6}','{7}')"
-                , ID, Name, PB.ToString(), Dep.ToString(), Device.ToString(), Shift.ToString(), Attendance.ToString(), Authority_s.ToString());
+                sql = string.Format("insert into KQ_SQ (ID,Name,PBGL,YGGL,SBGL,BCGL,KQGL,SQGL) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')"
+                , gridLookUpEdit1.EditValue.ToString(), gridLookUpEdit1.Text, PB.ToString(), Dep.ToString(), Device.ToString(), Shift.ToString(), Attendance.ToString(), Authority_s.ToString());
             }
             try
             {
@@ -152,12 +150,19 @@ namespace KaoQin.authority
                 MessageBox.Show(ex.Message);
                 return;
             }
+            Authority form = (Authority)this.Owner;
+            form.ButtonRefresh_Click(null, null);
             this.Close();
         }
 
         private void add_alter_authority_Load(object sender, EventArgs e)
         {
-            gridLookUpEdit1.Text = " ";
+            gridLookUpEdit1.Properties.DisplayMember = "U_NAME";
+            gridLookUpEdit1.Properties.ValueMember = "U_ACCOUNT";
+            gridLookUpEdit1.Properties.AutoComplete = false;
+            gridLookUpEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            gridLookUpEdit1.Properties.ImmediatePopup = true;
+            gridLookUpEdit1.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             treeView1.CheckBoxes = true;
 
             //第一级权限
@@ -252,8 +257,22 @@ namespace KaoQin.authority
                 }
             }
 
+            try
+            {
+                string sql = "select U_ACCOUNT,U_NAME from USERS";
+                users = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.USER, sql);
+                gridLookUpEdit1.Properties.DataSource = users;
+                gridLookUpEdit1.EditValue = ID;                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误1:" + ex.Message, "提示");
+                return;
+            }
+
             if (alter)
             {
+                gridLookUpEdit1.Enabled = false;
                 try
                 {
                     string sql = string.Format("select * from KQ_SQ where ID='{0}'", ID);
@@ -359,20 +378,20 @@ namespace KaoQin.authority
                     treeView1.Nodes[0].Nodes[5].Nodes[1].Checked = s2 == "1" ? true : false;
                     treeView1.Nodes[0].Nodes[5].Nodes[2].Checked = s3 == "1" ? true : false;
                 }
-            }else
-            {
-                try
+
+                if (Authority.Rows[0]["PBGL"].ToString() == "111" && Authority.Rows[0]["YGGL"].ToString() == "111")
                 {
-                    string sql = "select U_ACCOUNT,U_NAME from USERS";
-                    users = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.USER, sql);
-                    gridLookUpEdit1.EditValue = users.Rows[0]["U_ACCOUNT"].ToString();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("错误1:" + ex.Message, "提示");
-                    return;
+                    if (Authority.Rows[0]["SBGL"].ToString() == "111" && Authority.Rows[0]["BCGL"].ToString() == "11")
+                    {
+                        if (Authority.Rows[0]["KQGL"].ToString() == "1" && Authority.Rows[0]["SQGL"].ToString() == "111")
+                        {
+                            treeView1.Nodes[0].Checked = true;
+                        }
+                    }
                 }
             }
+
+           
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
@@ -443,6 +462,11 @@ namespace KaoQin.authority
             //        }
             //    }
             //}
+        }
+
+        private void gridLookUpEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

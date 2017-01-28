@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
             this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.label4 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.查看详细信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -49,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -68,6 +71,7 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.ContextMenuStrip = this.contextMenuStrip1;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.Location = new System.Drawing.Point(3, 73);
             this.gridControl1.MainView = this.gridView1;
@@ -86,8 +90,7 @@
             this.gridView1.Appearance.Row.Options.UseFont = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3});
+            this.gridColumn2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -112,12 +115,6 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "详细内容";
-            this.gridColumn3.FieldName = "Details";
-            this.gridColumn3.Name = "gridColumn3";
             // 
             // panel1
             // 
@@ -199,6 +196,20 @@
             this.label4.TabIndex = 46;
             this.label4.Text = "操作日期：";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.查看详细信息ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 30);
+            // 
+            // 查看详细信息ToolStripMenuItem
+            // 
+            this.查看详细信息ToolStripMenuItem.Name = "查看详细信息ToolStripMenuItem";
+            this.查看详细信息ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
+            this.查看详细信息ToolStripMenuItem.Text = "查看详细信息";
+            // 
             // OpeartionRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -219,6 +230,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -236,6 +248,7 @@
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.Label label4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 查看详细信息ToolStripMenuItem;
     }
 }
