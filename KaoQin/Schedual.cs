@@ -53,6 +53,7 @@ namespace KaoQin
                 comboBoxMonth.Enabled = false;
                 comboBoxYear.Enabled = false;
                 ButtonCreate.Enabled = false;
+                
                 string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {
@@ -108,8 +109,14 @@ namespace KaoQin
                         }
                     }
                 }
-                
-            }else
+                if (Authority_Arrangement_Edit == false)
+                {
+                    ButtonSave.Enabled = false;
+                    ButtonImport.Enabled = false;
+                }
+
+            }
+            else
             {
                 //如果是新增
                 string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
@@ -348,11 +355,6 @@ namespace KaoQin
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            if (Authority_Arrangement_Edit == false)
-            {
-                MessageBox.Show("您没有操作的权限！");
-                return;
-            }
 
             if (alter == true)
             {

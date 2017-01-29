@@ -27,7 +27,7 @@ namespace KaoQin.authority
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
 
-            string sql = "select Top 1000 ID,Record,Time from KQ_LOG order by ID desc";
+            string sql = "select Top 600 ID,Record,Time from KQ_LOG order by ID desc";
             
             try
             {
@@ -99,6 +99,11 @@ namespace KaoQin.authority
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void 查看详细信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gridControl1_DoubleClick(sender, e);
         }
     }
 }

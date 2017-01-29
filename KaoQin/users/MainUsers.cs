@@ -14,9 +14,9 @@ namespace KaoQin.users
     {
         DataTable Staff = new DataTable();
         DataTable Department = new DataTable();
-        public bool Authority_Dep_Read = false;
         public bool Authority_Dep_Edit = false;
         public bool Authority_Dep_Del = false;
+        bool searchAllUsers = false;
         delegate void UpdateUI();
         public MainUsers()
         {
@@ -57,7 +57,13 @@ namespace KaoQin.users
 
 
         private void ButtonAdd_Click(object sender, EventArgs e)
-        {           
+        {
+            if (Authority_Dep_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 add_alter_Users form = new add_alter_Users();
@@ -84,6 +90,12 @@ namespace KaoQin.users
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 add_alter_Users form = new add_alter_Users();
@@ -96,6 +108,7 @@ namespace KaoQin.users
                 form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("RZSJ").ToString();
                 form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("LZSJ").ToString();
                 form.textBoxRemark.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                form.searchAllUsers = searchAllUsers;
                 form.Show(this);
             }
             catch { }
@@ -104,6 +117,12 @@ namespace KaoQin.users
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep_Del == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 if (MessageBox.Show(string.Format("是否删除员工 '{0}'？", gridView2.GetFocusedRowCellDisplayText("YGXM").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
@@ -116,7 +135,8 @@ namespace KaoQin.users
             try
             {
                 string sql = string.Format("delete from KQ_YG where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString())
-                           + string.Format("delete from KQ_PB_XB where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString());
+                           + string.Format("delete from KQ_PB_XB where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString())
+                           + string.Format("delete from KQ_PB_LD where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString());
                 GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl1_Click(null, null);
             }
@@ -127,7 +147,7 @@ namespace KaoQin.users
             }
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+        public void simpleButton2_Click(object sender, EventArgs e)
         {
             string sql = "select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID";
 
@@ -135,6 +155,7 @@ namespace KaoQin.users
             {
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl2.DataSource = Staff;
+                searchAllUsers = true;
             }
             catch (Exception ex)
             {
@@ -169,6 +190,12 @@ namespace KaoQin.users
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             add_alter_Dep form = new add_alter_Dep();
             form.Show(this);
         }
@@ -181,6 +208,7 @@ namespace KaoQin.users
             {
                 Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl1.DataSource = Department;
+                
             }
             catch (Exception ex)
             {
@@ -190,6 +218,13 @@ namespace KaoQin.users
 
         private void toolStripButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
+
             try
             {
                 if (gridView1.GetFocusedRowCellDisplayText("BMID").ToString() == "0")
@@ -220,6 +255,7 @@ namespace KaoQin.users
                 Thread t1 = new Thread(SearchStaff);
                 t1.IsBackground = true;
                 t1.Start();
+                searchAllUsers = false;
             }            
         }
 
@@ -245,6 +281,13 @@ namespace KaoQin.users
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Dep_Del == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
+
             if (gridView1.GetFocusedRowCellDisplayText("BMID").ToString() == "0")
             {
                 MessageBox.Show("该项不可删除！");
@@ -258,15 +301,20 @@ namespace KaoQin.users
                     return;
                 }
             }
-            catch { }
-
-            
-            string sql = string.Format("delete from KQ_BM where BMID='{0}';",gridView1.GetFocusedRowCellValue("BMID").ToString())
-                       + string.Format("delete from KQ_PB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
-                       + string.Format("delete from KQ_PB_XB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString());
+            catch
+            {
+                return;
+            }
+                     
             try
-            {                
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+            {
+                string sql = string.Format("delete from KQ_BM where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("delete from KQ_PB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("delete from KQ_PB_XB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("delete from KQ_PB_LD where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
+                       + string.Format("update KQ_YG set BMID='0' where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                toolStripButtonRefresh_Click(null, null);
             }
             catch (Exception ex)
             {

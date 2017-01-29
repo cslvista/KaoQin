@@ -15,6 +15,7 @@ namespace KaoQin.users
         public string department;
         public string KQID;
         bool success = false;
+        public bool searchAllUsers = false;
         public add_alter_Users()
         {
             InitializeComponent();
@@ -22,9 +23,13 @@ namespace KaoQin.users
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            MainUsers form = (MainUsers)this.Owner;
-            form.simpleButton3_Click(null, null);
+            if (alter == false)
+            {
+                MainUsers form = (MainUsers)this.Owner;
+                form.simpleButton3_Click(null, null);               
+            }
             this.Close();
+
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -68,7 +73,10 @@ namespace KaoQin.users
             }else if (success == true && alter == true)
             {
                 MainUsers form = (MainUsers)this.Owner;
-                form.simpleButton3_Click(null, null);
+                if (searchAllUsers==false)
+                {
+                    form.simpleButton3_Click(null, null);
+                }                                
                 this.Close();
             }
 

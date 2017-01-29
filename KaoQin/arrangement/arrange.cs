@@ -14,6 +14,7 @@ namespace KaoQin.arrangement
     {
         DataTable Type = new DataTable();
         DataTable WorkShift = new DataTable();
+        public bool Authority_Shift_Edit = false;
         delegate void UpdateUI();
 
         public arrange()
@@ -80,6 +81,12 @@ namespace KaoQin.arrangement
 
         private void ButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Shift_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 add_alter_Item form = new add_alter_Item();
@@ -117,6 +124,12 @@ namespace KaoQin.arrangement
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            if (Authority_Shift_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 add_alter_Item form = new add_alter_Item();
@@ -130,13 +143,24 @@ namespace KaoQin.arrangement
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            add_alter_Type form = new add_alter_Type();
-            
+            if (Authority_Shift_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
+            add_alter_Type form = new add_alter_Type();            
             form.Show(this);
         }
 
         private void toolStripButtonAlter_Click(object sender, EventArgs e)
         {
+            if (Authority_Shift_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             try
             {
                 if (gridView1.GetFocusedRowCellDisplayText("ID").ToString()=="0")
@@ -173,6 +197,12 @@ namespace KaoQin.arrangement
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Shift_Edit == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             if (gridView1.GetFocusedRowCellDisplayText("ID").ToString() == "0")
             {
                 MessageBox.Show("'部门共用'不可删除！");

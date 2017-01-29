@@ -88,6 +88,12 @@ namespace KaoQin.authority
                 return;
             }
 
+            if (MessageBox.Show(string.Format("是否要删除 '{0}'的授权信息？", gridView1.GetFocusedRowCellDisplayText("Name").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
+
             try
             {
                 string sql = string.Format("delete from KQ_SQ where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());

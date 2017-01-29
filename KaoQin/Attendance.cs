@@ -175,6 +175,7 @@ namespace KaoQin
             PersonShiftAll.Columns.Add("NAME", typeof(string));
             PersonShiftAll.Columns.Add("SBSJ", typeof(string));
             PersonShiftAll.Columns.Add("XBSJ", typeof(string));
+            PersonShiftAll.Columns.Add("WorkDay", typeof(string));
             PersonShiftAll.Columns.Add("KT", typeof(string));
 
             AttendanceCollect.Columns.Add("KQID", typeof(string));
@@ -373,7 +374,7 @@ namespace KaoQin
             //读取班次信息            
             try
             {
-                string sql = string.Format("select ID,NAME,SBSJ,XBSJ,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0", gridView1.GetFocusedRowCellValue("BMLB").ToString());
+                string sql = string.Format("select ID,NAME,SBSJ,XBSJ,GZR,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0", gridView1.GetFocusedRowCellValue("BMLB").ToString());
                 WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
@@ -541,13 +542,14 @@ namespace KaoQin
                                      PD = personshift.Field<string>("PD"),
                                      SBSJ = workshift.Field<string>("SBSJ"),
                                      XBSJ = workshift.Field<string>("XBSJ"),
+                                     WorkDay = workshift.Field<int>("GZR").ToString(),
                                      KT = workshift.Field<int>("KT").ToString(),
                                  };
 
                     PersonShiftAll.Clear();
                     foreach (var obj in query2)
                     {
-                        PersonShiftAll.Rows.Add(obj.PD,obj.ID,obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                        PersonShiftAll.Rows.Add(obj.PD,obj.ID,obj.Name, obj.SBSJ, obj.XBSJ, obj.WorkDay,obj.KT);
                     }
 
                     AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShiftAll,Date);
@@ -1057,8 +1059,8 @@ namespace KaoQin
             //还要考虑点击名字的时候
             Record_Person.Clear();
             PersonShift.Clear();
-            PersonShift.Rows.Add(new object[] { });
-            PersonShift.Rows.Add(new object[] { });
+            PersonShift.Rows.Add();
+            PersonShift.Rows.Add();
             PersonShiftAll.Clear();
             try
             {
@@ -1138,14 +1140,15 @@ namespace KaoQin
                                  Name = workshift.Field<string>("NAME"),
                                  PD = personshift.Field<string>("PD"),
                                  SBSJ = workshift.Field<string>("SBSJ"),
-                                 XBSJ = workshift.Field<string>("XBSJ"),
+                                 XBSJ = workshift.Field<string>("XBSJ"),  
+                                 WorkDay= workshift.Field<int>("GZR").ToString(),
                                  KT = workshift.Field<int>("KT").ToString(),
                              };
 
                 PersonShiftAll.Clear();
                 foreach (var obj in query2)
                 {
-                    PersonShiftAll.Rows.Add(obj.PD, obj.ID, obj.Name, obj.SBSJ, obj.XBSJ, obj.KT);
+                    PersonShiftAll.Rows.Add(obj.PD, obj.ID, obj.Name, obj.SBSJ, obj.XBSJ,obj.WorkDay,obj.KT);
                 }
 
                 PersonData form = new PersonData();

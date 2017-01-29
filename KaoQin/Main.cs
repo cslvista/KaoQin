@@ -247,6 +247,8 @@ namespace KaoQin
             }
 
             users.MainUsers form = new users.MainUsers();
+            form.Authority_Dep_Del = Authority_Dep_Del;
+            form.Authority_Dep_Edit = Authority_Dep_Edit;
             form.Show();
         }
 
@@ -337,6 +339,8 @@ namespace KaoQin
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             gridControl1_Click(null, null);
+            LoadingForm form = new LoadingForm();
+            form.Show(this);
         }
 
         private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
