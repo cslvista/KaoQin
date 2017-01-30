@@ -254,7 +254,7 @@
             "10月",
             "11月",
             "12月"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(392, 19);
+            this.comboBoxMonth.Location = new System.Drawing.Point(392, 20);
             this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(89, 28);
@@ -265,7 +265,7 @@
             this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxYear.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(277, 19);
+            this.comboBoxYear.Location = new System.Drawing.Point(277, 20);
             this.comboBoxYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxYear.Name = "comboBoxYear";
             this.comboBoxYear.Size = new System.Drawing.Size(89, 28);
@@ -339,7 +339,7 @@
             // searchControl2
             // 
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl2.Location = new System.Drawing.Point(19, 20);
+            this.searchControl2.Location = new System.Drawing.Point(19, 21);
             this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -370,7 +370,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(176, 21);
+            this.label4.Location = new System.Drawing.Point(177, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 45;
@@ -425,31 +425,31 @@
             this.修改为ToolStripMenuItem,
             this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 88);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 82);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 24);
             this.toolStripMenuItem1.Text = "查看排班与考勤";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
             // 修改全列ToolStripMenuItem
             // 
             this.修改全列ToolStripMenuItem.Name = "修改全列ToolStripMenuItem";
-            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
             this.修改全列ToolStripMenuItem.Text = "修改全列";
             this.修改全列ToolStripMenuItem.Click += new System.EventHandler(this.修改全列ToolStripMenuItem_Click);
             // 

@@ -44,7 +44,9 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemColorPickEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorPickEdit();
@@ -80,7 +82,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.gridControl1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.gridControl2, 1, 1);
@@ -104,7 +106,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(229, 717);
+            this.gridControl1.Size = new System.Drawing.Size(244, 717);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -145,14 +147,14 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl2.Location = new System.Drawing.Point(238, 72);
+            this.gridControl2.Location = new System.Drawing.Point(253, 72);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemColorPickEdit1,
             this.repositoryItemColorEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(941, 717);
+            this.gridControl2.Size = new System.Drawing.Size(926, 717);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -175,13 +177,16 @@
             this.gridColumn5,
             this.gridColumn9,
             this.gridColumn6,
+            this.gridColumn15,
             this.gridColumn7,
+            this.gridColumn14,
             this.gridColumn8,
             this.gridColumn13});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.GroupCount = 1;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.OptionsView.ColumnAutoWidth = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn12, DevExpress.Data.ColumnSortOrder.Ascending)});
@@ -247,6 +252,7 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.Width = 101;
             // 
             // gridColumn6
             // 
@@ -256,13 +262,33 @@
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 7;
             // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "创建时间";
+            this.gridColumn15.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.gridColumn15.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn15.FieldName = "CJSJ";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 8;
+            // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "修改人";
             this.gridColumn7.FieldName = "XGR";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 8;
+            this.gridColumn7.VisibleIndex = 9;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "修改时间";
+            this.gridColumn14.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm";
+            this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn14.FieldName = "XGSJ";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 10;
             // 
             // gridColumn8
             // 
@@ -303,7 +329,7 @@
             this.panelControl1.Location = new System.Drawing.Point(3, 2);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(229, 66);
+            this.panelControl1.Size = new System.Drawing.Size(244, 66);
             this.panelControl1.TabIndex = 4;
             // 
             // searchControl2
@@ -320,7 +346,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl2.Properties.FindDelay = 100;
             this.searchControl2.Properties.NullValuePrompt = "E";
-            this.searchControl2.Size = new System.Drawing.Size(225, 26);
+            this.searchControl2.Size = new System.Drawing.Size(240, 26);
             this.searchControl2.TabIndex = 26;
             this.searchControl2.TextChanged += new System.EventHandler(this.searchControl2_TextChanged);
             // 
@@ -335,7 +361,7 @@
             this.toolStripButtonRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(2, 37);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(225, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(240, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -386,10 +412,10 @@
             this.panelControl2.Controls.Add(this.ButtonAdd);
             this.panelControl2.Controls.Add(this.ButtonAlter);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(238, 2);
+            this.panelControl2.Location = new System.Drawing.Point(253, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(941, 66);
+            this.panelControl2.Size = new System.Drawing.Size(926, 66);
             this.panelControl2.TabIndex = 5;
             // 
             // searchControl1
@@ -458,6 +484,7 @@
             this.Name = "arrange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "班次管理";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.arrange_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -513,5 +540,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraEditors.Repository.RepositoryItemColorPickEdit repositoryItemColorPickEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
     }
 }

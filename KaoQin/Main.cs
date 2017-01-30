@@ -25,6 +25,7 @@ namespace KaoQin
         bool Authority_Shift = false;
         bool Authority_Shift_Edit = false;
         bool Authority_Arrangement = false;
+        bool Authority_Arrangement_Add = false;
         bool Authority_Arrangement_Edit = false;
         bool Authority_Arrangement_Del = false;
         bool Authority_Mangement = false;
@@ -74,6 +75,7 @@ namespace KaoQin
                 Authority_Shift = true;
                 Authority_Shift_Edit = true;
                 Authority_Arrangement = true;
+                Authority_Arrangement_Add = true;
                 Authority_Arrangement_Edit = true;
                 Authority_Arrangement_Del = true;
                 Authority_Mangement = true;
@@ -100,9 +102,10 @@ namespace KaoQin
             }else
             {
                 //排班
-                if (Authority.Rows[0]["PBGL"].ToString() == "111")
+                if (Authority.Rows[0]["PBGL"].ToString() == "1111")
                 {
                     Authority_Arrangement = true;
+                    Authority_Arrangement_Add = true;
                     Authority_Arrangement_Edit = true;
                     Authority_Arrangement_Del = true;
                 }
@@ -111,9 +114,11 @@ namespace KaoQin
                     string s1 = Authority.Rows[0]["PBGL"].ToString().Substring(0, 1);
                     string s2 = Authority.Rows[0]["PBGL"].ToString().Substring(1, 1);
                     string s3 = Authority.Rows[0]["PBGL"].ToString().Substring(2, 1);
+                    string s4 = Authority.Rows[0]["PBGL"].ToString().Substring(3, 1);
                     Authority_Arrangement = s1 == "1" ? true : false;
-                    Authority_Arrangement_Edit = s2 == "1" ? true : false;
-                    Authority_Arrangement_Del = s3 == "1" ? true : false;
+                    Authority_Arrangement_Add = s2 == "1" ? true : false;
+                    Authority_Arrangement_Edit = s3 == "1" ? true : false;
+                    Authority_Arrangement_Del = s4 == "1" ? true : false;
                 }
                 //员工
                 if (Authority.Rows[0]["YGGL"].ToString() == "111")
@@ -207,7 +212,7 @@ namespace KaoQin
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            if (Authority_Arrangement_Edit == false)
+            if (Authority_Arrangement_Add == false)
             {
                 MessageBox.Show("您没有操作的权限！");
                 return;
@@ -309,6 +314,7 @@ namespace KaoQin
             }
 
             arrangement.arrange form = new arrangement.arrange();
+            form.Authority_Shift_Edit = Authority_Shift_Edit;
             form.Show();
         }
 

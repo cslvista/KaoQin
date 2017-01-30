@@ -54,7 +54,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(18, 32);
+            this.label3.Location = new System.Drawing.Point(20, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 23);
             this.label3.TabIndex = 39;
@@ -73,11 +73,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(37, 74);
+            this.label1.Location = new System.Drawing.Point(24, 75);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 23);
+            this.label1.Size = new System.Drawing.Size(91, 23);
             this.label1.TabIndex = 41;
-            this.label1.Text = "IP地址：";
+            this.label1.Text = "IP 地  址：";
             // 
             // textBox3
             // 
@@ -101,21 +101,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(52, 116);
+            this.label2.Location = new System.Drawing.Point(19, 115);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 23);
+            this.label2.Size = new System.Drawing.Size(96, 23);
             this.label2.TabIndex = 44;
-            this.label2.Text = "端口：";
+            this.label2.Text = "端       口：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(52, 159);
+            this.label4.Location = new System.Drawing.Point(19, 157);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 23);
+            this.label4.Size = new System.Drawing.Size(96, 23);
             this.label4.TabIndex = 45;
-            this.label4.Text = "密码：";
+            this.label4.Text = "密       码：";
             // 
             // simpleButton2
             // 
@@ -150,13 +150,13 @@
             this.ClientSize = new System.Drawing.Size(337, 251);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

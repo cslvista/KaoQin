@@ -278,7 +278,7 @@ namespace KaoQin.arrangement
         {
             this.BeginInvoke(new UpdateUI(delegate ()
             {
-                string sql = string.Format("select ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,CJR,XGR,COLOR from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
+                string sql = string.Format("select * from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());

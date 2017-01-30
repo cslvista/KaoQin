@@ -79,7 +79,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(41, 15);
+            this.label4.Location = new System.Drawing.Point(45, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 44;
@@ -89,7 +89,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(12, 179);
+            this.label3.Location = new System.Drawing.Point(16, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 23);
             this.label3.TabIndex = 42;
@@ -99,7 +99,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 218);
+            this.label1.Location = new System.Drawing.Point(16, 218);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 23);
             this.label1.TabIndex = 38;
@@ -109,11 +109,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(75, 336);
+            this.label2.Location = new System.Drawing.Point(44, 336);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 23);
+            this.label2.Size = new System.Drawing.Size(96, 23);
             this.label2.TabIndex = 39;
-            this.label2.Text = "说明：";
+            this.label2.Text = "说       明：";
             // 
             // timeEdit2
             // 
@@ -133,7 +133,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.Location = new System.Drawing.Point(251, 180);
+            this.checkBox1.Location = new System.Drawing.Point(251, 181);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(76, 24);
@@ -146,7 +146,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox2.Location = new System.Drawing.Point(251, 220);
+            this.checkBox2.Location = new System.Drawing.Point(251, 221);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(76, 24);
@@ -159,7 +159,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(24, 258);
+            this.label5.Location = new System.Drawing.Point(28, 258);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 23);
             this.label5.TabIndex = 51;
@@ -197,7 +197,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(41, 139);
+            this.label7.Location = new System.Drawing.Point(45, 139);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(95, 23);
             this.label7.TabIndex = 55;
@@ -221,7 +221,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(41, 99);
+            this.label8.Location = new System.Drawing.Point(45, 99);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(95, 23);
             this.label8.TabIndex = 57;
@@ -260,21 +260,21 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(75, 58);
+            this.label9.Location = new System.Drawing.Point(44, 58);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 23);
+            this.label9.Size = new System.Drawing.Size(96, 23);
             this.label9.TabIndex = 59;
-            this.label9.Text = "状态：";
+            this.label9.Text = "状       态：";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(75, 296);
+            this.label10.Location = new System.Drawing.Point(44, 299);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 23);
+            this.label10.Size = new System.Drawing.Size(96, 23);
             this.label10.TabIndex = 61;
-            this.label10.Text = "颜色：";
+            this.label10.Text = "颜       色：";
             // 
             // colorPickEdit1
             // 

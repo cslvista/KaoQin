@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoLogin">
-      <HintPath>..\..\BCYY\Test\bin\Debug\AutoLogin.dll</HintPath>
+    <Reference Include="AutoLogin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AutoLogin.dll</HintPath>
     </Reference>
     <Reference Include="GlobalDataParmat">
       <HintPath>..\KaoQin\bin\Debug\GlobalDataParmat.dll</HintPath>

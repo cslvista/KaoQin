@@ -127,6 +127,19 @@ namespace KaoQin.machine
             {
                 this.Text = "添加设备信息";
             }
+            UILocation();
+
+        }
+
+        private void UILocation()
+        {
+            int x = 3;
+            int y = 2;
+            label3.Location = new Point(textBox1.Location.X - label3.Width - x, textBox1.Location.Y + y);
+            label1.Location = new Point(textBox2.Location.X - label1.Width - x, textBox2.Location.Y + y);
+            label2.Location = new Point(textBox3.Location.X - label2.Width - x, textBox3.Location.Y + y);
+            label4.Location = new Point(textBox4.Location.X - label4.Width - x, textBox4.Location.Y + y);
+
         }
     }
 }

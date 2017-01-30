@@ -180,15 +180,15 @@ namespace KaoQin
 
             AttendanceCollect.Columns.Add("KQID", typeof(string));
             AttendanceCollect.Columns.Add("YGXM", typeof(string));
-            AttendanceCollect.Columns.Add("TotalDays", typeof(string));
-            AttendanceCollect.Columns.Add("Normal", typeof(string));
-            AttendanceCollect.Columns.Add("Absent", typeof(string));
-            AttendanceCollect.Columns.Add("Rest", typeof(string));
-            AttendanceCollect.Columns.Add("Late", typeof(string));
-            AttendanceCollect.Columns.Add("LeaveEarly", typeof(string));
-            AttendanceCollect.Columns.Add("Morning", typeof(string));
-            AttendanceCollect.Columns.Add("Afternoon", typeof(string));
-            AttendanceCollect.Columns.Add("OverTime", typeof(string));
+            AttendanceCollect.Columns.Add("TotalDays", typeof(int));
+            AttendanceCollect.Columns.Add("Normal", typeof(int));
+            AttendanceCollect.Columns.Add("Absent", typeof(int));
+            AttendanceCollect.Columns.Add("Rest", typeof(int));
+            AttendanceCollect.Columns.Add("Late", typeof(int));
+            AttendanceCollect.Columns.Add("LeaveEarly", typeof(int));
+            AttendanceCollect.Columns.Add("Morning", typeof(int));
+            AttendanceCollect.Columns.Add("Afternoon", typeof(int));
+            AttendanceCollect.Columns.Add("OverTime", typeof(int));
             AttendanceCollect.Columns.Add("WorkYear", typeof(string));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
@@ -811,25 +811,36 @@ namespace KaoQin
                 case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
                 case "/早退/正常下班": result.Clear(); result.Append("早退"); break;
                 case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
+                case "/下班未签/上班未签": result.Clear(); result.Append("全天未签"); break;
+                case "/下班未签全天未签": result.Clear(); result.Append("全天未签"); break;
             }
 
-            if (result.ToString().IndexOf("/准点上班/") == 0)
+            if (result.ToString().IndexOf("/准点上班") >= 0 && result.ToString()!= "/准点上班")
             {
-                string str = result.ToString().Replace("/准点上班/", "");
+                string str = result.ToString().Replace("/准点上班", "");
                 result.Clear();
                 result.Append(str);
             }
 
-            if (result.ToString().IndexOf("/正常下班/") == 0)
+            if (result.ToString().IndexOf("/正常下班") >= 0 && result.ToString() != "/正常下班")
             {
-                string str = result.ToString().Replace("/正常下班/", "");
+                string str = result.ToString().Replace("/正常下班", "");
                 result.Clear();
                 result.Append(str);
             }
-
+            
+            //跨天班第二天为休的情况
             if (result.ToString().IndexOf("休") > 1)
             {
-                string str = result.ToString().Replace("休", "");
+                string str = result.ToString().Replace("休", "/休");
+                result.Clear();
+                result.Append(str);
+            }
+
+            //跨天班第二天为休的情况
+            if (result.ToString().IndexOf("加班") > 1)
+            {
+                string str = result.ToString().Replace("加班", "");
                 result.Clear();
                 result.Append(str);
             }
@@ -848,10 +859,20 @@ namespace KaoQin
         /// </summary>
         private string JudgeOffWork(DataTable Record_Tomorrow,DataTable Record_Today,DateTime XBSJ,int leaveEarly)
         {
-            DateTime time1 = Convert.ToDateTime("22:00");
-            if (XBSJ.CompareTo(time1)<=0)
+            DateTime time1 = Convert.ToDateTime("21:00");
+            DateTime XBTime = new DateTime();
+
+            if (XBSJ.AddMinutes(-leaveEarly).CompareTo(XBSJ) < 0)
             {
-                DateTime XBTime = XBSJ.AddMinutes(-leaveEarly);
+                XBTime = XBSJ.AddMinutes(-leaveEarly);
+            }
+            else
+            {
+                XBTime = Convert.ToDateTime("00:01");
+            }
+
+            if (XBTime.CompareTo(time1)<=0)
+            {
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     if (Record_Today.Rows.Count == 0)
@@ -876,7 +897,7 @@ namespace KaoQin
                 }
             }else
             {
-                DateTime XBTime = XBSJ.AddMinutes(-leaveEarly);
+                //这个点后下班的，可能会用到明天的数据
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());

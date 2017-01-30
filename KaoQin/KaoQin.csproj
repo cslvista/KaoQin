@@ -132,6 +132,18 @@
     <Compile Include="authority\OpeartionRecord.Designer.cs">
       <DependentUpon>OpeartionRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataOpeation\ImportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataOpeation\ImportData.Designer.cs">
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataOpeation\OutportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataOpeation\OutportData.Designer.cs">
+      <DependentUpon>OutportData.cs</DependentUpon>
+    </Compile>
     <Compile Include="machine\add_alter_machine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="authority\OpeartionRecord.resx">
       <DependentUpon>OpeartionRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataOpeation\ImportData.resx">
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataOpeation\OutportData.resx">
+      <DependentUpon>OutportData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="machine\add_alter_machine.resx">
       <DependentUpon>add_alter_machine.cs</DependentUpon>

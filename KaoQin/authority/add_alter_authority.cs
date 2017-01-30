@@ -23,6 +23,12 @@ namespace KaoQin.authority
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            if (gridLookUpEdit1.Text == "")
+            {
+                MessageBox.Show("请输入姓名！" );
+                return;
+            }
+
             StringBuilder PB = new StringBuilder();
             StringBuilder Dep = new StringBuilder();
             StringBuilder Device = new StringBuilder();
@@ -42,10 +48,16 @@ namespace KaoQin.authority
                             {
                                 PB.Append(ThirdNode.Checked == true ? "1" :"0");
                             }else 
-                            if (ThirdNode.Text == "新增与修改")
+                            if (ThirdNode.Text == "新增")
                             {
                                 PB.Append(ThirdNode.Checked == true ? "1" : "0");
-                            }else 
+                            }
+                            else
+                            if (ThirdNode.Text == "修改")
+                            {
+                                PB.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
+                            else 
                             if (ThirdNode.Text == "删除")
                             {
                                 PB.Append(ThirdNode.Checked == true ? "1" : "0");
@@ -192,8 +204,10 @@ namespace KaoQin.authority
             //排班
             TreeNode PB_Read = new TreeNode();
             PB_Read.Text = "查看";
+            TreeNode PB_Add = new TreeNode();
+            PB_Add.Text = "新增";
             TreeNode PB_Edit = new TreeNode();                   
-            PB_Edit.Text = "新增与修改";
+            PB_Edit.Text = "修改";
             TreeNode PB_Del = new TreeNode();
             PB_Del.Text = "删除";
             //部门与员工
@@ -227,6 +241,7 @@ namespace KaoQin.authority
             Autority_Del.Text = "删除";
 
             PB.Nodes.Add(PB_Read);
+            PB.Nodes.Add(PB_Add);
             PB.Nodes.Add(PB_Edit);
             PB.Nodes.Add(PB_Del);
             Dep.Nodes.Add(Dep_Read);
@@ -285,21 +300,24 @@ namespace KaoQin.authority
                 }
 
                 //排班
-                if (Authority.Rows[0]["PBGL"].ToString() == "111")
+                if (Authority.Rows[0]["PBGL"].ToString() == "1111")
                 {
                     treeView1.Nodes[0].Nodes[0].Checked = true;
                     treeView1.Nodes[0].Nodes[0].Nodes[0].Checked = true;
                     treeView1.Nodes[0].Nodes[0].Nodes[1].Checked = true;
                     treeView1.Nodes[0].Nodes[0].Nodes[2].Checked = true;
+                    treeView1.Nodes[0].Nodes[0].Nodes[3].Checked = true;
                 }
                 else
                 {
                     string s1 = Authority.Rows[0]["PBGL"].ToString().Substring(0, 1);
                     string s2 = Authority.Rows[0]["PBGL"].ToString().Substring(1, 1);
                     string s3 = Authority.Rows[0]["PBGL"].ToString().Substring(2, 1);
+                    string s4 = Authority.Rows[0]["PBGL"].ToString().Substring(3, 1);
                     treeView1.Nodes[0].Nodes[0].Nodes[0].Checked = s1 == "1" ? true : false;
                     treeView1.Nodes[0].Nodes[0].Nodes[1].Checked = s2 == "1" ? true : false;
                     treeView1.Nodes[0].Nodes[0].Nodes[2].Checked = s3 == "1" ? true : false;
+                    treeView1.Nodes[0].Nodes[0].Nodes[3].Checked = s4 == "1" ? true : false;
                 }
                 //员工
                 if (Authority.Rows[0]["YGGL"].ToString() == "111")
@@ -379,7 +397,7 @@ namespace KaoQin.authority
                     treeView1.Nodes[0].Nodes[5].Nodes[2].Checked = s3 == "1" ? true : false;
                 }
 
-                if (Authority.Rows[0]["PBGL"].ToString() == "111" && Authority.Rows[0]["YGGL"].ToString() == "111")
+                if (Authority.Rows[0]["PBGL"].ToString() == "1111" && Authority.Rows[0]["YGGL"].ToString() == "111")
                 {
                     if (Authority.Rows[0]["SBGL"].ToString() == "111" && Authority.Rows[0]["BCGL"].ToString() == "11")
                     {

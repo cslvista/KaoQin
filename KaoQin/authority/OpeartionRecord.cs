@@ -26,11 +26,10 @@ namespace KaoQin.authority
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
             dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
-
-            string sql = "select Top 600 ID,Record,Time from KQ_LOG order by ID desc";
-            
+                        
             try
             {
+                string sql = "select Top 600 ID,Record,Time from KQ_LOG order by ID desc";
                 Record = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl1.DataSource = Record;
                 gridView1.BestFitColumns();
@@ -52,8 +51,7 @@ namespace KaoQin.authority
                     string StopTime = Convert.ToDateTime(dateEdit2.Text).AddDays(1).ToString("yyyy-MM-dd");
                     Record.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( Record like '%{2}%')", dateEdit1.Text, StopTime, searchControl1.Text);
                 }
-                catch { }
-                
+                catch { }                
             }
 
         }
