@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Data.OleDb;
-using System.Threading;
 using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace KaoQin
@@ -36,6 +35,7 @@ namespace KaoQin
         DateTime StopDate;
         DateTime LastMonth;
         TimeSpan Timespan;
+        public int[][] WorkDayCount;
         bool HasDownload = false;//是否已下载数据
         public Attendance()
         {
@@ -189,6 +189,7 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("Morning", typeof(int));
             AttendanceCollect.Columns.Add("Afternoon", typeof(int));
             AttendanceCollect.Columns.Add("OverTime", typeof(int));
+            AttendanceCollect.Columns.Add("WorkDay", typeof(int));
             AttendanceCollect.Columns.Add("WorkYear", typeof(string));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
@@ -258,7 +259,6 @@ namespace KaoQin
             AttendanceResult.Clear();
             AttendanceResult.Columns.Clear();        
             Record_Dep.Clear();
-
             try
             {
                 string year = comboBoxYear.Text.Substring(0, 4);
@@ -297,6 +297,9 @@ namespace KaoQin
             {
                 return;
             }
+
+            //计算出勤天数
+            WorkDayCount = new int[ArrangementItem.Rows.Count][];
             
             GridBand band = new GridBand();
             band.Caption = " ";
@@ -455,6 +458,8 @@ namespace KaoQin
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceResult.Rows.Add();
+                WorkDayCount[i] = new int[Timespan+1];
+
                 //添加姓名与考勤号
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
@@ -552,7 +557,9 @@ namespace KaoQin
                         PersonShiftAll.Rows.Add(obj.PD,obj.ID,obj.Name, obj.SBSJ, obj.XBSJ, obj.WorkDay,obj.KT);
                     }
 
-                    AttendanceResult.Rows[i][j + 2] = Result(Record_Person, PersonShiftAll,Date);
+                    string[] ResultAll = Result(Record_Person, PersonShiftAll, Date);
+                    AttendanceResult.Rows[i][j + 2] = ResultAll[0];
+                    WorkDayCount[i][j]=Convert.ToInt32(ResultAll[1]);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -564,12 +571,13 @@ namespace KaoQin
             AttendanceCollect.Clear();
             int normal;
             int late;
-            int absent;
-            int rest;
-            int leaveEarly;
-            int morning;
-            int afternoon;
-            int overTime;
+            int absent;//全天未签
+            int rest;//休假
+            int leaveEarly;//早退
+            int morning;//上午未签
+            int afternoon;//下午未签
+            int overTime;//加班
+            int workDay;//出勤
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
                 AttendanceCollect.Rows.Add(new object[] {});
@@ -581,8 +589,10 @@ namespace KaoQin
                 morning = 0;
                 afternoon = 0;
                 overTime = 0;
+                workDay = 0;
                 for (int j=0;j<=Timespan; j++)
                 {
+                    workDay = workDay + WorkDayCount[i][j];
                     if (AttendanceResult.Rows[i][j + 2].ToString() == "正常")
                     {
                         normal = normal + 1;
@@ -627,6 +637,8 @@ namespace KaoQin
                         afternoon = afternoon + 1;
                     }
 
+                    
+
                 }
                 AttendanceCollect.Rows[i]["KQID"] = AttendanceResult.Rows[i]["KQID"];
                 AttendanceCollect.Rows[i]["YGXM"] = AttendanceResult.Rows[i]["YGXM"];
@@ -638,7 +650,9 @@ namespace KaoQin
                 AttendanceCollect.Rows[i]["LeaveEarly"] = leaveEarly.ToString();
                 AttendanceCollect.Rows[i]["Morning"] =morning.ToString();
                 AttendanceCollect.Rows[i]["Afternoon"] =afternoon .ToString();
+                AttendanceCollect.Rows[i]["WorkDay"] = workDay.ToString();
                 AttendanceCollect.Rows[i]["OverTime"] = overTime.ToString();
+                //工作年限计算
                 if (string.IsNullOrEmpty(Staff.Rows[i]["RZSJ"].ToString()))
                 {
                     AttendanceCollect.Rows[i]["WorkYear"] = "";
@@ -671,10 +685,11 @@ namespace KaoQin
             
         }
 
-        private string Result(DataTable Record_Person, DataTable PersonShiftAll,string Date)
+        private string [] Result(DataTable Record_Person, DataTable PersonShiftAll,string Date)
         {
-
             StringBuilder result = new StringBuilder();
+            int workDay = 0;
+            string[] resultAll=new string[2];
             //过滤，放宽迟到和早退的时间
             int late = 0;
             int leaveEarly = 0;            
@@ -851,8 +866,69 @@ namespace KaoQin
                 result.Clear();
                 result.Append(str);
             }
-                                          
-            return result.ToString();
+
+            //计算出勤
+            for (int i = 0; i < PersonShiftAll.Rows.Count; i++)
+            {
+                //不取昨日的数据，只取今日的数据
+                if (PersonShiftAll.Rows[i]["PD"].ToString() == "0")
+                {
+                    continue;
+                }
+                else
+                {
+                    //不跨天的计算
+                    if (PersonShiftAll.Rows[i]["KT"].ToString() == "0")
+                    {
+                        
+                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString()=="" && PersonShiftAll.Rows[i]["XBSJ"].ToString()=="")
+                        {
+                            //休假的情况
+                            if (Record_Today.Rows.Count > 0)
+                            {
+                                workDay = 1;
+                            }else
+                            {
+                                workDay = Convert.ToInt32(PersonShiftAll.Rows[i]["WorkDay"].ToString());
+                            }
+                        }else
+                        {
+                            //不休假的情况
+                            if (Record_Today.Rows.Count > 0)
+                            {
+                                workDay = Convert.ToInt32(PersonShiftAll.Rows[i]["WorkDay"].ToString());
+                            }
+                            else
+                            {
+                                workDay = 0;
+                            }
+                        }                       
+            
+                    }else
+                    {
+                        //跨天的计算
+                        if (Record_Today.Rows.Count > 0)
+                        {
+                            workDay = Convert.ToInt32(PersonShiftAll.Rows[i]["WorkDay"].ToString());
+                        }
+                        else
+                        {
+                            if (Record_Tomorrow.Rows.Count > 0)
+                            {
+                                workDay = Convert.ToInt32(PersonShiftAll.Rows[i]["WorkDay"].ToString());
+                            }
+                            else
+                            {
+                                workDay = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            resultAll = new string[] { result.ToString(), workDay.ToString()};
+
+            return resultAll;
         }
         /// <summary>
         /// 判断下班
@@ -1083,9 +1159,18 @@ namespace KaoQin
             PersonShift.Rows.Add();
             PersonShift.Rows.Add();
             PersonShiftAll.Clear();
+            int Row=0;
             try
             {
                 string KQID = bandedGridView2.GetFocusedRowCellDisplayText("KQID").ToString();
+                for (int i = 0; i < ArrangementItem.Rows.Count; i++)
+                {
+                   if (ArrangementItem.Rows[i]["KQID"].ToString()==KQID)
+                    {
+                        Row = i;
+                        break;
+                    }
+                }
                 string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
                 string Date = bandedGridView2.FocusedColumn.Caption;
                 var query = from rec in Record_Dep.AsEnumerable()
@@ -1177,6 +1262,7 @@ namespace KaoQin
                 form.PersonShift = PersonShiftAll.Copy();
                 form.WorkShift = WorkShift.Copy();
                 form.name = Name;
+                form.workDay = WorkDayCount[Row][day-1];
                 form.Date = Date;
                 form.Show();
 
@@ -1245,6 +1331,13 @@ namespace KaoQin
             catch (Exception ex)
             {
                 MessageBox.Show("错误2:" + ex.Message);
+                return;
+            }
+
+            if (dtExcel.Rows[0][0].ToString()!= "考勤号" || dtExcel.Rows[0][1].ToString() != "姓名"
+                || dtExcel.Rows[0][2].ToString() != "打卡时间" || dtExcel.Rows[0][3].ToString() != "来源")
+            {
+                MessageBox.Show("导入的文件错误！");
                 return;
             }
 
@@ -1350,6 +1443,8 @@ namespace KaoQin
                 }                
                 form.StartDate = StartDate;
                 form.Timespan = Timespan.Days;
+                form.Column = Convert.ToDateTime(form.Date).Day - 1;
+                form.WorkDay = WorkDayCount[form.Row][form.Column];
                 form.Show(this);
             }
             catch { }
@@ -1366,6 +1461,7 @@ namespace KaoQin
                 form.Row = bandedGridView2.GetDataSourceRowIndex(bandedGridView2.FocusedRowHandle);
                 form.StartDate = StartDate;
                 form.Timespan = Timespan.Days;
+                form.Column = Convert.ToDateTime(form.Date).Day - 1;
                 form.AlterColumn = true;
                 form.Show(this);
             }

@@ -159,11 +159,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(28, 258);
+            this.label5.Location = new System.Drawing.Point(44, 258);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 23);
+            this.label5.Size = new System.Drawing.Size(95, 23);
             this.label5.TabIndex = 51;
-            this.label5.Text = "记为工作日：";
+            this.label5.Text = "记为出勤：";
             // 
             // textBox2
             // 
@@ -182,7 +182,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(27, 23);
             this.label6.TabIndex = 53;
-            this.label6.Text = "日";
+            this.label6.Text = "天";
             // 
             // textBox3
             // 
@@ -308,7 +308,7 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(147, 379);
+            this.simpleButton1.Location = new System.Drawing.Point(144, 379);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(71, 31);

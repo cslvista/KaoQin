@@ -14,6 +14,7 @@ namespace KaoQin
         public DataTable PersonRecord = new DataTable();
         public DataTable PersonShift = new DataTable();
         public DataTable WorkShift = new DataTable();
+        public int workDay = 0;
         public string name = "";
         public string Date="";
         public PersonData()
@@ -30,6 +31,7 @@ namespace KaoQin
             this.Text = name + " 排班与签到 "+string.Format("({0} {1})",date,weekdays);
             gridControl1.DataSource = PersonRecord;
             gridView1.BestFitColumns();
+            txtCQ.Text = "记为出勤：" + workDay.ToString()+"天";
 
             for (int i = 0; i < PersonShift.Rows.Count; i++)
             {

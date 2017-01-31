@@ -76,6 +76,7 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -425,31 +426,31 @@
             this.修改为ToolStripMenuItem,
             this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 82);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 88);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 26);
             this.toolStripMenuItem1.Text = "查看排班与考勤";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
             // 修改全列ToolStripMenuItem
             // 
             this.修改全列ToolStripMenuItem.Name = "修改全列ToolStripMenuItem";
-            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改全列ToolStripMenuItem.Text = "修改全列";
             this.修改全列ToolStripMenuItem.Click += new System.EventHandler(this.修改全列ToolStripMenuItem_Click);
             // 
@@ -513,6 +514,7 @@
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn5,
+            this.gridColumn16,
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn12,
@@ -557,7 +559,7 @@
             this.gridColumn6.FieldName = "Normal";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 2;
+            this.gridColumn6.VisibleIndex = 3;
             // 
             // gridColumn7
             // 
@@ -565,7 +567,7 @@
             this.gridColumn7.FieldName = "Late";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 3;
+            this.gridColumn7.VisibleIndex = 4;
             // 
             // gridColumn12
             // 
@@ -573,7 +575,7 @@
             this.gridColumn12.FieldName = "Absent";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 7;
+            this.gridColumn12.VisibleIndex = 8;
             // 
             // gridColumn9
             // 
@@ -581,7 +583,7 @@
             this.gridColumn9.FieldName = "LeaveEarly";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.VisibleIndex = 5;
             // 
             // gridColumn13
             // 
@@ -589,7 +591,7 @@
             this.gridColumn13.FieldName = "Morning";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 8;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // gridColumn14
             // 
@@ -597,7 +599,7 @@
             this.gridColumn14.FieldName = "Afternoon";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 9;
+            this.gridColumn14.VisibleIndex = 10;
             // 
             // gridColumn10
             // 
@@ -605,7 +607,7 @@
             this.gridColumn10.FieldName = "Rest";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 6;
+            this.gridColumn10.VisibleIndex = 7;
             // 
             // gridColumn11
             // 
@@ -613,7 +615,7 @@
             this.gridColumn11.FieldName = "WorkYear";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn11.VisibleIndex = 11;
             // 
             // gridColumn15
             // 
@@ -621,7 +623,15 @@
             this.gridColumn15.FieldName = "OverTime";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 5;
+            this.gridColumn15.VisibleIndex = 6;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "总出勤";
+            this.gridColumn16.FieldName = "WorkDay";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 2;
             // 
             // Attendance
             // 
@@ -705,5 +715,6 @@
         private System.Windows.Forms.ToolStripMenuItem 修改全列ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

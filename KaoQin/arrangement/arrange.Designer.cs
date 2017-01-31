@@ -247,12 +247,12 @@
             // 
             this.gridColumn9.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.gridColumn9.Caption = "记为工作日";
+            this.gridColumn9.Caption = "记为出勤 (天)";
             this.gridColumn9.FieldName = "GZR";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 4;
-            this.gridColumn9.Width = 101;
+            this.gridColumn9.Width = 102;
             // 
             // gridColumn6
             // 
