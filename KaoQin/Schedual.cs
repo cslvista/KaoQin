@@ -43,9 +43,10 @@ namespace KaoQin
 
         private void Schedual_Load(object sender, EventArgs e)
         {
+            UILocation();
             SearchDepartment();
             searchControl1.Properties.NullValuePrompt = "请输入姓名";
-            bandedGridView1.IndicatorWidth = 40;
+            bandedGridView1.IndicatorWidth = 35;
             if (alter == true)
             {
                 comboBox1.Enabled = false;
@@ -132,6 +133,23 @@ namespace KaoQin
             
         }
 
+        private void UILocation()
+        {
+            int height = (panel1.Height - ButtonCreate.Height) / 2;
+            int x = 3;
+            int y = 2;
+            ButtonCreate.Location = new Point(ButtonCreate.Location.X, height);
+            ButtonSave.Location = new Point(ButtonSave.Location.X, height);
+            ButtonImport.Location = new Point(ButtonImport.Location.X, height);
+            ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            searchControl1.Location = new Point(searchControl1.Location.X, (panel1.Height - searchControl1.Height) / 2);
+            label3.Location = new Point(searchControl1.Location.X - label3.Width - x, searchControl1.Location.Y + y);
+            comboBox1.Location=new Point(comboBox1.Location.X, (panel1.Height - comboBox1.Height) / 2);
+            label1.Location = new Point(comboBox1.Location.X - label1.Width - x, comboBox1.Location.Y + y);
+            comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panel1.Height - comboBoxYear.Height) / 2);
+            label4.Location = new Point(comboBoxYear.Location.X - label4.Width - x, comboBoxYear.Location.Y + y);
+            comboBoxMonth.Location = new Point(comboBoxMonth.Location.X, (panel1.Height - comboBoxMonth.Height) / 2);
+        }
         private void SearchDepartment()
         {
             Department.Columns.Add("BMID");

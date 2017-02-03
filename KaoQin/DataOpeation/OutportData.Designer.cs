@@ -29,21 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OutportData));
-            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
-            // 
-            // ButtonDelete
-            // 
-            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonDelete.Appearance.Options.UseFont = true;
-            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(38, 41);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(148, 30);
-            this.ButtonDelete.TabIndex = 37;
-            this.ButtonDelete.Text = "保存到数据库";
             // 
             // ButtonRefresh
             // 
@@ -56,6 +44,20 @@
             this.ButtonRefresh.Size = new System.Drawing.Size(148, 30);
             this.ButtonRefresh.TabIndex = 38;
             this.ButtonRefresh.Text = "保存到Excel";
+            this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
+            // 
+            // ButtonDelete
+            // 
+            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonDelete.Appearance.Options.UseFont = true;
+            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
+            this.ButtonDelete.Location = new System.Drawing.Point(38, 41);
+            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonDelete.Name = "ButtonDelete";
+            this.ButtonDelete.Size = new System.Drawing.Size(148, 30);
+            this.ButtonDelete.TabIndex = 37;
+            this.ButtonDelete.Text = "保存到数据库";
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // OutportData
             // 
@@ -68,7 +70,8 @@
             this.MinimizeBox = false;
             this.Name = "OutportData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "导出数据";
+            this.Text = "保存数据";
+            this.Load += new System.EventHandler(this.OutportData_Load);
             this.ResumeLayout(false);
 
         }

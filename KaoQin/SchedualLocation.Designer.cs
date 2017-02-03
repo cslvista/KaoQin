@@ -42,7 +42,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(72, 26);
+            this.label4.Location = new System.Drawing.Point(69, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(154, 23);
             this.label4.TabIndex = 54;
@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(22, 67);
+            this.label1.Location = new System.Drawing.Point(18, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(205, 23);
             this.label1.TabIndex = 55;
@@ -63,7 +63,7 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(231, 110);
+            this.simpleButton1.Location = new System.Drawing.Point(226, 110);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(71, 32);
@@ -83,7 +83,8 @@
             "D",
             "E",
             "F"});
-            this.comboBoxName.Location = new System.Drawing.Point(231, 24);
+            this.comboBoxName.Location = new System.Drawing.Point(226, 23);
+            this.comboBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxName.Name = "comboBoxName";
             this.comboBoxName.Size = new System.Drawing.Size(61, 28);
             this.comboBoxName.TabIndex = 59;
@@ -101,7 +102,8 @@
             "F",
             "G",
             "H"});
-            this.comboBoxPB.Location = new System.Drawing.Point(231, 65);
+            this.comboBoxPB.Location = new System.Drawing.Point(226, 64);
+            this.comboBoxPB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxPB.Name = "comboBoxPB";
             this.comboBoxPB.Size = new System.Drawing.Size(61, 28);
             this.comboBoxPB.TabIndex = 60;
@@ -110,7 +112,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(297, 67);
+            this.label2.Location = new System.Drawing.Point(294, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 23);
             this.label2.TabIndex = 61;
@@ -120,7 +122,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(297, 26);
+            this.label3.Location = new System.Drawing.Point(294, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 23);
             this.label3.TabIndex = 62;
@@ -130,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 162);
+            this.ClientSize = new System.Drawing.Size(340, 162);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxPB);
@@ -139,6 +141,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SchedualLocation";

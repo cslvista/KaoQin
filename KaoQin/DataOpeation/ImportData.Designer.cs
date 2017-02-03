@@ -29,55 +29,60 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportData));
-            this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
+            this.FromExcel = new DevExpress.XtraEditors.SimpleButton();
+            this.FromDB = new DevExpress.XtraEditors.SimpleButton();
+            this.FromMachine = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
-            // ButtonRefresh
+            // FromExcel
             // 
-            this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonRefresh.Appearance.Options.UseFont = true;
-            this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(43, 154);
-            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonRefresh.Name = "ButtonRefresh";
-            this.ButtonRefresh.Size = new System.Drawing.Size(157, 30);
-            this.ButtonRefresh.TabIndex = 37;
-            this.ButtonRefresh.Text = "从Excel文件读取";
+            this.FromExcel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FromExcel.Appearance.Options.UseFont = true;
+            this.FromExcel.Image = ((System.Drawing.Image)(resources.GetObject("FromExcel.Image")));
+            this.FromExcel.Location = new System.Drawing.Point(37, 154);
+            this.FromExcel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FromExcel.Name = "FromExcel";
+            this.FromExcel.Size = new System.Drawing.Size(169, 30);
+            this.FromExcel.TabIndex = 37;
+            this.FromExcel.Text = "从Excel文件读取";
+            this.FromExcel.Click += new System.EventHandler(this.FromExcel_Click);
             // 
-            // ButtonDelete
+            // FromDB
             // 
-            this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonDelete.Appearance.Options.UseFont = true;
-            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(43, 94);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(157, 30);
-            this.ButtonDelete.TabIndex = 36;
-            this.ButtonDelete.Text = "从数据库下载";
+            this.FromDB.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FromDB.Appearance.Options.UseFont = true;
+            this.FromDB.Image = ((System.Drawing.Image)(resources.GetObject("FromDB.Image")));
+            this.FromDB.Location = new System.Drawing.Point(37, 94);
+            this.FromDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FromDB.Name = "FromDB";
+            this.FromDB.Size = new System.Drawing.Size(169, 30);
+            this.FromDB.TabIndex = 36;
+            this.FromDB.Text = "从数据库下载";
+            this.FromDB.Click += new System.EventHandler(this.FromDB_Click);
             // 
-            // ButtonAlter
+            // FromMachine
             // 
-            this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonAlter.Appearance.Options.UseFont = true;
-            this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(43, 34);
-            this.ButtonAlter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonAlter.Name = "ButtonAlter";
-            this.ButtonAlter.Size = new System.Drawing.Size(157, 30);
-            this.ButtonAlter.TabIndex = 35;
-            this.ButtonAlter.Text = "从考勤机下载";
+            this.FromMachine.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FromMachine.Appearance.Options.UseFont = true;
+            this.FromMachine.Image = ((System.Drawing.Image)(resources.GetObject("FromMachine.Image")));
+            this.FromMachine.Location = new System.Drawing.Point(37, 34);
+            this.FromMachine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FromMachine.Name = "FromMachine";
+            this.FromMachine.Size = new System.Drawing.Size(169, 30);
+            this.FromMachine.TabIndex = 35;
+            this.FromMachine.Text = "从考勤机下载";
+            this.FromMachine.Click += new System.EventHandler(this.FromMachine_Click);
             // 
             // ImportData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(241, 221);
-            this.Controls.Add(this.ButtonRefresh);
-            this.Controls.Add(this.ButtonDelete);
-            this.Controls.Add(this.ButtonAlter);
+            this.Controls.Add(this.FromExcel);
+            this.Controls.Add(this.FromDB);
+            this.Controls.Add(this.FromMachine);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportData";
@@ -90,8 +95,8 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.SimpleButton ButtonRefresh;
-        private DevExpress.XtraEditors.SimpleButton ButtonDelete;
-        private DevExpress.XtraEditors.SimpleButton ButtonAlter;
+        private DevExpress.XtraEditors.SimpleButton FromExcel;
+        private DevExpress.XtraEditors.SimpleButton FromDB;
+        private DevExpress.XtraEditors.SimpleButton FromMachine;
     }
 }

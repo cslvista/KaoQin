@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.label4 = new System.Windows.Forms.Label();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -66,7 +67,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(789, 624);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(942, 624);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -75,7 +76,7 @@
             this.gridControl1.Location = new System.Drawing.Point(3, 73);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(783, 548);
+            this.gridControl1.Size = new System.Drawing.Size(936, 548);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -130,6 +131,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.simpleButton1);
             this.panel1.Controls.Add(this.simpleButton2);
             this.panel1.Controls.Add(this.dateEdit2);
             this.panel1.Controls.Add(this.dateEdit1);
@@ -139,7 +141,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(783, 64);
+            this.panel1.Size = new System.Drawing.Size(936, 64);
             this.panel1.TabIndex = 1;
             // 
             // simpleButton2
@@ -221,11 +223,23 @@
             this.label4.TabIndex = 46;
             this.label4.Text = "考勤日期：";
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(782, 16);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(128, 32);
+            this.simpleButton1.TabIndex = 50;
+            this.simpleButton1.Text = "保存到数据库";
+            // 
             // OrignData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 624);
+            this.ClientSize = new System.Drawing.Size(942, 624);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "OrignData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -261,5 +275,6 @@
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.Label label4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

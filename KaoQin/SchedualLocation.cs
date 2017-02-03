@@ -20,8 +20,18 @@ namespace KaoQin
         {
             comboBoxName.Text = "B";
             comboBoxPB.Text = "E";
+            UILocation();
         }
 
+        private void UILocation()
+        {
+            int x = 2;
+            int y = 2;
+            label4.Location = new Point(comboBoxName.Location.X - label4.Width - x, comboBoxName.Location.Y + y);
+            label1.Location = new Point(comboBoxPB.Location.X - label1.Width - x, comboBoxPB.Location.Y + y);
+            label3.Location = new Point(comboBoxName.Location.X + comboBoxName.Width + x, comboBoxName.Location.Y + y);
+            label2.Location = new Point(comboBoxPB.Location.X + comboBoxPB.Width  + x, comboBoxPB.Location.Y + y);
+        }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             int name = 0;

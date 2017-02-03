@@ -211,6 +211,8 @@ namespace KaoQin
             ButtonFilter.Location = new Point(ButtonFilter.Location.X, height);
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panelControl2.Height - comboBoxYear.Height) / 2);
+            comboBoxMonth.Location = new Point(comboBoxMonth.Location.X, (panelControl2.Height - comboBoxMonth.Height) / 2);
             searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
             
         }
@@ -1275,7 +1277,7 @@ namespace KaoQin
         }
 
 
-        private void ButtonImport_Click(object sender, EventArgs e)
+        public void ButtonImport_Click(object sender, EventArgs e)
         {
             string FileName = "";
 
@@ -1358,7 +1360,7 @@ namespace KaoQin
             MessageBox.Show("导入成功，请点击‘查询计算’查看考勤结果！");
         }
 
-        private void ButtonExport_Click(object sender, EventArgs e)
+        public void ButtonExport_Click(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
@@ -1491,6 +1493,12 @@ namespace KaoQin
             {
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
             }
+        }
+
+        private void ButtonImportData_Click(object sender, EventArgs e)
+        {
+            KaoQin.DataOpeation.ImportData form = new DataOpeation.ImportData();
+            form.Show(this);
         }
     }
 }

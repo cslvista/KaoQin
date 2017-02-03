@@ -52,7 +52,7 @@ namespace KaoQin.users
             ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
             ButtonSearch.Location = new Point(ButtonSearch.Location.X, height);
             ButtonAll.Location = new Point(ButtonAll.Location.X, height);
-            searchControl1.Location = new Point(searchControl1.Location.X, height);
+            searchControl1.Location = new Point(searchControl1.Location.X, (panelControl2.Height - searchControl1.Height) / 2);
         }
 
 
@@ -155,6 +155,7 @@ namespace KaoQin.users
             {
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
                 gridControl2.DataSource = Staff;
+                gridView2.BestFitColumns();
                 searchAllUsers = true;
             }
             catch (Exception ex)
@@ -269,6 +270,7 @@ namespace KaoQin.users
                     string sql = string.Format("select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID where a.BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
                     Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
                     gridControl2.DataSource = Staff;
+                    gridView2.BestFitColumns();
                 }
                 catch (Exception ex)
                 {
