@@ -40,26 +40,29 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.dropDownButton1 = new DevExpress.XtraEditors.DropDownButton();
+            this.test = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonImport = new DevExpress.XtraEditors.DropDownButton();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.FromMachine = new DevExpress.XtraBars.BarButtonItem();
+            this.FromDB = new DevExpress.XtraBars.BarButtonItem();
+            this.FromExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
-            this.ButtonImportData = new DevExpress.XtraEditors.SimpleButton();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
+            this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.comboBoxYear = new System.Windows.Forms.ComboBox();
             this.ButtonExport = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonImport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonOrignData = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonFilter = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
-            this.ButtonDownload = new DevExpress.XtraEditors.SimpleButton();
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -87,11 +90,11 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
+            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -102,6 +105,7 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -111,7 +115,6 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -227,18 +230,16 @@
             // 
             // panelControl2
             // 
-            this.panelControl2.Controls.Add(this.dropDownButton1);
-            this.panelControl2.Controls.Add(this.ButtonImportData);
+            this.panelControl2.Controls.Add(this.test);
+            this.panelControl2.Controls.Add(this.ButtonImport);
             this.panelControl2.Controls.Add(this.label2);
             this.panelControl2.Controls.Add(this.comboBoxMonth);
             this.panelControl2.Controls.Add(this.comboBoxYear);
             this.panelControl2.Controls.Add(this.ButtonExport);
-            this.panelControl2.Controls.Add(this.ButtonImport);
             this.panelControl2.Controls.Add(this.ButtonOrignData);
             this.panelControl2.Controls.Add(this.ButtonFilter);
             this.panelControl2.Controls.Add(this.ButtonCal);
             this.panelControl2.Controls.Add(this.searchControl2);
-            this.panelControl2.Controls.Add(this.ButtonDownload);
             this.panelControl2.Controls.Add(this.label4);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(283, 2);
@@ -247,29 +248,67 @@
             this.panelControl2.Size = new System.Drawing.Size(1507, 66);
             this.panelControl2.TabIndex = 5;
             // 
-            // dropDownButton1
+            // test
             // 
-            this.dropDownButton1.AllowDrop = true;
-            this.dropDownButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dropDownButton1.Appearance.Options.UseFont = true;
-            this.dropDownButton1.DropDownArrowStyle = DevExpress.XtraEditors.DropDownArrowStyle.Show;
-            this.dropDownButton1.DropDownControl = this.popupMenu1;
-            this.dropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("dropDownButton1.Image")));
-            this.dropDownButton1.Location = new System.Drawing.Point(1351, 19);
-            this.dropDownButton1.Name = "dropDownButton1";
-            this.barManager1.SetPopupContextMenu(this.dropDownButton1, this.popupMenu1);
-            this.dropDownButton1.Size = new System.Drawing.Size(121, 33);
-            this.dropDownButton1.TabIndex = 59;
-            this.dropDownButton1.Text = "保存数据";
+            this.test.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.test.Appearance.Options.UseFont = true;
+            this.test.Image = ((System.Drawing.Image)(resources.GetObject("test.Image")));
+            this.test.Location = new System.Drawing.Point(1131, 19);
+            this.test.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(73, 31);
+            this.test.TabIndex = 60;
+            this.test.Text = "test";
+            this.test.Click += new System.EventHandler(this.test_Click);
+            // 
+            // ButtonImport
+            // 
+            this.ButtonImport.AllowDrop = true;
+            this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonImport.Appearance.Options.UseFont = true;
+            this.ButtonImport.DropDownArrowStyle = DevExpress.XtraEditors.DropDownArrowStyle.Show;
+            this.ButtonImport.DropDownControl = this.popupMenu1;
+            this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
+            this.ButtonImport.Location = new System.Drawing.Point(762, 19);
+            this.ButtonImport.Name = "ButtonImport";
+            this.barManager1.SetPopupContextMenu(this.ButtonImport, this.popupMenu1);
+            this.ButtonImport.Size = new System.Drawing.Size(115, 31);
+            this.ButtonImport.TabIndex = 59;
+            this.ButtonImport.Text = "导入数据";
             // 
             // popupMenu1
             // 
             this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barEditItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.skinBarSubItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.FromMachine, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.FromDB),
+            new DevExpress.XtraBars.LinkPersistInfo(this.FromExcel)});
             this.popupMenu1.Manager = this.barManager1;
             this.popupMenu1.Name = "popupMenu1";
+            // 
+            // FromMachine
+            // 
+            this.FromMachine.Caption = "从考勤机下载";
+            this.FromMachine.Id = 4;
+            this.FromMachine.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("FromMachine.LargeGlyph")));
+            this.FromMachine.Name = "FromMachine";
+            this.FromMachine.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.FromMachine_ItemClick);
+            // 
+            // FromDB
+            // 
+            this.FromDB.Caption = "从数据库下载";
+            this.FromDB.Id = 10;
+            this.FromDB.Name = "FromDB";
+            this.FromDB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.FromDB_ItemClick);
+            // 
+            // FromExcel
+            // 
+            this.FromExcel.Caption = "从Excel文件导入";
+            this.FromExcel.Id = 8;
+            this.FromExcel.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("FromExcel.LargeGlyph")));
+            this.FromExcel.LargeGlyphDisabled = ((System.Drawing.Image)(resources.GetObject("FromExcel.LargeGlyphDisabled")));
+            this.FromExcel.Name = "FromExcel";
+            this.FromExcel.ShowItemShortcut = DevExpress.Utils.DefaultBoolean.True;
+            this.FromExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.FromExcel_ItemClick);
             // 
             // barManager1
             // 
@@ -282,12 +321,12 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barButtonItem1,
-            this.barSubItem1,
-            this.barSubItem2,
-            this.barEditItem1,
-            this.barButtonItem2,
-            this.skinBarSubItem1});
-            this.barManager1.MaxItemId = 6;
+            this.barButtonItem3,
+            this.FromExcel,
+            this.FromMachine,
+            this.barSubItem3,
+            this.FromDB});
+            this.barManager1.MaxItemId = 11;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             // 
@@ -322,27 +361,30 @@
             // barButtonItem1
             // 
             this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.CategoryGuid = new System.Guid("3abe080a-e47c-417f-b8c4-cd3a224fc458");
             this.barButtonItem1.Id = 0;
             this.barButtonItem1.Name = "barButtonItem1";
             // 
-            // barSubItem1
+            // barButtonItem3
             // 
-            this.barSubItem1.Caption = "barSubItem1";
-            this.barSubItem1.Id = 1;
-            this.barSubItem1.Name = "barSubItem1";
+            this.barButtonItem3.Caption = "barButtonItem3";
+            this.barButtonItem3.Id = 6;
+            this.barButtonItem3.Name = "barButtonItem3";
             // 
-            // ButtonImportData
+            // barSubItem3
             // 
-            this.ButtonImportData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonImportData.Appearance.Options.UseFont = true;
-            this.ButtonImportData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImportData.Image")));
-            this.ButtonImportData.Location = new System.Drawing.Point(1216, 19);
-            this.ButtonImportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonImportData.Name = "ButtonImportData";
-            this.ButtonImportData.Size = new System.Drawing.Size(108, 31);
-            this.ButtonImportData.TabIndex = 58;
-            this.ButtonImportData.Text = "导入数据";
-            this.ButtonImportData.Click += new System.EventHandler(this.ButtonImportData_Click);
+            this.barSubItem3.Caption = "barSubItem3";
+            this.barSubItem3.Id = 9;
+            this.barSubItem3.ImageIndex = 0;
+            this.barSubItem3.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barSubItem3.LargeGlyph")));
+            this.barSubItem3.LargeImageIndex = 0;
+            this.barSubItem3.MenuAppearance.HeaderItemAppearance.Image = ((System.Drawing.Image)(resources.GetObject("barSubItem3.MenuAppearance.HeaderItemAppearance.Image")));
+            this.barSubItem3.MenuAppearance.HeaderItemAppearance.Options.UseImage = true;
+            this.barSubItem3.Name = "barSubItem3";
+            // 
+            // repositoryItemPictureEdit1
+            // 
+            this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
             // 
             // label2
             // 
@@ -394,7 +436,7 @@
             this.ButtonExport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
-            this.ButtonExport.Location = new System.Drawing.Point(1087, 19);
+            this.ButtonExport.Location = new System.Drawing.Point(996, 19);
             this.ButtonExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(108, 31);
@@ -402,25 +444,12 @@
             this.ButtonExport.Text = "导出Excel";
             this.ButtonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
-            // ButtonImport
-            // 
-            this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonImport.Appearance.Options.UseFont = true;
-            this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(868, 19);
-            this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonImport.Name = "ButtonImport";
-            this.ButtonImport.Size = new System.Drawing.Size(108, 31);
-            this.ButtonImport.TabIndex = 53;
-            this.ButtonImport.Text = "导入Excel";
-            this.ButtonImport.Click += new System.EventHandler(this.ButtonImport_Click);
-            // 
             // ButtonOrignData
             // 
             this.ButtonOrignData.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonOrignData.Appearance.Options.UseFont = true;
             this.ButtonOrignData.Image = ((System.Drawing.Image)(resources.GetObject("ButtonOrignData.Image")));
-            this.ButtonOrignData.Location = new System.Drawing.Point(630, 19);
+            this.ButtonOrignData.Location = new System.Drawing.Point(639, 19);
             this.ButtonOrignData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonOrignData.Name = "ButtonOrignData";
             this.ButtonOrignData.Size = new System.Drawing.Size(100, 31);
@@ -433,7 +462,7 @@
             this.ButtonFilter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonFilter.Appearance.Options.UseFont = true;
             this.ButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFilter.Image")));
-            this.ButtonFilter.Location = new System.Drawing.Point(995, 19);
+            this.ButtonFilter.Location = new System.Drawing.Point(900, 19);
             this.ButtonFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonFilter.Name = "ButtonFilter";
             this.ButtonFilter.Size = new System.Drawing.Size(73, 31);
@@ -446,7 +475,7 @@
             this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonCal.Appearance.Options.UseFont = true;
             this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(511, 19);
+            this.ButtonCal.Location = new System.Drawing.Point(516, 19);
             this.ButtonCal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonCal.Name = "ButtonCal";
             this.ButtonCal.Size = new System.Drawing.Size(100, 31);
@@ -470,19 +499,6 @@
             this.searchControl2.Size = new System.Drawing.Size(140, 26);
             this.searchControl2.TabIndex = 16;
             this.searchControl2.TextChanged += new System.EventHandler(this.searchControl2_TextChanged);
-            // 
-            // ButtonDownload
-            // 
-            this.ButtonDownload.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonDownload.Appearance.Options.UseFont = true;
-            this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
-            this.ButtonDownload.Location = new System.Drawing.Point(749, 19);
-            this.ButtonDownload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonDownload.Name = "ButtonDownload";
-            this.ButtonDownload.Size = new System.Drawing.Size(100, 31);
-            this.ButtonDownload.TabIndex = 37;
-            this.ButtonDownload.Text = "下载数据";
-            this.ButtonDownload.Click += new System.EventHandler(this.ButtonDownload_Click);
             // 
             // label4
             // 
@@ -603,7 +619,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1499, 654);
+            this.tabPage2.Size = new System.Drawing.Size(1499, 683);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "考勤汇总";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -616,7 +632,7 @@
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1493, 650);
+            this.gridControl3.Size = new System.Drawing.Size(1493, 679);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -750,12 +766,6 @@
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 6;
             // 
-            // barSubItem2
-            // 
-            this.barSubItem2.Caption = "barSubItem2";
-            this.barSubItem2.Id = 2;
-            this.barSubItem2.Name = "barSubItem2";
-            // 
             // barEditItem1
             // 
             this.barEditItem1.Caption = "barEditItem1";
@@ -763,21 +773,29 @@
             this.barEditItem1.Id = 3;
             this.barEditItem1.Name = "barEditItem1";
             // 
-            // repositoryItemPictureEdit1
-            // 
-            this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "barButtonItem2";
-            this.barButtonItem2.Id = 4;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
             // skinBarSubItem1
             // 
             this.skinBarSubItem1.Caption = "skinBarSubItem1";
             this.skinBarSubItem1.Id = 5;
             this.skinBarSubItem1.Name = "skinBarSubItem1";
+            // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Caption = "barSubItem1";
+            this.barSubItem1.Id = 1;
+            this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barSubItem2
+            // 
+            this.barSubItem2.Caption = "barSubItem2";
+            this.barSubItem2.Id = 2;
+            this.barSubItem2.Name = "barSubItem2";
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(67, 4);
             // 
             // Attendance
             // 
@@ -806,6 +824,7 @@
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -815,7 +834,6 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -826,7 +844,6 @@
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraEditors.SimpleButton ButtonDownload;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -838,7 +855,6 @@
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraEditors.SearchControl searchControl2;
         private DevExpress.XtraEditors.SimpleButton ButtonFilter;
-        private DevExpress.XtraEditors.SimpleButton ButtonCal;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -850,12 +866,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraEditors.SimpleButton ButtonOrignData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraEditors.SimpleButton ButtonExport;
-        private DevExpress.XtraEditors.SimpleButton ButtonImport;
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.Label label2;
@@ -869,8 +883,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
-        private DevExpress.XtraEditors.SimpleButton ButtonImportData;
-        private DevExpress.XtraEditors.DropDownButton dropDownButton1;
+        private DevExpress.XtraEditors.DropDownButton ButtonImport;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -881,8 +894,16 @@
         private DevExpress.XtraBars.BarSubItem barSubItem1;
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem FromMachine;
         private DevExpress.XtraBars.SkinBarSubItem skinBarSubItem1;
         private DevExpress.XtraBars.BarSubItem barSubItem2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private DevExpress.XtraBars.BarButtonItem FromExcel;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarSubItem barSubItem3;
+        private DevExpress.XtraBars.BarButtonItem FromDB;
+        private DevExpress.XtraEditors.SimpleButton test;
+        public DevExpress.XtraEditors.SimpleButton ButtonCal;
+        public DevExpress.XtraEditors.SimpleButton ButtonOrignData;
     }
 }

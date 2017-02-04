@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -109,25 +108,12 @@
             this.label5.TabIndex = 50;
             this.label5.Text = "label5";
             // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(150, 181);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(71, 32);
-            this.simpleButton2.TabIndex = 37;
-            this.simpleButton2.Text = "退出";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
             // simpleButton1
             // 
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(42, 181);
+            this.simpleButton1.Location = new System.Drawing.Point(122, 180);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(71, 32);
@@ -174,7 +160,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -192,8 +177,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;

@@ -332,7 +332,9 @@ namespace KaoQin
             Shift.AutoHeight = false;
             Shift.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "班次")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NAME", "班次")}
+            );
+
 
             for (int i = 0; i <= Timespan.Days; i++)
             {

@@ -33,7 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ButtonImport = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -64,19 +63,18 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(685, 565);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(720, 565);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.ButtonImport);
             this.panel1.Controls.Add(this.ButtonRefresh);
-            this.panel1.Controls.Add(this.ButtonAdd);
             this.panel1.Controls.Add(this.ButtonDelete);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(679, 59);
+            this.panel1.Size = new System.Drawing.Size(714, 59);
             this.panel1.TabIndex = 0;
             // 
             // ButtonImport
@@ -84,7 +82,7 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(294, 15);
+            this.ButtonImport.Location = new System.Drawing.Point(209, 15);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(69, 31);
@@ -97,7 +95,7 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(203, 15);
+            this.ButtonRefresh.Location = new System.Drawing.Point(21, 15);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
             this.ButtonRefresh.Size = new System.Drawing.Size(69, 31);
@@ -105,25 +103,12 @@
             this.ButtonRefresh.Text = "刷新";
             this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
-            // ButtonAdd
-            // 
-            this.ButtonAdd.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonAdd.Appearance.Options.UseFont = true;
-            this.ButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAdd.Image")));
-            this.ButtonAdd.Location = new System.Drawing.Point(21, 15);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(69, 31);
-            this.ButtonAdd.TabIndex = 29;
-            this.ButtonAdd.Text = "新增";
-            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-            // 
             // ButtonDelete
             // 
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(112, 15);
+            this.ButtonDelete.Location = new System.Drawing.Point(115, 15);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(69, 31);
@@ -139,7 +124,7 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(679, 494);
+            this.gridControl1.Size = new System.Drawing.Size(714, 494);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -187,6 +172,8 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "起始时间";
+            this.gridColumn1.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm:ss";
+            this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn1.FieldName = "KSSJ";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
@@ -197,6 +184,8 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "结束时间";
+            this.gridColumn2.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm:ss";
+            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn2.FieldName = "JSSJ";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
@@ -227,6 +216,8 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "保存时间";
+            this.gridColumn5.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm:ss";
+            this.gridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn5.FieldName = "BCSJ";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.AllowEdit = false;
@@ -238,11 +229,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 565);
+            this.ClientSize = new System.Drawing.Size(720, 565);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SaveToDB";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "数据库";
+            this.Text = "数据库操作";
             this.Load += new System.EventHandler(this.SaveToDB_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -260,7 +251,6 @@
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.SimpleButton ButtonRefresh;
-        private DevExpress.XtraEditors.SimpleButton ButtonAdd;
         private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;

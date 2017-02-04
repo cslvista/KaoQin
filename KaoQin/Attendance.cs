@@ -42,7 +42,7 @@ namespace KaoQin
             InitializeComponent();
         }
 
-        private void ButtonDownload_Click(object sender, EventArgs e)
+        private void FromMachine_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (HasDownload)
             {
@@ -198,7 +198,6 @@ namespace KaoQin
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).AddYears(-2).Year.ToString() + "年");
             comboBoxYear.Text = Convert.ToDateTime(TimeNow).Year.ToString() + "年";
             comboBoxMonth.Text = Convert.ToDateTime(TimeNow).Month.ToString() + "月";
-
             SearchDepartment();
         }
 
@@ -207,7 +206,6 @@ namespace KaoQin
             int height = (panelControl2.Height - ButtonCal.Height) / 2;
             ButtonCal.Location = new Point(ButtonCal.Location.X, height);
             ButtonOrignData.Location = new Point(ButtonOrignData.Location.X, height);
-            ButtonDownload.Location = new Point(ButtonDownload.Location.X, height);
             ButtonFilter.Location = new Point(ButtonFilter.Location.X, height);
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
@@ -1150,7 +1148,7 @@ namespace KaoQin
             OrignData form = new OrignData();
             form.Record_DKJ = Record_DKJ.Copy();
             form.Staff = Staff_Orign.Copy();
-            form.Show();
+            form.Show(this);
         }
 
         private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1276,8 +1274,7 @@ namespace KaoQin
 
         }
 
-
-        public void ButtonImport_Click(object sender, EventArgs e)
+        public void FromExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string FileName = "";
 
@@ -1343,12 +1340,19 @@ namespace KaoQin
                 return;
             }
 
+            DataView dVExcel = dtExcel.DefaultView;
+            Staff_Orign= dVExcel.ToTable(true, "F1", "F2");
+            Staff_Orign.Columns["F1"].ColumnName = "ID";            
+            Staff_Orign.Columns["F2"].ColumnName = "Name";
+            Staff_Orign.Rows.RemoveAt(0);
+
             try
             {
                 for (int i = 1; i < dtExcel.Rows.Count; i++)
                 {
                     Record_DKJ.Rows.Add(new object[] { dtExcel.Rows[i][0].ToString(), dtExcel.Rows[i][2].ToString(), dtExcel.Rows[i][3].ToString() });
                 }
+                
             }
             catch (Exception ex)
             {
@@ -1356,7 +1360,13 @@ namespace KaoQin
                 return;
             }
 
+            if (Record_DKJ.Rows[Record_DKJ.Rows.Count - 1]["Time"].ToString() == "")
+            {
+                Record_DKJ.Rows.RemoveAt(Record_DKJ.Rows.Count - 1);
+            }  
+                     
             ButtonCal.Enabled = true;
+            ButtonOrignData.Enabled = true;
             MessageBox.Show("导入成功，请点击‘查询计算’查看考勤结果！");
         }
 
@@ -1495,9 +1505,25 @@ namespace KaoQin
             }
         }
 
-        private void ButtonImportData_Click(object sender, EventArgs e)
+        private void test_Click(object sender, EventArgs e)
         {
-            KaoQin.DataOpeation.ImportData form = new DataOpeation.ImportData();
+            for (int i = 0; i < Record_DKJ.Rows.Count; i++)
+            {
+                try
+                {
+                    Convert.ToDateTime(Record_DKJ.Rows[i][1].ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message+i);
+                }
+                
+            }
+        }
+
+        private void FromDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DataOpeation.SaveToDB form = new DataOpeation.SaveToDB();
             form.Show(this);
         }
     }

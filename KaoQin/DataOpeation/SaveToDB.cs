@@ -11,7 +11,7 @@ namespace KaoQin.DataOpeation
 {
     public partial class SaveToDB : Form
     {
-        public DataTable Record_DKJ = new DataTable();
+        DataTable Record_DKJ = new DataTable();
         DataTable Record = new DataTable();
         public bool Extract = false;
         public SaveToDB()
@@ -21,31 +21,7 @@ namespace KaoQin.DataOpeation
 
         private void SaveToDB_Load(object sender, EventArgs e)
         {
-            
-            Record.Columns.Add("ID", typeof(string));
-            Record.Columns.Add("Check", typeof(bool));
-            Record.Columns.Add("KSSJ", typeof(string));
-            Record.Columns.Add("JSSJ", typeof(string));
-            Record.Columns.Add("JLTS", typeof(string));
-            Record.Columns.Add("BCR", typeof(string));
-            Record.Columns.Add("BCSJ", typeof(string));
             ButtonRefresh_Click(sender, e);
-
-            if (Record_DKJ.Rows.Count == 0)
-            {
-                ButtonAdd.Enabled = false;
-            }
-
-            if (Extract == true)
-            {
-                ButtonAdd.Visible = false;
-                ButtonDelete.Visible = false;
-                ButtonRefresh.Visible = false;
-                ButtonImport.Location = new Point(ButtonAdd.Location.X, ButtonAdd.Location.Y);
-            }else
-            {
-                ButtonImport.Visible = false;
-            }
         }
 
         public void ButtonRefresh_Click(object sender, EventArgs e)
@@ -54,6 +30,10 @@ namespace KaoQin.DataOpeation
             {
                 string sql = "select * from KQ_JL";
                 Record = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                if (Record.Columns.Contains("Check")==false)
+                {
+                    Record.Columns.Add("Check", typeof(bool));
+                }              
                 gridControl1.DataSource = Record;
                 gridView1.BestFitColumns();
 
@@ -74,21 +54,16 @@ namespace KaoQin.DataOpeation
             try
             {
                 string sql = string.Format("delete from KQ_JL where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString())
-                           + string.Format("delete from KQ_JL_XB where ID='{0}'", gridView1.GetFocusedRowCellValue("ID").ToString());
+                           + string.Format("delete from KQ_JL_XB where ZBID='{0}'", gridView1.GetFocusedRowCellValue("ID").ToString());
                 GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
             }
-        }
 
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            Add_DB form = new Add_DB();
-            form.Show(this);
+            ButtonRefresh_Click(sender, e);
         }
-
         private void ButtonImport_Click(object sender, EventArgs e)
         {
             if (Record.Rows.Count == 0)
@@ -99,22 +74,29 @@ namespace KaoQin.DataOpeation
             StringBuilder sql = new StringBuilder();
             for (int i = 0; i < Record.Rows.Count; i++)
             {
-                if (Record.Rows[i]["Check"].ToString() == "0")
+                if (Record.Rows[i]["Check"].ToString() == "True")
                 {
                     try
                     {                        
-                        sql.Append(string.Format("select * from KQ_JL_XB where ID='{0}'", Record.Rows[i]["ID"].ToString()));                        
+                        sql.Append(string.Format("select ID,KQSJ,LY from KQ_JL_XB where ZBID='{0}';", Record.Rows[i]["ID"].ToString()));
+                        Record_DKJ = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("错误1:" + ex.Message, "提示");
+                        return;
                     }
                 }
             }
 
-            Record_DKJ = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
-            ImportData form = new ImportData();
-            
+            Record_DKJ.Columns["KQSJ"].ColumnName = "Time";
+            Record_DKJ.Columns["LY"].ColumnName = "Source";
+
+            Attendance form = (Attendance)this.Owner;
+            form.Record_DKJ = Record_DKJ.Copy();
+            form.ButtonCal.Enabled = true;
+            form.ButtonOrignData.Enabled = true;
+            this.Close();
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
