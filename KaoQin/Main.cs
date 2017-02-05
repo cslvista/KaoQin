@@ -88,7 +88,7 @@ namespace KaoQin
             try
             {
                 string sql =string.Format("select * from KQ_SQ where ID='{0}'", GlobalHelper.UserHelper.User["U_ACCOUNT"].ToString());
-                Authority = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Authority = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -200,7 +200,7 @@ namespace KaoQin
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Department;
             }
             catch (Exception ex)
@@ -293,7 +293,7 @@ namespace KaoQin
             {
                 try
                 {
-                    Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                    Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                     gridControl2.DataSource = Attendance;
                     gridView2.BestFitColumns();
                 }
@@ -396,7 +396,7 @@ namespace KaoQin
                 string sql = string.Format("delete from KQ_PB  where PBID='{0}';", gridView2.GetFocusedRowCellValue("PBID").ToString())
                + string.Format("delete from KQ_PB_XB  where PBID='{0}'", gridView2.GetFocusedRowCellValue("PBID").ToString())
                + string.Format("delete from KQ_PB_LD  where PBID='{0}'", gridView2.GetFocusedRowCellValue("PBID").ToString());
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -409,7 +409,7 @@ namespace KaoQin
             DataTable MaxID = new DataTable();
             try
             {
-                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql_del);
+                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql_del);
                 if (MaxID.Rows[0][0].ToString() == "")
                 {
                     ID = "1";
@@ -429,7 +429,7 @@ namespace KaoQin
             string sql1 = string.Format("insert into KQ_LOG (ID,Record,Time) values ('{0}','{1}','{2}')", ID, Record, GlobalHelper.IDBHelper.GetServerDateTime());
             try
             {
-               GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+               GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql1);
             }
             catch (Exception ex)
             {

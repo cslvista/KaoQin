@@ -137,7 +137,7 @@ namespace KaoQin.users
                 string sql = string.Format("delete from KQ_YG where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString())
                            + string.Format("delete from KQ_PB_XB where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString())
                            + string.Format("delete from KQ_PB_LD where KQID='{0}';", gridView2.GetFocusedRowCellValue("KQID").ToString());
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
                 gridControl1_Click(null, null);
             }
             catch (Exception ex)
@@ -153,7 +153,7 @@ namespace KaoQin.users
 
             try
             {
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl2.DataSource = Staff;
                 gridView2.BestFitColumns();
                 searchAllUsers = true;
@@ -207,7 +207,7 @@ namespace KaoQin.users
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Department;
                 
             }
@@ -268,7 +268,7 @@ namespace KaoQin.users
                 try
                 {
                     string sql = string.Format("select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID where a.BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
-                    Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString());
                     gridControl2.DataSource = Staff;
                     gridView2.BestFitColumns();
                 }
@@ -315,7 +315,7 @@ namespace KaoQin.users
                        + string.Format("delete from KQ_PB_XB where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
                        + string.Format("delete from KQ_PB_LD where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString())
                        + string.Format("update KQ_YG set BMID='0' where BMID='{0}';", gridView1.GetFocusedRowCellValue("BMID").ToString());
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
                 toolStripButtonRefresh_Click(null, null);
             }
             catch (Exception ex)

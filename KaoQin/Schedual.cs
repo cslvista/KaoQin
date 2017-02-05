@@ -58,7 +58,7 @@ namespace KaoQin
                 string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
                 try
                 {
-                    Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                    Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 }
                 catch (Exception ex)
                 {
@@ -159,7 +159,7 @@ namespace KaoQin
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 comboBox1.DataSource = Department;
                 comboBox1.DisplayMember = "BMMC";
                 comboBox1.ValueMember = "BMID";
@@ -222,7 +222,7 @@ namespace KaoQin
 
             try
             {
-                Staff=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+                Staff=GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
             }
             catch (Exception ex)
             {
@@ -242,7 +242,7 @@ namespace KaoQin
             
             try
             {
-                WorkShift_Common = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                WorkShift_Common = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql2);
             }
             catch (Exception ex)
             {
@@ -256,7 +256,7 @@ namespace KaoQin
             DataTable DepartmentType = new DataTable();
             try
             {
-                DepartmentType = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql3);
+                DepartmentType = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql3);
             }
             catch (Exception ex)
             {
@@ -277,7 +277,7 @@ namespace KaoQin
                 
                 try
                 {
-                    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql4);
+                    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql4);
                     WorkShift.Merge(WorkShift_Common);
                 }
                 catch (Exception ex)
@@ -446,7 +446,7 @@ namespace KaoQin
 
                 try
                 {
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql1);
                 }
                 catch (Exception ex)
                 {
@@ -510,8 +510,8 @@ namespace KaoQin
 
                 try
                 {
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql_lastday.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql_lastday.ToString());
                     
                 }
                 catch (Exception ex)
@@ -535,7 +535,7 @@ namespace KaoQin
                 DataTable isExists = new DataTable();
                 try
                 {
-                    isExists=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, search_PB);
+                    isExists=GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, search_PB);
                 }
                 catch (Exception ex)
                 {
@@ -555,7 +555,7 @@ namespace KaoQin
                 string ID = "";
                 try
                 {
-                    Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+                    Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
                     if (Max_ID.Rows[0][0].ToString() == "")
                     {
                         ID = "1";
@@ -579,7 +579,7 @@ namespace KaoQin
 
                 try
                 {
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql2);
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql2);
                 }
                 catch (Exception ex)
                 {
@@ -646,8 +646,8 @@ namespace KaoQin
 
                 try
                 {
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
-                    GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql_lastday.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());
+                    GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql_lastday.ToString());
                     alter = true;
                     MessageBox.Show("保存成功！");
                     this.Close();
@@ -668,7 +668,7 @@ namespace KaoQin
             DataTable MaxID = new DataTable();
             try
             {
-                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql_del);
+                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql_del);
                 if (MaxID.Rows[0][0].ToString() == "")
                 {
                     ID = "1";
@@ -690,7 +690,7 @@ namespace KaoQin
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {

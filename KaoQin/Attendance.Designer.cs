@@ -253,7 +253,7 @@
             this.test.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.test.Appearance.Options.UseFont = true;
             this.test.Image = ((System.Drawing.Image)(resources.GetObject("test.Image")));
-            this.test.Location = new System.Drawing.Point(1131, 19);
+            this.test.Location = new System.Drawing.Point(1130, 19);
             this.test.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.test.Name = "test";
             this.test.Size = new System.Drawing.Size(73, 31);

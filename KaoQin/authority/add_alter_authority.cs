@@ -155,7 +155,7 @@ namespace KaoQin.authority
             try
             {
                 
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -291,7 +291,7 @@ namespace KaoQin.authority
                 try
                 {
                     string sql = string.Format("select * from KQ_SQ where ID='{0}'", ID);
-                    Authority = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                    Authority = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 }
                 catch (Exception ex)
                 {

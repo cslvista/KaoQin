@@ -62,7 +62,7 @@ namespace KaoQin.machine
             
             try
             {
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Machine;
             }
             catch (Exception ex)
@@ -151,7 +151,7 @@ namespace KaoQin.machine
             
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {

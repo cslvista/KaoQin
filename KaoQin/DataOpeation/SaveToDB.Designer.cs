@@ -82,12 +82,12 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(209, 15);
+            this.ButtonImport.Location = new System.Drawing.Point(20, 14);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(69, 31);
             this.ButtonImport.TabIndex = 33;
-            this.ButtonImport.Text = "提取";
+            this.ButtonImport.Text = "下载";
             this.ButtonImport.Click += new System.EventHandler(this.ButtonImport_Click);
             // 
             // ButtonRefresh
@@ -95,7 +95,7 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(21, 15);
+            this.ButtonRefresh.Location = new System.Drawing.Point(112, 14);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
             this.ButtonRefresh.Size = new System.Drawing.Size(69, 31);
@@ -108,7 +108,7 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(115, 15);
+            this.ButtonDelete.Location = new System.Drawing.Point(204, 14);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(69, 31);

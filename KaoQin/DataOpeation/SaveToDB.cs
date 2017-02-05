@@ -29,7 +29,7 @@ namespace KaoQin.DataOpeation
             try
             {
                 string sql = "select * from KQ_JL";
-                Record = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Record = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (Record.Columns.Contains("Check")==false)
                 {
                     Record.Columns.Add("Check", typeof(bool));
@@ -80,7 +80,7 @@ namespace KaoQin.DataOpeation
                 return;
             }
 
-            GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());            
+            GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());            
             ButtonRefresh_Click(sender, e);
         }
         private void ButtonImport_Click(object sender, EventArgs e)
@@ -95,10 +95,11 @@ namespace KaoQin.DataOpeation
             {
                 if (Record.Rows[i]["Check"].ToString() == "True")
                 {
+                    sql.Clear();
+                    sql.Append(string.Format("select ID,KQSJ,LY from KQ_JL_XB where ZBID='{0}';", Record.Rows[i]["ID"].ToString()));
                     try
-                    {                        
-                        sql.Append(string.Format("select ID,KQSJ,LY from KQ_JL_XB where ZBID='{0}';", Record.Rows[i]["ID"].ToString()));
-                        Record_DKJ = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    {
+                        Record_DKJ.Merge(GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString()));
                     }
                     catch (Exception ex)
                     {
@@ -107,12 +108,12 @@ namespace KaoQin.DataOpeation
                     }
                 }
             }
-
+                       
             Record_DKJ.Columns["KQSJ"].ColumnName = "Time";
             Record_DKJ.Columns["LY"].ColumnName = "Source";
 
             Attendance form = (Attendance)this.Owner;
-            form.Record_DKJ = Record_DKJ.Copy();
+            form.Record_DKJ.Merge(Record_DKJ);
             form.ButtonCal.Enabled = true;
             form.ButtonOrignData.Enabled = true;
             this.Close();

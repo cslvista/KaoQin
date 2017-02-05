@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting;
+using System.Threading;
 
 namespace KaoQin
 {
@@ -17,6 +18,10 @@ namespace KaoQin
         DataTable Machine = new DataTable();//考勤机数据
         DataTable Record_DKJ_new = new DataTable();//连接Record_DKJ和Staff数据后的表
         bool allowVisit = false;//是否允许访问Record_DKJ_new
+        delegate void UpdateUI();
+        delegate void EventHandler(int i);
+        event EventHandler ShowData;
+        event Action CloseProgress;
         public OrignData()
         {
             InitializeComponent();
@@ -77,7 +82,7 @@ namespace KaoQin
             try
             {
                 string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -168,9 +173,7 @@ namespace KaoQin
         /// 保存到数据库
         /// </summary>
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-                
+        {                
             var query= from rec in Record_DKJ.AsEnumerable()
                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text))>= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1)) < 0
                        select new
@@ -182,12 +185,12 @@ namespace KaoQin
 
             DataTable SaveData = new DataTable();
             SaveData.Columns.Add("ID", typeof(string));
-            SaveData.Columns.Add("Time", typeof(DateTime));
+            SaveData.Columns.Add("Time", typeof(string));
             SaveData.Columns.Add("Source", typeof(string));
 
             foreach (var obj in query)
             {
-                SaveData.Rows.Add(obj.ID,Convert.ToDateTime(obj.Time),obj.Source);
+                SaveData.Rows.Add(obj.ID,obj.Time,obj.Source);
             }
             SaveData.DefaultView.Sort = "Time";
 
@@ -201,13 +204,12 @@ namespace KaoQin
             }
 
             //求主表的ID
-
             string ID = "";            
             DataTable Max_ID = new DataTable();
             try
             {
                 string sql = "select max(ID) from KQ_JL";
-                Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (Max_ID.Rows[0][0].ToString() == "")
                 {
                     ID = "1";
@@ -229,7 +231,7 @@ namespace KaoQin
             {
                 string sql = string.Format("insert into KQ_JL (ID,KSSJ,JSSJ,JLTS,BCRID,BCR,BCSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                     ID,startTime,stopTime, SaveData.Rows.Count, GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -237,8 +239,12 @@ namespace KaoQin
                 return;
             }
 
-            //写入细表           
-
+            //写入细表      
+            //弹出进度窗体 
+            Progress form = new Progress();
+            CloseProgress += form.CloseProgress;
+            ShowData += form.ShowData;
+            form.Show(this);
             Application.DoEvents();
             try
             {
@@ -246,13 +252,17 @@ namespace KaoQin
                 for (int i = 0; i < SaveData.Rows.Count; i++)
                 {
                     sql.Append(string.Format("insert into KQ_JL_XB (ZBID,ID,KQSJ,LY) values ('{0}','{1}','{2}','{3}');", ID,SaveData.Rows[i][0], SaveData.Rows[i][1], SaveData.Rows[i][2]));
-                    if (i.ToString().Length == 4 || i==SaveData.Rows.Count-1)
+                    int yushu = i % 10000;
+                    if ((yushu==0 || i==SaveData.Rows.Count-1))
                     {
-                        GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());                       
-                        
+                        GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());
+                        int progress = Convert.ToInt32(((double)i/(double)SaveData.Rows.Count)*100);
+                        //进度条变化
+                        ShowData(progress);                      
                         if (i == SaveData.Rows.Count - 1)
                         {
-                            
+                            //关闭进度条
+                            CloseProgress();
                         }
                         Application.DoEvents();
                         sql.Clear();

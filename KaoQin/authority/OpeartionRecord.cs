@@ -30,7 +30,7 @@ namespace KaoQin.authority
             try
             {
                 string sql = "select Top 600 ID,Record,Time from KQ_LOG order by ID desc";
-                Record = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Record = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Record;
                 gridView1.BestFitColumns();
             }
@@ -82,7 +82,7 @@ namespace KaoQin.authority
 
                 string sql = string.Format("select Details from KQ_LOG where ID='{0}'", gridView1.GetFocusedRowCellDisplayText("ID").ToString());
                 DataTable Details = new DataTable();
-                Details=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Details=GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (Details.Rows.Count == 0)
                 {
                     MessageBox.Show("该项操作没有记录！");

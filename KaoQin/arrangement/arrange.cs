@@ -51,7 +51,7 @@ namespace KaoQin.arrangement
             DataTable isExists = new DataTable();
             try
             {
-                isExists=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                isExists=GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (isExists.Rows.Count > 0)
                 {
                     MessageBox.Show("该班次不可删除！");
@@ -68,7 +68,7 @@ namespace KaoQin.arrangement
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql1);
             }
             catch (Exception ex)
             {
@@ -185,7 +185,7 @@ namespace KaoQin.arrangement
 
             try
             {
-                Type = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Type = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Type;
             }
             catch (Exception ex)
@@ -220,7 +220,7 @@ namespace KaoQin.arrangement
             DataTable isExists = new DataTable();
             try
             {
-                isExists = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                isExists = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (isExists.Rows.Count > 0)
                 {
                     MessageBox.Show("该类别不允许被删除！");
@@ -238,7 +238,7 @@ namespace KaoQin.arrangement
             DataTable isExists_LB = new DataTable();
             try
             {
-                isExists_LB=GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
+                isExists_LB=GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
                 if (isExists_LB.Rows.Count > 0)
                 {
                     MessageBox.Show("该类别仍被使用，不允许删除!");
@@ -255,7 +255,7 @@ namespace KaoQin.arrangement
                
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql2);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql2);
             }
             catch (Exception ex)
             {
@@ -281,7 +281,7 @@ namespace KaoQin.arrangement
                 string sql = string.Format("select * from KQ_BC where LBID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
                 try
                 {
-                    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                    WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString());
                     gridControl2.DataSource = WorkShift;
                     gridView2.BestFitColumns();
                 }

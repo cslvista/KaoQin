@@ -52,7 +52,7 @@ namespace KaoQin
             {
                 string sql = string.Format("update KQ_FILTER set Time='{0}' where Name='Late';", txtLate.Text)
                 + string.Format("update KQ_FILTER set Time='{0}' where Name='LeaveEarly';", txtLeaveEarly.Text);
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace KaoQin
             try
             {
                 string sql = "select Name,Time from KQ_FILTER";
-                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {

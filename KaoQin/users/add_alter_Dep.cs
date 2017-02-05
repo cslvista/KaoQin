@@ -61,7 +61,7 @@ namespace KaoQin.users
             string ID = "";
             try
             {
-                Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Max_ID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (Max_ID.Rows[0][0].ToString() == "")
                 {
                     ID = "1";
@@ -81,7 +81,7 @@ namespace KaoQin.users
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql1);
                 return true;
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace KaoQin.users
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
                 return true;
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace KaoQin.users
 
             try
             {
-                Type = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Type = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 comboBox1.DataSource = Type;
                 comboBox1.DisplayMember = "BMLB";
                 comboBox1.ValueMember = "ID";

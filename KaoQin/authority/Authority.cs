@@ -42,7 +42,7 @@ namespace KaoQin.authority
             try
             {
                 string sql = "select * from KQ_SQ";
-                users = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                users = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = users;
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace KaoQin.authority
             try
             {
                 string sql = string.Format("delete from KQ_SQ where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString());
-                GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {

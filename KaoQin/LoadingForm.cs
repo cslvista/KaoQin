@@ -32,9 +32,8 @@ namespace KaoQin
             this.Width = 300;
             this.Height = pictureBox1.Height+simpleButton1.Height;
 
-
             t1 = new Thread(DownloadData);
-            t1.IsBackground = false;
+            t1.IsBackground = true;
             t1.Start();
         }
 
@@ -57,7 +56,7 @@ namespace KaoQin
 
             try
             {
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -100,7 +99,7 @@ namespace KaoQin
             int Second = 0;
             int Workcode = 0;
             string dwEnrollNumber = "";
-            for (int i = 0; i < Machine.Rows.Count; i++)
+            for (int i = 1; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
                 bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
@@ -109,12 +108,10 @@ namespace KaoQin
                     MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
                     return;
                 }
-                int j = 0;
+
                 DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
-                MessageBox.Show("已经读取所有缓存！");
                 while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
                 {
-                    j++;
                     string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
                     string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
                     Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
@@ -125,7 +122,10 @@ namespace KaoQin
             {
                 Attendance form = (Attendance)this.Owner;
                 form.Staff_Orign = Staff_Orign.Copy();
-                form.Record_DKJ = Record_DKJ.Copy();
+                form.Record_DKJ.Merge(Record_DKJ);
+                form.HasDownload = true;
+                form.ButtonCal.Enabled = true;
+                form.ButtonOrignData.Enabled = true;
                 MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
                 this.Close();                
             }));            
@@ -142,7 +142,12 @@ namespace KaoQin
             {
                 return;
             }
-            Application.ExitThread();
+            Application.Exit();
+        }
+
+        public void CloseWin()
+        {
+            this.Close();
         }
     }
 }

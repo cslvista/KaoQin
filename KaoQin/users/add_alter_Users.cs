@@ -91,7 +91,7 @@ namespace KaoQin.users
             DataTable isExist = new DataTable();
             try
             {
-                isExist = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                isExist = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -119,7 +119,7 @@ namespace KaoQin.users
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql1);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql1);
                 return true;
             }
             catch (Exception ex)
@@ -169,7 +169,7 @@ namespace KaoQin.users
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
                 return true;
             }
             catch (Exception ex)
@@ -196,7 +196,7 @@ namespace KaoQin.users
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 comboBoxDep.DataSource = Department;
                 comboBoxDep.DisplayMember = "BMMC";
                 comboBoxDep.ValueMember = "BMID";

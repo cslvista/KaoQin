@@ -36,7 +36,8 @@ namespace KaoQin
         DateTime LastMonth;
         TimeSpan Timespan;
         public int[][] WorkDayCount;
-        bool HasDownload = false;//是否已下载数据
+        public bool HasDownload = false;//是否已下载数据
+        delegate void UpdateUI();
         public Attendance()
         {
             InitializeComponent();
@@ -63,15 +64,16 @@ namespace KaoQin
             Staff_Orign.Clear();
             Record_DKJ.Clear();
             //读取考勤机数据
-            //Thread t1 = new Thread(DownloadData);
-            //t1.IsBackground = false;
-            //t1.Start();
+            Thread t1 = new Thread(DownloadData);
+            t1.IsBackground = true;
+            t1.Start();
+            return;
 
             string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
 
             try
             {
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -145,6 +147,15 @@ namespace KaoQin
             ButtonOrignData.Enabled = true;
         }
 
+        private void DownloadData()
+        {
+            this.BeginInvoke(new UpdateUI(delegate ()
+            {
+                LoadingForm form = new LoadingForm();
+                form.ShowDialog(this);
+            }));
+        }
+
         private void Attendance_Load(object sender, EventArgs e)
         {
             UILocation();
@@ -210,24 +221,20 @@ namespace KaoQin
             ButtonFilter.Location = new Point(ButtonFilter.Location.X, height);
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            test.Location = new Point(test.Location.X, height);
             comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panelControl2.Height - comboBoxYear.Height) / 2);
             comboBoxMonth.Location = new Point(comboBoxMonth.Location.X, (panelControl2.Height - comboBoxMonth.Height) / 2);
             searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
             
         }
 
-        private void DownloadData()
-        {
-            LoadingForm form = new LoadingForm();
-            form.ShowDialog();
-        }
         private void SearchDepartment()
         {
             string sql = "select BMID,BMMC,BMLB from KQ_BM where BMID>0";
 
             try
             {
-                Department = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Department = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Department;
             }
             catch (Exception ex)
@@ -379,7 +386,7 @@ namespace KaoQin
             try
             {
                 string sql = string.Format("select ID,NAME,SBSJ,XBSJ,GZR,KT from KQ_BC where LBID='{0}' or LBID='{1}'", "0", gridView1.GetFocusedRowCellValue("BMLB").ToString());
-                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -391,7 +398,7 @@ namespace KaoQin
             try
             {
                 string sql = string.Format("select PBID from KQ_PB where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", comboBoxYear.Text, comboBoxMonth.Text, gridView1.GetFocusedRowCellValue("BMID").ToString());
-                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                PBID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -407,8 +414,8 @@ namespace KaoQin
                 string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
                 try
                 {
-                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql1);
-                    ArrangementItem_LastDay = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql2);
+                    ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
+                    ArrangementItem_LastDay = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql2);
                 }
                 catch (Exception ex)
                 {
@@ -426,7 +433,7 @@ namespace KaoQin
             try
             {
                 string sql = "select Name,Time from KQ_FILTER";
-                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Filter = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -438,7 +445,7 @@ namespace KaoQin
             try
             {
                 string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
-                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -1279,18 +1286,18 @@ namespace KaoQin
         {
             string FileName = "";
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
-            ofd.RestoreDirectory = true; //记忆上次浏览路径            
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                FileName = ofd.FileName;
-            }
-            else
-            {
-                return;
-            }
-            //FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
+            //ofd.RestoreDirectory = true; //记忆上次浏览路径            
+            //if (ofd.ShowDialog() == DialogResult.OK)
+            //{
+            //    FileName = ofd.FileName;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
 
             string FileExtension = "";
             DataTable dtExcel = new DataTable(); //数据表   
@@ -1508,18 +1515,8 @@ namespace KaoQin
 
         private void test_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Record_DKJ.Rows.Count; i++)
-            {
-                try
-                {
-                    Convert.ToDateTime(Record_DKJ.Rows[i][1].ToString());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message+i);
-                }
-                
-            }
+            LoadingForm form = new LoadingForm();
+            form.Show(this);
         }
 
         private void FromDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

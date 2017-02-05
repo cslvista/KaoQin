@@ -36,7 +36,7 @@ namespace KaoQin.users
 
             try
             {
-                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace KaoQin.users
             DataTable ConnectInfo = new DataTable();
             try
             {
-                ConnectInfo = GlobalHelper.IDBHelper.ExecuteDataTable(GlobalHelper.GloValue.ZYDB, sql);
+                ConnectInfo = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
             {
