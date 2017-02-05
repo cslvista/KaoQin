@@ -63,7 +63,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(720, 565);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 565);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -74,7 +74,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(714, 59);
+            this.panel1.Size = new System.Drawing.Size(736, 59);
             this.panel1.TabIndex = 0;
             // 
             // ButtonImport
@@ -124,7 +124,7 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(714, 494);
+            this.gridControl1.Size = new System.Drawing.Size(736, 494);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -229,7 +229,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 565);
+            this.ClientSize = new System.Drawing.Size(742, 565);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SaveToDB";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

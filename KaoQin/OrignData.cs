@@ -33,7 +33,6 @@ namespace KaoQin
             Record_DKJ_new.Columns.Add("Name", typeof(string));
             Record_DKJ_new.Columns.Add("Time", typeof(DateTime));
             Record_DKJ_new.Columns.Add("Source", typeof(string));
-
             if (Staff.Rows.Count == 0)
             {
                 if (MessageBox.Show(string.Format("员工姓名为空，是否需要下载员工信息？"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.Yes)
@@ -121,7 +120,7 @@ namespace KaoQin
         {
             if (allowVisit == true)
             {
-                string StopTime = Convert.ToDateTime(DateTime.Today).AddDays(1).ToString("yyyy-MM-dd");
+                string StopTime = Convert.ToDateTime(dateEdit2.Text).AddDays(1).ToString("yyyy-MM-dd");
                 Record_DKJ_new.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( ID like '%{2}%' or Name like '%{2}%' )", dateEdit1.Text, StopTime, searchControl1.Text);
             }
             
@@ -223,6 +222,7 @@ namespace KaoQin
                 MessageBox.Show("错误1:" + ex.Message, "提示");
                 return;
             }
+            
 
             //写入主表
             try
@@ -237,15 +237,28 @@ namespace KaoQin
                 return;
             }
 
-            //写入细表
+            //写入细表           
+
+            Application.DoEvents();
             try
             {
                 StringBuilder sql = new StringBuilder();
                 for (int i = 0; i < SaveData.Rows.Count; i++)
                 {
                     sql.Append(string.Format("insert into KQ_JL_XB (ZBID,ID,KQSJ,LY) values ('{0}','{1}','{2}','{3}');", ID,SaveData.Rows[i][0], SaveData.Rows[i][1], SaveData.Rows[i][2]));
+                    if (i.ToString().Length == 4 || i==SaveData.Rows.Count-1)
+                    {
+                        GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());                       
+                        
+                        if (i == SaveData.Rows.Count - 1)
+                        {
+                            
+                        }
+                        Application.DoEvents();
+                        sql.Clear();
+                    }
                 }
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());
+                
             }
             catch (Exception ex)
             {
@@ -254,6 +267,11 @@ namespace KaoQin
             }
 
             MessageBox.Show("保存成功！");
+        }
+
+        private void dateEdit2_TextChanged(object sender, EventArgs e)
+        {
+            SearchInfo();
         }
     }
 }

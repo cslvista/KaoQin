@@ -51,17 +51,36 @@ namespace KaoQin.DataOpeation
                 return;
             }
 
-            try
+            StringBuilder sql = new StringBuilder();
+            for (int i = 0; i < Record.Rows.Count; i++)
             {
-                string sql = string.Format("delete from KQ_JL where ID='{0}'",gridView1.GetFocusedRowCellValue("ID").ToString())
-                           + string.Format("delete from KQ_JL_XB where ZBID='{0}'", gridView1.GetFocusedRowCellValue("ID").ToString());
-                GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误1:" + ex.Message, "提示");
+                if (Record.Rows[i]["Check"].ToString() == "True")
+                {
+                    try
+                    {
+                        sql.Append(string.Format("delete from KQ_JL where ID='{0}'", Record.Rows[i]["ID"].ToString())
+                                 + string.Format("delete from KQ_JL_XB where ZBID='{0}'", Record.Rows[i]["ID"].ToString()));                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("错误1:" + ex.Message, "提示");
+                        return;
+                    }
+                }
             }
 
+            if (sql.ToString().Length == 0)
+            {
+                MessageBox.Show("没有选择要删除的内容！");
+                return;
+            }
+
+            if (MessageBox.Show(string.Format("是否确定删除？"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
+            GlobalHelper.IDBHelper.ExecuteNonQuery(GlobalHelper.GloValue.ZYDB, sql.ToString());            
             ButtonRefresh_Click(sender, e);
         }
         private void ButtonImport_Click(object sender, EventArgs e)

@@ -40,6 +40,7 @@ namespace KaoQin
         public Attendance()
         {
             InitializeComponent();
+
         }
 
         private void FromMachine_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1278,18 +1279,18 @@ namespace KaoQin
         {
             string FileName = "";
 
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
-            //ofd.RestoreDirectory = true; //记忆上次浏览路径            
-            //if (ofd.ShowDialog() == DialogResult.OK)
-            //{
-            //    FileName = ofd.FileName;
-            //}
-            //else
-            //{
-            //    return;
-            //}
-            FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
+            ofd.RestoreDirectory = true; //记忆上次浏览路径            
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileName = ofd.FileName;
+            }
+            else
+            {
+                return;
+            }
+            //FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
 
             string FileExtension = "";
             DataTable dtExcel = new DataTable(); //数据表   
