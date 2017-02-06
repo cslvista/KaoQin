@@ -99,7 +99,7 @@ namespace KaoQin
             int Second = 0;
             int Workcode = 0;
             string dwEnrollNumber = "";
-            for (int i = 1; i < Machine.Rows.Count; i++)
+            for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
                 bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));

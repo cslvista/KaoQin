@@ -1027,7 +1027,7 @@ namespace KaoQin
                 SBTime= Convert.ToDateTime("23:59");
             }
 
-            if (SBTime.CompareTo(time1)>0 && SBTime.CompareTo(time2) <= 0)
+            if (SBTime.CompareTo(time1)>=0 && SBTime.CompareTo(time2) <= 0)
             {
                 if (Record_Today.Rows.Count == 0)
                 {
@@ -1038,7 +1038,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                     double subtract = (SBTime - record).TotalMinutes;
-                    if (subtract >= 0 && subtract < 120)
+                    if (subtract >= 0 && subtract <= 180)
                     {
                         return "/准点上班";          
                     }
@@ -1052,7 +1052,7 @@ namespace KaoQin
                     }
                 }
             }
-            else  if (SBTime.CompareTo(time1) <= 0)
+            else  if (SBTime.CompareTo(time1) < 0)
             {
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
@@ -1354,10 +1354,17 @@ namespace KaoQin
             Staff_Orign.Columns["F2"].ColumnName = "Name";
             Staff_Orign.Rows.RemoveAt(0);
 
+            //移除最后一行空行
+            if (dtExcel.Rows[dtExcel.Rows.Count - 1][2].ToString() == "")
+            {
+                dtExcel.Rows.RemoveAt(dtExcel.Rows.Count - 1);
+            }
+
             try
             {
                 for (int i = 1; i < dtExcel.Rows.Count; i++)
                 {
+                    Convert.ToDateTime(dtExcel.Rows[i][2].ToString());
                     Record_DKJ.Rows.Add(new object[] { dtExcel.Rows[i][0].ToString(), dtExcel.Rows[i][2].ToString(), dtExcel.Rows[i][3].ToString() });
                 }
                 
@@ -1365,13 +1372,11 @@ namespace KaoQin
             catch (Exception ex)
             {
                 MessageBox.Show("错误3:" + ex.Message);
+                Record_DKJ.Clear();
                 return;
             }
 
-            if (Record_DKJ.Rows[Record_DKJ.Rows.Count - 1]["Time"].ToString() == "")
-            {
-                Record_DKJ.Rows.RemoveAt(Record_DKJ.Rows.Count - 1);
-            }  
+
                      
             ButtonCal.Enabled = true;
             ButtonOrignData.Enabled = true;
@@ -1388,8 +1393,11 @@ namespace KaoQin
                 {
                     try
                     {
+                        DevExpress.XtraPrinting.XlsxExportOptions options = new DevExpress.XtraPrinting.XlsxExportOptions();
+                        options.ShowGridLines = true;
+                        options.RawDataMode = true;
                         string path = sf.FileName.ToString();
-                        gridControl2.ExportToXlsx(path);
+                        gridControl2.ExportToXlsx(path, options);
                         MessageBox.Show("导出成功！");
                     }
                     catch { }

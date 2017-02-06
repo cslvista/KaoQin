@@ -59,11 +59,12 @@
             this.tableLayoutPanel1.Controls.Add(this.gridControl1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 565);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(591, 452);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -72,9 +73,10 @@
             this.panel1.Controls.Add(this.ButtonRefresh);
             this.panel1.Controls.Add(this.ButtonDelete);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(736, 59);
+            this.panel1.Size = new System.Drawing.Size(587, 48);
             this.panel1.TabIndex = 0;
             // 
             // ButtonImport
@@ -82,10 +84,10 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(20, 14);
-            this.ButtonImport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonImport.Location = new System.Drawing.Point(17, 11);
+            this.ButtonImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonImport.Name = "ButtonImport";
-            this.ButtonImport.Size = new System.Drawing.Size(69, 31);
+            this.ButtonImport.Size = new System.Drawing.Size(52, 25);
             this.ButtonImport.TabIndex = 33;
             this.ButtonImport.Text = "下载";
             this.ButtonImport.Click += new System.EventHandler(this.ButtonImport_Click);
@@ -95,10 +97,10 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(112, 14);
-            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonRefresh.Location = new System.Drawing.Point(86, 11);
+            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
-            this.ButtonRefresh.Size = new System.Drawing.Size(69, 31);
+            this.ButtonRefresh.Size = new System.Drawing.Size(52, 25);
             this.ButtonRefresh.TabIndex = 32;
             this.ButtonRefresh.Text = "刷新";
             this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
@@ -108,10 +110,10 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(204, 14);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonDelete.Location = new System.Drawing.Point(155, 11);
+            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(69, 31);
+            this.ButtonDelete.Size = new System.Drawing.Size(52, 25);
             this.ButtonDelete.TabIndex = 31;
             this.ButtonDelete.Text = "删除";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
@@ -119,12 +121,14 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 68);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl1.Location = new System.Drawing.Point(2, 54);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(736, 494);
+            this.gridControl1.Size = new System.Drawing.Size(587, 396);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -227,10 +231,11 @@
             // 
             // SaveToDB
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 565);
+            this.ClientSize = new System.Drawing.Size(591, 452);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SaveToDB";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据库操作";

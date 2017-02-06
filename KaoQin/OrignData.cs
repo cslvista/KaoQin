@@ -29,7 +29,7 @@ namespace KaoQin
 
         private void OrignData_Load(object sender, EventArgs e)
         {
-            searchControl1.Properties.NullValuePrompt = "请输入考勤号或者姓名";
+            searchControl1.Properties.NullValuePrompt = "请输入考勤号或姓名";
             dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
@@ -68,6 +68,7 @@ namespace KaoQin
                 MessageBox.Show(ex.Message);
             }
             Record_DKJ_new.DefaultView.Sort = "Time";
+            Record_DKJ_new=Record_DKJ_new.DefaultView.ToTable();
             gridControl1.DataSource = Record_DKJ_new;
             allowVisit = false;
             dateEdit1.Text = Convert.ToDateTime(Record_DKJ_new.Rows[0]["Time"]).ToString("yyyy-MM-dd");
@@ -173,7 +174,12 @@ namespace KaoQin
         /// 保存到数据库
         /// </summary>
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {                
+        {
+            if (Record_DKJ.Rows.Count == 0)
+            {
+                MessageBox.Show("考勤记录为空！");
+            }
+
             var query= from rec in Record_DKJ.AsEnumerable()
                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text))>= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1)) < 0
                        select new
@@ -264,6 +270,10 @@ namespace KaoQin
                             //关闭进度条
                             CloseProgress();
                         }
+                        if (i == 0)
+                        {
+                            ShowData(5);
+                        }
                         Application.DoEvents();
                         sql.Clear();
                     }
@@ -282,6 +292,17 @@ namespace KaoQin
         private void dateEdit2_TextChanged(object sender, EventArgs e)
         {
             SearchInfo();
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Record_DKJ_new.Clear();
+            Record_DKJ.Clear();
+            Attendance form = (Attendance)this.Owner;
+            form.Record_DKJ.Clear();
+            form.ButtonCal.Enabled = false;
+            form.ButtonOrignData.Enabled = false;
+            this.Close();
         }
     }
 }
