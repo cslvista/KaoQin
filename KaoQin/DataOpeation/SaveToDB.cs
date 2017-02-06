@@ -12,6 +12,7 @@ namespace KaoQin.DataOpeation
     public partial class SaveToDB : Form
     {
         DataTable Record_DKJ = new DataTable();
+        DataTable Record_DKJ_Copy = new DataTable();
         DataTable Record = new DataTable();
         public bool Extract = false;
         public SaveToDB()
@@ -21,6 +22,9 @@ namespace KaoQin.DataOpeation
 
         private void SaveToDB_Load(object sender, EventArgs e)
         {
+            Record_DKJ.Columns.Add("ID", typeof(string));
+            Record_DKJ.Columns.Add("Time", typeof(string));
+            Record_DKJ.Columns.Add("Source", typeof(string));
             ButtonRefresh_Click(sender, e);
         }
 
@@ -28,7 +32,7 @@ namespace KaoQin.DataOpeation
         {
             try
             {
-                string sql = "select * from KQ_JL";
+                string sql = "select * from KQ_JL order by ID desc";
                 Record = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (Record.Columns.Contains("Check")==false)
                 {
@@ -99,7 +103,7 @@ namespace KaoQin.DataOpeation
                     sql.Append(string.Format("select ID,KQSJ,LY from KQ_JL_XB where ZBID='{0}';", Record.Rows[i]["ID"].ToString()));
                     try
                     {
-                        Record_DKJ.Merge(GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString()));
+                        Record_DKJ_Copy.Merge(GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString()));
                     }
                     catch (Exception ex)
                     {
@@ -108,9 +112,12 @@ namespace KaoQin.DataOpeation
                     }
                 }
             }
-                       
-            Record_DKJ.Columns["KQSJ"].ColumnName = "Time";
-            Record_DKJ.Columns["LY"].ColumnName = "Source";
+
+            for (int i = 0; i < Record_DKJ_Copy.Rows.Count; i++)
+            {
+                Record_DKJ.Rows.Add(new object[] { Record_DKJ_Copy.Rows[i]["ID"],Convert.ToDateTime(Record_DKJ_Copy.Rows[i]["KQSJ"]).ToString("yyyy-MM-dd HH:mm:ss") , Record_DKJ_Copy.Rows[i]["LY"] });
+            }
+
 
             Attendance form = (Attendance)this.Owner;
             form.Record_DKJ.Merge(Record_DKJ);

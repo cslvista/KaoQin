@@ -418,7 +418,7 @@ namespace KaoQin
                                     break;
                                 }
                             }
-                            details.Append(string.Format("{0}{1}的排班从 {2} 变更为 {3}  \r\n", name, date, PB_origin, PB_change));
+                            details.Append(string.Format("{0} {1} 从 {2} 变更为 {3}  \r\n", name, date, PB_origin, PB_change));
                         }
                     }
                 }

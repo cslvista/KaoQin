@@ -252,6 +252,7 @@ namespace KaoQin
             ShowData += form.ShowData;
             form.Show(this);
             Application.DoEvents();
+
             try
             {
                 StringBuilder sql = new StringBuilder();

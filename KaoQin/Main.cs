@@ -278,21 +278,9 @@ namespace KaoQin
         {
             if (gridView1.RowCount > 0)
             {
-                Thread t1 = new Thread(SearchAttendance);
-                t1.IsBackground = true;
-                t1.Start();
-            }
-
-        }
-
-        private void SearchAttendance()
-        {
-            string sql = string.Format("select PBID,BMID,YEAR,MONTH,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
-
-            this.BeginInvoke(new UpdateUI(delegate ()
-            {
                 try
                 {
+                    string sql = string.Format("select PBID,BMID,YEAR,MONTH,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
                     Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                     gridControl2.DataSource = Attendance;
                     gridView2.BestFitColumns();
@@ -302,7 +290,7 @@ namespace KaoQin
                     MessageBox.Show("错误1:" + ex.Message, "提示");
                     return;
                 }
-            }));
+            }
         }
 
         private void 排班维护ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -345,8 +333,6 @@ namespace KaoQin
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             gridControl1_Click(null, null);
-            LoadingForm form = new LoadingForm();
-            form.Show(this);
         }
 
         private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)

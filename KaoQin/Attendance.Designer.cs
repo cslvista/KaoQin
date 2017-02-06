@@ -152,8 +152,12 @@
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.Blue;
+            this.gridView1.Appearance.FocusedCell.Options.UseForeColor = true;
             this.gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView1.Appearance.FocusedRow.ForeColor = System.Drawing.Color.White;
             this.gridView1.Appearance.FocusedRow.Options.UseFont = true;
+            this.gridView1.Appearance.FocusedRow.Options.UseForeColor = true;
             this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -559,31 +563,31 @@
             this.修改为ToolStripMenuItem,
             this.修改全列ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 82);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 88);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 26);
             this.toolStripMenuItem1.Text = "查看排班与考勤";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // 修改为ToolStripMenuItem
             // 
             this.修改为ToolStripMenuItem.Name = "修改为ToolStripMenuItem";
-            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改为ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改为ToolStripMenuItem.Text = "修改";
             this.修改为ToolStripMenuItem.Click += new System.EventHandler(this.修改为ToolStripMenuItem_Click);
             // 
             // 修改全列ToolStripMenuItem
             // 
             this.修改全列ToolStripMenuItem.Name = "修改全列ToolStripMenuItem";
-            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.修改全列ToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.修改全列ToolStripMenuItem.Text = "修改全列";
             this.修改全列ToolStripMenuItem.Click += new System.EventHandler(this.修改全列ToolStripMenuItem_Click);
             // 
@@ -796,7 +800,7 @@
             // 
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(67, 4);
             // 
             // Attendance
             // 

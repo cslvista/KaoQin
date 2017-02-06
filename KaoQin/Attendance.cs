@@ -222,6 +222,7 @@ namespace KaoQin
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
             test.Location = new Point(test.Location.X, height);
+            test.Visible = false;
             comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panelControl2.Height - comboBoxYear.Height) / 2);
             comboBoxMonth.Location = new Point(comboBoxMonth.Location.X, (panelControl2.Height - comboBoxMonth.Height) / 2);
             searchControl2.Location= new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
@@ -1286,18 +1287,18 @@ namespace KaoQin
         {
             string FileName = "";
 
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
-            //ofd.RestoreDirectory = true; //记忆上次浏览路径            
-            //if (ofd.ShowDialog() == DialogResult.OK)
-            //{
-            //    FileName = ofd.FileName;
-            //}
-            //else
-            //{
-            //    return;
-            //}
-            FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";//过滤文件类型
+            ofd.RestoreDirectory = true; //记忆上次浏览路径            
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileName = ofd.FileName;
+            }
+            else
+            {
+                return;
+            }
+            //FileName = "C:\\Users\\Administrator\\Desktop\\考勤.xlsx";
 
             string FileExtension = "";
             DataTable dtExcel = new DataTable(); //数据表   

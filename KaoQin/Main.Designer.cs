@@ -209,12 +209,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改排班表ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 30);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 28);
             // 
             // 修改排班表ToolStripMenuItem
             // 
             this.修改排班表ToolStripMenuItem.Name = "修改排班表ToolStripMenuItem";
-            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
             this.修改排班表ToolStripMenuItem.Text = "修改排班表";
             // 
             // gridView2
@@ -376,7 +376,7 @@
             this.ButtonRefresh1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh1.Appearance.Options.UseFont = true;
             this.ButtonRefresh1.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh1.Image")));
-            this.ButtonRefresh1.Location = new System.Drawing.Point(192, 13);
+            this.ButtonRefresh1.Location = new System.Drawing.Point(186, 13);
             this.ButtonRefresh1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonRefresh1.Name = "ButtonRefresh1";
             this.ButtonRefresh1.Size = new System.Drawing.Size(69, 29);
@@ -397,7 +397,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.FindDelay = 100;
             this.searchControl1.Properties.NullValuePrompt = "E";
-            this.searchControl1.Size = new System.Drawing.Size(166, 26);
+            this.searchControl1.Size = new System.Drawing.Size(160, 26);
             this.searchControl1.TabIndex = 12;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
