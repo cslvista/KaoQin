@@ -69,6 +69,7 @@ namespace KaoQin
             }
             Record_DKJ_new.DefaultView.Sort = "Time";
             Record_DKJ_new=Record_DKJ_new.DefaultView.ToTable();
+
             gridControl1.DataSource = Record_DKJ_new;
             allowVisit = false;
             dateEdit1.Text = Convert.ToDateTime(Record_DKJ_new.Rows[0]["Time"]).ToString("yyyy-MM-dd");
@@ -301,7 +302,7 @@ namespace KaoQin
             Record_DKJ.Clear();
             Attendance form = (Attendance)this.Owner;
             form.Record_DKJ.Clear();
-            form.ButtonCal.Enabled = false;
+            form.TimeSort();
             form.ButtonOrignData.Enabled = false;
             this.Close();
         }

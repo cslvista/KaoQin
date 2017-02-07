@@ -124,7 +124,7 @@ namespace KaoQin
                 form.Staff_Orign = Staff_Orign.Copy();
                 form.Record_DKJ.Merge(Record_DKJ);
                 form.HasDownload = true;
-                form.ButtonCal.Enabled = true;
+                form.TimeSort();
                 form.ButtonOrignData.Enabled = true;
                 MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
                 this.Close();                

@@ -58,10 +58,11 @@ namespace KaoQin.machine
 
         public void simpleButton1_Click(object sender, EventArgs e)
         {
-            string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
+            
             
             try
             {
+                string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
                 Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Machine;
             }

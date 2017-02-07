@@ -121,7 +121,7 @@ namespace KaoQin.DataOpeation
 
             Attendance form = (Attendance)this.Owner;
             form.Record_DKJ.Merge(Record_DKJ);
-            form.ButtonCal.Enabled = true;
+            form.TimeSort();
             form.ButtonOrignData.Enabled = true;
             this.Close();
         }
