@@ -74,20 +74,23 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 624);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(628, 499);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 73);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl1.Location = new System.Drawing.Point(2, 58);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(832, 548);
+            this.gridControl1.Size = new System.Drawing.Size(624, 439);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -152,9 +155,10 @@
             this.panel1.Controls.Add(this.searchControl1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(832, 64);
+            this.panel1.Size = new System.Drawing.Size(624, 52);
             this.panel1.TabIndex = 1;
             // 
             // simpleButton1
@@ -162,10 +166,10 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(748, 17);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(561, 14);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(71, 32);
+            this.simpleButton1.Size = new System.Drawing.Size(53, 26);
             this.simpleButton1.TabIndex = 61;
             this.simpleButton1.Text = "清空";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -178,9 +182,10 @@
             this.dropDownButton1.DropDownArrowStyle = DevExpress.XtraEditors.DropDownArrowStyle.Show;
             this.dropDownButton1.DropDownControl = this.popupMenu1;
             this.dropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("dropDownButton1.Image")));
-            this.dropDownButton1.Location = new System.Drawing.Point(621, 17);
+            this.dropDownButton1.Location = new System.Drawing.Point(466, 14);
+            this.dropDownButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dropDownButton1.Name = "dropDownButton1";
-            this.dropDownButton1.Size = new System.Drawing.Size(111, 32);
+            this.dropDownButton1.Size = new System.Drawing.Size(87, 26);
             this.dropDownButton1.TabIndex = 60;
             this.dropDownButton1.Text = "保存数据";
             // 
@@ -223,33 +228,38 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(838, 0);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlTop.Size = new System.Drawing.Size(628, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 624);
-            this.barDockControlBottom.Size = new System.Drawing.Size(838, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 499);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlBottom.Size = new System.Drawing.Size(628, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 624);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 499);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(838, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 624);
+            this.barDockControlRight.Location = new System.Drawing.Point(628, 0);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 499);
             // 
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(474, 21);
+            this.dateEdit2.Location = new System.Drawing.Point(356, 16);
+            this.dateEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit2.Properties.Appearance.Options.UseFont = true;
@@ -257,14 +267,15 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Size = new System.Drawing.Size(129, 26);
+            this.dateEdit2.Size = new System.Drawing.Size(97, 24);
             this.dateEdit2.TabIndex = 48;
             this.dateEdit2.TextChanged += new System.EventHandler(this.dateEdit2_TextChanged);
             // 
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(324, 21);
+            this.dateEdit1.Location = new System.Drawing.Point(243, 16);
+            this.dateEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit1.Properties.Appearance.Options.UseFont = true;
@@ -272,7 +283,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(129, 26);
+            this.dateEdit1.Size = new System.Drawing.Size(97, 24);
             this.dateEdit1.TabIndex = 47;
             this.dateEdit1.TextChanged += new System.EventHandler(this.dateEdit1_TextChanged);
             // 
@@ -280,17 +291,18 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(456, 23);
+            this.label2.Location = new System.Drawing.Point(342, 17);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 20);
+            this.label2.Size = new System.Drawing.Size(13, 17);
             this.label2.TabIndex = 45;
             this.label2.Text = "-";
             // 
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(22, 20);
-            this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchControl1.Location = new System.Drawing.Point(16, 16);
+            this.searchControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.searchControl1.Properties.Appearance.Options.UseFont = true;
@@ -299,7 +311,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.FindDelay = 100;
             this.searchControl1.Properties.NullValuePrompt = "E";
-            this.searchControl1.Size = new System.Drawing.Size(188, 26);
+            this.searchControl1.Size = new System.Drawing.Size(141, 24);
             this.searchControl1.TabIndex = 44;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
@@ -307,22 +319,24 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(226, 22);
+            this.label4.Location = new System.Drawing.Point(167, 17);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 23);
+            this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 46;
             this.label4.Text = "考勤日期：";
             // 
             // OrignData
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 624);
+            this.ClientSize = new System.Drawing.Size(628, 499);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "OrignData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "原始记录";

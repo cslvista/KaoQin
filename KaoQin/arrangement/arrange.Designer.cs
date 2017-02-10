@@ -82,7 +82,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.gridControl1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.gridControl2, 1, 1);
@@ -90,23 +90,23 @@
             this.tableLayoutPanel1.Controls.Add(this.panelControl2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1182, 791);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(886, 633);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl1.Location = new System.Drawing.Point(3, 72);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl1.Location = new System.Drawing.Point(2, 62);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(244, 717);
+            this.gridControl1.Size = new System.Drawing.Size(184, 569);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -146,15 +146,15 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl2.Location = new System.Drawing.Point(253, 72);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl2.Location = new System.Drawing.Point(190, 62);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemColorPickEdit1,
             this.repositoryItemColorEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(926, 717);
+            this.gridControl2.Size = new System.Drawing.Size(694, 569);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -326,10 +326,10 @@
             this.panelControl1.Controls.Add(this.searchControl2);
             this.panelControl1.Controls.Add(this.toolStrip1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(3, 2);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelControl1.Location = new System.Drawing.Point(2, 2);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(244, 66);
+            this.panelControl1.Size = new System.Drawing.Size(184, 56);
             this.panelControl1.TabIndex = 4;
             // 
             // searchControl2
@@ -337,7 +337,7 @@
             this.searchControl2.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
             this.searchControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchControl2.Location = new System.Drawing.Point(2, 2);
-            this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchControl2.Name = "searchControl2";
             this.searchControl2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.searchControl2.Properties.Appearance.Options.UseFont = true;
@@ -346,7 +346,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl2.Properties.FindDelay = 100;
             this.searchControl2.Properties.NullValuePrompt = "E";
-            this.searchControl2.Size = new System.Drawing.Size(240, 26);
+            this.searchControl2.Size = new System.Drawing.Size(180, 24);
             this.searchControl2.TabIndex = 26;
             this.searchControl2.TextChanged += new System.EventHandler(this.searchControl2_TextChanged);
             // 
@@ -359,9 +359,9 @@
             this.toolStripButtonAlter,
             this.toolStripButtonDelete,
             this.toolStripButtonRefresh});
-            this.toolStrip1.Location = new System.Drawing.Point(2, 37);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 29);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(240, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(180, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -371,7 +371,7 @@
             this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
             this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(47, 24);
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(40, 22);
             this.toolStripButtonAdd.Text = " 新增";
             this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
@@ -381,7 +381,7 @@
             this.toolStripButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAlter.Image")));
             this.toolStripButtonAlter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAlter.Name = "toolStripButtonAlter";
-            this.toolStripButtonAlter.Size = new System.Drawing.Size(43, 24);
+            this.toolStripButtonAlter.Size = new System.Drawing.Size(36, 22);
             this.toolStripButtonAlter.Text = "修改";
             this.toolStripButtonAlter.Click += new System.EventHandler(this.toolStripButtonAlter_Click);
             // 
@@ -391,7 +391,7 @@
             this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(43, 24);
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(36, 22);
             this.toolStripButtonDelete.Text = "删除";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
@@ -401,7 +401,7 @@
             this.toolStripButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRefresh.Image")));
             this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
-            this.toolStripButtonRefresh.Size = new System.Drawing.Size(43, 24);
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(36, 22);
             this.toolStripButtonRefresh.Text = "刷新";
             this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
             // 
@@ -412,17 +412,17 @@
             this.panelControl2.Controls.Add(this.ButtonAdd);
             this.panelControl2.Controls.Add(this.ButtonAlter);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(253, 2);
-            this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelControl2.Location = new System.Drawing.Point(190, 2);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(926, 66);
+            this.panelControl2.Size = new System.Drawing.Size(694, 56);
             this.panelControl2.TabIndex = 5;
             // 
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(304, 21);
-            this.searchControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchControl1.Location = new System.Drawing.Point(228, 18);
+            this.searchControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.searchControl1.Properties.Appearance.Options.UseFont = true;
@@ -431,7 +431,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.FindDelay = 100;
             this.searchControl1.Properties.NullValuePrompt = "E";
-            this.searchControl1.Size = new System.Drawing.Size(157, 26);
+            this.searchControl1.Size = new System.Drawing.Size(118, 24);
             this.searchControl1.TabIndex = 25;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
@@ -440,10 +440,10 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(207, 20);
-            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonRefresh.Location = new System.Drawing.Point(155, 17);
+            this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonRefresh.Name = "ButtonRefresh";
-            this.ButtonRefresh.Size = new System.Drawing.Size(69, 30);
+            this.ButtonRefresh.Size = new System.Drawing.Size(52, 24);
             this.ButtonRefresh.TabIndex = 24;
             this.ButtonRefresh.Text = "刷新";
             this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
@@ -453,10 +453,10 @@
             this.ButtonAdd.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAdd.Appearance.Options.UseFont = true;
             this.ButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAdd.Image")));
-            this.ButtonAdd.Location = new System.Drawing.Point(29, 20);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAdd.Location = new System.Drawing.Point(22, 17);
+            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(69, 30);
+            this.ButtonAdd.Size = new System.Drawing.Size(52, 24);
             this.ButtonAdd.TabIndex = 20;
             this.ButtonAdd.Text = "新增";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
@@ -466,21 +466,21 @@
             this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAlter.Appearance.Options.UseFont = true;
             this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(117, 20);
-            this.ButtonAlter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAlter.Location = new System.Drawing.Point(88, 17);
+            this.ButtonAlter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonAlter.Name = "ButtonAlter";
-            this.ButtonAlter.Size = new System.Drawing.Size(69, 30);
+            this.ButtonAlter.Size = new System.Drawing.Size(52, 24);
             this.ButtonAlter.TabIndex = 21;
             this.ButtonAlter.Text = "修改";
             this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
             // 
             // arrange
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 791);
+            this.ClientSize = new System.Drawing.Size(886, 633);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "arrange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "班次管理";

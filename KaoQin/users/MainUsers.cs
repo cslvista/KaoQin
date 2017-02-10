@@ -176,8 +176,17 @@ namespace KaoQin.users
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
-            SearchMachine form = new SearchMachine();
-            form.Show();
+            try
+            {
+                SearchMachine form = new SearchMachine();
+                form.Show();
+            }
+            catch
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+            }
+
+            
         }
 
         private void searchControl2_TextChanged(object sender, EventArgs e)

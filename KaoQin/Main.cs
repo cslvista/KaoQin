@@ -237,10 +237,18 @@ namespace KaoQin
                 return;
             }
 
-            machine.machine form = new machine.machine();
-            form.Authority_Device_Del = Authority_Device_Del;
-            form.Authority_Device_Edit = Authority_Device_Edit;
-            form.Show();
+            try
+            {
+                machine.machine form = new machine.machine();
+                form.Authority_Device_Del = Authority_Device_Del;
+                form.Authority_Device_Edit = Authority_Device_Edit;
+                form.Show();
+            }
+            catch
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+            }
+            
         }
 
         private void 员工设置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -250,6 +258,7 @@ namespace KaoQin
                 MessageBox.Show("您没有查看部门与员工的权限！");
                 return;
             }
+
 
             users.MainUsers form = new users.MainUsers();
             form.Authority_Dep_Del = Authority_Dep_Del;
@@ -343,8 +352,16 @@ namespace KaoQin
                 return;
             }
 
-            Attendance form = new Attendance();
-            form.Show();
+            try
+            {
+                Attendance form = new Attendance();
+                form.Show();
+            }
+            catch
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+            }
+            
 
         }
 

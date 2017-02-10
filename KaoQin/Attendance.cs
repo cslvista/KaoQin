@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Data.OleDb;
+using System.Collections;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Columns;
 
 namespace KaoQin
 {
@@ -19,6 +21,7 @@ namespace KaoQin
         DataTable Department = new DataTable();//部门
         public DataTable AttendanceResult = new DataTable();//考勤结果
         DataTable AttendanceCollect = new DataTable();//考勤汇总
+        DataTable AttendanceShiftCollect = new DataTable();//考勤班次汇总
         DataTable Staff = new DataTable();//整个部门的所有员工，包括在职离职
         public DataTable Staff_Orign = new DataTable();//打卡机的原始员工数据，包括考勤号和姓名
         DataTable WorkShift = new DataTable();//班次信息
@@ -222,12 +225,14 @@ namespace KaoQin
             ButtonFilter.Location = new Point(ButtonFilter.Location.X, height);
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            ButtonRefresh1.Location = new Point(ButtonRefresh1.Location.X, height);
             test.Location = new Point(test.Location.X, height);
             test.Visible = false;
             comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panelControl2.Height - comboBoxYear.Height) / 2);
             comboBoxMonth.Location = new Point(comboBoxMonth.Location.X, (panelControl2.Height - comboBoxMonth.Height) / 2);
             searchControl2.Location = new Point(searchControl2.Location.X, (panelControl2.Height - searchControl2.Height) / 2);
-
+            searchControl1.Location = new Point(searchControl1.Location.X, (panelControl1.Height - searchControl1.Height) / 2);
+            label4.Location = new Point(comboBoxYear.Location.X - label4.Width - 2, comboBoxYear.Location.Y + 2);
         }
 
         private void SearchDepartment()
@@ -257,18 +262,25 @@ namespace KaoQin
 
         private void ButtonCal_Click(object sender, EventArgs e)
         {
+            //初始化
             gridControl2.DataSource = null;
             gridControl3.DataSource = null;
+            gridControl4.DataSource = null;
             bandedGridView2.IndicatorWidth = 40;
             gridView3.IndicatorWidth = 40;
+            gridView4.IndicatorWidth = 40;
             bandedGridView2.Columns.Clear();
             bandedGridView2.Bands.Clear();
+            gridView4.Columns.Clear();
             searchControl2.Text = "";
             //如果没有这一句，就会导致在增加新行的时候报错
             AttendanceResult.DefaultView.RowFilter = "";
             AttendanceResult.Clear();
             AttendanceResult.Columns.Clear();
             Record_Dep.Clear();
+            AttendanceShiftCollect.DefaultView.RowFilter = "";
+            AttendanceShiftCollect.Clear();
+            AttendanceShiftCollect.Columns.Clear();
             try
             {
                 string year = comboBoxYear.Text.Substring(0, 4);
@@ -344,7 +356,6 @@ namespace KaoQin
             AttendanceResult.Columns.Add("KQID");
             bandedGridView2.Columns.Add(Staff_ID);
 
-
             BandedGridColumn Staff_Name = new BandedGridColumn();
             Staff_Name.Caption = "姓名";
             Staff_Name.Name = "Staff_Name";
@@ -396,6 +407,8 @@ namespace KaoQin
             AnalysisData(StartDate, Timespan.Days);
             //进行考勤汇总分析
             DataCollect(StartDate, Timespan.Days);
+            //进行班次汇总分析
+            ShiftCollect();
         }
 
         private bool ReadDatabase()
@@ -1141,6 +1154,8 @@ namespace KaoQin
             bandedGridView2.Bands.Clear();
             gridControl2.DataSource = null;
             gridControl3.DataSource = null;
+            gridControl4.DataSource = null;
+            gridView4.Columns.Clear();
         }
 
 
@@ -1464,6 +1479,7 @@ namespace KaoQin
             {
                 AttendanceResult.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
                 AttendanceCollect.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
+                AttendanceShiftCollect.DefaultView.RowFilter = string.Format("YGXM like '%{0}%'", searchControl2.Text);
             }
 
         }
@@ -1611,7 +1627,7 @@ namespace KaoQin
             DataTable Record_Month = new DataTable();
             try
             {
-                string sql = string.Format("select ID,KQSJ,LY from KQ_JL_XB where KQSJ between '{0} 00:00:00' and '{1} 23:59:59'", startTime,stopTime);
+                string sql = string.Format("select ID,KQSJ,LY from KQ_JL_XB where KQSJ between '{0}' and '{1} 23:59:59' order by KQSJ", startTime,stopTime);
                 Record_Month = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
@@ -1625,11 +1641,7 @@ namespace KaoQin
             {
                 return false;
             }
-
-            //排序
-            Record_Month.DefaultView.Sort = "KQSJ";
-            Record_Month = Record_Month.DefaultView.ToTable();
-            
+          
             //取头尾的时间分析
             DateTime Record_Month_startTime = Convert.ToDateTime(Convert.ToDateTime(Record_Month.Rows[0]["KQSJ"]).ToString("yyyy-MM-dd"));
             DateTime Record_Month_stopTime = Convert.ToDateTime(Convert.ToDateTime(Record_Month.Rows[Record_Month.Rows.Count - 1]["KQSJ"]).ToString("yyyy-MM-dd"));
@@ -1651,5 +1663,105 @@ namespace KaoQin
 
         }
 
+        private void ShiftCollect()
+        {
+            Hashtable ShiftCount = new Hashtable();
+
+            //检查有几个班次的类型，作为表的列名
+            for (int i = 0; i < ArrangementItem.Rows.Count; i++)
+            {
+                for (int j = 0; j < 31; j++)
+                {
+                    Hashtable PersonCount = new Hashtable();
+                    if (ArrangementItem.Rows[i][j + 3].ToString() != "")
+                    {
+                        if (ShiftCount.Contains(ArrangementItem.Rows[i][j + 3]) == false)
+                        {
+                            for (int k = 0; k < WorkShift.Rows.Count; k++)
+                            {
+                                if (WorkShift.Rows[k]["ID"].ToString()== ArrangementItem.Rows[i][j + 3].ToString())
+                                {
+                                    ShiftCount.Add(ArrangementItem.Rows[i][j + 3], WorkShift.Rows[k]["NAME"]);
+                                    break;
+                                }
+                            }                            
+                        }
+                    }
+                }
+            }
+
+            GridColumn Staff_ID = new GridColumn();
+            Staff_ID.Caption = "考勤号";
+            Staff_ID.Name = "Staff_ID";
+            Staff_ID.FieldName = "KQID";
+            Staff_ID.Visible = false;
+            Staff_ID.OptionsColumn.AllowEdit = false;
+            AttendanceShiftCollect.Columns.Add("KQID", typeof(string));
+            gridView4.Columns.Add(Staff_ID);
+
+            GridColumn Staff_Name = new GridColumn();
+            Staff_Name.Caption = "姓名";
+            Staff_Name.Name = "Staff_Name";
+            Staff_Name.Visible = true;
+            Staff_Name.FieldName = "YGXM";
+            Staff_Name.OptionsColumn.AllowEdit = false;
+            AttendanceShiftCollect.Columns.Add("YGXM", typeof(string));
+            gridView4.Columns.Add(Staff_Name);
+
+            foreach (DictionaryEntry de in ShiftCount)
+            {
+                GridColumn Shift = new GridColumn();
+                Shift.Caption = de.Value.ToString();
+                Shift.Name = de.Value.ToString();
+                Shift.Visible = true;
+                Shift.FieldName = de.Key.ToString();
+                Shift.OptionsColumn.AllowEdit = false;
+                AttendanceShiftCollect.Columns.Add(Shift.FieldName, typeof(int));
+                gridView4.Columns.Add(Shift);
+            }
+
+            for (int i = 0; i < ArrangementItem.Rows.Count; i++)
+            {
+                AttendanceShiftCollect.Rows.Add();
+                AttendanceShiftCollect.Rows[i]["KQID"] = ArrangementItem.Rows[i]["KQID"];
+                AttendanceShiftCollect.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
+                for (int j = 0; j < 31; j++)
+                {
+                    if (ArrangementItem.Rows[i][j + 3].ToString() != "")
+                    {
+                       if (AttendanceShiftCollect.Rows[i][ArrangementItem.Rows[i][j + 3].ToString()].ToString() != "")
+                        {
+                            AttendanceShiftCollect.Rows[i][ArrangementItem.Rows[i][j + 3].ToString()] = Convert.ToInt32(AttendanceShiftCollect.Rows[i][ArrangementItem.Rows[i][j + 3].ToString()])+1;
+                        }
+                        else
+                        {
+                            AttendanceShiftCollect.Rows[i][ArrangementItem.Rows[i][j + 3].ToString()] = 1;
+                        }
+                    }
+
+                    if (j == 30)
+                    {
+                        for (int k=0;k< AttendanceShiftCollect.Columns.Count; k++)
+                        {
+                           if (AttendanceShiftCollect.Rows[i][k].ToString()=="")
+                            {
+                                AttendanceShiftCollect.Rows[i][k] = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            gridControl4.DataSource = AttendanceShiftCollect;
+            gridView4.BestFitColumns();
+        }
+
+        private void gridView4_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
+        }
     }
 }

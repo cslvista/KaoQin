@@ -24,10 +24,10 @@ namespace test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = "G0017";
-            textBox3.Text = "111111";
-            textBox2.Text = "1000";
-            textBox4.Text = "540";
+            textBox1.Text = "MZSYS";
+            textBox3.Text = "1";
+            textBox2.Text = "800";
+            textBox4.Text = "450";
 
             button1_Click(null, null);
         }
@@ -47,9 +47,10 @@ namespace test
                 {
                     KaoQin.Main form = new KaoQin.Main();
                     form.Show();
-                    
+
                 }
             }
+
         }
     }
 }
