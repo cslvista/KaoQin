@@ -369,5 +369,10 @@ namespace KaoQin.arrangement
                 Type.DefaultView.RowFilter = string.Format("BMLB like '%{0}%'", searchControl2.Text);
             }
         }
+
+        private void gridControl2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

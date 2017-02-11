@@ -32,6 +32,7 @@ namespace KaoQin
         bool Authority_Mangement_Edit = false;
         bool Authority_Mangement_Del = false;
         bool Authority_Attendance = false;
+        bool Authority_Attendance_VisitMachine = false;
         delegate void UpdateUI();
         public Main()
         {
@@ -82,6 +83,7 @@ namespace KaoQin
                 Authority_Mangement_Edit = true;
                 Authority_Mangement_Del = true;
                 Authority_Attendance = true;
+                Authority_Attendance_VisitMachine = true;
                 return;
             }
             
@@ -167,13 +169,17 @@ namespace KaoQin
                 }
 
                 //考勤
-                if (Authority.Rows[0]["KQGL"].ToString() == "1")
+                if (Authority.Rows[0]["KQGL"].ToString() == "11")
                 {
                     Authority_Attendance = true;
+                    Authority_Attendance_VisitMachine = true;
                 }
                 else
                 {
-                    Authority_Attendance = false;
+                    string s1 = Authority.Rows[0]["KQGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["KQGL"].ToString().Substring(1, 1);
+                    Authority_Attendance = s1 == "1" ? true : false;
+                    Authority_Attendance_VisitMachine = s2 == "1" ? true : false;
                 }
 
                 //授权
@@ -355,9 +361,10 @@ namespace KaoQin
             try
             {
                 Attendance form = new Attendance();
+                form.Authority_Attendance_VisitMachine = Authority_Attendance_VisitMachine;
                 form.Show();
             }
-            catch
+            catch 
             {
                 MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
             }

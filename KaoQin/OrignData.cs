@@ -192,19 +192,20 @@ namespace KaoQin
 
             DataTable SaveData = new DataTable();
             SaveData.Columns.Add("ID", typeof(string));
-            SaveData.Columns.Add("Time", typeof(string));
+            SaveData.Columns.Add("Time", typeof(DateTime));
             SaveData.Columns.Add("Source", typeof(string));
 
             foreach (var obj in query)
             {
-                SaveData.Rows.Add(obj.ID,obj.Time,obj.Source);
+                SaveData.Rows.Add(obj.ID,Convert.ToDateTime(obj.Time),obj.Source);
             }
             SaveData.DefaultView.Sort = "Time";
+            SaveData = SaveData.DefaultView.ToTable();
 
             string startTime = Convert.ToDateTime(SaveData.Rows[0]["Time"]).ToString("yyyy-MM-dd HH:mm:ss");
             string stopTime =  Convert.ToDateTime(SaveData.Rows[SaveData.Rows.Count - 1]["Time"]).ToString("yyyy-MM-dd HH:mm:ss");
 
-            if (MessageBox.Show(string.Format(" 开始时间:{0} \r\n 结束时间:{1} \r\n 记录条数:{2} \r\n 是否保存？", startTime,stopTime, SaveData.Rows.Count), "",
+            if (MessageBox.Show(string.Format(" 开始时间 : {0} \r\n 结束时间 : {1} \r\n 记录条数 : {2} \r\n 是否保存？", startTime,stopTime, SaveData.Rows.Count), "",
             MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;
@@ -259,7 +260,7 @@ namespace KaoQin
                 StringBuilder sql = new StringBuilder();
                 for (int i = 0; i < SaveData.Rows.Count; i++)
                 {
-                    sql.Append(string.Format("insert into KQ_JL_XB (ZBID,ID,KQSJ,LY) values ('{0}','{1}','{2}','{3}');", ID,SaveData.Rows[i][0], SaveData.Rows[i][1], SaveData.Rows[i][2]));
+                    sql.Append(string.Format("insert into KQ_JL_XB (ZBID,ID,KQSJ,LY) values ('{0}','{1}','{2}','{3}');", ID,SaveData.Rows[i][0], Convert.ToDateTime(SaveData.Rows[i][1]).ToString("yyyy-MM-dd HH:mm:ss"), SaveData.Rows[i][2]));
                     int yushu = i % 10000;
                     if ((yushu==0 || i==SaveData.Rows.Count-1))
                     {

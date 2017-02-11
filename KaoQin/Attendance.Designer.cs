@@ -405,7 +405,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(279, 16);
+            this.label2.Location = new System.Drawing.Point(279, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(15, 20);
@@ -864,7 +864,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Attendance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "考勤查询";
+            this.Text = "考勤管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Attendance_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

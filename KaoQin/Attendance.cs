@@ -43,6 +43,7 @@ namespace KaoQin
         delegate void UpdateUI();
         string Record_startTime = "";//考勤原始数据的起始时间
         string Record_stopTime = "";//考勤原始数据的结束时间
+        public bool Authority_Attendance_VisitMachine = false;
         public Attendance()
         {
             InitializeComponent();
@@ -51,6 +52,13 @@ namespace KaoQin
 
         private void FromMachine_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (Authority_Attendance_VisitMachine == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
+
             if (HasDownload)
             {
                 if (MessageBox.Show("数据已经下载到本地，是否还需要重新下载？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
@@ -330,7 +338,7 @@ namespace KaoQin
 
              if (judgeTime == false)
             {
-                if (MessageBox.Show(string.Format("考勤记录不完整，是否继续？"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show(string.Format("数据库中的考勤记录不完整，是否继续？"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
                 }
@@ -1465,6 +1473,29 @@ namespace KaoQin
                     catch { }
                 }
             }
+            else if (tabControl1.SelectedTab.Name == "tabPage3")
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.Filter = "Excel文件(*.xlsx)|*.xlsx";
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string path = sf.FileName.ToString();
+                        gridControl4.ExportToXlsx(path);
+                        MessageBox.Show("导出成功！");
+                    }
+                    catch { }
+
+                    if (MessageBox.Show("是否打开？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                        return;
+                    try
+                    {
+                        System.Diagnostics.Process.Start(sf.FileName);
+                    }
+                    catch { }
+                }
+            }
         }
 
         private void ButtonFilter_Click(object sender, EventArgs e)
@@ -1708,6 +1739,15 @@ namespace KaoQin
             AttendanceShiftCollect.Columns.Add("YGXM", typeof(string));
             gridView4.Columns.Add(Staff_Name);
 
+            GridColumn Collect = new GridColumn();
+            Collect.Caption = "总计";
+            Collect.Name = "Collect";
+            Collect.Visible = true;
+            Collect.FieldName = "Collect";
+            Collect.OptionsColumn.AllowEdit = false;
+            AttendanceShiftCollect.Columns.Add("Collect", typeof(int));
+            gridView4.Columns.Add(Collect);
+
             foreach (DictionaryEntry de in ShiftCount)
             {
                 GridColumn Shift = new GridColumn();
@@ -1741,9 +1781,9 @@ namespace KaoQin
 
                     if (j == 30)
                     {
-                        for (int k=0;k< AttendanceShiftCollect.Columns.Count; k++)
+                        for (int k = 0; k < AttendanceShiftCollect.Columns.Count; k++)
                         {
-                           if (AttendanceShiftCollect.Rows[i][k].ToString()=="")
+                            if (AttendanceShiftCollect.Rows[i][k].ToString() == "")
                             {
                                 AttendanceShiftCollect.Rows[i][k] = 0;
                             }
@@ -1751,8 +1791,21 @@ namespace KaoQin
                     }
                 }
             }
+            //计算总计
+            for (int i = 0; i < AttendanceShiftCollect.Rows.Count; i++)
+            {
+                for (int j = 0; j < AttendanceShiftCollect.Columns.Count-3; j++)
+                {
+                    if (j == 0)
+                    {
+                        AttendanceShiftCollect.Rows[i]["Collect"] = 0;
+                    }
 
-            gridControl4.DataSource = AttendanceShiftCollect;
+                    AttendanceShiftCollect.Rows[i]["Collect"] = Convert.ToInt32(AttendanceShiftCollect.Rows[i]["Collect"]) + Convert.ToInt32(AttendanceShiftCollect.Rows[i][j+3]);
+                }
+            }
+
+                gridControl4.DataSource = AttendanceShiftCollect;
             gridView4.BestFitColumns();
         }
 

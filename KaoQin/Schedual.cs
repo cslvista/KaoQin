@@ -743,7 +743,7 @@ namespace KaoQin
         private void simpleButton2_Click(object sender, EventArgs e)
         {
 
-            //MessageBox.Show("提示：在导入之前，请先关闭要读取的Excel文件!");
+            MessageBox.Show("提示：在导入之前，请先关闭要读取的Excel文件!");
 
             //用于定位姓名列与排班第一列
             SchedualLocation form = new SchedualLocation();

@@ -118,6 +118,10 @@ namespace KaoQin.authority
                             {
                                 Attendance.Append(ThirdNode.Checked == true ? "1" : "0");
                             }
+                            if (ThirdNode.Text == "读取考勤机")
+                            {
+                                Attendance.Append(ThirdNode.Checked == true ? "1" : "0");
+                            }
                             continue;
                         }
 
@@ -232,6 +236,8 @@ namespace KaoQin.authority
             //考勤管理
             TreeNode Attendance_Read = new TreeNode();
             Attendance_Read.Text = "查看";
+            TreeNode Attendance_VisitMachine = new TreeNode();
+            Attendance_VisitMachine.Text = "读取考勤机";
             //授权管理
             TreeNode Autority_Read = new TreeNode();
             Autority_Read.Text = "查看";
@@ -253,6 +259,7 @@ namespace KaoQin.authority
             Shift.Nodes.Add(Shift_Read);
             Shift.Nodes.Add(Shift_Edit);
             Attendance.Nodes.Add(Attendance_Read);
+            Attendance.Nodes.Add(Attendance_VisitMachine);
             Autority.Nodes.Add(Autority_Read);
             Autority.Nodes.Add(Autority_Edit);
             Autority.Nodes.Add(Autority_Del);
@@ -369,14 +376,18 @@ namespace KaoQin.authority
                 }
 
                 //考勤
-                if (Authority.Rows[0]["KQGL"].ToString() == "1")
+                if (Authority.Rows[0]["KQGL"].ToString() == "11")
                 {
                     treeView1.Nodes[0].Nodes[4].Checked = true;
                     treeView1.Nodes[0].Nodes[4].Nodes[0].Checked = true;
+                    treeView1.Nodes[0].Nodes[4].Nodes[1].Checked = true;
                 }
                 else
                 {
-                    treeView1.Nodes[0].Nodes[4].Checked =false;
+                    string s1 = Authority.Rows[0]["KQGL"].ToString().Substring(0, 1);
+                    string s2 = Authority.Rows[0]["KQGL"].ToString().Substring(1, 1);
+                    treeView1.Nodes[0].Nodes[4].Nodes[0].Checked = s1 == "1" ? true : false;
+                    treeView1.Nodes[0].Nodes[4].Nodes[1].Checked = s2 == "1" ? true : false;
                 }
 
                 //授权
@@ -401,7 +412,7 @@ namespace KaoQin.authority
                 {
                     if (Authority.Rows[0]["SBGL"].ToString() == "111" && Authority.Rows[0]["BCGL"].ToString() == "11")
                     {
-                        if (Authority.Rows[0]["KQGL"].ToString() == "1" && Authority.Rows[0]["SQGL"].ToString() == "111")
+                        if (Authority.Rows[0]["KQGL"].ToString() == "11" && Authority.Rows[0]["SQGL"].ToString() == "111")
                         {
                             treeView1.Nodes[0].Checked = true;
                         }

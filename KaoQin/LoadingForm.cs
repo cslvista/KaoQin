@@ -142,7 +142,7 @@ namespace KaoQin
             {
                 return;
             }
-            Application.Exit();
+            Application.ExitThread();
         }
 
         public void CloseWin()
