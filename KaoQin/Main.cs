@@ -33,6 +33,7 @@ namespace KaoQin
         bool Authority_Mangement_Del = false;
         bool Authority_Attendance = false;
         bool Authority_Attendance_VisitMachine = false;
+        bool Authority_Attendance_DelDB = false;
         delegate void UpdateUI();
         public Main()
         {
@@ -84,6 +85,7 @@ namespace KaoQin
                 Authority_Mangement_Del = true;
                 Authority_Attendance = true;
                 Authority_Attendance_VisitMachine = true;
+                Authority_Attendance_DelDB = true;
                 return;
             }
             
@@ -169,17 +171,20 @@ namespace KaoQin
                 }
 
                 //考勤
-                if (Authority.Rows[0]["KQGL"].ToString() == "11")
+                if (Authority.Rows[0]["KQGL"].ToString() == "111")
                 {
                     Authority_Attendance = true;
                     Authority_Attendance_VisitMachine = true;
+                    Authority_Attendance_DelDB = true;
                 }
                 else
                 {
                     string s1 = Authority.Rows[0]["KQGL"].ToString().Substring(0, 1);
                     string s2 = Authority.Rows[0]["KQGL"].ToString().Substring(1, 1);
+                    string s3 = Authority.Rows[0]["KQGL"].ToString().Substring(2, 1);
                     Authority_Attendance = s1 == "1" ? true : false;
                     Authority_Attendance_VisitMachine = s2 == "1" ? true : false;
+                    Authority_Attendance_DelDB= s3 == "1" ? true : false;
                 }
 
                 //授权
@@ -362,6 +367,7 @@ namespace KaoQin
             {
                 Attendance form = new Attendance();
                 form.Authority_Attendance_VisitMachine = Authority_Attendance_VisitMachine;
+                form.Authority_Attendance_DelDB = Authority_Attendance_DelDB;
                 form.Show();
             }
             catch 

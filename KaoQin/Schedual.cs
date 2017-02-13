@@ -317,6 +317,7 @@ namespace KaoQin
             Staff_Name.Name = "Staff_Name";
             Staff_Name.Visible = true;
             Staff_Name.FieldName = "YGXM";
+            Staff_Name.Width = 30;
             Staff_Name.OptionsColumn.AllowEdit = false;
             band.Columns.Add(Staff_Name);
             bandedGridView1.Columns.Add(Staff_Name);
@@ -342,10 +343,11 @@ namespace KaoQin
                 Day_band.Caption = Week(StartDate);
                 bandedGridView1.Bands.Add(Day_band);
                 BandedGridColumn Day_Column = new BandedGridColumn();
-                Day_Column.Caption = StartDate.ToString("yyyy-MM-dd");
+                Day_Column.Caption = StartDate.ToString("MM-dd");
                 Day_Column.FieldName = StartDate.ToString("yyyy-MM-dd");
                 Day_Column.Name= Day_Column.FieldName;
                 Day_Column.Visible = true;
+                Day_Column.Width = 61;
                 Day_Column.ColumnEdit = Shift;
                 //Day_Column.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
                 Day_Column.OptionsColumn.AllowEdit = true;
@@ -361,7 +363,6 @@ namespace KaoQin
             }
 
             gridControl1.DataSource = Staff_WorkShift;
-            bandedGridView1.BestFitColumns();
             //禁止再更改
             comboBox1.Enabled = false;
             comboBoxMonth.Enabled = false;
@@ -880,7 +881,7 @@ namespace KaoQin
         {
             try
             {
-                string name = Week(DateTime.Parse(e.Column.Caption));
+                string name = Week(DateTime.Parse(e.Column.FieldName));
                 if (name == "周六" || name == "周日")
                 {
                     e.Appearance.BackColor = Color.AliceBlue;

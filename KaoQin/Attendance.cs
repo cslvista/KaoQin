@@ -44,6 +44,7 @@ namespace KaoQin
         string Record_startTime = "";//考勤原始数据的起始时间
         string Record_stopTime = "";//考勤原始数据的结束时间
         public bool Authority_Attendance_VisitMachine = false;
+        public bool Authority_Attendance_DelDB = false;
         public Attendance()
         {
             InitializeComponent();
@@ -376,19 +377,19 @@ namespace KaoQin
 
             //生成日期列
             DateTime day = StartDate;
-            for (int i = 0; i <= Timespan.Days; i++)
+            for (int i = 0; i <= Timespan.Days; i++)    
             {
                 GridBand Day_band = new GridBand();
                 Day_band.Caption = Week(day);
                 bandedGridView2.Bands.Add(Day_band);
                 BandedGridColumn Day_Column = new BandedGridColumn();
                 Day_Column.Caption = day.ToString("yyyy-MM-dd");
-                Day_Column.FieldName = Day_Column.Caption;
+                Day_Column.FieldName = day.ToString("yyyy-MM-dd");
                 Day_Column.Name = Day_Column.Caption;
                 Day_Column.Visible = true;
                 Day_Column.OptionsColumn.AllowEdit = true;
                 Day_band.Columns.Add(Day_Column);
-                AttendanceResult.Columns.Add(Day_Column.Name);
+                AttendanceResult.Columns.Add(Day_Column.FieldName);
                 bandedGridView2.Columns.Add(Day_Column);
                 day = day.AddDays(1);
             }
@@ -1171,7 +1172,7 @@ namespace KaoQin
         {
             try
             {
-                string name = Week(DateTime.Parse(e.Column.Caption));
+                string name = Week(DateTime.Parse(e.Column.FieldName));
                 if (name == "周六" || name == "周日")
                 {
                     e.Appearance.BackColor = Color.AliceBlue;
@@ -1180,6 +1181,7 @@ namespace KaoQin
             catch { }
 
             if (e.Column.FieldName != "YGXM")
+            {
                 switch (e.CellValue.ToString())
                 {
                     case "休": e.Appearance.ForeColor = Color.DarkGreen; break;
@@ -1189,6 +1191,8 @@ namespace KaoQin
                     case "正常下班": e.Appearance.ForeColor = Color.Blue; break;
                     default: e.Appearance.ForeColor = Color.Red; break;
                 }
+            }
+
 
         }
 
@@ -1222,13 +1226,13 @@ namespace KaoQin
                 }
                 string Name = bandedGridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
                 string Date = bandedGridView2.FocusedColumn.Caption;
-                var query = from rec in Record_Dep.AsEnumerable()
+                var query = (from rec in Record_Dep.AsEnumerable()
                             where rec.Field<string>("ID") == KQID && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date)) >= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(Date).AddDays(1)) < 0
                             select new
                             {
                                 Time = rec.Field<string>("Time"),
                                 Source = rec.Field<string>("Source"),
-                            };
+                            }).Distinct();
                 foreach (var obj in query)
                 {
                     Record_Person.Rows.Add(obj.Time, obj.Source);
@@ -1593,6 +1597,7 @@ namespace KaoQin
         private void FromDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DataOpeation.SaveToDB form = new DataOpeation.SaveToDB();
+            form.Authority_Attendance_DelDB = Authority_Attendance_DelDB;
             form.Show(this);
         }
 

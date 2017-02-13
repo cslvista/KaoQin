@@ -180,20 +180,19 @@ namespace KaoQin
             {
                 MessageBox.Show("考勤记录为空！");
             }
+            DataTable SaveData = new DataTable();
+            SaveData.Columns.Add("ID", typeof(string));
+            SaveData.Columns.Add("Time", typeof(DateTime));
+            SaveData.Columns.Add("Source", typeof(string));
 
-            var query= from rec in Record_DKJ.AsEnumerable()
+            var query= (from rec in Record_DKJ.AsEnumerable()
                        where Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit1.Text))>= 0 && Convert.ToDateTime(rec.Field<string>("Time")).CompareTo(Convert.ToDateTime(dateEdit2.Text).AddDays(1)) < 0
                        select new
                        {
                            ID = rec.Field<string>("ID"),
                            Time = rec.Field<string>("Time"),
                            Source = rec.Field<string>("Source"),
-                       };
-
-            DataTable SaveData = new DataTable();
-            SaveData.Columns.Add("ID", typeof(string));
-            SaveData.Columns.Add("Time", typeof(DateTime));
-            SaveData.Columns.Add("Source", typeof(string));
+                       }).Distinct();
 
             foreach (var obj in query)
             {

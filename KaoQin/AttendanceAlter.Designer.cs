@@ -54,18 +54,20 @@
             "早退",
             "准点上班",
             "准点下班"});
-            this.comboBox1.Location = new System.Drawing.Point(122, 98);
+            this.comboBox1.Location = new System.Drawing.Point(92, 80);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 28);
+            this.comboBox1.Size = new System.Drawing.Size(93, 25);
             this.comboBox1.TabIndex = 38;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(23, 24);
+            this.label4.Location = new System.Drawing.Point(17, 19);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 23);
+            this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 46;
             this.label4.Text = "员工姓名：";
             // 
@@ -73,9 +75,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(23, 63);
+            this.label1.Location = new System.Drawing.Point(17, 50);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 23);
+            this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 47;
             this.label1.Text = "考勤日期：";
             // 
@@ -83,9 +86,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(23, 102);
+            this.label2.Location = new System.Drawing.Point(17, 82);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 23);
+            this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 48;
             this.label2.Text = "考勤结果：";
             // 
@@ -93,9 +97,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(122, 26);
+            this.label3.Location = new System.Drawing.Point(92, 21);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 23);
+            this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 49;
             this.label3.Text = "label3";
             // 
@@ -103,9 +108,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(122, 62);
+            this.label5.Location = new System.Drawing.Point(92, 50);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 23);
+            this.label5.Size = new System.Drawing.Size(50, 20);
             this.label5.TabIndex = 50;
             this.label5.Text = "label5";
             // 
@@ -114,10 +120,10 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(52, 180);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(39, 144);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(71, 32);
+            this.simpleButton1.Size = new System.Drawing.Size(53, 26);
             this.simpleButton1.TabIndex = 36;
             this.simpleButton1.Text = "确认";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -126,27 +132,30 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(23, 141);
+            this.label6.Location = new System.Drawing.Point(17, 113);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 23);
+            this.label6.Size = new System.Drawing.Size(79, 20);
             this.label6.TabIndex = 51;
             this.label6.Text = "记为出勤：";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(122, 139);
+            this.textBox1.Location = new System.Drawing.Point(92, 113);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(73, 27);
+            this.textBox1.Size = new System.Drawing.Size(56, 23);
             this.textBox1.TabIndex = 52;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(204, 141);
+            this.label7.Location = new System.Drawing.Point(153, 114);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(27, 23);
+            this.label7.Size = new System.Drawing.Size(23, 20);
             this.label7.TabIndex = 53;
             this.label7.Text = "天";
             // 
@@ -155,19 +164,19 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(153, 180);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(115, 144);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(71, 32);
+            this.simpleButton2.Size = new System.Drawing.Size(53, 26);
             this.simpleButton2.TabIndex = 54;
             this.simpleButton2.Text = "退出";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // AttendanceAlter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 223);
+            this.ClientSize = new System.Drawing.Size(199, 178);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
@@ -180,6 +189,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AttendanceAlter";

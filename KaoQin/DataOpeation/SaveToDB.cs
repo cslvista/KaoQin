@@ -15,6 +15,7 @@ namespace KaoQin.DataOpeation
         DataTable Record_DKJ_Copy = new DataTable();
         DataTable Record = new DataTable();
         public bool Extract = false;
+        public bool Authority_Attendance_DelDB = false;
         public SaveToDB()
         {
             InitializeComponent();
@@ -50,6 +51,12 @@ namespace KaoQin.DataOpeation
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            if (Authority_Attendance_DelDB == false)
+            {
+                MessageBox.Show("您没有操作的权限！");
+                return;
+            }
+
             if (Record.Rows.Count == 0)
             {
                 return;
