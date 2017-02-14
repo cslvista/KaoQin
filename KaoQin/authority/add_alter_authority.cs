@@ -112,7 +112,7 @@ namespace KaoQin.authority
                             continue;
                         }
 
-                        if (SecondNode.Name == "考勤管理")
+                        if (SecondNode.Name == "考勤查询")
                         {
                             if (ThirdNode.Text == "查看")
                             {
@@ -198,7 +198,7 @@ namespace KaoQin.authority
             TreeNode Shift = new TreeNode();
             Shift.Text = "班次管理";
             TreeNode Attendance = new TreeNode();
-            Attendance.Text = "考勤管理";
+            Attendance.Text = "考勤查询";
             TreeNode Autority = new TreeNode();
             Autority.Text = "授权管理";
 
@@ -237,7 +237,7 @@ namespace KaoQin.authority
             Shift_Read.Text = "查看";
             TreeNode Shift_Edit = new TreeNode();
             Shift_Edit.Text = "新增与修改";
-            //考勤管理
+            //考勤查询
             TreeNode Attendance_Read = new TreeNode();
             Attendance_Read.Text = "查看";
             TreeNode Attendance_VisitMachine = new TreeNode();
@@ -483,24 +483,6 @@ namespace KaoQin.authority
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //if (e.Action == TreeViewAction.ByMouse)
-            //{
-            //    if (e.Node.Checked == true)
-            //    {
-            //        //选中节点之后，选中该节点所有的子节点
-            //        setChildNodeCheckedState(e.Node, true);
-            //    }
-            //    else if (e.Node.Checked == false)
-            //    {
-            //        //取消节点选中状态之后，取消该节点所有子节点选中状态
-            //        setChildNodeCheckedState(e.Node, false);
-            //        //如果节点存在父节点，取消父节点的选中状态
-            //        if (e.Node.Parent != null)
-            //        {
-            //            setParentNodeCheckedState(e.Node, false);
-            //        }
-            //    }
-            //}
         }
 
         private void gridLookUpEdit1_EditValueChanged(object sender, EventArgs e)

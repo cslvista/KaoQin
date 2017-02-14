@@ -864,7 +864,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Attendance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "考勤管理";
+            this.Text = "考勤查询";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Attendance_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

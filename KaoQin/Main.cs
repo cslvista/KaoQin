@@ -359,7 +359,7 @@ namespace KaoQin
         {
             if (Authority_Attendance == false)
             {
-                MessageBox.Show("您没有查看考勤管理的权限！");
+                MessageBox.Show("您没有查看考勤查询的权限！");
                 return;
             }
 
