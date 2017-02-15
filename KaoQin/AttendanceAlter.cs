@@ -14,7 +14,7 @@ namespace KaoQin
         public string Name="";
         public string Date = "";
         public string Result = "";
-        public int WorkDay = 0;
+        public double WorkDay = 0;
         public int Row=0;
         public int Column=0;
         public DateTime StartDate;
@@ -32,14 +32,14 @@ namespace KaoQin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            int day=0;
+            double day=0;
             try
             {
-                day=Convert.ToInt16(textBox1.Text);
+                day=Convert.ToDouble(textBox1.Text);
             }
             catch
             {
-                MessageBox.Show("出勤天数必须是整数！");
+                MessageBox.Show("出勤天数必须是数字！");
                 return;
             }
 

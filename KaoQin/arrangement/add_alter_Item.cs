@@ -69,7 +69,7 @@ namespace KaoQin.arrangement
 
             if (textBox2.Text == "")
             {
-                MessageBox.Show("请输入工作日！");
+                MessageBox.Show("请输入出勤日！");
                 return;
             }
 
@@ -91,11 +91,11 @@ namespace KaoQin.arrangement
 
             try
             {
-                Convert.ToInt16(textBox2.Text);
+                Convert.ToDouble(textBox2.Text);
             }
             catch
             {
-                MessageBox.Show("请输入正确的工作日！");
+                MessageBox.Show("请输入正确的出勤日！");
                 return;
             }
 

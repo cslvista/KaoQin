@@ -14,7 +14,7 @@ namespace KaoQin
         public DataTable PersonRecord = new DataTable();
         public DataTable PersonShift = new DataTable();
         public DataTable WorkShift = new DataTable();
-        public int workDay = 0;
+        public double workDay = 0;
         public string name = "";
         public string Date="";
         public PersonData()
