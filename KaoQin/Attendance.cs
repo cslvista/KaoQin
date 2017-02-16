@@ -1707,9 +1707,9 @@ namespace KaoQin
             //检查有几个班次的类型，作为表的列名
             for (int i = 0; i < ArrangementItem.Rows.Count; i++)
             {
-                for (int j = 0; j < 31; j++)
+                //天数
+                for (int j = 0; j <31; j++)
                 {
-                    Hashtable PersonCount = new Hashtable();
                     if (ArrangementItem.Rows[i][j + 3].ToString() != "")
                     {
                         if (ShiftCount.Contains(ArrangementItem.Rows[i][j + 3]) == false)

@@ -924,5 +924,31 @@ namespace KaoQin
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
             }
         }
+
+        private void 清空ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Staff_WorkShift.Rows.Count == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                int row = 0;
+                //找到焦点行
+                for (int i = 0; i < Staff_WorkShift.Rows.Count;i++)
+                {
+                    if (Staff_WorkShift.Rows[i]["KQID"].ToString() == bandedGridView1.GetFocusedRowCellValue("KQID").ToString())
+                    {
+                        row = i;
+                        break;
+                    }
+                }
+
+                Staff_WorkShift.Rows[row][bandedGridView1.FocusedColumn.FieldName] = "";
+            }
+            catch { }
+
+        }
     }
 }

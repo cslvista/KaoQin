@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Schedual));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
@@ -46,11 +47,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -61,7 +65,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
@@ -71,11 +75,12 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.ContextMenuStrip = this.contextMenuStrip1;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl1.Location = new System.Drawing.Point(2, 54);
             this.gridControl1.MainView = this.bandedGridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1037, 529);
             this.gridControl1.TabIndex = 0;
@@ -124,7 +129,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1037, 48);
             this.panel1.TabIndex = 1;
@@ -133,7 +138,7 @@
             // searchControl1
             // 
             this.searchControl1.Location = new System.Drawing.Point(60, 15);
-            this.searchControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchControl1.Margin = new System.Windows.Forms.Padding(2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchControl1.Properties.Appearance.Options.UseFont = true;
@@ -174,7 +179,7 @@
             "11月",
             "12月"});
             this.comboBoxMonth.Location = new System.Drawing.Point(547, 13);
-            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(77, 25);
             this.comboBoxMonth.TabIndex = 41;
@@ -185,7 +190,7 @@
             this.comboBoxYear.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxYear.FormattingEnabled = true;
             this.comboBoxYear.Location = new System.Drawing.Point(453, 13);
-            this.comboBoxYear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxYear.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxYear.Name = "comboBoxYear";
             this.comboBoxYear.Size = new System.Drawing.Size(77, 25);
             this.comboBoxYear.TabIndex = 40;
@@ -196,7 +201,7 @@
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(231, 14);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(128, 25);
             this.comboBox1.TabIndex = 39;
@@ -207,7 +212,7 @@
             this.ButtonSave.Appearance.Options.UseFont = true;
             this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
             this.ButtonSave.Location = new System.Drawing.Point(742, 14);
-            this.ButtonSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonSave.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(54, 24);
             this.ButtonSave.TabIndex = 36;
@@ -220,7 +225,7 @@
             this.ButtonCreate.Appearance.Options.UseFont = true;
             this.ButtonCreate.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCreate.Image")));
             this.ButtonCreate.Location = new System.Drawing.Point(647, 14);
-            this.ButtonCreate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonCreate.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonCreate.Name = "ButtonCreate";
             this.ButtonCreate.Size = new System.Drawing.Size(75, 24);
             this.ButtonCreate.TabIndex = 5;
@@ -233,7 +238,7 @@
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
             this.ButtonExport.Location = new System.Drawing.Point(915, 14);
-            this.ButtonExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonExport.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(80, 24);
             this.ButtonExport.TabIndex = 4;
@@ -246,7 +251,7 @@
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
             this.ButtonImport.Location = new System.Drawing.Point(815, 14);
-            this.ButtonImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonImport.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(80, 24);
             this.ButtonImport.TabIndex = 3;
@@ -286,13 +291,27 @@
             this.label1.TabIndex = 38;
             this.label1.Text = "部门：";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.清空ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // 清空ToolStripMenuItem
+            // 
+            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
+            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清空ToolStripMenuItem.Text = "清空";
+            this.清空ToolStripMenuItem.Click += new System.EventHandler(this.清空ToolStripMenuItem_Click);
+            // 
             // Schedual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 585);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Schedual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "排班计划";
@@ -304,6 +323,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -327,5 +347,7 @@
         public System.Windows.Forms.ComboBox comboBoxYear;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
     }
 }
