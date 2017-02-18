@@ -835,7 +835,7 @@ namespace KaoQin
                             continue;
                         }
 
-                        if ((PersonShiftAll.Rows[i]["SBSJ"].ToString() != "" || PersonShiftAll.Rows[i]["XBSJ"].ToString() != "") && Record_Today.Rows.Count == 0)
+                        if ((PersonShiftAll.Rows[i]["SBSJ"].ToString() != "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() != "") && Record_Today.Rows.Count == 0)
                         {
                             result.Append("全天未签");
                             continue;
@@ -986,7 +986,7 @@ namespace KaoQin
             DateTime time1 = Convert.ToDateTime("21:00");
             DateTime XBTime = new DateTime();
 
-            if (XBSJ.AddMinutes(-leaveEarly).CompareTo(XBSJ) < 0)
+            if (XBSJ.AddMinutes(-leaveEarly).CompareTo(XBSJ) <= 0)
             {
                 XBTime = XBSJ.AddMinutes(-leaveEarly);
             }
@@ -1059,7 +1059,7 @@ namespace KaoQin
             DateTime time2 = Convert.ToDateTime("22:00");
             DateTime SBTime = new DateTime();
 
-            if (SBSJ.AddMinutes(late).CompareTo(SBSJ) > 0)
+            if (SBSJ.AddMinutes(late).CompareTo(SBSJ) >= 0)
             {
                 SBTime = SBSJ.AddMinutes(late);
             } else
@@ -1526,7 +1526,7 @@ namespace KaoQin
             {
                 AttendanceAlter form = new AttendanceAlter();
                 form.Name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
-                form.Date = bandedGridView2.FocusedColumn.Caption;
+                form.Date = bandedGridView2.FocusedColumn.FieldName;
                 form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString();
                 for (int i = 0; i < AttendanceResult.Rows.Count; i++)
                 {

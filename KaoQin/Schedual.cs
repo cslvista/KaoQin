@@ -934,6 +934,11 @@ namespace KaoQin
 
             try
             {
+                if (bandedGridView1.FocusedColumn.FieldName=="YGXM")
+                {
+                    return;
+                }
+
                 int row = 0;
                 //找到焦点行
                 for (int i = 0; i < Staff_WorkShift.Rows.Count;i++)

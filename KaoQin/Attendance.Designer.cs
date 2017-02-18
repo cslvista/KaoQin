@@ -719,7 +719,7 @@
             this.gridColumn6.FieldName = "Normal";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 3;
+            this.gridColumn6.VisibleIndex = 4;
             // 
             // gridColumn7
             // 
@@ -727,7 +727,7 @@
             this.gridColumn7.FieldName = "Late";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 4;
+            this.gridColumn7.VisibleIndex = 5;
             // 
             // gridColumn12
             // 
@@ -743,7 +743,7 @@
             this.gridColumn9.FieldName = "LeaveEarly";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.VisibleIndex = 6;
             // 
             // gridColumn13
             // 
@@ -767,7 +767,7 @@
             this.gridColumn10.FieldName = "Rest";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 7;
+            this.gridColumn10.VisibleIndex = 3;
             // 
             // gridColumn11
             // 
@@ -783,7 +783,7 @@
             this.gridColumn15.FieldName = "OverTime";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 6;
+            this.gridColumn15.VisibleIndex = 7;
             // 
             // tabPage3
             // 

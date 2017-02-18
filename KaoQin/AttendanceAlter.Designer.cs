@@ -53,9 +53,9 @@
             "迟到",
             "早退",
             "准点上班",
-            "准点下班"});
+            "正常下班"});
             this.comboBox1.Location = new System.Drawing.Point(92, 80);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(93, 25);
             this.comboBox1.TabIndex = 38;
@@ -120,8 +120,8 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(39, 144);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton1.Location = new System.Drawing.Point(39, 147);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(53, 26);
             this.simpleButton1.TabIndex = 36;
@@ -143,7 +143,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(92, 113);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(56, 23);
             this.textBox1.TabIndex = 52;
@@ -164,8 +164,8 @@
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(115, 144);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(115, 147);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(53, 26);
             this.simpleButton2.TabIndex = 54;
@@ -176,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(199, 178);
+            this.ClientSize = new System.Drawing.Size(204, 181);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
@@ -189,7 +189,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AttendanceAlter";

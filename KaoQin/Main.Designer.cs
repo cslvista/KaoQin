@@ -161,6 +161,8 @@
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.Blue;
+            this.gridView1.Appearance.FocusedCell.Options.UseForeColor = true;
             this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
