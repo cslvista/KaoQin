@@ -16,7 +16,7 @@ namespace KaoQin
 {
     public partial class Attendance : Form
     {
-        zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
+        
         DataTable Machine = new DataTable();//机器信息
         DataTable Department = new DataTable();//部门
         public DataTable AttendanceResult = new DataTable();//考勤结果
@@ -78,96 +78,16 @@ namespace KaoQin
             Staff_Orign.Clear();
 
             //读取考勤机数据
-            Thread t1 = new Thread(DownloadData);
-            t1.IsBackground = true;
-            t1.Start();
-            return;
-
-            //string sql = "select ID,Machine,IP,Port,Password from KQ_Machine";
-
-            //try
-            //{
-            //    Machine = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("错误1:" + ex.Message);
-            //    return;
-            //}
-
-            //if (Machine.Rows.Count == 0)
-            //{
-            //    MessageBox.Show("没有可用设备！");
-            //    return;
-            //}
-
-
-            //DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
-            //DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
-            //bool bIsConnected = false;//判断设备是否可连接   
-            //string sdwEnrollNumber = "";
-            //string sName = "";
-            //string sPassword = "";
-            //int iPrivilege = 0;
-            //bool bEnabled = false;
-
-            //this.Text = "正在读取员工数据...";
-            //DKJ.ReadAllUserID(0);
-            //while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
-            //{
-            //    int position = sName.IndexOf("\0");
-            //    string name = sName.Substring(0, position);//过滤sName中多余字符
-            //    Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
-
-            //}
-
-            //int iMachineNumber = 0;
-            //int VerifyMode = 0;
-            //int InOutMode = 0;
-            //int Year = 0;
-            //int Month = 0;
-            //int Day = 0;
-            //int Hour = 0;
-            //int Minute = 0;
-            //int Second = 0;
-            //int Workcode = 0;
-            //string dwEnrollNumber = "";
-
-            //this.Text = "正在下载考勤数据，请稍候...";
-            //for (int i = 0; i < Machine.Rows.Count; i++)
-            //{
-            //    DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
-            //    bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
-            //    if (bIsConnected == false)
-            //    {
-            //        MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
-            //        return;
-            //    }
-            //    int j = 0;
-            //    DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
-            //    while (DKJ.SSR_GetGeneralLogData(iMachineNumber, out dwEnrollNumber, out VerifyMode, out InOutMode, out Year, out Month, out Day, out Hour, out Minute, out Second, ref Workcode))
-            //    {
-            //        j++;
-            //        string time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", Year, Month, Day, Hour, Minute, Second);
-            //        string time1 = Convert.ToDateTime(time).ToString("yyyy-MM-dd  HH:mm:ss");
-            //        Record_DKJ.Rows.Add(new object[] { dwEnrollNumber, time1, Machine.Rows[i]["Machine"].ToString() });
-            //        this.Text = string.Format("正在读取{0}第{1}条数据", Machine.Rows[i]["Machine"].ToString(), j);
-            //    }
-            //}
-            ////下载数据完毕
-            //MessageBox.Show("数据已经下载完成，请选择相应部门并点击'查询计算'按钮查看考勤结果！");
-            //HasDownload = true;
-            //ButtonCal.Enabled = true;
-            //ButtonOrignData.Enabled = true;
-        }
-
-        private void DownloadData()
-        {
-            this.BeginInvoke(new UpdateUI(delegate ()
+            try
             {
+                zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
                 LoadingForm form = new LoadingForm();
                 form.ShowDialog(this);
-            }));
+            }
+            catch
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+            }
         }
 
         private void Attendance_Load(object sender, EventArgs e)
@@ -1198,10 +1118,17 @@ namespace KaoQin
 
         private void ButtonOrignData_Click(object sender, EventArgs e)
         {
-            OrignData form = new OrignData();
-            form.Record_DKJ = Record_DKJ.Copy();
-            form.Staff = Staff_Orign.Copy();
-            form.Show(this);
+            try
+            {
+                OrignData form = new OrignData();
+                form.Record_DKJ = Record_DKJ.Copy();
+                form.Staff = Staff_Orign.Copy();
+                form.Show(this);
+            }catch
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+            }
+            
         }
 
         private void gridControl2_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1807,7 +1734,11 @@ namespace KaoQin
                         AttendanceShiftCollect.Rows[i]["Collect"] = 0;
                     }
 
-                    AttendanceShiftCollect.Rows[i]["Collect"] = Convert.ToInt32(AttendanceShiftCollect.Rows[i]["Collect"]) + Convert.ToInt32(AttendanceShiftCollect.Rows[i][j+3]);
+                    if (AttendanceShiftCollect.Rows[i][j + 3].ToString()!="")
+                    {
+                        AttendanceShiftCollect.Rows[i]["Collect"] = Convert.ToInt32(AttendanceShiftCollect.Rows[i]["Collect"]) + Convert.ToInt32(AttendanceShiftCollect.Rows[i][j + 3]);
+                    }
+                    
                 }
             }
 
@@ -1820,6 +1751,17 @@ namespace KaoQin
             if (e.Info.IsRowIndicator && e.RowHandle >= 0)
             {
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
+        }
+
+        private void gridView4_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName != "YGXM" && e.Column.FieldName != "KQID" && e.Column.FieldName != "Collect")
+            {
+                if (Convert.ToInt32(e.CellValue.ToString()) > 0)
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
             }
         }
     }

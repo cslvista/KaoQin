@@ -180,5 +180,38 @@ namespace KaoQin.machine
                 }
             }
         }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            if (gridView1.RowCount == 0)
+            {
+                return;
+            }
+
+            if (MessageBox.Show(string.Format("是否重启设备 '{0}'?", gridView1.GetFocusedRowCellValue("Machine").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                DKJ.SetCommPassword(Convert.ToInt32(gridView1.GetFocusedRowCellDisplayText("Password").ToString()));
+                if (DKJ.Connect_Net(gridView1.GetFocusedRowCellDisplayText("IP").ToString(), Convert.ToInt32(gridView1.GetFocusedRowCellDisplayText("Port").ToString())))
+                {
+                    DKJ.RestartDevice(0);
+                    MessageBox.Show("重启成功！");
+                }else
+                {
+                    MessageBox.Show("重启失败！");
+                }
+            }
+            catch 
+            {
+                MessageBox.Show("重启失败！");
+                return;
+            }
+            
+           
+        }
     }
 }

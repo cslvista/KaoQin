@@ -184,9 +184,7 @@ namespace KaoQin.users
             catch
             {
                 MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
-            }
-
-            
+            }            
         }
 
         private void searchControl2_TextChanged(object sender, EventArgs e)
