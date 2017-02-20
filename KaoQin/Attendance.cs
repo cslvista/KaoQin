@@ -1712,16 +1712,16 @@ namespace KaoQin
                         }
                     }
 
-                    if (j == 30)
-                    {
-                        for (int k = 0; k < AttendanceShiftCollect.Columns.Count; k++)
-                        {
-                            if (AttendanceShiftCollect.Rows[i][k].ToString() == "")
-                            {
-                                AttendanceShiftCollect.Rows[i][k] = 0;
-                            }
-                        }
-                    }
+                    //if (j == 30)
+                    //{
+                    //    for (int k = 0; k < AttendanceShiftCollect.Columns.Count; k++)
+                    //    {
+                    //        if (AttendanceShiftCollect.Rows[i][k].ToString() == "")
+                    //        {
+                    //            AttendanceShiftCollect.Rows[i][k] = 0;
+                    //        }
+                    //    }
+                    //}
                 }
             }
             //计算总计
@@ -1754,15 +1754,34 @@ namespace KaoQin
             }
         }
 
-        private void gridView4_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        private void gridView4_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
-            if (e.Column.FieldName != "YGXM" && e.Column.FieldName != "KQID" && e.Column.FieldName != "Collect")
+            for (int i = 0; i < gridView4.Columns.Count; i++)
             {
-                if (Convert.ToInt32(e.CellValue.ToString()) > 0)
+                if (i!= e.Column.ColumnHandle)
                 {
-                    e.Appearance.ForeColor = Color.Red;
-                }
+                    gridView4.Columns[i].AppearanceHeader.ForeColor = Color.Black;
+                }else
+                {
+                    gridView4.Columns[e.Column.ColumnHandle].AppearanceHeader.ForeColor = Color.Red;
+                }                
             }
+            
+        }
+
+        private void gridView3_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            //for (int i = 0; i < gridView3.Columns.Count; i++)
+            //{
+            //    if (i != e.Column.ColumnHandle)
+            //    {
+            //        gridView3.Columns[i].AppearanceHeader.ForeColor = Color.Black;
+            //    }
+            //    else
+            //    {
+            //        gridView3.Columns[e.Column.ColumnHandle].AppearanceHeader.ForeColor = Color.Red;
+            //    }
+            //}
         }
     }
 }

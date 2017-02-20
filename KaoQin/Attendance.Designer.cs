@@ -667,20 +667,21 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn16,
+            this.gridColumn10,
             this.gridColumn6,
             this.gridColumn7,
-            this.gridColumn12,
             this.gridColumn9,
+            this.gridColumn15,
+            this.gridColumn12,
             this.gridColumn13,
             this.gridColumn14,
-            this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn15});
+            this.gridColumn11});
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.Editable = false;
             this.gridView3.OptionsView.ColumnAutoWidth = false;
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView3_RowCellClick);
             this.gridView3.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView3_CustomDrawRowIndicator);
             // 
             // gridColumn3
@@ -818,8 +819,8 @@
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsView.ColumnAutoWidth = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridView4.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView4_RowCellClick);
             this.gridView4.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView4_CustomDrawRowIndicator);
-            this.gridView4.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView4_RowCellStyle);
             // 
             // barEditItem1
             // 

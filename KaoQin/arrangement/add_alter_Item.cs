@@ -63,7 +63,7 @@ namespace KaoQin.arrangement
         {
             if (textBox3.Text == "")
             {
-                MessageBox.Show("请输入名称！");
+                MessageBox.Show("请输入班次名称！");
                 return;
             }
 
