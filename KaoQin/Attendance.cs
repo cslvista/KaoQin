@@ -1452,7 +1452,7 @@ namespace KaoQin
             try
             {
                 AttendanceAlter form = new AttendanceAlter();
-                form.Name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
+                form.name = bandedGridView2.GetFocusedRowCellValue("YGXM").ToString();
                 form.Date = bandedGridView2.FocusedColumn.FieldName;
                 form.Result = bandedGridView2.GetFocusedRowCellValue(bandedGridView2.FocusedColumn.Caption).ToString();
                 for (int i = 0; i < AttendanceResult.Rows.Count; i++)
@@ -1479,7 +1479,7 @@ namespace KaoQin
             try
             {
                 AttendanceAlter form = new AttendanceAlter();
-                form.Name = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+                form.name = gridView1.GetFocusedRowCellValue("BMMC").ToString();
                 form.Date = bandedGridView2.FocusedColumn.Caption;
                 form.Row = bandedGridView2.GetDataSourceRowIndex(bandedGridView2.FocusedRowHandle);
                 form.StartDate = StartDate;
@@ -1782,6 +1782,26 @@ namespace KaoQin
             //        gridView3.Columns[e.Column.ColumnHandle].AppearanceHeader.ForeColor = Color.Red;
             //    }
             //}
+        }
+
+        private void gridView4_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void gridView4_CellMerge(object sender, DevExpress.XtraGrid.Views.Grid.CellMergeEventArgs e)
+        {
+            for (int i = 0; i < gridView4.Columns.Count; i++)
+            {
+                if (i != e.Column.ColumnHandle)
+                {
+                    gridView4.Columns[i].AppearanceHeader.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gridView4.Columns[e.Column.ColumnHandle].AppearanceHeader.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

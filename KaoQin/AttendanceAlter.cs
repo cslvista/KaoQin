@@ -11,7 +11,7 @@ namespace KaoQin
 {
     public partial class AttendanceAlter : Form
     {
-        public string Name="";
+        public string name="";
         public string Date = "";
         public string Result = "";
         public double WorkDay = 0;
@@ -76,13 +76,13 @@ namespace KaoQin
             if (AlterColumn == true)
             {
                 label4.Text = "部门名称：";
-                label3.Text = Name;
+                label3.Text = name;
                 textBox1.Text = "1";
                 label5.Text = Convert.ToDateTime(Date).Year + "年" + Convert.ToDateTime(Date).Month + "月" + Convert.ToDateTime(Date).Day + "日";
             }
             else
             {
-                label3.Text = Name;
+                label3.Text = name;
                 label5.Text = Convert.ToDateTime(Date).Year + "年" + Convert.ToDateTime(Date).Month + "月" + Convert.ToDateTime(Date).Day + "日";
                 comboBox1.Text = Result;
                 textBox1.Text = WorkDay.ToString();

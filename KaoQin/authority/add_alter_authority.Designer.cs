@@ -162,7 +162,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "add_alter_authority";
+            this.name = "add_alter_authority";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "授权管理";
             this.Load += new System.EventHandler(this.add_alter_authority_Load);

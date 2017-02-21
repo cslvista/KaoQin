@@ -14,7 +14,7 @@ namespace KaoQin.authority
         public bool alter = false;
         DataTable users = new DataTable();
         public string ID = "";
-        public string Name = "";
+        public string name = "";
         DataTable Authority = new DataTable();
         public add_alter_authority()
         {

@@ -26,8 +26,7 @@ namespace test
         {
             textBox1.Text = "G0017";
             textBox3.Text = "111111";
-            textBox2.Text = "800";
-            textBox4.Text = "450";
+            textBox2.Text = "2";
 
             button1_Click(null, null);
         }
@@ -39,7 +38,7 @@ namespace test
 
             IntPtr ParenthWnd = new IntPtr(0);
             AutoLogin.AutoLogin AL = new AutoLogin.AutoLogin();
-            if (AL.autoLogin(textBox1.Text, textBox3.Text, Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox4.Text), "") == true)
+            if (AL.autoLogin(textBox1.Text, textBox3.Text, Convert.ToInt32(textBox2.Text)) == true)
             {
                 Thread.Sleep(50);
                 ParenthWnd = FindWindow(null, "用户登录");

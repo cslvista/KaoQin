@@ -81,15 +81,15 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -714,6 +714,14 @@
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 2;
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "休假";
+            this.gridColumn10.FieldName = "Rest";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 3;
+            // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "正常";
@@ -730,14 +738,6 @@
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 5;
             // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "全天未签";
-            this.gridColumn12.FieldName = "Absent";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 8;
-            // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "早退";
@@ -745,6 +745,22 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 6;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "加班";
+            this.gridColumn15.FieldName = "OverTime";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 7;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "全天未签";
+            this.gridColumn12.FieldName = "Absent";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 8;
             // 
             // gridColumn13
             // 
@@ -762,14 +778,6 @@
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 10;
             // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "休假";
-            this.gridColumn10.FieldName = "Rest";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 3;
-            // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "工作年限";
@@ -777,14 +785,6 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 11;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "加班";
-            this.gridColumn15.FieldName = "OverTime";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 7;
             // 
             // tabPage3
             // 
@@ -820,6 +820,7 @@
             this.gridView4.OptionsView.ColumnAutoWidth = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             this.gridView4.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView4_RowCellClick);
+            this.gridView4.CellMerge += new DevExpress.XtraGrid.Views.Grid.CellMergeEventHandler(this.gridView4_CellMerge);
             this.gridView4.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView4_CustomDrawRowIndicator);
             // 
             // barEditItem1

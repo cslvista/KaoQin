@@ -190,18 +190,6 @@ namespace KaoQin
                 StartDate =Convert.ToDateTime(startDate);
                 StopDate = StartDate.AddMonths(1).AddDays(-1);
                 Timespan = StopDate-StartDate;
-
-                if (Timespan.Days < 0)
-                {
-                    MessageBox.Show("结束时间不得小于开始时间！");
-                    return;
-                }
-
-                if (Timespan.Days > 62)
-                {
-                    MessageBox.Show("不能生成超过两个月的计划！");
-                    return;
-                }
             }
             catch (Exception ex)
             {

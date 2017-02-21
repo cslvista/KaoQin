@@ -71,7 +71,7 @@ namespace KaoQin.authority
             add_alter_authority form = new add_alter_authority();
             form.alter = true;
             form.ID = gridView1.GetFocusedRowCellValue("ID").ToString();
-            form.Name= gridView1.GetFocusedRowCellValue("Name").ToString();
+            form.name= gridView1.GetFocusedRowCellValue("Name").ToString();
             form.Show(this);
         }
 

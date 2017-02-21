@@ -192,7 +192,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AttendanceAlter";
+            this.name = "AttendanceAlter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改考勤结果";
             this.Load += new System.EventHandler(this.AttendanceAlter_Load);
