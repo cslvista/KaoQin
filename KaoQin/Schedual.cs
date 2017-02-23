@@ -335,7 +335,7 @@ namespace KaoQin
                 Day_Column.FieldName = StartDate.ToString("yyyy-MM-dd");
                 Day_Column.Name= Day_Column.FieldName;
                 Day_Column.Visible = true;
-                Day_Column.Width = 61;
+                Day_Column.Width = 62;
                 Day_Column.ColumnEdit = Shift;
                 //Day_Column.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
                 Day_Column.OptionsColumn.AllowEdit = true;

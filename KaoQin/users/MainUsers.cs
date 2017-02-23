@@ -44,7 +44,7 @@ namespace KaoQin.users
 
         private void UILocation()
         {
-            tableLayoutPanel1.RowStyles[0].Height = searchControl2.Height + toolStrip1.Height + 15;
+            tableLayoutPanel1.RowStyles[0].Height = searchControl2.Height + toolStrip1.Height + 12;
             int height =(panelControl2.Height-ButtonAdd.Height)/2;
             ButtonAdd.Location=new Point(ButtonAdd.Location.X, height);
             ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);

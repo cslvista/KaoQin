@@ -234,6 +234,7 @@
             this.Name = "SearchMachine";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "查询考勤机";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Search_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();

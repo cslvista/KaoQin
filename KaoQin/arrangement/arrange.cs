@@ -24,10 +24,21 @@ namespace KaoQin.arrangement
 
         private void arrange_Load(object sender, EventArgs e)
         {
+            UILocation();
             searchControl1.Properties.NullValuePrompt = "请输入时段名称";
             searchControl2.Properties.NullValuePrompt = "请输入部门类别";
             gridView2.OptionsBehavior.AutoExpandAllGroups = true;
             toolStripButtonRefresh_Click(null, null);
+        }
+
+        private void UILocation()
+        {
+            tableLayoutPanel1.RowStyles[0].Height = searchControl2.Height + toolStrip1.Height + 12;
+            int height = (panelControl2.Height - ButtonAdd.Height) / 2;
+            ButtonAdd.Location = new Point(ButtonAdd.Location.X, height);
+            ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);
+            ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
+            searchControl1.Location = new Point(searchControl1.Location.X, (panelControl2.Height - searchControl1.Height) / 2);
         }
 
 
