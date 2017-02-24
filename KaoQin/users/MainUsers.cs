@@ -145,6 +145,41 @@ namespace KaoQin.users
                 MessageBox.Show("错误1:" + ex.Message);
                 return;
             }
+
+            //写入日志
+            string sql_del = string.Format("select max(ID) from KQ_LOG");
+            string ID = "";
+            DataTable MaxID = new DataTable();
+            try
+            {
+                MaxID = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql_del);
+                if (MaxID.Rows[0][0].ToString() == "")
+                {
+                    ID = "1";
+                }
+                else
+                {
+                    ID = (Convert.ToInt32(MaxID.Rows[0][0].ToString()) + 1).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误2:" + ex.Message);
+                return;
+            }
+
+            try
+            {
+                string Record = string.Format("{0}删除了员工{1}", GlobalHelper.UserHelper.User["U_NAME"].ToString(), gridView2.GetFocusedRowCellDisplayText("YGXM").ToString());
+                string sql = string.Format("insert into KQ_LOG (ID,Record,Time) values ('{0}','{1}','{2}')", ID, Record, GlobalHelper.IDBHelper.GetServerDateTime());
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误3:" + ex.Message);
+                return;
+            }
+
         }
 
         public void simpleButton2_Click(object sender, EventArgs e)
@@ -179,6 +214,7 @@ namespace KaoQin.users
             try
             {
                 SearchMachine form = new SearchMachine();
+                form.Location = new Point(Screen.PrimaryScreen.Bounds.Width*63/100,(Screen.PrimaryScreen.Bounds.Height-form.Height)/2);
                 form.Show();
             }
             catch

@@ -232,7 +232,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "SearchMachine";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "查询考勤机";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Search_Load);

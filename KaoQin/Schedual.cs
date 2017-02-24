@@ -72,9 +72,19 @@ namespace KaoQin
                 //将排班内容填充
                 for (int i = 0; i < Staff.Rows.Count; i++)
                 {
+                    int row = 0;
+                    for (int j=0;j< Staff_WorkShift_SQL.Rows.Count; j++)
+                    {
+                        if (Staff_WorkShift.Rows[i]["KQID"].ToString()== Staff_WorkShift_SQL.Rows[j]["KQID"].ToString())
+                        {
+                            row = j;
+                            break;
+                        }
+                    }
+
                     for (int j=2;j<=Timespan.Days+2; j++)
                     {
-                        Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[i][j+1].ToString();
+                        Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[row][j+1].ToString();
                     }
                 }
                 Staff_WorkShift_SQL_Copy = Staff_WorkShift_SQL.Copy();
@@ -512,6 +522,7 @@ namespace KaoQin
                 if (WriteLog(details.ToString()))
                 {
                     MessageBox.Show("保存成功！");
+                    this.Close();
                 }
                
             }
