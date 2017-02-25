@@ -98,8 +98,6 @@
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -550,7 +548,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(973, 542);
+            this.tabPage1.Size = new System.Drawing.Size(1112, 542);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "考勤明细";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -564,7 +562,7 @@
             this.gridControl2.MainView = this.bandedGridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(969, 538);
+            this.gridControl2.Size = new System.Drawing.Size(1108, 538);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView2});
@@ -677,9 +675,7 @@
             this.gridColumn12,
             this.gridColumn13,
             this.gridColumn14,
-            this.gridColumn11,
-            this.gridColumn17,
-            this.gridColumn18});
+            this.gridColumn11});
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.Editable = false;
@@ -764,7 +760,7 @@
             this.gridColumn12.FieldName = "Absent";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 10;
+            this.gridColumn12.VisibleIndex = 8;
             // 
             // gridColumn13
             // 
@@ -772,7 +768,7 @@
             this.gridColumn13.FieldName = "Morning";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 11;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // gridColumn14
             // 
@@ -780,7 +776,7 @@
             this.gridColumn14.FieldName = "Afternoon";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 12;
+            this.gridColumn14.VisibleIndex = 10;
             // 
             // gridColumn11
             // 
@@ -788,7 +784,7 @@
             this.gridColumn11.FieldName = "WorkYear";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 13;
+            this.gridColumn11.VisibleIndex = 11;
             // 
             // tabPage3
             // 
@@ -796,7 +792,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(973, 542);
+            this.tabPage3.Size = new System.Drawing.Size(1112, 542);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "班次汇总";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -808,7 +804,7 @@
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.MenuManager = this.barManager1;
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(967, 536);
+            this.gridControl4.Size = new System.Drawing.Size(1106, 536);
             this.gridControl4.TabIndex = 0;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -857,22 +853,6 @@
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "正常上班";
-            this.gridColumn17.FieldName = "morningNormal";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 8;
-            // 
-            // gridColumn18
-            // 
-            this.gridColumn18.Caption = "正常下班";
-            this.gridColumn18.FieldName = "afternoonNormal";
-            this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 9;
             // 
             // Attendance
             // 
@@ -988,7 +968,5 @@
         private System.Windows.Forms.TabPage tabPage3;
         private DevExpress.XtraGrid.GridControl gridControl4;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
     }
 }

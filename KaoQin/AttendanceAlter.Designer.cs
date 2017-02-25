@@ -49,11 +49,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "正常",
             "休",
-            "加班",
-            "迟到",
-            "早退",
-            "准点上班",
-            "正常下班"});
+            "加班"});
             this.comboBox1.Location = new System.Drawing.Point(92, 80);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
@@ -192,7 +188,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.name = "AttendanceAlter";
+            this.Name = "AttendanceAlter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改考勤结果";
             this.Load += new System.EventHandler(this.AttendanceAlter_Load);
