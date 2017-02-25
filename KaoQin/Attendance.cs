@@ -136,6 +136,8 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("OverTime", typeof(int));
             AttendanceCollect.Columns.Add("WorkDay", typeof(double));
             AttendanceCollect.Columns.Add("WorkYear", typeof(string));
+            AttendanceCollect.Columns.Add("morningNormal", typeof(int));
+            AttendanceCollect.Columns.Add("afternoonNormal", typeof(int));
 
             string TimeNow = GlobalHelper.IDBHelper.GetServerDateTime();
             comboBoxYear.Items.Add(Convert.ToDateTime(TimeNow).Year.ToString() + "年");
@@ -545,6 +547,8 @@ namespace KaoQin
             int morning;//上午未签
             int afternoon;//下午未签
             int overTime;//加班
+            int morningNormal;//正常上班
+            int afternoonNormal;//正常下班
             double workDay;//出勤
             for (int i = 0; i < Staff.Rows.Count; i++)
             {
@@ -557,6 +561,8 @@ namespace KaoQin
                 morning = 0;
                 afternoon = 0;
                 overTime = 0;
+                morningNormal = 0;
+                afternoonNormal = 0;
                 workDay = 0;
                 for (int j = 0; j <= Timespan; j++)
                 {
@@ -567,7 +573,7 @@ namespace KaoQin
                         continue;
                     }
 
-                    if (AttendanceResult.Rows[i][j + 2].ToString() == "休")
+                    if (AttendanceResult.Rows[i][j + 2].ToString().IndexOf("休") > -1)
                     {
                         rest = rest + 1;
                         continue;
@@ -582,6 +588,18 @@ namespace KaoQin
                     if (AttendanceResult.Rows[i][j + 2].ToString() == "全天未签")
                     {
                         absent = absent + 1;
+                        continue;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "正常上班")
+                    {
+                        morningNormal = morningNormal + 1;
+                        continue;
+                    }
+
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "正常下班")
+                    {
+                        afternoonNormal = afternoonNormal + 1;
                         continue;
                     }
 
@@ -620,6 +638,8 @@ namespace KaoQin
                 AttendanceCollect.Rows[i]["Afternoon"] = afternoon.ToString();
                 AttendanceCollect.Rows[i]["WorkDay"] = workDay.ToString();
                 AttendanceCollect.Rows[i]["OverTime"] = overTime.ToString();
+                AttendanceCollect.Rows[i]["morningNormal"] = morningNormal.ToString();
+                AttendanceCollect.Rows[i]["afternoonNormal"] = afternoonNormal.ToString();
                 //工作年限计算
                 if (string.IsNullOrEmpty(Staff.Rows[i]["RZSJ"].ToString()))
                 {
@@ -679,11 +699,11 @@ namespace KaoQin
             DataTable Record_Yesterday = new DataTable();
             DataTable Record_Today = new DataTable();
             DataTable Record_Tomorrow = new DataTable();
-            Record_Yesterday.Columns.Add("Time", typeof(string));
+            Record_Yesterday.Columns.Add("Time", typeof(DateTime));
             Record_Yesterday.Columns.Add("Source", typeof(string));
-            Record_Today.Columns.Add("Time", typeof(string));
+            Record_Today.Columns.Add("Time", typeof(DateTime));
             Record_Today.Columns.Add("Source", typeof(string));
-            Record_Tomorrow.Columns.Add("Time", typeof(string));
+            Record_Tomorrow.Columns.Add("Time", typeof(DateTime));
             Record_Tomorrow.Columns.Add("Source", typeof(string));
 
 
@@ -701,17 +721,17 @@ namespace KaoQin
                 {
                     if (i == -1)
                     {
-                        Record_Yesterday.Rows.Add(obj.Time, obj.Source);
+                        Record_Yesterday.Rows.Add(Convert.ToDateTime(obj.Time), obj.Source);
                     }
 
                     if (i == 0)
                     {
-                        Record_Today.Rows.Add(obj.Time, obj.Source);
+                        Record_Today.Rows.Add(Convert.ToDateTime(obj.Time), obj.Source);
                     }
 
                     if (i == 1)
                     {
-                        Record_Tomorrow.Rows.Add(obj.Time, obj.Source);
+                        Record_Tomorrow.Rows.Add(Convert.ToDateTime(obj.Time), obj.Source);
                     }
                 }
             }
@@ -743,43 +763,43 @@ namespace KaoQin
                     {
                         //不跨天，判断上下班时间
 
-                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "" && Record_Today.Rows.Count == 0 && Convert.ToInt16(PersonShiftAll.Rows[i]["WorkDay"].ToString()) ==0)
+                        //上下班时间都为空
+                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "")
                         {
-                            result.Append("休");
-                            continue;
-                        }
-
-                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == ""  && Convert.ToDouble(PersonShiftAll.Rows[i]["WorkDay"].ToString()) > 0)
-                        {
-                            result.Append("正常");
-                            continue;
-                        }
-
-                        if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "" && Record_Today.Rows.Count != 0)
-                        {
-                            for (int j=0;j< Record_Today.Rows.Count; j++)
+                            if (Convert.ToInt16(PersonShiftAll.Rows[i]["WorkDay"].ToString()) > 0)
                             {
-                                //上班时间是21:00以后的，不算加班
-                                DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
-                                if ((Convert.ToDateTime("21:00")-record).TotalMinutes>0)
+                                //无论昨天明天如何排班，今天就是无条件正常
+                                result.Clear();
+                                result.Append("正常");
+                                continue;
+                            }else
+                            {
+                                //出勤记为0天的
+                                if (Record_Today.Rows.Count == 0)
                                 {
-                                    result.Append("加班");
-                                    break;
-                                }
-
-                                if (j== Record_Today.Rows.Count - 1)
-                                {
-                                    result.Append("休");
+                                    result.Append("/休");
                                     continue;
                                 }
-                            }
-                            continue;
-                        }
 
-                        if ((PersonShiftAll.Rows[i]["SBSJ"].ToString() != "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() != "") && Record_Today.Rows.Count == 0)
-                        {
-                            result.Append("全天未签");
-                            continue;
+                                for (int j = 0; j < Record_Today.Rows.Count; j++)
+                                {
+                                    //上班时间是20:00以后的，不算加班
+                                    DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
+                                    if ((Convert.ToDateTime("20:00") - record).TotalMinutes > 0)
+                                    {
+                                        result.Append("/加班");
+                                        break;
+                                    }
+
+                                    if (j == Record_Today.Rows.Count - 1)
+                                    {
+                                        result.Append("/休");
+                                        continue;
+                                    }
+                                }
+                                continue;
+                            }
+                          
                         }
 
                         //上班时间
@@ -806,18 +826,16 @@ namespace KaoQin
                 }
             }
 
-            //结果处理
+            //融合
             switch (result.ToString())
             {
                 case "/正常上班/正常下班": result.Clear(); result.Append("正常"); break;
                 case "/正常下班/正常上班": result.Clear(); result.Append("正常"); break;
-                case "/迟到/正常下班": result.Clear(); result.Append("迟到"); break;
-                case "/上班未签/正常下班": result.Clear(); result.Append("上班未签"); break;
-                case "/早退/正常下班": result.Clear(); result.Append("早退"); break;
                 case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
                 case "/下班未签/上班未签": result.Clear(); result.Append("全天未签"); break;
-                case "/下班未签全天未签": result.Clear(); result.Append("全天未签"); break;
             }
+
+            //去除掉正常的考勤结果
 
             if (result.ToString().IndexOf("/正常上班") >= 0 && result.ToString() != "/正常上班")
             {
@@ -827,9 +845,9 @@ namespace KaoQin
             }
 
             //跨天班第二天为休的情况
-            if (result.ToString().IndexOf("加班") > 1)
+            if (result.ToString().IndexOf("/加班") > 1)
             {
-                string str = result.ToString().Replace("加班", "");
+                string str = result.ToString().Replace("/加班", "/休");
                 result.Clear();
                 result.Append(str);
             }
@@ -840,16 +858,6 @@ namespace KaoQin
                 result.Clear();
                 result.Append(str);
             }
-
-            //跨天班第二天为休的情况
-            if (result.ToString().IndexOf("休") > 1)
-            {
-                string str = result.ToString().Replace("休", "/休");
-                result.Clear();
-                result.Append(str);
-            }
-
-
 
             if (result.ToString().IndexOf("/") == 0)
             {
@@ -950,20 +958,22 @@ namespace KaoQin
 
             if (XBTime.CompareTo(time1) <= 0)
             {
+                if (Record_Today.Rows.Count == 0)
+                {
+                    return "/下班未签";
+                }
+                Record_Today.DefaultView.Sort = "Time desc";
+                Record_Today = Record_Today.DefaultView.ToTable();
+
                 for (int j = 0; j < Record_Today.Rows.Count; j++)
                 {
-                    if (Record_Today.Rows.Count == 0)
-                    {
-                        return "/下班未签";
-                    }
-
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                     double subtract = (record - XBTime).TotalMinutes;
                     if (subtract >= 0)
                     {
                         return "/正常下班";
                     }
-                    else if (subtract < 0 && subtract > -90)
+                    else if (subtract < 0 && subtract > -120)
                     {
                         return "/早退";
                     }
@@ -1135,15 +1145,39 @@ namespace KaoQin
 
             if (e.Column.FieldName != "YGXM")
             {
-                switch (e.CellValue.ToString())
+                if (e.CellValue.ToString() == "休")
                 {
-                    case "休": e.Appearance.ForeColor = Color.DarkGreen; break;
-                    case "加班": e.Appearance.ForeColor = Color.DarkMagenta; break;
-                    case "正常": e.Appearance.ForeColor = Color.Blue; break;
-                    case "正常上班": e.Appearance.ForeColor = Color.Blue; break;
-                    case "正常下班": e.Appearance.ForeColor = Color.Blue; break;
-                    default: e.Appearance.ForeColor = Color.Red; break;
+                    e.Appearance.ForeColor = Color.DarkGreen;
+                    return;
                 }
+
+                if (e.CellValue.ToString() == "加班")
+                {
+                    e.Appearance.ForeColor = Color.DarkMagenta;
+                    return;
+                }
+
+                if (e.CellValue.ToString().IndexOf("迟到")>=0)
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                    return;
+                }
+
+                if (e.CellValue.ToString().IndexOf("早退") >= 0)
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                    return;
+                }
+
+                if (e.CellValue.ToString().IndexOf("未签") >= 0)
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                    return;
+                }else
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+
             }
 
 

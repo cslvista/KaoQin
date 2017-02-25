@@ -98,6 +98,8 @@
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -139,7 +141,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1195, 632);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1334, 632);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -255,7 +257,7 @@
             this.panelControl2.Location = new System.Drawing.Point(212, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(981, 52);
+            this.panelControl2.Size = new System.Drawing.Size(1120, 52);
             this.panelControl2.TabIndex = 5;
             // 
             // test
@@ -347,7 +349,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlTop.Size = new System.Drawing.Size(1195, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1334, 0);
             // 
             // barDockControlBottom
             // 
@@ -355,7 +357,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 632);
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1195, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1334, 0);
             // 
             // barDockControlLeft
             // 
@@ -369,7 +371,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1195, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1334, 0);
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(2);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 632);
             // 
@@ -538,7 +540,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(981, 572);
+            this.tabControl1.Size = new System.Drawing.Size(1120, 572);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -638,7 +640,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(973, 542);
+            this.tabPage2.Size = new System.Drawing.Size(1112, 542);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "考勤汇总";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -651,7 +653,7 @@
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(969, 538);
+            this.gridControl3.Size = new System.Drawing.Size(1108, 538);
             this.gridControl3.TabIndex = 0;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -675,7 +677,9 @@
             this.gridColumn12,
             this.gridColumn13,
             this.gridColumn14,
-            this.gridColumn11});
+            this.gridColumn11,
+            this.gridColumn17,
+            this.gridColumn18});
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.Editable = false;
@@ -728,7 +732,7 @@
             this.gridColumn6.FieldName = "Normal";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 4;
+            this.gridColumn6.VisibleIndex = 7;
             // 
             // gridColumn7
             // 
@@ -736,7 +740,7 @@
             this.gridColumn7.FieldName = "Late";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 5;
+            this.gridColumn7.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
@@ -744,7 +748,7 @@
             this.gridColumn9.FieldName = "LeaveEarly";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 6;
+            this.gridColumn9.VisibleIndex = 5;
             // 
             // gridColumn15
             // 
@@ -752,7 +756,7 @@
             this.gridColumn15.FieldName = "OverTime";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 7;
+            this.gridColumn15.VisibleIndex = 6;
             // 
             // gridColumn12
             // 
@@ -760,7 +764,7 @@
             this.gridColumn12.FieldName = "Absent";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 8;
+            this.gridColumn12.VisibleIndex = 10;
             // 
             // gridColumn13
             // 
@@ -768,7 +772,7 @@
             this.gridColumn13.FieldName = "Morning";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 9;
+            this.gridColumn13.VisibleIndex = 11;
             // 
             // gridColumn14
             // 
@@ -776,7 +780,7 @@
             this.gridColumn14.FieldName = "Afternoon";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 12;
             // 
             // gridColumn11
             // 
@@ -784,7 +788,7 @@
             this.gridColumn11.FieldName = "WorkYear";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 11;
+            this.gridColumn11.VisibleIndex = 13;
             // 
             // tabPage3
             // 
@@ -854,11 +858,27 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "正常上班";
+            this.gridColumn17.FieldName = "morningNormal";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 8;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "正常下班";
+            this.gridColumn18.FieldName = "afternoonNormal";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 9;
+            // 
             // Attendance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1195, 632);
+            this.ClientSize = new System.Drawing.Size(1334, 632);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -968,5 +988,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private DevExpress.XtraGrid.GridControl gridControl4;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
     }
 }
