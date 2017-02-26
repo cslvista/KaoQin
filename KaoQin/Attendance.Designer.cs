@@ -85,8 +85,6 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -671,8 +669,6 @@
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn9,
-            this.gridColumn15,
-            this.gridColumn12,
             this.gridColumn13,
             this.gridColumn14,
             this.gridColumn11});
@@ -728,7 +724,7 @@
             this.gridColumn6.FieldName = "Normal";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
+            this.gridColumn6.VisibleIndex = 4;
             // 
             // gridColumn7
             // 
@@ -736,7 +732,7 @@
             this.gridColumn7.FieldName = "Late";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 4;
+            this.gridColumn7.VisibleIndex = 5;
             // 
             // gridColumn9
             // 
@@ -744,23 +740,7 @@
             this.gridColumn9.FieldName = "LeaveEarly";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "加班";
-            this.gridColumn15.FieldName = "OverTime";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 6;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "全天未签";
-            this.gridColumn12.FieldName = "Absent";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 6;
             // 
             // gridColumn13
             // 
@@ -768,7 +748,7 @@
             this.gridColumn13.FieldName = "Morning";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 9;
+            this.gridColumn13.VisibleIndex = 7;
             // 
             // gridColumn14
             // 
@@ -776,7 +756,7 @@
             this.gridColumn14.FieldName = "Afternoon";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 8;
             // 
             // gridColumn11
             // 
@@ -784,7 +764,7 @@
             this.gridColumn11.FieldName = "WorkYear";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 11;
+            this.gridColumn11.VisibleIndex = 9;
             // 
             // tabPage3
             // 
@@ -933,10 +913,8 @@
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.Label label2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 修改为ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改全列ToolStripMenuItem;

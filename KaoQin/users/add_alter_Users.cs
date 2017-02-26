@@ -165,11 +165,20 @@ namespace KaoQin.users
 
 
             //更新或插入数据
-            string sql = string.Format("update KQ_YG set KQID='{0}',YGXM='{1}',RZSJ={2},LZSJ={3},ZT='{4}',SM='{5}',BMID='{6}' where KQID='{7}'", textBoxID.Text.Trim(), textBoxName.Text.Trim(),EntryDate ,LeaveDate,State,textBoxRemark.Text ,comboBoxDep.SelectedValue,KQID);
+            StringBuilder sql = new StringBuilder();
+            sql.Append (string.Format("update KQ_YG set KQID='{0}',YGXM='{1}',RZSJ={2},LZSJ={3},ZT='{4}',SM='{5}',BMID='{6}' where KQID='{7}';", textBoxID.Text.Trim(), textBoxName.Text.Trim(), EntryDate, LeaveDate, State, textBoxRemark.Text, comboBoxDep.SelectedValue, KQID));
+
+            if (textBoxID.Text.Trim() != KQID)
+            {
+                sql.Append(string.Format("update KQ_PB_XB set KQID='{0}' where KQID='{1}';",textBoxID.Text.Trim(),KQID)
+                    + string.Format("update KQ_PB_LD set KQID='{0}' where KQID='{1}';", textBoxID.Text.Trim(), KQID));
+            }
+            
+
 
             try
             {
-                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
+                GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());
                 return true;
             }
             catch (Exception ex)

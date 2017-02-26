@@ -127,13 +127,11 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("YGXM", typeof(string));
             AttendanceCollect.Columns.Add("TotalDays", typeof(int));
             AttendanceCollect.Columns.Add("Normal", typeof(int));
-            AttendanceCollect.Columns.Add("Absent", typeof(int));
             AttendanceCollect.Columns.Add("Rest", typeof(int));
             AttendanceCollect.Columns.Add("Late", typeof(int));
             AttendanceCollect.Columns.Add("LeaveEarly", typeof(int));
             AttendanceCollect.Columns.Add("Morning", typeof(int));
             AttendanceCollect.Columns.Add("Afternoon", typeof(int));
-            AttendanceCollect.Columns.Add("OverTime", typeof(int));
             AttendanceCollect.Columns.Add("WorkDay", typeof(double));
             AttendanceCollect.Columns.Add("WorkYear", typeof(string));
 
@@ -544,7 +542,6 @@ namespace KaoQin
             int leaveEarly;//早退
             int morning;//上午未签
             int afternoon;//下午未签
-            int overTime;//加班
 
             double workDay;//出勤
             for (int i = 0; i < Staff.Rows.Count; i++)
@@ -552,31 +549,25 @@ namespace KaoQin
                 AttendanceCollect.Rows.Add(new object[] { });
                 normal = 0;
                 late = 0;
-                absent = 0;
                 rest = 0;
                 leaveEarly = 0;
                 morning = 0;
                 afternoon = 0;
-                overTime = 0;
                 workDay = 0;
                 for (int j = 0; j <= Timespan; j++)
                 {
                     workDay = workDay + WorkDayCount[i][j];
+
                     if (AttendanceResult.Rows[i][j + 2].ToString() == "正常")
                     {
                         normal = normal + 1;
                         continue;
                     }
-                   
-                    if (AttendanceResult.Rows[i][j + 2].ToString() == "加班")
-                    {
-                        overTime = overTime + 1;
-                        continue;
-                    }
 
-                    if (AttendanceResult.Rows[i][j + 2].ToString() == "全天未签")
+                    if (AttendanceResult.Rows[i][j + 2].ToString() == "上下班未签")
                     {
-                        absent = absent + 1;
+                        morning = morning + 1;
+                        afternoon = afternoon + 1;
                         continue;
                     }
 
@@ -613,13 +604,11 @@ namespace KaoQin
                 AttendanceCollect.Rows[i]["TotalDays"] = (Timespan + 1).ToString();
                 AttendanceCollect.Rows[i]["Normal"] = normal.ToString();
                 AttendanceCollect.Rows[i]["Rest"] = rest.ToString();
-                AttendanceCollect.Rows[i]["Absent"] = absent.ToString();
                 AttendanceCollect.Rows[i]["Late"] = late.ToString();
                 AttendanceCollect.Rows[i]["LeaveEarly"] = leaveEarly.ToString();
                 AttendanceCollect.Rows[i]["Morning"] = morning.ToString();
                 AttendanceCollect.Rows[i]["Afternoon"] = afternoon.ToString();
                 AttendanceCollect.Rows[i]["WorkDay"] = workDay.ToString();
-                AttendanceCollect.Rows[i]["OverTime"] = overTime.ToString();
 
                 //工作年限计算
                 if (string.IsNullOrEmpty(Staff.Rows[i]["RZSJ"].ToString()))
@@ -751,7 +740,7 @@ namespace KaoQin
                             {
                                 //无论昨天明天如何排班，今天就是无条件正常
                                 result.Clear();
-                                result.Append("/正常");
+                                result.Append("正常");
                                 continue;
                             }else
                             {
@@ -768,7 +757,7 @@ namespace KaoQin
                                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                                     if ((Convert.ToDateTime("20:00") - record).TotalMinutes > 0)
                                     {
-                                        result.Append("/加班");
+                                        result.Append("/休(有签到)");
                                         break;
                                     }
 
@@ -812,17 +801,17 @@ namespace KaoQin
             {
                 case "/正常/正常": result.Clear(); result.Append("正常"); break;
                 case "/正常/正常/正常": result.Clear(); result.Append("正常"); break;
-                case "/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
-                case "/下班未签/上班未签": result.Clear(); result.Append("全天未签"); break;
-                case "/下班未签/上班未签/下班未签": result.Clear(); result.Append("全天未签"); break;
+                case "/上班未签/下班未签": result.Clear(); result.Append("上下班未签"); break;
+                case "/下班未签/上班未签": result.Clear(); result.Append("上下班未签"); break;
+                case "/下班未签/上班未签/下班未签": result.Clear(); result.Append("上下班未签"); break;
             }
 
             //去除掉正常的考勤结果
 
             //跨天班第二天为休的情况
-            if (result.ToString().IndexOf("/加班") >= 1)
+            if (result.ToString().IndexOf("/休(有签到)") >= 1)
             {
-                string str = result.ToString().Replace("/加班", "/休");
+                string str = result.ToString().Replace("/休(有签到)", "/休");
                 result.Clear();
                 result.Append(str);
             }
@@ -1128,7 +1117,7 @@ namespace KaoQin
                     return;
                 }
 
-                if (e.CellValue.ToString() == "加班")
+                if (e.CellValue.ToString() == "休(有签到)")
                 {
                     e.Appearance.ForeColor = Color.DarkMagenta;
                     return;
