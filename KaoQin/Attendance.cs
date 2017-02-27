@@ -368,8 +368,8 @@ namespace KaoQin
             //读取排班细表和上个月最后一天的排班情况
             if (PBID.Rows.Count > 0)
             {
-                string sql1 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
-                string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                string sql1 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}' order by KQID", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}' order by KQID", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
                 try
                 {
                     ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
@@ -402,7 +402,7 @@ namespace KaoQin
             //读取员工信息            
             try
             {
-                string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}'", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}' order by a.KQID", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
@@ -736,7 +736,7 @@ namespace KaoQin
                         //上下班时间都为空
                         if (PersonShiftAll.Rows[i]["SBSJ"].ToString() == "" && PersonShiftAll.Rows[i]["XBSJ"].ToString() == "")
                         {
-                            if (Convert.ToInt16(PersonShiftAll.Rows[i]["WorkDay"].ToString()) > 0)
+                            if (Convert.ToDouble(PersonShiftAll.Rows[i]["WorkDay"].ToString()) > 0)
                             {
                                 //无论昨天明天如何排班，今天就是无条件正常
                                 result.Clear();
@@ -855,15 +855,7 @@ namespace KaoQin
                             }
                             else
                             {
-                                //21:00后签到的，不算出勤
-                                if (result.ToString() == "加班")
-                                {
-                                    workDay = 1;
-                                }
-                                else
-                                {
-                                    workDay = 0;
-                                }
+                                workDay = 0;
                             }
                           
                         } else

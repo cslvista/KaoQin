@@ -54,8 +54,8 @@
             // textBoxName
             // 
             this.textBoxName.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxName.Location = new System.Drawing.Point(93, 110);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxName.Location = new System.Drawing.Point(93, 108);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(138, 25);
             this.textBoxName.TabIndex = 30;
@@ -64,7 +64,7 @@
             // 
             this.textBoxID.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxID.Location = new System.Drawing.Point(93, 76);
-            this.textBoxID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxID.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(138, 25);
             this.textBoxID.TabIndex = 28;
@@ -75,7 +75,7 @@
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
             this.simpleButton2.Location = new System.Drawing.Point(177, 241);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(53, 26);
             this.simpleButton2.TabIndex = 24;
@@ -88,7 +88,7 @@
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
             this.simpleButton1.Location = new System.Drawing.Point(93, 241);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(53, 26);
             this.simpleButton1.TabIndex = 23;
@@ -99,7 +99,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(18, 46);
+            this.label4.Location = new System.Drawing.Point(16, 46);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 20);
@@ -110,7 +110,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(16, 79);
+            this.label3.Location = new System.Drawing.Point(14, 79);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 20);
@@ -121,7 +121,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(18, 113);
+            this.label1.Location = new System.Drawing.Point(16, 111);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 20);
@@ -132,7 +132,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(19, 144);
+            this.label2.Location = new System.Drawing.Point(16, 142);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
@@ -142,8 +142,8 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(93, 143);
-            this.dateEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateEdit1.Location = new System.Drawing.Point(93, 140);
+            this.dateEdit1.Margin = new System.Windows.Forms.Padding(2);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit1.Properties.Appearance.Options.UseFont = true;
@@ -163,7 +163,7 @@
             "在职",
             "离职"});
             this.comboBoxState.Location = new System.Drawing.Point(93, 12);
-            this.comboBoxState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxState.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxState.Name = "comboBoxState";
             this.comboBoxState.Size = new System.Drawing.Size(138, 25);
             this.comboBoxState.TabIndex = 33;
@@ -173,7 +173,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(18, 206);
+            this.label5.Location = new System.Drawing.Point(16, 205);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 20);
@@ -183,8 +183,8 @@
             // textBoxRemark
             // 
             this.textBoxRemark.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxRemark.Location = new System.Drawing.Point(93, 203);
-            this.textBoxRemark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxRemark.Location = new System.Drawing.Point(93, 202);
+            this.textBoxRemark.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxRemark.Name = "textBoxRemark";
             this.textBoxRemark.Size = new System.Drawing.Size(138, 25);
             this.textBoxRemark.TabIndex = 35;
@@ -193,7 +193,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(18, 14);
+            this.label6.Location = new System.Drawing.Point(16, 14);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 20);
@@ -206,7 +206,7 @@
             this.comboBoxDep.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxDep.FormattingEnabled = true;
             this.comboBoxDep.Location = new System.Drawing.Point(93, 44);
-            this.comboBoxDep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxDep.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxDep.Name = "comboBoxDep";
             this.comboBoxDep.Size = new System.Drawing.Size(138, 25);
             this.comboBoxDep.TabIndex = 37;
@@ -214,8 +214,8 @@
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(93, 174);
-            this.dateEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateEdit2.Location = new System.Drawing.Point(93, 171);
+            this.dateEdit2.Margin = new System.Windows.Forms.Padding(2);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit2.Properties.Appearance.Options.UseFont = true;
@@ -230,7 +230,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(19, 174);
+            this.label7.Location = new System.Drawing.Point(16, 173);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 20);
@@ -259,7 +259,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "add_alter_Users";

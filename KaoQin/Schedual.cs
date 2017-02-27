@@ -55,7 +55,7 @@ namespace KaoQin
                 comboBoxYear.Enabled = false;
                 ButtonCreate.Enabled = false;
                 
-                string sql = string.Format("select * from KQ_PB_XB where PBID='{0}'",PBID);
+                string sql = string.Format("select * from KQ_PB_XB where PBID='{0}' order by KQID",PBID);
                 try
                 {
                     Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
@@ -211,10 +211,10 @@ namespace KaoQin
             string sql1 = "";
             if (alter == true)
             {
-                sql1 = string.Format("select a.KQID,a.YGXM from KQ_YG a inner join KQ_PB_XB b on a.KQID=b.KQID where b.PBID='{0}'",PBID);
+                sql1 = string.Format("select a.KQID,a.YGXM from KQ_YG a inner join KQ_PB_XB b on a.KQID=b.KQID where b.PBID='{0}' order by a.KQID",PBID);
             }else
             {
-                sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT='0'", comboBox1.SelectedValue);
+                sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT='0' order by KQID", comboBox1.SelectedValue);
             }
             
 
@@ -815,6 +815,7 @@ namespace KaoQin
                     TableNameHasChoosed = false;
                 }else
                 {
+                    ExcelConn.Close();
                     return;
                 }
                 string strSql = "select * from [" + tableName + "]";

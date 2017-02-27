@@ -44,7 +44,28 @@ namespace KaoQin
                 {
                     SearchStaff();
                 }
+            }else
+            {
+                //判断staff 中前20列是否有姓名，否则下载
+                int j = 0;
+                for (int i = 0; i < 20; i++)
+                {
+                    if (Staff.Rows[i][1].ToString() == "")
+                    {
+                        j = j + 1;
+                    }
+
+                    if (i == 19 && j > 10)
+                    {
+                        Staff.Clear();
+                        if (MessageBox.Show(string.Format("员工姓名为空，是否需要下载员工信息？"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            SearchStaff();
+                        }
+                    }
+                }
             }
+
             //联结两个表
             var query = from rec in Record_DKJ.AsEnumerable()
                         join staff in Staff.AsEnumerable()
@@ -114,15 +135,19 @@ namespace KaoQin
             DKJ.ReadAllUserID(0);
             while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
             {
-                int position = sName.IndexOf("\0");
-                string name = sName.Substring(0, position);//过滤sName中多余字符
-                Staff.Rows.Add(new object[] {sdwEnrollNumber, name});
+                try
+                {
+                    int position = sName.IndexOf("\0");
+                    string name = sName.Substring(0, position);//过滤sName中多余字符
+                    Staff.Rows.Add(new object[] { sdwEnrollNumber, name });
+                }
+                catch { }                
             }
             Attendance form =  (Attendance)this.Owner;
             form.Staff_Orign = Staff.Copy();
            
         }
-
+            
         private void SearchInfo()
         {
             if (allowVisit == true)

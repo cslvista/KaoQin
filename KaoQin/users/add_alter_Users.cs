@@ -174,8 +174,6 @@ namespace KaoQin.users
                     + string.Format("update KQ_PB_LD set KQID='{0}' where KQID='{1}';", textBoxID.Text.Trim(), KQID));
             }
             
-
-
             try
             {
                 GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql.ToString());
