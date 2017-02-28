@@ -47,6 +47,7 @@ namespace KaoQin
             SearchDepartment();
             searchControl1.Properties.NullValuePrompt = "请输入姓名";
             bandedGridView1.IndicatorWidth = 35;
+
             if (alter == true)
             {
                 comboBox1.Enabled = false;
@@ -54,78 +55,15 @@ namespace KaoQin
                 comboBoxMonth.Enabled = false;
                 comboBoxYear.Enabled = false;
                 ButtonCreate.Enabled = false;
-                
-                string sql = string.Format("select * from KQ_PB_XB where PBID='{0}' order by KQID",PBID);
-                try
-                {
-                    Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("错误1:" + ex.Message, "提示");
-                    return;
-                }
-                
-                //点击生成计划按钮
-                simpleButton1_Click(null, null);
 
-                //将排班内容填充
-                for (int i = 0; i < Staff.Rows.Count; i++)
-                {
-                    int row = 0;
-                    for (int j=0;j< Staff_WorkShift_SQL.Rows.Count; j++)
-                    {
-                        if (Staff_WorkShift.Rows[i]["KQID"].ToString()== Staff_WorkShift_SQL.Rows[j]["KQID"].ToString())
-                        {
-                            row = j;
-                            break;
-                        }
-                    }
-
-                    for (int j=2;j<=Timespan.Days+2; j++)
-                    {
-                        Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[row][j+1].ToString();
-                    }
-                }
-                Staff_WorkShift_SQL_Copy = Staff_WorkShift_SQL.Copy();
-
-                //从排班中保留停用中还存在的班次
-                for (int k = 0; k < WorkShift.Rows.Count; k++)
-                {
-                    //还在启用的班次保留
-                    if (WorkShift.Rows[k]["ZT"].ToString()=="0")
-                    {
-                        continue;
-                    }
-                    //检查停用的班次是否在使用
-                    for (int i = 0; i < Staff_WorkShift_SQL.Rows.Count; i++)
-                    {
-                        bool hasFound = false;
-                        for (int j = 0; j <= Timespan.Days; j++)
-                        {
-                            if (WorkShift.Rows[k]["ID"].ToString()== Staff_WorkShift_SQL.Rows[i][j + 3].ToString())
-                            {
-                                hasFound = true;
-                                break;
-                            }
-                            //如果还没找到，就删除
-                            if (i== Staff_WorkShift_SQL.Rows.Count-1 && j== Timespan.Days)
-                            {
-                                WorkShift.Rows.RemoveAt(k);
-                            }
-                        }
-                        if (hasFound == true)
-                        {
-                            break;
-                        }
-                    }
-                }
                 if (Authority_Arrangement_Edit == false)
                 {
                     ButtonSave.Enabled = false;
                     ButtonImport.Enabled = false;
                 }
 
+                //点击生成计划按钮
+                simpleButton1_Click(null, null);                                                                            
             }
             else
             {
@@ -211,7 +149,7 @@ namespace KaoQin
             string sql1 = "";
             if (alter == true)
             {
-                sql1 = string.Format("select a.KQID,a.YGXM from KQ_YG a inner join KQ_PB_XB b on a.KQID=b.KQID where b.PBID='{0}' order by a.KQID",PBID);
+                sql1 = string.Format("select a.KQID,a.YGXM from KQ_YG a inner join KQ_PB_XB b on a.KQID=b.KQID where b.PBID='{0}' order by b.sortNo",PBID);
             }else
             {
                 sql1 = string.Format("select KQID,YGXM from KQ_YG where BMID='{0}' and ZT='0' order by KQID", comboBox1.SelectedValue);
@@ -287,7 +225,7 @@ namespace KaoQin
             {
                 WorkShift = WorkShift_Common.Clone();
             }
-            
+          
             bandedGridView1.Columns.Clear();
             bandedGridView1.Bands.Clear();
             Staff_WorkShift.Columns.Clear();
@@ -347,7 +285,6 @@ namespace KaoQin
                 Day_Column.Visible = true;
                 Day_Column.Width = 62;
                 Day_Column.ColumnEdit = Shift;
-                //Day_Column.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
                 Day_Column.OptionsColumn.AllowEdit = true;
                 Day_band.Columns.Add(Day_Column);
                 bandedGridView1.Columns.Add(Day_Column);
@@ -355,9 +292,87 @@ namespace KaoQin
                 StartDate =StartDate.AddDays(1);
             }
 
+            //排序
+            Staff_WorkShift.Columns.Add("sortNo", typeof(int));
+            Staff_WorkShift.Columns.Add("hasFound", typeof(bool));
+
             foreach (DataRow Row in Staff.Rows)
             {
-                Staff_WorkShift.Rows.Add(new object[] {Row["KQID"],Row["YGXM"]});
+                Staff_WorkShift.Rows.Add(new object[] { Row["KQID"], Row["YGXM"] });
+            }
+
+            if (alter == true)
+            {
+                //读取排班细表
+                try
+                {
+                    string sql = string.Format("select * from KQ_PB_XB where PBID='{0}' order by sortNo", PBID);
+                    Staff_WorkShift_SQL = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("错误6:" + ex.Message, "提示");
+                    return;
+                }
+
+                //将排班内容填充
+                for (int i = 0; i < Staff.Rows.Count; i++)
+                {
+                    int row = 0;
+                    for (int j = 0; j < Staff_WorkShift_SQL.Rows.Count; j++)
+                    {
+                        if (Staff_WorkShift.Rows[i]["KQID"].ToString() == Staff_WorkShift_SQL.Rows[j]["KQID"].ToString())
+                        {
+                            row = j;
+                            break;
+                        }
+                    }
+
+                    for (int j = 2; j <= Timespan.Days + 2; j++)
+                    {
+                        Staff_WorkShift.Rows[i][j] = Staff_WorkShift_SQL.Rows[row][j + 1].ToString();
+                    }
+                }
+
+                Staff_WorkShift_SQL_Copy = Staff_WorkShift_SQL.Copy();
+
+                //从排班中保留停用中还存在的班次
+                for (int k = 0; k < WorkShift.Rows.Count; k++)
+                {
+                    //还在启用的班次保留
+                    if (WorkShift.Rows[k]["ZT"].ToString() == "0")
+                    {
+                        continue;
+                    }
+                    //检查停用的班次是否在使用
+                    for (int i = 0; i < Staff_WorkShift_SQL.Rows.Count; i++)
+                    {
+                        bool hasFound = false;
+                        for (int j = 0; j <= Timespan.Days; j++)
+                        {
+                            if (WorkShift.Rows[k]["ID"].ToString() == Staff_WorkShift_SQL.Rows[i][j + 3].ToString())
+                            {
+                                hasFound = true;
+                                break;
+                            }
+                            //如果还没找到，就删除
+                            if (i == Staff_WorkShift_SQL.Rows.Count - 1 && j == Timespan.Days)
+                            {
+                                WorkShift.Rows.RemoveAt(k);
+                            }
+                        }
+                        if (hasFound == true)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
+            {
+                Staff_WorkShift.Rows[i]["sortNo"] = i;
+                Staff_WorkShift.Rows[i]["hasFound"] = false;
             }
 
             gridControl1.DataSource = Staff_WorkShift;
@@ -458,8 +473,8 @@ namespace KaoQin
                 Staff_WorkShift_SQL.Columns.Clear();
                 for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
                 {
-                    Staff_WorkShift_SQL.Rows.Add(new object[] { });
-                    for (int j = 0; j < 33; j++)
+                    Staff_WorkShift_SQL.Rows.Add();
+                    for (int j = 0; j < 34; j++)
                     {
                         //第0列为考勤ID，第1列是姓名
                         if (i == 0)
@@ -485,7 +500,7 @@ namespace KaoQin
                 {
                     sql.Append(string.Format("update KQ_PB_XB set D1T={0},D2T={1},D3T={2},D4T={3},D5T={4},D6T={5},D7T={6},D8T={7},"
                         + "D9T={8},D10T={9},D11T={10},D12T={11},D13T={12},D14T={13},D15T={14},D16T={15},D17T={16},D18T={17},D19T={18},D20T={19},"
-                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30} where PBID='{31}' and KQID={32};",
+                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30},sortNo={31} where PBID='{32}' and KQID={33};",
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
                         Staff_WorkShift_SQL.Rows[i][5].ToString(), Staff_WorkShift_SQL.Rows[i][6].ToString(),
@@ -502,6 +517,7 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][27].ToString(), Staff_WorkShift_SQL.Rows[i][28].ToString(),
                         Staff_WorkShift_SQL.Rows[i][29].ToString(), Staff_WorkShift_SQL.Rows[i][30].ToString(),
                         Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString(),
+                        Staff_WorkShift_SQL.Rows[i][33].ToString(),
                         PBID,Staff_WorkShift_SQL.Rows[i][0].ToString()
                         ));
                     sql_lastday.Append(string.Format("update KQ_PB_LD set LastDay={0} where PBID='{1}' and KQID={2};", Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString(), PBID, Staff_WorkShift_SQL.Rows[i][0].ToString()));
@@ -593,7 +609,7 @@ namespace KaoQin
                 for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
                 {
                     Staff_WorkShift_SQL.Rows.Add(new object[] {});
-                    for (int j = 0; j < 33; j++)
+                    for (int j = 0; j < 34; j++)
                     {
                         if (i == 0)
                         {
@@ -619,10 +635,10 @@ namespace KaoQin
                     sql.Append("insert into KQ_PB_XB (PBID,BMID,KQID,"
                         + "D1T,D2T,D3T,D4T,D5T,D6T,D7T,D8T,D9T,"
                         + "D10T,D11T,D12T,D13T,D14T,D15T,D16T,D17T,D18T,D19T,"
-                        + "D20T,D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T)"
+                        + "D20T,D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T,sortNo)"
                         + string.Format(" values ('{0}','{1}',{2},{3},{4},{5},{6},{7},{8},{9},{10},"
                         + "{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},"
-                        + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33});",
+                        + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34});",
                         ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(), 
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
@@ -639,7 +655,8 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][25].ToString(), Staff_WorkShift_SQL.Rows[i][26].ToString(),
                         Staff_WorkShift_SQL.Rows[i][27].ToString(), Staff_WorkShift_SQL.Rows[i][28].ToString(),
                         Staff_WorkShift_SQL.Rows[i][29].ToString(), Staff_WorkShift_SQL.Rows[i][30].ToString(),
-                        Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString()
+                        Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString(),
+                        Staff_WorkShift_SQL.Rows[i][33].ToString()
                         ));
                     sql_lastday.Append(string.Format("insert into KQ_PB_LD (PBID,BMID,KQID,YEAR,MONTH,LastDay) values ('{0}','{1}',{2},'{3}','{4}',{5});", ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(),comboBoxYear.Text,comboBoxMonth.Text, Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString()));
                 }
@@ -841,16 +858,18 @@ namespace KaoQin
 
             //将Excel文件内容插入DataTable
             int row;
-            for (int i = 0; i < Staff.Rows.Count; i++)
+            for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
             {
                 //找出Excel表格中同名者所在行
                 row = -1;
                 for (int j = 0; j < dtExcel.Rows.Count; j++)
                 {
                     string Name = dtExcel.Rows[j][NameColumn].ToString().Replace(" ", ""); //去掉空格
-                    if (Name.IndexOf(Staff.Rows[i][1].ToString())>=0)
+                    if (Name.IndexOf(Staff_WorkShift.Rows[i]["YGXM"].ToString())>=0)
                     {
                         row = j;
+                        Staff_WorkShift.Rows[i]["hasFound"] = true;
+                        Staff_WorkShift.Rows[i]["sortNo"] = j;
                         break;
                     }
                 }
@@ -874,6 +893,73 @@ namespace KaoQin
                     }
                 }
             }
+
+            //对Staff_WorkShift进行排序
+            //第一次排序，将hasFound为true和false 分开
+            int trueCount = 0;
+            for (int i=0;i< Staff_WorkShift.Rows.Count; i++)
+            {
+                if (Staff_WorkShift.Rows[i]["hasFound"].ToString() == "True")
+                {
+                    DataRow dr = Staff_WorkShift.NewRow();
+                    dr.ItemArray = Staff_WorkShift.Rows[trueCount].ItemArray;
+                    Staff_WorkShift.Rows[trueCount].ItemArray = Staff_WorkShift.Rows[i].ItemArray;
+                    Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;
+                    trueCount = trueCount + 1;
+                }
+            }
+
+            //第二次排序，对hasFound=true的排序
+            for (int i = 0; i < trueCount; i++)
+            {
+                for (int j=i;j< trueCount; j++)
+                {
+                    if (Convert.ToInt32(Staff_WorkShift.Rows[i]["sortNo"]) > Convert.ToInt32(Staff_WorkShift.Rows[j]["sortNo"]))
+                    {
+                        DataRow dr = Staff_WorkShift.NewRow();
+                        dr.ItemArray = Staff_WorkShift.Rows[j].ItemArray;
+                        Staff_WorkShift.Rows[j].ItemArray = Staff_WorkShift.Rows[i].ItemArray;
+                        Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;
+                    }
+                }
+
+                if (i== trueCount-1)
+                {
+                    for (int k = 0; k < trueCount; k++)
+                    {
+                        Staff_WorkShift.Rows[k]["sortNo"] = k;
+                    }
+                }
+            }
+
+            //第三次排序，对hasFound=false的排序
+            for (int i = trueCount; i < Staff_WorkShift.Rows.Count; i++)
+            {
+                for (int j=i;j< Staff_WorkShift.Rows.Count;j++)
+                {
+                    if (Convert.ToInt32(Staff_WorkShift.Rows[i]["sortNo"]) > Convert.ToInt32(Staff_WorkShift.Rows[j]["sortNo"]))
+                    {
+                        DataRow dr = Staff_WorkShift.NewRow();
+                        dr.ItemArray = Staff_WorkShift.Rows[j].ItemArray;
+                        Staff_WorkShift.Rows[j].ItemArray = Staff_WorkShift.Rows[i].ItemArray;
+                        Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;
+                    }
+                }
+
+                if (i == Staff_WorkShift.Rows.Count-1)
+                {
+                    for (int k = trueCount; k < Staff_WorkShift.Rows.Count; k++)
+                    {
+                        Staff_WorkShift.Rows[k]["sortNo"] = k;
+                    }
+                }
+            }
+
+            for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
+            {
+                Staff_WorkShift.Rows[i]["hasFound"] = false;
+            }
+
             gridControl1.DataSource = Staff_WorkShift;
         }
 

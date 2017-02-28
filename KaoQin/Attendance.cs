@@ -368,8 +368,8 @@ namespace KaoQin
             //读取排班细表和上个月最后一天的排班情况
             if (PBID.Rows.Count > 0)
             {
-                string sql1 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}' order by KQID", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
-                string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}' order by KQID", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                string sql1 = string.Format("select * from KQ_PB_XB where BMID='{0}' and PBID='{1}' order by sortNo", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                string sql2 = string.Format("select * from KQ_PB_LD where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", LastMonth.Year.ToString() + "年", LastMonth.Month.ToString() + "月", gridView1.GetFocusedRowCellValue("BMID").ToString());
                 try
                 {
                     ArrangementItem = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql1);
@@ -402,7 +402,7 @@ namespace KaoQin
             //读取员工信息            
             try
             {
-                string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}' order by a.KQID", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
+                string sql = string.Format("select b.* from KQ_PB_XB a left join KQ_YG b on a.KQID=b.KQID where a.BMID='{0}' and a.PBID='{1}' order by a.sortNo", gridView1.GetFocusedRowCellValue("BMID").ToString(), PBID.Rows[0][0].ToString());
                 Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
             }
             catch (Exception ex)
