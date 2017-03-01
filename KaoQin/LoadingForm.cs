@@ -138,6 +138,7 @@ namespace KaoQin
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
+
             if (MessageBox.Show("注意：强制停止会关闭整个程序，是否继续？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
             {
                 return;

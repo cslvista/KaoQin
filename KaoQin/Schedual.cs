@@ -369,6 +369,8 @@ namespace KaoQin
                 }
             }
 
+            Shift.DropDownRows = WorkShift.Rows.Count;
+
             for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
             {
                 Staff_WorkShift.Rows[i]["sortNo"] = i;
@@ -975,7 +977,7 @@ namespace KaoQin
                 }
             }
 
-            //第二次排序，对hasFound=true的排序
+            //第二次排序，对hasFound=true进行冒泡排序
             for (int i = 0; i < trueCount; i++)
             {
                 for (int j=i;j< trueCount; j++)
@@ -985,44 +987,14 @@ namespace KaoQin
                         DataRow dr = Staff_WorkShift.NewRow();
                         dr.ItemArray = Staff_WorkShift.Rows[j].ItemArray;
                         Staff_WorkShift.Rows[j].ItemArray = Staff_WorkShift.Rows[i].ItemArray;
-                        Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;
-                    }
-                }
-
-                if (i== trueCount-1)
-                {
-                    for (int k = 0; k < trueCount; k++)
-                    {
-                        Staff_WorkShift.Rows[k]["sortNo"] = k;
-                    }
-                }
-            }
-
-            //第三次排序，对hasFound=false的排序
-            for (int i = trueCount; i < Staff_WorkShift.Rows.Count; i++)
-            {
-                for (int j=i;j< Staff_WorkShift.Rows.Count;j++)
-                {
-                    if (Convert.ToInt32(Staff_WorkShift.Rows[i]["sortNo"]) > Convert.ToInt32(Staff_WorkShift.Rows[j]["sortNo"]))
-                    {
-                        DataRow dr = Staff_WorkShift.NewRow();
-                        dr.ItemArray = Staff_WorkShift.Rows[j].ItemArray;
-                        Staff_WorkShift.Rows[j].ItemArray = Staff_WorkShift.Rows[i].ItemArray;
-                        Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;
-                    }
-                }
-
-                if (i == Staff_WorkShift.Rows.Count-1)
-                {
-                    for (int k = trueCount; k < Staff_WorkShift.Rows.Count; k++)
-                    {
-                        Staff_WorkShift.Rows[k]["sortNo"] = k;
+                        Staff_WorkShift.Rows[i].ItemArray = dr.ItemArray;   
                     }
                 }
             }
 
             for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
             {
+                Staff_WorkShift.Rows[i]["sortNo"] = i;
                 Staff_WorkShift.Rows[i]["hasFound"] = false;
             }
 

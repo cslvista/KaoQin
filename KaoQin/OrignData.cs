@@ -100,7 +100,17 @@ namespace KaoQin
 
         private void SearchStaff()
         {
-            zkemkeeper.CZKEMClass DKJ = new zkemkeeper.CZKEMClass();//打卡机
+            zkemkeeper.CZKEMClass DKJ;
+            try
+            {
+                DKJ = new zkemkeeper.CZKEMClass();
+            }
+            catch 
+            {
+                MessageBox.Show("本机没有安装相应的软件，请联系信息部安装！");
+                return;
+            }
+            
             
             try
             {
