@@ -399,14 +399,25 @@ namespace KaoQin
                 for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
                 {
                     //第二层循环是排班天数
+                    int row = 0;
                     for (int j = 0; j <= Timespan.Days; j++)
                     {
-                        if (Staff_WorkShift.Rows[i][j + 2].ToString() != Staff_WorkShift_SQL_Copy.Rows[i][j + 3].ToString())
+                        //先查找在哪行
+                        for (int k=0;k< Staff_WorkShift_SQL_Copy.Rows.Count; k++)
+                        {
+                            if (Staff_WorkShift.Rows[i][0].ToString()== Staff_WorkShift_SQL_Copy.Rows[k][2].ToString())
+                            {
+                                row = k;
+                                break;
+                            }
+                        }
+
+                        if (Staff_WorkShift.Rows[i][j + 2].ToString() != Staff_WorkShift_SQL_Copy.Rows[row][j + 3].ToString())
                         {
                             DateTime startDate = StartDate.AddMonths(-1);
                             string name = Staff_WorkShift.Rows[i]["YGXM"].ToString();
                             string date = startDate.AddDays(j).Month.ToString() + "月" + startDate.AddDays(j).Day.ToString() + "日";
-                            string PB_num_origin = Staff_WorkShift_SQL_Copy.Rows[i][j + 3].ToString();
+                            string PB_num_origin = Staff_WorkShift_SQL_Copy.Rows[row][j + 3].ToString();
                             string PB_num_change = Staff_WorkShift.Rows[i][j + 2].ToString();
                             string PB_origin = "空";
                             string PB_change = "";
@@ -473,24 +484,50 @@ namespace KaoQin
                 Staff_WorkShift_SQL.Columns.Clear();
                 for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
                 {
-                    Staff_WorkShift_SQL.Rows.Add();
+                    Staff_WorkShift_SQL.Rows.Add(new object[] { });
+                    //共34列，第0和1列为姓名考勤号，第2-32为排班，33列为排序列
                     for (int j = 0; j < 34; j++)
                     {
-                        //第0列为考勤ID，第1列是姓名
                         if (i == 0)
                         {
                             Staff_WorkShift_SQL.Columns.Add();
                         }
 
-                        if (j < Staff_WorkShift.Columns.Count && Staff_WorkShift.Rows[i][j].ToString() != "")
+                        if (j == 0)
                         {
-                            Staff_WorkShift_SQL.Rows[i][j] = "'" + Staff_WorkShift.Rows[i][j].ToString() + "'";
-                        }
-                        else
-                        {
-                            Staff_WorkShift_SQL.Rows[i][j] = "null";
+                            Staff_WorkShift_SQL.Rows[i][0] = Staff_WorkShift.Rows[i]["KQID"].ToString();
                         }
 
+                        if (j == 1)
+                        {
+                            Staff_WorkShift_SQL.Rows[i][1] = Staff_WorkShift.Rows[i]["YGXM"].ToString();
+                        }
+
+                        if (j > 1 && j <= 32)
+                        {
+                            if (j <= Timespan.Days + 2)
+                            {
+                                if (Staff_WorkShift.Rows[i][j].ToString() != "")
+                                {
+                                    Staff_WorkShift_SQL.Rows[i][j] = "'" + Staff_WorkShift.Rows[i][j].ToString() + "'";
+                                }
+                                else
+                                {
+                                    Staff_WorkShift_SQL.Rows[i][j] = "null";
+                                }
+                            }
+                            else
+                            {
+                                Staff_WorkShift_SQL.Rows[i][j] = "null";
+                            }
+
+                        }
+
+                        //最后一列是排序列
+                        if (j == 33)
+                        {
+                            Staff_WorkShift_SQL.Rows[i][33] = Staff_WorkShift.Rows[i]["sortNo"].ToString();
+                        }
                     }
                 }
 
@@ -500,7 +537,7 @@ namespace KaoQin
                 {
                     sql.Append(string.Format("update KQ_PB_XB set D1T={0},D2T={1},D3T={2},D4T={3},D5T={4},D6T={5},D7T={6},D8T={7},"
                         + "D9T={8},D10T={9},D11T={10},D12T={11},D13T={12},D14T={13},D15T={14},D16T={15},D17T={16},D18T={17},D19T={18},D20T={19},"
-                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30},sortNo={31} where PBID='{32}' and KQID={33};",
+                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30},sortNo='{31}' where PBID='{32}' and KQID={33};",
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
                         Staff_WorkShift_SQL.Rows[i][5].ToString(), Staff_WorkShift_SQL.Rows[i][6].ToString(),
@@ -609,23 +646,52 @@ namespace KaoQin
                 for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
                 {
                     Staff_WorkShift_SQL.Rows.Add(new object[] {});
+                    //共34列，第0和1列为姓名考勤号，第2-32为排班，33列为排序列
                     for (int j = 0; j < 34; j++)
                     {
                         if (i == 0)
                         {
                             Staff_WorkShift_SQL.Columns.Add();
                         }
-                        
-                        if (j< Staff_WorkShift.Columns.Count && Staff_WorkShift.Rows[i][j].ToString()!="")
+
+                        if (j == 0)
                         {
-                            Staff_WorkShift_SQL.Rows[i][j] = "'"+Staff_WorkShift.Rows[i][j].ToString()+ "'";
-                        }else
-                        {
-                            Staff_WorkShift_SQL.Rows[i][j] = "null";
+                            Staff_WorkShift_SQL.Rows[i][0] = Staff_WorkShift.Rows[i]["KQID"].ToString();
                         }
-                        
+
+                        if (j == 1)
+                        {
+                            Staff_WorkShift_SQL.Rows[i][1] = Staff_WorkShift.Rows[i]["YGXM"].ToString();
+                        }
+
+                        if (j>1 && j<=32)
+                        {
+                            if (j <= Timespan.Days+2)
+                            {
+                                if (Staff_WorkShift.Rows[i][j].ToString() != "")
+                                {
+                                    Staff_WorkShift_SQL.Rows[i][j] = "'" + Staff_WorkShift.Rows[i][j].ToString() + "'";
+                                }
+                                else
+                                {
+                                    Staff_WorkShift_SQL.Rows[i][j] = "null";
+                                }
+                            }else
+                            {
+                                Staff_WorkShift_SQL.Rows[i][j] = "null";
+                            }
+                                                                            
+                        }
+
+                        //最后一列是排序列
+                        if (j == 33)
+                        {
+                            Staff_WorkShift_SQL.Rows[i][33] = Staff_WorkShift.Rows[i]["sortNo"].ToString();
+                        }                    
                     }
                 }
+
+                
                 
                 //写入排班细表
                 StringBuilder sql = new StringBuilder();
@@ -638,7 +704,7 @@ namespace KaoQin
                         + "D20T,D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T,sortNo)"
                         + string.Format(" values ('{0}','{1}',{2},{3},{4},{5},{6},{7},{8},{9},{10},"
                         + "{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},"
-                        + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34});",
+                        + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},'{34}');",
                         ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(), 
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
