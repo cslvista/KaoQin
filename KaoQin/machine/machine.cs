@@ -107,7 +107,14 @@ namespace KaoQin.machine
             {
                 try
                 {
-                    DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+                    if (Machine.Rows[i]["Password"].ToString() == "")
+                    {
+                        
+                    }else
+                    {
+                        DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+                    }
+                    
                     bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
                     if (bIsConnected==false)
                     {

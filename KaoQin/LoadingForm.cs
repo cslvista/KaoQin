@@ -70,24 +70,36 @@ namespace KaoQin
                 return;
             }
 
-            DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
-            DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
-            bool bIsConnected = false;//判断设备是否可连接   
-            string sdwEnrollNumber = "";
-            string sName = "";
-            string sPassword = "";
-            int iPrivilege = 0;
-            bool bEnabled = false;
-            
-            DKJ.ReadAllUserID(0);
-            
-            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+            for (int i = 0; i < Machine.Rows.Count; i++)
             {
-                int position = sName.IndexOf("\0");
-                string name = sName.Substring(0, position);//过滤sName中多余字符
-                Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });                
-            }
+                bool isConnected = false;
+                DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+                isConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
+                if (isConnected == false)
+                {
+                    MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[0]["Machine"].ToString()));
+                    continue;
+                }
 
+                string sdwEnrollNumber = "";
+                string sName = "";
+                string sPassword = "";
+                int iPrivilege = 0;
+                bool bEnabled = false;
+
+                DKJ.ReadAllUserID(0);
+                while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+                {
+                    try
+                    {
+                        int position = sName.IndexOf("\0");
+                        string name = sName.Substring(0, position);//过滤sName中多余字符
+                        Staff_Orign.Rows.Add(new object[] { sdwEnrollNumber, name });
+                    }
+                    catch { }
+                }
+            }
+           
             int iMachineNumber = 0;
             int VerifyMode = 0;
             int InOutMode = 0;
@@ -102,11 +114,11 @@ namespace KaoQin
             for (int i = 0; i < Machine.Rows.Count; i++)
             {
                 DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
-                bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
+                bool bIsConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
                 if (bIsConnected == false)
                 {
                     MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[i]["Machine"].ToString()));
-                    return;
+                    continue;
                 }
 
                 DKJ.ReadAllGLogData(iMachineNumber);//read all the user information to the memory
@@ -143,7 +155,8 @@ namespace KaoQin
             {
                 return;
             }
-            Application.ExitThread();
+            this.Close();
+            //Application.ExitThread();
         }
 
         public void CloseWin()

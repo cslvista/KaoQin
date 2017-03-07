@@ -79,10 +79,15 @@ namespace KaoQin.users
             DKJ.ReadAllUserID(0);
             while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
             {
-                int a;
-                a = sName.IndexOf("\0");
-                string name = sName.Substring(0, a);//过滤sName中多余字符
-                User.Rows.Add(new object[] { sdwEnrollNumber, name });
+                try
+                {
+                    int a;
+                    a = sName.IndexOf("\0");
+                    string name = sName.Substring(0, a);//过滤sName中多余字符
+                    User.Rows.Add(new object[] { sdwEnrollNumber, name });
+                }
+                catch { }
+                
             }
             this.BeginInvoke(new UpdateUI(delegate ()
             {

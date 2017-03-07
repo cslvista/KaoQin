@@ -67,7 +67,7 @@ namespace KaoQin
             }
 
             //联结两个表
-            var query = from rec in Record_DKJ.AsEnumerable()
+            var query = (from rec in Record_DKJ.AsEnumerable()
                         join staff in Staff.AsEnumerable()
                         on rec.Field<string>("ID") equals staff.Field<string>("ID") into AllInfo
                         from allInfo in AllInfo.DefaultIfEmpty()
@@ -77,7 +77,7 @@ namespace KaoQin
                             Name = allInfo == null ? "" : allInfo["Name"],
                             Time = rec.Field<string>("Time"),
                             Source = rec.Field<string>("Source"),
-                        };
+                        }).Distinct();
             try
             {                
                 foreach (var obj in query)
@@ -128,31 +128,35 @@ namespace KaoQin
                 MessageBox.Show("没有可用设备！");
                 return;
             }
-            bool isConnected = false;
-            DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[0]["Password"].ToString()));
-            isConnected=DKJ.Connect_Net(Machine.Rows[0]["IP"].ToString(), Convert.ToInt32(Machine.Rows[0]["Port"].ToString()));
-            if (isConnected == false)
-            {
-                MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[0]["Machine"].ToString()));
-                return;
-            }
-            string sdwEnrollNumber = "";
-            string sName = "";
-            string sPassword = "";
-            int iPrivilege = 0;
-            bool bEnabled = false;
 
-            DKJ.ReadAllUserID(0);
-            while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+            for (int i = 0; i < Machine.Rows.Count; i++)
             {
-                try
+                bool isConnected = false;
+                DKJ.SetCommPassword(Convert.ToInt32(Machine.Rows[i]["Password"].ToString()));
+                isConnected = DKJ.Connect_Net(Machine.Rows[i]["IP"].ToString(), Convert.ToInt32(Machine.Rows[i]["Port"].ToString()));
+                if (isConnected == false)
                 {
-                    int position = sName.IndexOf("\0");
-                    string name = sName.Substring(0, position);//过滤sName中多余字符
-                    Staff.Rows.Add(new object[] { sdwEnrollNumber, name });
+                    MessageBox.Show(string.Format("'{0}'无法连接！", Machine.Rows[0]["Machine"].ToString()));
+                    continue;
                 }
-                catch { }                
-            }
+                string sdwEnrollNumber = "";
+                string sName = "";
+                string sPassword = "";
+                int iPrivilege = 0;
+                bool bEnabled = false;
+
+                DKJ.ReadAllUserID(0);
+                while (DKJ.SSR_GetAllUserInfo(0, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))//get all the users' information from the memory
+                {
+                    try
+                    {
+                        int position = sName.IndexOf("\0");
+                        string name = sName.Substring(0, position);//过滤sName中多余字符
+                        Staff.Rows.Add(new object[] { sdwEnrollNumber, name });
+                    }
+                    catch { }
+                }
+            }                        
             Attendance form =  (Attendance)this.Owner;
             form.Staff_Orign = Staff.Copy();
            

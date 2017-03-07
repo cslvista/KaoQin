@@ -1032,7 +1032,7 @@ namespace KaoQin
                 for (int j = 0; j < Record_Yesterday.Rows.Count; j++)
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Yesterday.Rows[j]["Time"]).ToShortTimeString());
-                    DateTime value = Convert.ToDateTime("22:30");
+                    DateTime value = Convert.ToDateTime("20:00");
                     if (record.CompareTo(value) >= 0)
                     {
                         return "/正常";
@@ -1044,7 +1044,7 @@ namespace KaoQin
                 {
                     DateTime record = Convert.ToDateTime(Convert.ToDateTime(Record_Today.Rows[j]["Time"]).ToShortTimeString());
                     double subtract = (SBTime - record).TotalMinutes;
-                    if (record.CompareTo(SBTime) <= 0)
+                    if (subtract>=0 && subtract<240)
                     {
                         return "/正常";
                     }
