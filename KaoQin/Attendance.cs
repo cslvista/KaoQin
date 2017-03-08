@@ -383,7 +383,7 @@ namespace KaoQin
             }
             else
             {
-                MessageBox.Show(string.Format("{0}在{1}{2}没有排班记录，无法查看考勤结果！", gridView1.GetFocusedRowCellValue("BMMC").ToString(), comboBoxYear.Text, comboBoxMonth.Text));
+                MessageBox.Show(string.Format("{0}没有{1}{2}的排班记录，无法查看考勤结果！", gridView1.GetFocusedRowCellValue("BMMC").ToString(), comboBoxYear.Text, comboBoxMonth.Text));
                 return false;
             }
 

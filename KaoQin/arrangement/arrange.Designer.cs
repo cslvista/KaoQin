@@ -63,6 +63,7 @@
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -95,7 +96,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(886, 633);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1188, 633);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -156,7 +157,7 @@
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemColorPickEdit1,
             this.repositoryItemColorEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(694, 569);
+            this.gridControl2.Size = new System.Drawing.Size(996, 569);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -175,6 +176,7 @@
             this.gridColumn10,
             this.gridColumn12,
             this.gridColumn3,
+            this.gridColumn16,
             this.gridColumn11,
             this.gridColumn4,
             this.gridColumn5,
@@ -236,7 +238,7 @@
             this.gridColumn4.FieldName = "SBSJ";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // gridColumn5
             // 
@@ -244,7 +246,7 @@
             this.gridColumn5.FieldName = "XBSJ";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
@@ -254,7 +256,7 @@
             this.gridColumn9.FieldName = "GZR";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.VisibleIndex = 5;
             this.gridColumn9.Width = 102;
             // 
             // gridColumn6
@@ -263,7 +265,7 @@
             this.gridColumn6.FieldName = "CJR";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
+            this.gridColumn6.VisibleIndex = 8;
             // 
             // gridColumn15
             // 
@@ -273,7 +275,7 @@
             this.gridColumn15.FieldName = "CJSJ";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 8;
+            this.gridColumn15.VisibleIndex = 9;
             // 
             // gridColumn7
             // 
@@ -281,7 +283,7 @@
             this.gridColumn7.FieldName = "XGR";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
+            this.gridColumn7.VisibleIndex = 10;
             // 
             // gridColumn14
             // 
@@ -291,7 +293,7 @@
             this.gridColumn14.FieldName = "XGSJ";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 11;
             // 
             // gridColumn8
             // 
@@ -299,7 +301,7 @@
             this.gridColumn8.FieldName = "SM";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
+            this.gridColumn8.VisibleIndex = 7;
             // 
             // gridColumn13
             // 
@@ -308,7 +310,7 @@
             this.gridColumn13.FieldName = "COLOR";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 5;
+            this.gridColumn13.VisibleIndex = 6;
             // 
             // repositoryItemColorPickEdit1
             // 
@@ -418,7 +420,7 @@
             this.panelControl2.Location = new System.Drawing.Point(190, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(694, 56);
+            this.panelControl2.Size = new System.Drawing.Size(996, 56);
             this.panelControl2.TabIndex = 5;
             // 
             // searchControl1
@@ -477,11 +479,19 @@
             this.ButtonAlter.Text = "修改";
             this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
             // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "班次类型";
+            this.gridColumn16.FieldName = "Type";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 2;
+            // 
             // arrange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 633);
+            this.ClientSize = new System.Drawing.Size(1188, 633);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "arrange";
@@ -545,5 +555,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

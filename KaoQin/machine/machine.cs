@@ -220,5 +220,10 @@ namespace KaoQin.machine
             
            
         }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(sender, e);
+        }
     }
 }

@@ -67,8 +67,9 @@ namespace KaoQin.users
             {
                 textBoxID.Text = "";
                 textBoxName.Text = "";
-                dateEdit1.Text = "";
+                dateEntry.Text = "";
                 textBoxRemark.Text = "";
+                dateBirthday.Text = "";
                 MessageBox.Show("添加成功！");
             }else if (success == true && alter == true)
             {
@@ -106,16 +107,26 @@ namespace KaoQin.users
             }
 
             string EntryDate = "";
-            if (dateEdit1.Text != "")
+            if (dateEntry.Text != "")
             {
-                EntryDate = "'" + Convert.ToDateTime(dateEdit1.Text).ToString("yyyy-MM-dd")+"'" ;
+                EntryDate = "'" + Convert.ToDateTime(dateEntry.Text).ToString("yyyy-MM-dd")+"'" ;
             }
             else
             {
                 EntryDate = "null";
             }
 
-            string sql1 = string.Format("insert into KQ_YG (KQID,YGXM,BMID,RZSJ,ZT,SM) values ('{0}','{1}','{2}',{3},'{4}','{5}')", textBoxID.Text.Trim(), textBoxName.Text.Trim(), comboBoxDep.SelectedValue, EntryDate, "0", textBoxRemark.Text.Trim());
+            string birthday = "";
+            if (dateBirthday.Text != "")
+            {
+                birthday = "'" + Convert.ToDateTime(dateBirthday.Text).ToString("yyyy-MM-dd") + "'";
+            }
+            else
+            {
+                birthday = "null";
+            }
+
+            string sql1 = string.Format("insert into KQ_YG (KQID,YGXM,BMID,RZSJ,ZT,BZ,XB,CSRQ,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}',{3},'{4}','{5}','{6}',{7},'{8}','{9}','{10}')", textBoxID.Text.Trim(), textBoxName.Text.Trim(), comboBoxDep.SelectedValue, EntryDate, "0", textBoxRemark.Text.Trim(),comboBoxSex.Text, birthday, GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
             try
             {
@@ -132,9 +143,9 @@ namespace KaoQin.users
         private bool Alter()
         {
             string EntryDate = "null";
-            if (dateEdit1.Text != "")
+            if (dateEntry.Text != "")
             {
-                EntryDate = "'" + Convert.ToDateTime(dateEdit1.Text).ToString("yyyy-MM-dd")+ "'" ;
+                EntryDate = "'" + Convert.ToDateTime(dateEntry.Text).ToString("yyyy-MM-dd")+ "'" ;
             }
             else
             {
@@ -144,14 +155,24 @@ namespace KaoQin.users
             string LeaveDate = "null";
             if (comboBoxState.Text == "离职")
             {
-                if (dateEdit2.Text != "")
+                if (dateLeave.Text != "")
                 {
-                    LeaveDate = "'"+Convert.ToDateTime(dateEdit2.Text).ToString("yyyy-MM-dd")+"'";
+                    LeaveDate = "'"+Convert.ToDateTime(dateLeave.Text).ToString("yyyy-MM-dd")+"'";
                 }
                 else
                 {
                     LeaveDate = "null";
                 }
+            }
+
+            string birthday = "";
+            if (dateBirthday.Text != "")
+            {
+                birthday = "'" + Convert.ToDateTime(dateBirthday.Text).ToString("yyyy-MM-dd") + "'";
+            }
+            else
+            {
+                birthday = "null";
             }
 
             string State = "";
@@ -166,7 +187,7 @@ namespace KaoQin.users
 
             //更新或插入数据
             StringBuilder sql = new StringBuilder();
-            sql.Append (string.Format("update KQ_YG set KQID='{0}',YGXM='{1}',RZSJ={2},LZSJ={3},ZT='{4}',SM='{5}',BMID='{6}' where KQID='{7}';", textBoxID.Text.Trim(), textBoxName.Text.Trim(), EntryDate, LeaveDate, State, textBoxRemark.Text, comboBoxDep.SelectedValue, KQID));
+            sql.Append (string.Format("update KQ_YG set KQID='{0}',YGXM='{1}',RZSJ={2},LZSJ={3},ZT='{4}',BZ='{5}',BMID='{6}',XB='{7}',CSRQ={8},XGRID='{9}',XGR='{10}',XGSJ='{11}' where KQID='{12}';", textBoxID.Text.Trim(), textBoxName.Text.Trim(), EntryDate, LeaveDate, State, textBoxRemark.Text, comboBoxDep.SelectedValue, comboBoxSex.Text,birthday, GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(), KQID));
 
             if (textBoxID.Text.Trim() != KQID)
             {
@@ -190,10 +211,13 @@ namespace KaoQin.users
         {
             UILocation();
 
-            dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
-            dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateEntry.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateEntry.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateLeave.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateLeave.Properties.Mask.EditMask = "yyyy-MM-dd";
+            dateBirthday.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            dateBirthday.Properties.Mask.EditMask = "yyyy-MM-dd";
+            comboBoxSex.Text = "女";
 
             string sql = "select BMID,BMMC from KQ_BM where BMID>0";
 
@@ -219,7 +243,7 @@ namespace KaoQin.users
             {
                 comboBoxState.Text = "在职";
                 comboBoxState.Enabled = false;
-                dateEdit2.Enabled = false;
+                dateLeave.Enabled = false;
             }
             else
             {
@@ -235,10 +259,12 @@ namespace KaoQin.users
             int y = 2;
             label6.Location = new Point(comboBoxState.Location.X - label6.Width - x, comboBoxState.Location.Y + y);
             label4.Location = new Point(comboBoxDep.Location.X - label4.Width - x, comboBoxDep.Location.Y + y);
+            label8.Location = new Point(comboBoxSex.Location.X - label4.Width - x, comboBoxSex.Location.Y + y);
             label3.Location = new Point(textBoxID.Location.X - label3.Width - x, textBoxID.Location.Y + y);
             label1.Location = new Point(textBoxName.Location.X - label1.Width - x, textBoxName.Location.Y + y);
-            label2.Location = new Point(dateEdit1.Location.X - label2.Width - x, dateEdit1.Location.Y + y);
-            label7.Location = new Point(dateEdit2.Location.X - label7.Width - x, dateEdit2.Location.Y + y);
+            label9.Location = new Point(dateBirthday.Location.X - label1.Width - x, dateBirthday.Location.Y + y);
+            label2.Location = new Point(dateEntry.Location.X - label2.Width - x, dateEntry.Location.Y + y);
+            label7.Location = new Point(dateLeave.Location.X - label7.Width - x, dateLeave.Location.Y + y);
             label5.Location = new Point(textBoxRemark.Location.X - label5.Width - x, textBoxRemark.Location.Y + y);
 
         }
@@ -247,10 +273,10 @@ namespace KaoQin.users
         {
             if (comboBoxState.Text == "离职")
             {
-                dateEdit2.Enabled = true;
+                dateLeave.Enabled = true;
             }else
             {
-                dateEdit2.Enabled = false;
+                dateLeave.Enabled = false;
             }
         }
     }

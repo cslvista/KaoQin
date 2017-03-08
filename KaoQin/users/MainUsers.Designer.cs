@@ -59,6 +59,12 @@
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.ButtonAll = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -89,7 +95,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(883, 594);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1198, 594);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -157,7 +163,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(629, 528);
+            this.gridControl2.Size = new System.Drawing.Size(944, 528);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -178,15 +184,22 @@
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
+            this.gridColumn11,
             this.gridColumn5,
-            this.gridColumn6,
+            this.gridColumn12,
             this.gridColumn8,
-            this.gridColumn10});
+            this.gridColumn10,
+            this.gridColumn6,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.GroupCount = 1;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
             this.gridView2.OptionsPrint.AutoWidth = false;
+            this.gridView2.OptionsView.ColumnAutoWidth = false;
             this.gridView2.OptionsView.ShowFooter = true;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
@@ -202,7 +215,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
-            this.gridColumn2.Width = 125;
+            this.gridColumn2.Width = 94;
             // 
             // gridColumn3
             // 
@@ -222,7 +235,7 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "YGXM", "总计：{0}")});
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
-            this.gridColumn4.Width = 116;
+            this.gridColumn4.Width = 65;
             // 
             // gridColumn5
             // 
@@ -237,12 +250,12 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "说明";
-            this.gridColumn6.FieldName = "SM";
+            this.gridColumn6.Caption = "备注";
+            this.gridColumn6.FieldName = "BZ";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
-            this.gridColumn6.Width = 198;
+            this.gridColumn6.VisibleIndex = 7;
+            this.gridColumn6.Width = 83;
             // 
             // gridColumn8
             // 
@@ -252,8 +265,8 @@
             this.gridColumn8.FieldName = "RZSJ";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
-            this.gridColumn8.Width = 113;
+            this.gridColumn8.VisibleIndex = 5;
+            this.gridColumn8.Width = 82;
             // 
             // gridColumn10
             // 
@@ -263,8 +276,8 @@
             this.gridColumn10.FieldName = "LZSJ";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
-            this.gridColumn10.Width = 117;
+            this.gridColumn10.VisibleIndex = 6;
+            this.gridColumn10.Width = 97;
             // 
             // panelControl1
             // 
@@ -359,7 +372,7 @@
             this.panelControl2.Location = new System.Drawing.Point(252, 2);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(629, 58);
+            this.panelControl2.Size = new System.Drawing.Size(944, 58);
             this.panelControl2.TabIndex = 4;
             // 
             // ButtonSearch
@@ -367,7 +380,7 @@
             this.ButtonSearch.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonSearch.Appearance.Options.UseFont = true;
             this.ButtonSearch.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSearch.Image")));
-            this.ButtonSearch.Location = new System.Drawing.Point(268, 18);
+            this.ButtonSearch.Location = new System.Drawing.Point(276, 18);
             this.ButtonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonSearch.Name = "ButtonSearch";
             this.ButtonSearch.Size = new System.Drawing.Size(87, 25);
@@ -380,7 +393,7 @@
             this.ButtonRefresh.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh.Appearance.Options.UseFont = true;
             this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
-            this.ButtonRefresh.Location = new System.Drawing.Point(206, 18);
+            this.ButtonRefresh.Location = new System.Drawing.Point(211, 18);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonRefresh.Name = "ButtonRefresh";
             this.ButtonRefresh.Size = new System.Drawing.Size(52, 25);
@@ -406,7 +419,7 @@
             this.ButtonDelete.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonDelete.Appearance.Options.UseFont = true;
             this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
-            this.ButtonDelete.Location = new System.Drawing.Point(142, 18);
+            this.ButtonDelete.Location = new System.Drawing.Point(146, 18);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(52, 25);
@@ -419,7 +432,7 @@
             this.ButtonAlter.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAlter.Appearance.Options.UseFont = true;
             this.ButtonAlter.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAlter.Image")));
-            this.ButtonAlter.Location = new System.Drawing.Point(80, 18);
+            this.ButtonAlter.Location = new System.Drawing.Point(81, 18);
             this.ButtonAlter.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonAlter.Name = "ButtonAlter";
             this.ButtonAlter.Size = new System.Drawing.Size(52, 25);
@@ -430,7 +443,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(458, 19);
+            this.searchControl1.Location = new System.Drawing.Point(468, 19);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -449,7 +462,7 @@
             this.ButtonAll.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonAll.Appearance.Options.UseFont = true;
             this.ButtonAll.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAll.Image")));
-            this.ButtonAll.Location = new System.Drawing.Point(367, 18);
+            this.ButtonAll.Location = new System.Drawing.Point(376, 18);
             this.ButtonAll.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonAll.Name = "ButtonAll";
             this.ButtonAll.Size = new System.Drawing.Size(75, 26);
@@ -457,16 +470,74 @@
             this.ButtonAll.Text = "所有员工";
             this.ButtonAll.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "性别";
+            this.gridColumn11.FieldName = "XB";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 3;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "出生日期";
+            this.gridColumn12.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.gridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn12.FieldName = "CSRQ";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 4;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "创建人";
+            this.gridColumn13.FieldName = "CJR";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 8;
+            this.gridColumn13.Width = 52;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "创建时间";
+            this.gridColumn14.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn14.FieldName = "CJSJ";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 9;
+            this.gridColumn14.Width = 68;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "修改人";
+            this.gridColumn15.FieldName = "XGR";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 10;
+            this.gridColumn15.Width = 52;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "修改时间";
+            this.gridColumn16.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn16.FieldName = "XGSJ";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 11;
+            // 
             // MainUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 594);
+            this.ClientSize = new System.Drawing.Size(1198, 594);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部门与员工设置";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainUsers_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -518,5 +589,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

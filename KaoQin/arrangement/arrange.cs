@@ -104,12 +104,12 @@ namespace KaoQin.arrangement
                 form.alter = true;
                 form.LBID= gridView1.GetFocusedRowCellValue("ID").ToString();
                 form.ID = gridView2.GetFocusedRowCellValue("ID").ToString();
-                form.comboBox2.Text= gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
-                form.comboBox1.Text = gridView2.GetFocusedRowCellDisplayText("KT").ToString();
-                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
-                form.textBox2.Text = gridView2.GetFocusedRowCellDisplayText("GZR").ToString();
-                form.textBox3.Text = gridView2.GetFocusedRowCellDisplayText("NAME").ToString(); 
-                form.textBox4.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                form.comState.Text= gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
+                form.comKT.Text = gridView2.GetFocusedRowCellDisplayText("KT").ToString();
+                form.textBoxType.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.textBoxCQ.Text = gridView2.GetFocusedRowCellDisplayText("GZR").ToString();
+                form.textBoxShift.Text = gridView2.GetFocusedRowCellDisplayText("NAME").ToString(); 
+                form.textBoxRemark.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
                 form.colorPickEdit1.Text= gridView2.GetFocusedRowCellDisplayText("COLOR").ToString();
                 if (gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString() == "")
                 {
@@ -117,7 +117,7 @@ namespace KaoQin.arrangement
                 }
                 else
                 {
-                    form.timeEdit1.EditValue = gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString();
+                    form.timeWork.EditValue = gridView2.GetFocusedRowCellDisplayText("SBSJ").ToString();
                 }
 
                 if (gridView2.GetFocusedRowCellDisplayText("XBSJ").ToString() == "")
@@ -125,9 +125,10 @@ namespace KaoQin.arrangement
                     form.checkBox2.Checked = true;
                 }else
                 {
-                    form.timeEdit2.EditValue = gridView2.GetFocusedRowCellDisplayText("XBSJ").ToString();
+                    form.timeOffWork.EditValue = gridView2.GetFocusedRowCellDisplayText("XBSJ").ToString();
                 }
                 form.Show(this);
+                form.comShiftType.Text = gridView2.GetFocusedRowCellDisplayText("Type").ToString();
             }
             catch { }
             
@@ -145,7 +146,7 @@ namespace KaoQin.arrangement
             {
                 add_alter_Item form = new add_alter_Item();
                 form.LBID= gridView1.GetFocusedRowCellDisplayText("ID").ToString();
-                form.textBox1.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
+                form.textBoxType.Text = gridView1.GetFocusedRowCellDisplayText("BMLB").ToString();
                 form.Show(this);
             }
             catch { }

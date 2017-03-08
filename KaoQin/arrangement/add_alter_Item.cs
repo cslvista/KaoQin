@@ -24,14 +24,15 @@ namespace KaoQin.arrangement
         {
             UILocation();
 
-            textBox1.Enabled = false;
+            textBoxType.Enabled = false;
             if (alter == false)
             {
-                textBox2.Text = "1";
-                comboBox1.Text = "否";
-                comboBox2.Text = "在用";
-                comboBox2.Enabled = false;
+                textBoxCQ.Text = "1";
+                comKT.Text = "否";
+                comState.Text = "在用";
+                comState.Enabled = false;
                 colorPickEdit1.EditValue = Color.Black;
+                comShiftType.Text = "普通";
             }
             else
             {
@@ -43,14 +44,15 @@ namespace KaoQin.arrangement
         {
             int x = 3;
             int y = 2;
-            label4.Location = new Point(textBox1.Location.X - label4.Width - x, textBox1.Location.Y + y);
-            label9.Location = new Point(comboBox2.Location.X - label9.Width - x, comboBox2.Location.Y + y);
-            label8.Location = new Point(comboBox1.Location.X - label8.Width - x, comboBox1.Location.Y + y);
-            label7.Location = new Point(textBox3.Location.X - label7.Width - x, textBox3.Location.Y + y);
-            label3.Location = new Point(timeEdit1.Location.X - label3.Width - x, timeEdit1.Location.Y );
-            label1.Location = new Point(timeEdit2.Location.X - label1.Width - x, timeEdit2.Location.Y );
-            label5.Location = new Point(textBox2.Location.X - label5.Width - x, textBox2.Location.Y + y);
-            label2.Location = new Point(textBox4.Location.X - label2.Width - x, textBox4.Location.Y + y);
+            label4.Location = new Point(textBoxType.Location.X - label4.Width - x, textBoxType.Location.Y + y);
+            label9.Location = new Point(comState.Location.X - label9.Width - x, comState.Location.Y + y);
+            label8.Location = new Point(comKT.Location.X - label8.Width - x, comKT.Location.Y + y);
+            label11.Location = new Point(comShiftType.Location.X - label8.Width - x, comShiftType.Location.Y + y);
+            label7.Location = new Point(textBoxShift.Location.X - label7.Width - x, textBoxShift.Location.Y + y);
+            label3.Location = new Point(timeWork.Location.X - label3.Width - x, timeWork.Location.Y );
+            label1.Location = new Point(timeOffWork.Location.X - label1.Width - x, timeOffWork.Location.Y );
+            label5.Location = new Point(textBoxCQ.Location.X - label5.Width - x, textBoxCQ.Location.Y + y);
+            label2.Location = new Point(textBoxRemark.Location.X - label2.Width - x, textBoxRemark.Location.Y + y);
             label10.Location = new Point(colorPickEdit1.Location.X - label10.Width - x, colorPickEdit1.Location.Y + y);
         }
 
@@ -61,27 +63,27 @@ namespace KaoQin.arrangement
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (textBox3.Text == "")
+            if (textBoxShift.Text == "")
             {
                 MessageBox.Show("请输入班次名称！");
                 return;
             }
 
-            if (textBox2.Text == "")
+            if (textBoxCQ.Text == "")
             {
                 MessageBox.Show("请输入出勤日！");
                 return;
             }
 
-            if (checkBox1.Checked==false && checkBox2.Checked == false && comboBox1.Text=="否")
+            if (checkBox1.Checked==false && checkBox2.Checked == false && comKT.Text=="否")
             {
-                if (timeEdit1.Text == timeEdit2.Text)
+                if (timeWork.Text == timeOffWork.Text)
                 {
                     MessageBox.Show("上班时间和下班时间不能相同！");
                     return;
                 }
 
-                if (comboBox1.Text == "否" && DateTime.Compare(Convert.ToDateTime(timeEdit1.Text), Convert.ToDateTime(timeEdit2.Text)) >= 0)
+                if (comKT.Text == "否" && DateTime.Compare(Convert.ToDateTime(timeWork.Text), Convert.ToDateTime(timeOffWork.Text)) >= 0)
                 {
                     MessageBox.Show("下班时间不能大于或等于上班时间！");
                     return;
@@ -91,7 +93,7 @@ namespace KaoQin.arrangement
 
             try
             {
-                Convert.ToDouble(textBox2.Text);
+                Convert.ToDouble(textBoxCQ.Text);
             }
             catch
             {
@@ -147,7 +149,7 @@ namespace KaoQin.arrangement
 
             if (checkBox1.Checked == false)
             {
-                WorkTime = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
+                WorkTime = Convert.ToDateTime(timeWork.Text).ToString("HH:mm");
             }
             else
             {
@@ -156,14 +158,14 @@ namespace KaoQin.arrangement
 
             if (checkBox2.Checked == false)
             {
-                OffWorkTime = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
+                OffWorkTime = Convert.ToDateTime(timeOffWork.Text).ToString("HH:mm");
             }
             else
             {
                 OffWorkTime = "";
             }
 
-            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,COLOR,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')", ID, LBID, "0",comboBox1.SelectedIndex,textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), ColorTranslator.ToHtml(colorPickEdit1.Color) ,GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
+            string sql1 = string.Format("insert into KQ_BC (ID,LBID,ZT,KT,NAME,SBSJ,XBSJ,GZR,SM,COLOR,CJRID,CJR,CJSJ,Type) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}')", ID, LBID, "0",comKT.SelectedIndex,textBoxShift.Text.Trim(),WorkTime,OffWorkTime, textBoxCQ.Text.Trim(), textBoxRemark.Text.Trim(), ColorTranslator.ToHtml(colorPickEdit1.Color) ,GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),comShiftType.Text);
 
             try
             {
@@ -184,7 +186,7 @@ namespace KaoQin.arrangement
 
             if (checkBox1.Checked == false)
             {
-                WorkTime = Convert.ToDateTime(timeEdit1.Text).ToString("HH:mm");
+                WorkTime = Convert.ToDateTime(timeWork.Text).ToString("HH:mm");
             }else
             {
                 WorkTime = "";
@@ -192,7 +194,7 @@ namespace KaoQin.arrangement
 
             if (checkBox2.Checked == false)
             {
-                OffWorkTime = Convert.ToDateTime(timeEdit2.Text).ToString("HH:mm");
+                OffWorkTime = Convert.ToDateTime(timeOffWork.Text).ToString("HH:mm");
             }
             else
             {
@@ -201,7 +203,7 @@ namespace KaoQin.arrangement
 
             //更新或插入数据
             
-            string sql = string.Format("update KQ_BC set NAME='{0}',SBSJ='{1}',XBSJ='{2}',GZR='{3}',SM='{4}',XGRID='{5}',XGR='{6}',XGSJ='{7}',ZT='{8}',KT='{9}',COLOR='{10}' where ID='{11}'", textBox3.Text.Trim(),WorkTime,OffWorkTime, textBox2.Text.Trim(), textBox4.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),comboBox2.SelectedIndex,comboBox1.SelectedIndex, ColorTranslator.ToHtml(colorPickEdit1.Color), ID);
+            string sql = string.Format("update KQ_BC set NAME='{0}',SBSJ='{1}',XBSJ='{2}',GZR='{3}',SM='{4}',XGRID='{5}',XGR='{6}',XGSJ='{7}',ZT='{8}',KT='{9}',COLOR='{10}',Type='{11}' where ID='{12}'", textBoxShift.Text.Trim(),WorkTime,OffWorkTime, textBoxCQ.Text.Trim(), textBoxRemark.Text.Trim(), GlobalHelper.UserHelper.User["U_ID"].ToString(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),comState.SelectedIndex,comKT.SelectedIndex, ColorTranslator.ToHtml(colorPickEdit1.Color), comShiftType.Text,ID);
 
             try
             {
@@ -217,17 +219,17 @@ namespace KaoQin.arrangement
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            timeEdit1.Enabled = !checkBox1.Checked;
+            timeWork.Enabled = !checkBox1.Checked;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            timeEdit2.Enabled = !checkBox2.Checked;
+            timeOffWork.Enabled = !checkBox2.Checked;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "是")
+            if (comKT.Text == "是")
             {
                 label1.Text = "下班时间(明)：";
                 checkBox1.Checked = false;
@@ -238,7 +240,7 @@ namespace KaoQin.arrangement
             }
             else
             {
-                label1.Text = "下班时间(今)：";
+                label1.Text = "下班时间：";
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
                 checkBox1.Enabled = true;
@@ -247,5 +249,9 @@ namespace KaoQin.arrangement
             }
         }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

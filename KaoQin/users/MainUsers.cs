@@ -102,14 +102,19 @@ namespace KaoQin.users
                 form.alter = true;                
                 form.comboBoxState.Text =  gridView2.GetFocusedRowCellDisplayText("ZT").ToString();
                 form.department = gridView2.GetFocusedRowCellDisplayText("BMMC").ToString();
-                form.KQID = gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
+                form.KQID = gridView2.GetFocusedRowCellDisplayText("KQID").ToString();                            
                 form.textBoxID.Text= gridView2.GetFocusedRowCellDisplayText("KQID").ToString();
                 form.textBoxName.Text= gridView2.GetFocusedRowCellDisplayText("YGXM").ToString();
-                form.dateEdit1.Text= gridView2.GetFocusedRowCellDisplayText("RZSJ").ToString();
-                form.dateEdit2.Text = gridView2.GetFocusedRowCellDisplayText("LZSJ").ToString();
-                form.textBoxRemark.Text = gridView2.GetFocusedRowCellDisplayText("SM").ToString();
+                form.dateBirthday.Text = gridView2.GetFocusedRowCellDisplayText("CSRQ").ToString();
+                form.dateEntry.Text= gridView2.GetFocusedRowCellDisplayText("RZSJ").ToString();
+                form.dateLeave.Text = gridView2.GetFocusedRowCellDisplayText("LZSJ").ToString();
+                form.textBoxRemark.Text = gridView2.GetFocusedRowCellDisplayText("BZ").ToString();
                 form.searchAllUsers = searchAllUsers;
                 form.Show(this);
+                if (gridView2.GetFocusedRowCellDisplayText("XB").ToString() != "")
+                {
+                    form.comboBoxSex.Text = gridView2.GetFocusedRowCellDisplayText("XB").ToString();
+                }
             }
             catch { }
             
@@ -125,6 +130,11 @@ namespace KaoQin.users
 
             try
             {
+                if (gridView2.GetFocusedRowCellDisplayText("YGXM").ToString() == "")
+                {
+                    return;
+                }
+
                 if (MessageBox.Show(string.Format("是否删除员工 '{0}'？", gridView2.GetFocusedRowCellDisplayText("YGXM").ToString()), "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
@@ -184,7 +194,7 @@ namespace KaoQin.users
 
         public void simpleButton2_Click(object sender, EventArgs e)
         {
-            string sql = "select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID";
+            string sql = "select b.BMMC,a.* from KQ_YG a left join KQ_BM b on a.BMID=b.BMID";
 
             try
             {
@@ -310,7 +320,7 @@ namespace KaoQin.users
             {
                 try
                 {
-                    string sql = string.Format("select a.KQID,b.BMMC,a.YGXM,a.BMID,a.RZSJ,a.LZSJ,a.ZT,a.SM from KQ_YG a left join KQ_BM b on a.BMID=b.BMID where a.BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
+                    string sql = string.Format("select b.BMMC,a.* from KQ_YG a left join KQ_BM b on a.BMID=b.BMID where a.BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
                     Staff = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString());
                     gridControl2.DataSource = Staff;
                     gridView2.BestFitColumns();

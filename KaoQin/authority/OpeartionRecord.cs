@@ -24,12 +24,16 @@ namespace KaoQin.authority
             dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd";
             dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
             dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd";
-            dateEdit1.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-01");
-            dateEdit2.Text = Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd");
-                        
+            dateEdit1.Text = Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()).AddDays(-30).ToString("yyyy-MM-dd");
+            dateEdit2.Text = Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()).ToString("yyyy-MM-dd"); ;           
+            SearchDB();
+        }
+
+        private void SearchDB()
+        {
             try
             {
-                string sql = "select Top 600 ID,Record,Time from KQ_LOG order by ID desc";
+                string sql = string.Format("select ID,Record,Time from KQ_LOG where Time between '{0} 00:00:00' and '{1} 23:59:59' order by ID desc", dateEdit1.Text, dateEdit2.Text);
                 Record = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 gridControl1.DataSource = Record;
                 gridView1.BestFitColumns();
@@ -38,8 +42,6 @@ namespace KaoQin.authority
             {
                 MessageBox.Show("错误1:" + ex.Message, "提示");
             }
-
-            SearchInfo();
         }
 
         private void SearchInfo()
@@ -48,8 +50,7 @@ namespace KaoQin.authority
             {
                 try
                 {
-                    string StopTime = Convert.ToDateTime(dateEdit2.Text).AddDays(1).ToString("yyyy-MM-dd");
-                    Record.DefaultView.RowFilter = string.Format("Time>='{0}' and Time<='{1}' and  ( Record like '%{2}%')", dateEdit1.Text, StopTime, searchControl1.Text);
+                    Record.DefaultView.RowFilter = string.Format("Record like '%{0}%'",searchControl1.Text);
                 }
                 catch { }                
             }
@@ -61,15 +62,6 @@ namespace KaoQin.authority
             SearchInfo();
         }
 
-        private void dateEdit1_TextChanged(object sender, EventArgs e)
-        {
-            SearchInfo();
-        }
-
-        private void dateEdit2_TextChanged(object sender, EventArgs e)
-        {
-            SearchInfo();
-        }
 
         private void gridControl1_DoubleClick(object sender, EventArgs e)
         {
@@ -102,6 +94,16 @@ namespace KaoQin.authority
         private void 查看详细信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gridControl1_DoubleClick(sender, e);
+        }
+
+        private void dateEdit1_TextChanged(object sender, EventArgs e)
+        {
+            SearchDB();
+        }
+
+        private void dateEdit2_TextChanged(object sender, EventArgs e)
+        {
+            SearchDB();
         }
     }
 }
