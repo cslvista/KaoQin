@@ -178,6 +178,12 @@
     <Compile Include="rest\Rest.Designer.cs">
       <DependentUpon>Rest.cs</DependentUpon>
     </Compile>
+    <Compile Include="rest\rules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rest\rules.Designer.cs">
+      <DependentUpon>rules.cs</DependentUpon>
+    </Compile>
     <Compile Include="Schedual.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </Compile>
     <EmbeddedResource Include="rest\Rest.resx">
       <DependentUpon>Rest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rest\rules.resx">
+      <DependentUpon>rules.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Schedual.resx">
       <DependentUpon>Schedual.cs</DependentUpon>

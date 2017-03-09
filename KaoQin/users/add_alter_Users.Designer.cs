@@ -64,7 +64,7 @@
             this.textBoxName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(138, 25);
-            this.textBoxName.TabIndex = 30;
+            this.textBoxName.TabIndex = 29;
             // 
             // textBoxID
             // 
@@ -132,7 +132,7 @@
             this.dateEntry.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEntry.Size = new System.Drawing.Size(138, 24);
-            this.dateEntry.TabIndex = 32;
+            this.dateEntry.TabIndex = 31;
             // 
             // comboBoxState
             // 
@@ -146,7 +146,7 @@
             this.comboBoxState.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxState.Name = "comboBoxState";
             this.comboBoxState.Size = new System.Drawing.Size(138, 25);
-            this.comboBoxState.TabIndex = 33;
+            this.comboBoxState.TabIndex = 1;
             this.comboBoxState.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
@@ -167,7 +167,7 @@
             this.textBoxRemark.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxRemark.Name = "textBoxRemark";
             this.textBoxRemark.Size = new System.Drawing.Size(138, 25);
-            this.textBoxRemark.TabIndex = 35;
+            this.textBoxRemark.TabIndex = 33;
             // 
             // label6
             // 
@@ -191,7 +191,7 @@
             this.comboBoxDep.MaxDropDownItems = 15;
             this.comboBoxDep.Name = "comboBoxDep";
             this.comboBoxDep.Size = new System.Drawing.Size(138, 25);
-            this.comboBoxDep.TabIndex = 37;
+            this.comboBoxDep.TabIndex = 2;
             // 
             // dateLeave
             // 
@@ -206,7 +206,7 @@
             this.dateLeave.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateLeave.Size = new System.Drawing.Size(138, 24);
-            this.dateLeave.TabIndex = 39;
+            this.dateLeave.TabIndex = 32;
             // 
             // label7
             // 
@@ -242,7 +242,7 @@
             this.comboBoxSex.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxSex.Name = "comboBoxSex";
             this.comboBoxSex.Size = new System.Drawing.Size(138, 25);
-            this.comboBoxSex.TabIndex = 41;
+            this.comboBoxSex.TabIndex = 3;
             // 
             // label9
             // 
@@ -268,18 +268,18 @@
             this.dateBirthday.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateBirthday.Size = new System.Drawing.Size(138, 24);
-            this.dateBirthday.TabIndex = 43;
+            this.dateBirthday.TabIndex = 30;
             // 
             // simpleButton2
             // 
             this.simpleButton2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton2.Appearance.Options.UseFont = true;
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(179, 300);
+            this.simpleButton2.Location = new System.Drawing.Point(178, 300);
             this.simpleButton2.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(53, 26);
-            this.simpleButton2.TabIndex = 24;
+            this.simpleButton2.TabIndex = 35;
             this.simpleButton2.Text = "退出";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
@@ -288,11 +288,11 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(96, 300);
+            this.simpleButton1.Location = new System.Drawing.Point(95, 300);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(53, 26);
-            this.simpleButton1.TabIndex = 23;
+            this.simpleButton1.TabIndex = 34;
             this.simpleButton1.Text = "保存";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 

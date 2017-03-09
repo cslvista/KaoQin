@@ -39,6 +39,7 @@ namespace KaoQin
         DateTime LastMonth;
         TimeSpan Timespan;
         public double[][] WorkDayCount;
+        int[][] HalfDayCount;
         public bool HasDownload = false;//是否已下载数据
         delegate void UpdateUI();
         string Record_startTime = "";//考勤原始数据的起始时间
@@ -127,7 +128,7 @@ namespace KaoQin
             AttendanceCollect.Columns.Add("YGXM", typeof(string));
             AttendanceCollect.Columns.Add("TotalDays", typeof(int));
             AttendanceCollect.Columns.Add("Normal", typeof(int));
-            AttendanceCollect.Columns.Add("Rest", typeof(int));
+            AttendanceCollect.Columns.Add("Rest", typeof(double));
             AttendanceCollect.Columns.Add("Late", typeof(int));
             AttendanceCollect.Columns.Add("LeaveEarly", typeof(int));
             AttendanceCollect.Columns.Add("Morning", typeof(int));
@@ -265,7 +266,7 @@ namespace KaoQin
 
             //计算出勤天数
             WorkDayCount = new double[ArrangementItem.Rows.Count][];
-
+            HalfDayCount = new int [ArrangementItem.Rows.Count][];
             GridBand band = new GridBand();
             band.Caption = " ";
             band.Width = 30;
@@ -425,7 +426,7 @@ namespace KaoQin
             {
                 AttendanceResult.Rows.Add();
                 WorkDayCount[i] = new double[Timespan + 1];
-
+                HalfDayCount[i] = new int[Timespan + 1];
                 //添加姓名与考勤号
                 AttendanceResult.Rows[i]["KQID"] = Staff.Rows[i]["KQID"];
                 AttendanceResult.Rows[i]["YGXM"] = Staff.Rows[i]["YGXM"];
@@ -526,6 +527,7 @@ namespace KaoQin
                     string[] ResultAll = Result(Record_Person, PersonShiftAll, Date);
                     AttendanceResult.Rows[i][j + 2] = ResultAll[0];
                     WorkDayCount[i][j] = Convert.ToDouble(ResultAll[1]);
+                    HalfDayCount[i][j] = Convert.ToInt32(ResultAll[2]);
                 }
             }
             gridControl2.DataSource = AttendanceResult;
@@ -537,8 +539,7 @@ namespace KaoQin
             AttendanceCollect.Clear();
             int normal;
             int late;
-            int absent;//全天未签
-            int rest;//休假
+            double rest;//休假
             int leaveEarly;//早退
             int morning;//上午未签
             int afternoon;//下午未签
@@ -557,6 +558,12 @@ namespace KaoQin
                 for (int j = 0; j <= Timespan; j++)
                 {
                     workDay = workDay + WorkDayCount[i][j];
+
+                    //如果上班为0.5天，那么休假+0.5天
+                    if (Convert.ToInt16(HalfDayCount[i][j]) == 1)
+                    {
+                        rest = rest + 0.5;
+                    }
 
                     if (AttendanceResult.Rows[i][j + 2].ToString() == "正常")
                     {
@@ -595,9 +602,6 @@ namespace KaoQin
                     {
                         afternoon = afternoon + 1;
                     }
-
-
-
                 }
                 AttendanceCollect.Rows[i]["KQID"] = AttendanceResult.Rows[i]["KQID"];
                 AttendanceCollect.Rows[i]["YGXM"] = AttendanceResult.Rows[i]["YGXM"];
@@ -645,9 +649,13 @@ namespace KaoQin
 
         private string[] Result(DataTable Record_Person, DataTable PersonShiftAll, string Date)
         {
+            //考勤明细
             StringBuilder result = new StringBuilder();
+            //工作日的计算
             double workDay = 0;
-            string[] resultAll = new string[2];
+            //是否是半天班
+            int HalfDay = 0;
+            string[] resultAll = new string[3];
             //过滤，放宽迟到和早退的时间
             int late = 0;
             int leaveEarly = 0;
@@ -869,6 +877,11 @@ namespace KaoQin
                             {
                                 workDay = 0;
                             }
+                            //出勤为半天班的，要记上
+                            if (Convert.ToDouble(PersonShiftAll.Rows[i]["WorkDay"]) == 0.5)
+                            {
+                                HalfDay = 1;
+                            }
                         }
 
                     } else
@@ -893,7 +906,7 @@ namespace KaoQin
                 }
             }
 
-            resultAll = new string[] { result.ToString(), workDay.ToString() };
+            resultAll = new string[] { result.ToString(), workDay.ToString(), HalfDay.ToString()};
 
             return resultAll;
         }

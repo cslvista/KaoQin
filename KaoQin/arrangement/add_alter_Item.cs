@@ -32,7 +32,6 @@ namespace KaoQin.arrangement
                 comState.Text = "在用";
                 comState.Enabled = false;
                 colorPickEdit1.EditValue = Color.Black;
-                comShiftType.Text = "普通";
             }
             else
             {

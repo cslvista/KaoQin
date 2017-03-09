@@ -339,7 +339,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(79, 20);
             this.label11.TabIndex = 63;
-            this.label11.Text = "班次类型：";
+            this.label11.Text = "假期类型：";
             // 
             // comShiftType
             // 
@@ -347,13 +347,11 @@
             this.comShiftType.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comShiftType.FormattingEnabled = true;
             this.comShiftType.Items.AddRange(new object[] {
-            "普通",
             "节休",
             "年休",
             "周休",
             "事假",
-            "产假",
-            "出差"});
+            "产假"});
             this.comShiftType.Location = new System.Drawing.Point(107, 108);
             this.comShiftType.Margin = new System.Windows.Forms.Padding(2);
             this.comShiftType.Name = "comShiftType";
