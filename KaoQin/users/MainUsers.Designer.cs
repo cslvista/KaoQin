@@ -40,10 +40,16 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
@@ -59,12 +65,6 @@
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.ButtonAll = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -237,6 +237,14 @@
             this.gridColumn4.VisibleIndex = 2;
             this.gridColumn4.Width = 65;
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "性别";
+            this.gridColumn11.FieldName = "XB";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 3;
+            // 
             // gridColumn5
             // 
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
@@ -248,14 +256,15 @@
             this.gridColumn5.VisibleIndex = 5;
             this.gridColumn5.Width = 69;
             // 
-            // gridColumn6
+            // gridColumn12
             // 
-            this.gridColumn6.Caption = "备注";
-            this.gridColumn6.FieldName = "BZ";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
-            this.gridColumn6.Width = 83;
+            this.gridColumn12.Caption = "出生日期";
+            this.gridColumn12.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.gridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn12.FieldName = "CSRQ";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 4;
             // 
             // gridColumn8
             // 
@@ -278,6 +287,54 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 6;
             this.gridColumn10.Width = 97;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "备注";
+            this.gridColumn6.FieldName = "BZ";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 7;
+            this.gridColumn6.Width = 83;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "创建人";
+            this.gridColumn13.FieldName = "CJR";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 8;
+            this.gridColumn13.Width = 52;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "创建时间";
+            this.gridColumn14.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn14.FieldName = "CJSJ";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 9;
+            this.gridColumn14.Width = 68;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "修改人";
+            this.gridColumn15.FieldName = "XGR";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 10;
+            this.gridColumn15.Width = 52;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "修改时间";
+            this.gridColumn16.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
+            this.gridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn16.FieldName = "XGSJ";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 11;
             // 
             // panelControl1
             // 
@@ -443,7 +500,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(468, 19);
+            this.searchControl1.Location = new System.Drawing.Point(471, 19);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -465,67 +522,10 @@
             this.ButtonAll.Location = new System.Drawing.Point(376, 18);
             this.ButtonAll.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonAll.Name = "ButtonAll";
-            this.ButtonAll.Size = new System.Drawing.Size(75, 26);
+            this.ButtonAll.Size = new System.Drawing.Size(75, 25);
             this.ButtonAll.TabIndex = 19;
             this.ButtonAll.Text = "所有员工";
             this.ButtonAll.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "性别";
-            this.gridColumn11.FieldName = "XB";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 3;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "出生日期";
-            this.gridColumn12.DisplayFormat.FormatString = "yyyy-MM-dd";
-            this.gridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn12.FieldName = "CSRQ";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "创建人";
-            this.gridColumn13.FieldName = "CJR";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 8;
-            this.gridColumn13.Width = 52;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "创建时间";
-            this.gridColumn14.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
-            this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn14.FieldName = "CJSJ";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 9;
-            this.gridColumn14.Width = 68;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "修改人";
-            this.gridColumn15.FieldName = "XGR";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 10;
-            this.gridColumn15.Width = 52;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "修改时间";
-            this.gridColumn16.DisplayFormat.FormatString = "yyyy-MM-dd  HH:mm";
-            this.gridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn16.FieldName = "XGSJ";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 11;
             // 
             // MainUsers
             // 

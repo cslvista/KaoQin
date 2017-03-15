@@ -294,6 +294,13 @@ namespace KaoQin.arrangement
                 try
                 {
                     WorkShift = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql.ToString());
+                    for (int i = 0; i < WorkShift.Rows.Count;i++)
+                    {
+                        if (WorkShift.Rows[i]["Type"].ToString() == "")
+                        {
+                            WorkShift.Rows[i]["Type"] = "上班";
+                        }
+                    }
                     gridControl2.DataSource = WorkShift;
                     gridView2.BestFitColumns();
                 }

@@ -9,11 +9,16 @@ using System.Windows.Forms;
 
 namespace KaoQin.rest
 {
-    public partial class Rules : Form
+    public partial class PersonRest : Form
     {
-        public Rules()
+        public PersonRest()
         {
             InitializeComponent();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

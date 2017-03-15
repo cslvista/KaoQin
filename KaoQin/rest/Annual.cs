@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace KaoQin.rest
 {
-    public partial class Rules : Form
+    public partial class Annual : Form
     {
-        public Rules()
+        public Annual()
         {
             InitializeComponent();
         }

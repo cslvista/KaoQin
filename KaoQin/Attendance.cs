@@ -34,6 +34,7 @@ namespace KaoQin
         DataTable Record_Dep = new DataTable();//选定部门员工的打卡数据
         public DataTable Record_DKJ = new DataTable();//考勤机原始数据
         DataTable Record_Person = new DataTable();//个人单日打卡数据
+        DataTable restCollect = new DataTable();//休假数据会中
         DateTime StartDate;
         DateTime StopDate;
         DateTime LastMonth;
@@ -337,6 +338,87 @@ namespace KaoQin
             DataCollect(StartDate, Timespan.Days);
             //进行班次汇总分析
             ShiftCollect();
+            //假期分析
+            //RestCollect();
+        }
+
+
+        /// <summary>
+        /// 假期分析
+        /// </summary>
+        private void RestCollect()
+        {
+            //年假
+            DataTable annualLeave = new DataTable();
+            try
+            {
+                string sql = string.Format("select * from KQ_NJ");
+                annualLeave = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取年假信息错误:" + ex.Message);
+                return;
+            }
+
+            //节休
+            DataTable festival = new DataTable();
+            try
+            {
+                string sql = string.Format("select * from KQ_JX where Year='{0}' and Month='{1}'",comboBoxYear.Text,comboBoxMonth.Text);
+                festival = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取节休信息错误:" + ex.Message);
+                return;
+            }
+
+            //工作年限计算和年假计算
+            for (int i = 0; i < Staff.Rows.Count; i++)
+            {
+                if (string.IsNullOrEmpty(Staff.Rows[i]["RZSJ"].ToString()))
+                {
+                    restCollect.Rows[i]["WorkYear"] = "";
+                    continue;
+                }
+                else
+                {
+                    DateTime EntryDate = Convert.ToDateTime(Staff.Rows[i]["RZSJ"].ToString());
+                    DateTime NowDate = Convert.ToDateTime(string.Format("{0}-{1}-01", comboBoxYear.Text.Substring(0, 4), comboBoxMonth.Text.Substring(0, comboBoxMonth.Text.IndexOf("月"))));
+                    int TotalMonth = NowDate.Year * 12 + NowDate.Month - EntryDate.Year * 12 - EntryDate.Month;
+                    int year = TotalMonth / 12;
+                    int month = TotalMonth % 12;
+                    string workYear = "";
+                    if (year == 0)
+                    {
+                        workYear = string.Format("{0}个月", month);
+                    }
+                    else if (month == 0)
+                    {
+                        workYear = string.Format("{0}年整", year);
+                    }
+                    else
+                    {
+                        workYear = string.Format("{0}年{1}个月", year, month);
+                    }
+
+                    restCollect.Rows[i]["WorkYear"] = workYear;
+                }
+            }
+
+            //节休计算    
+            for (int i = 0; i < festival.Rows.Count; i++)
+            {
+                for (int j = 0; j < Staff.Rows.Count; j++)
+                {
+
+
+
+                }
+            }
+            
+
         }
 
         private bool ReadDatabase()

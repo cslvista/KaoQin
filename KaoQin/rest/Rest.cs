@@ -42,5 +42,11 @@ namespace KaoQin.rest
                 return;
             }
         }
+
+        private void ButtonCal_Click(object sender, EventArgs e)
+        {
+            Rules form = new Rules();
+            form.Show(this);
+        }
     }
 }

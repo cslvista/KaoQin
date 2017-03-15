@@ -339,7 +339,7 @@
             this.ButtonRefresh.Location = new System.Drawing.Point(224, 11);
             this.ButtonRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonRefresh.Name = "ButtonRefresh";
-            this.ButtonRefresh.Size = new System.Drawing.Size(52, 23);
+            this.ButtonRefresh.Size = new System.Drawing.Size(52, 24);
             this.ButtonRefresh.TabIndex = 14;
             this.ButtonRefresh.Text = "刷新";
             this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
@@ -352,7 +352,7 @@
             this.ButtonAdd.Location = new System.Drawing.Point(22, 11);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(52, 23);
+            this.ButtonAdd.Size = new System.Drawing.Size(52, 24);
             this.ButtonAdd.TabIndex = 16;
             this.ButtonAdd.Text = "新增";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
@@ -365,7 +365,7 @@
             this.ButtonAlter.Location = new System.Drawing.Point(89, 11);
             this.ButtonAlter.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonAlter.Name = "ButtonAlter";
-            this.ButtonAlter.Size = new System.Drawing.Size(52, 23);
+            this.ButtonAlter.Size = new System.Drawing.Size(52, 24);
             this.ButtonAlter.TabIndex = 17;
             this.ButtonAlter.Text = "修改";
             this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
@@ -386,10 +386,10 @@
             this.ButtonRefresh1.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonRefresh1.Appearance.Options.UseFont = true;
             this.ButtonRefresh1.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh1.Image")));
-            this.ButtonRefresh1.Location = new System.Drawing.Point(140, 12);
+            this.ButtonRefresh1.Location = new System.Drawing.Point(140, 11);
             this.ButtonRefresh1.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonRefresh1.Name = "ButtonRefresh1";
-            this.ButtonRefresh1.Size = new System.Drawing.Size(52, 23);
+            this.ButtonRefresh1.Size = new System.Drawing.Size(52, 24);
             this.ButtonRefresh1.TabIndex = 13;
             this.ButtonRefresh1.Text = "刷新";
             this.ButtonRefresh1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -397,7 +397,7 @@
             // searchControl1
             // 
             this.searchControl1.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Location = new System.Drawing.Point(10, 12);
+            this.searchControl1.Location = new System.Drawing.Point(10, 11);
             this.searchControl1.Margin = new System.Windows.Forms.Padding(2);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

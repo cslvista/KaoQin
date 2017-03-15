@@ -31,6 +31,7 @@ namespace KaoQin.arrangement
                 comKT.Text = "否";
                 comState.Text = "在用";
                 comState.Enabled = false;
+                comShiftType.Text = "上班";
                 colorPickEdit1.EditValue = Color.Black;
             }
             else
@@ -100,6 +101,12 @@ namespace KaoQin.arrangement
                 return;
             }
 
+
+            if (checkBox1.Checked == true && checkBox2.Checked == true && textBoxCQ.Text == "0" && comShiftType.Text=="")
+            {
+                MessageBox.Show("请选择班次类型！");
+                return;
+            }
 
             if (alter == true)
             {
@@ -221,6 +228,17 @@ namespace KaoQin.arrangement
             timeWork.Enabled = !checkBox1.Checked;
         }
 
+        private void TypeEnable()
+        {
+            if (checkBox1.Checked==true && checkBox2.Checked==true && textBoxCQ.Text == "0")
+            {
+                comShiftType.Enabled = true;
+            }else
+            {
+                comShiftType.Enabled = false;
+                comShiftType.Text = null;
+            }
+        }
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             timeOffWork.Enabled = !checkBox2.Checked;
@@ -251,6 +269,10 @@ namespace KaoQin.arrangement
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxCQ_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

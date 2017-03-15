@@ -1,6 +1,6 @@
 ﻿namespace KaoQin.rest
 {
-    partial class rules
+    partial class Rules
     {
         /// <summary>
         /// Required designer variable.
@@ -52,14 +52,15 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comYear = new DevExpress.XtraEditors.ComboBoxEdit();
             this.comSex = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtRest = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtYear2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtYear1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comMonth = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -90,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comYear.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comSex.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comMonth.Properties)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -153,10 +155,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 61);
+            this.gridControl1.Location = new System.Drawing.Point(3, 60);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(416, 247);
+            this.gridControl1.Size = new System.Drawing.Size(416, 417);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -172,7 +174,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(428, 317);
+            this.tabPage3.Size = new System.Drawing.Size(428, 486);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "周休规则";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -183,7 +185,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(428, 317);
+            this.tabPage2.Size = new System.Drawing.Size(428, 486);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "节休规则";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -198,18 +200,18 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.62058F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.37942F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 311);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.58333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.41666F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 480);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(3, 119);
+            this.gridControl2.Location = new System.Drawing.Point(3, 121);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(416, 189);
+            this.gridControl2.Size = new System.Drawing.Size(416, 356);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -298,7 +300,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(3, 3);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(416, 110);
+            this.panelControl2.Size = new System.Drawing.Size(416, 112);
             this.panelControl2.TabIndex = 1;
             // 
             // simpleButton2
@@ -313,14 +315,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comYear);
             this.groupBox1.Controls.Add(this.comSex);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox5);
+            this.groupBox1.Controls.Add(this.txtRest);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.txtYear2);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.textBox7);
+            this.groupBox1.Controls.Add(this.txtYear1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.comMonth);
@@ -333,9 +336,34 @@
             this.groupBox1.TabIndex = 92;
             this.groupBox1.TabStop = false;
             // 
+            // comYear
+            // 
+            this.comYear.Location = new System.Drawing.Point(186, 16);
+            this.comYear.Name = "comYear";
+            this.comYear.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comYear.Properties.Appearance.Options.UseFont = true;
+            this.comYear.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comYear.Properties.Items.AddRange(new object[] {
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+            "7月",
+            "8月",
+            "9月",
+            "10月",
+            "11月",
+            "12月"});
+            this.comYear.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comYear.Size = new System.Drawing.Size(48, 24);
+            this.comYear.TabIndex = 92;
+            // 
             // comSex
             // 
-            this.comSex.Location = new System.Drawing.Point(277, 45);
+            this.comSex.Location = new System.Drawing.Point(277, 46);
             this.comSex.Name = "comSex";
             this.comSex.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comSex.Properties.Appearance.Options.UseFont = true;
@@ -349,31 +377,31 @@
             this.comSex.Size = new System.Drawing.Size(49, 24);
             this.comSex.TabIndex = 79;
             // 
-            // textBox4
+            // txtName
             // 
-            this.textBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(63, 17);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(82, 23);
-            this.textBox4.TabIndex = 89;
+            this.txtName.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Location = new System.Drawing.Point(63, 17);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(82, 23);
+            this.txtName.TabIndex = 89;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(33, 78);
+            this.label7.Location = new System.Drawing.Point(33, 79);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 17);
             this.label7.TabIndex = 91;
             this.label7.Text = "可休";
             // 
-            // textBox5
+            // txtRest
             // 
-            this.textBox5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(64, 75);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(40, 23);
-            this.textBox5.TabIndex = 84;
+            this.txtRest.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRest.Location = new System.Drawing.Point(64, 76);
+            this.txtRest.Name = "txtRest";
+            this.txtRest.Size = new System.Drawing.Size(40, 23);
+            this.txtRest.TabIndex = 84;
             // 
             // label6
             // 
@@ -385,31 +413,31 @@
             this.label6.TabIndex = 90;
             this.label6.Text = "假期名称";
             // 
-            // textBox6
+            // txtYear2
             // 
-            this.textBox6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(178, 46);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(40, 23);
-            this.textBox6.TabIndex = 83;
+            this.txtYear2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYear2.Location = new System.Drawing.Point(178, 47);
+            this.txtYear2.Name = "txtYear2";
+            this.txtYear2.Size = new System.Drawing.Size(40, 23);
+            this.txtYear2.TabIndex = 83;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(245, 49);
+            this.label8.Location = new System.Drawing.Point(245, 50);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 17);
             this.label8.TabIndex = 81;
             this.label8.Text = "性别";
             // 
-            // textBox7
+            // txtYear1
             // 
-            this.textBox7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(64, 46);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(40, 23);
-            this.textBox7.TabIndex = 82;
+            this.txtYear1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYear1.Location = new System.Drawing.Point(64, 47);
+            this.txtYear1.Name = "txtYear1";
+            this.txtYear1.Size = new System.Drawing.Size(40, 23);
+            this.txtYear1.TabIndex = 82;
             // 
             // label2
             // 
@@ -417,15 +445,15 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(151, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 17);
+            this.label2.Size = new System.Drawing.Size(32, 17);
             this.label2.TabIndex = 80;
-            this.label2.Text = "所在月份";
+            this.label2.Text = "时间";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(104, 48);
+            this.label9.Location = new System.Drawing.Point(104, 49);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 17);
             this.label9.TabIndex = 86;
@@ -433,7 +461,7 @@
             // 
             // comMonth
             // 
-            this.comMonth.Location = new System.Drawing.Point(207, 16);
+            this.comMonth.Location = new System.Drawing.Point(245, 16);
             this.comMonth.Name = "comMonth";
             this.comMonth.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comMonth.Properties.Appearance.Options.UseFont = true;
@@ -460,7 +488,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(16, 49);
+            this.label10.Location = new System.Drawing.Point(16, 50);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 17);
             this.label10.TabIndex = 85;
@@ -470,7 +498,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(110, 78);
+            this.label12.Location = new System.Drawing.Point(110, 79);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 17);
             this.label12.TabIndex = 88;
@@ -480,7 +508,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(219, 49);
+            this.label11.Location = new System.Drawing.Point(219, 50);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(20, 17);
             this.label11.TabIndex = 87;
@@ -494,7 +522,7 @@
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(42, 23);
             this.simpleButton1.TabIndex = 62;
-            this.simpleButton1.Text = "添加";
+            this.simpleButton1.Text = "保存";
             // 
             // tabPage1
             // 
@@ -503,7 +531,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(428, 317);
+            this.tabPage1.Size = new System.Drawing.Size(428, 486);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "年假规则";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -519,9 +547,9 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.97106F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.02894F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(422, 311);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.875F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.125F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(422, 480);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panelControl1
@@ -538,7 +566,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(416, 52);
+            this.panelControl1.Size = new System.Drawing.Size(416, 51);
             this.panelControl1.TabIndex = 1;
             // 
             // btnDel
@@ -559,7 +587,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(42, 23);
             this.btnAdd.TabIndex = 7;
-            this.btnAdd.Text = "添加";
+            this.btnAdd.Text = "保存";
             // 
             // textBox3
             // 
@@ -635,15 +663,17 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(436, 347);
+            this.tabControl1.Size = new System.Drawing.Size(436, 516);
             this.tabControl1.TabIndex = 0;
             // 
             // rules
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 347);
+            this.ClientSize = new System.Drawing.Size(436, 516);
             this.Controls.Add(this.tabControl1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "rules";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "休假规则设置";
@@ -658,6 +688,7 @@
             this.panelControl2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comYear.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comSex.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comMonth.Properties)).EndInit();
             this.tabPage1.ResumeLayout(false);
@@ -696,13 +727,13 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraEditors.ComboBoxEdit comSex;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtRest;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtYear2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtYear1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
         private DevExpress.XtraEditors.ComboBoxEdit comMonth;
@@ -724,5 +755,6 @@
         private System.Windows.Forms.Label label5;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private System.Windows.Forms.TabControl tabControl1;
+        private DevExpress.XtraEditors.ComboBoxEdit comYear;
     }
 }
