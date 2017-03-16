@@ -470,5 +470,10 @@ namespace KaoQin
             form.Authority_Mangement_Edit= Authority_Mangement_Edit;
             form.Show();
         }
+
+        private void 修改排班表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(sender, e);
+        }
     }
 }

@@ -172,11 +172,29 @@
       <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remark.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Remark.Designer.cs">
+      <DependentUpon>Remark.cs</DependentUpon>
+    </Compile>
     <Compile Include="rest\Annual.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="rest\Annual.Designer.cs">
       <DependentUpon>Annual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rest\MonthInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rest\MonthInfo.Designer.cs">
+      <DependentUpon>MonthInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rest\PersonRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rest\PersonRecord.Designer.cs">
+      <DependentUpon>PersonRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="rest\PersonRest.cs">
       <SubType>Form</SubType>
@@ -184,17 +202,23 @@
     <Compile Include="rest\PersonRest.Designer.cs">
       <DependentUpon>PersonRest.cs</DependentUpon>
     </Compile>
-    <Compile Include="rest\Rest.cs">
+    <Compile Include="rest\MonthRestCollect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="rest\Rest.Designer.cs">
-      <DependentUpon>Rest.cs</DependentUpon>
+    <Compile Include="rest\MonthRestCollect.Designer.cs">
+      <DependentUpon>MonthRestCollect.cs</DependentUpon>
     </Compile>
-    <Compile Include="rest\Rules.cs">
+    <Compile Include="rest\RestMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="rest\Rules.Designer.cs">
-      <DependentUpon>Rules.cs</DependentUpon>
+    <Compile Include="rest\RestMain.Designer.cs">
+      <DependentUpon>RestMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rest\RestRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rest\RestRules.Designer.cs">
+      <DependentUpon>RestRules.cs</DependentUpon>
     </Compile>
     <Compile Include="Schedual.cs">
       <SubType>Form</SubType>
@@ -316,17 +340,29 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Remark.resx">
+      <DependentUpon>Remark.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="rest\Annual.resx">
       <DependentUpon>Annual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rest\MonthInfo.resx">
+      <DependentUpon>MonthInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rest\PersonRecord.resx">
+      <DependentUpon>PersonRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rest\PersonRest.resx">
       <DependentUpon>PersonRest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="rest\Rest.resx">
-      <DependentUpon>Rest.cs</DependentUpon>
+    <EmbeddedResource Include="rest\MonthRestCollect.resx">
+      <DependentUpon>MonthRestCollect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="rest\Rules.resx">
-      <DependentUpon>Rules.cs</DependentUpon>
+    <EmbeddedResource Include="rest\RestMain.resx">
+      <DependentUpon>RestMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rest\RestRules.resx">
+      <DependentUpon>RestRules.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Schedual.resx">
       <DependentUpon>Schedual.cs</DependentUpon>

@@ -95,6 +95,8 @@ namespace KaoQin
         private void Attendance_Load(object sender, EventArgs e)
         {
             UILocation();
+            TabPage tp = tabControl1.TabPages[3];//在这里先保存，以便以后还要显示
+            tabControl1.TabPages.Remove(tp);//隐藏（删除）
             searchControl1.Properties.NullValuePrompt = "请输入部门名称";
             searchControl2.Properties.NullValuePrompt = "请输入姓名";
 
@@ -155,6 +157,7 @@ namespace KaoQin
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
             ButtonRefresh1.Location = new Point(ButtonRefresh1.Location.X, height);
+            ButtonRemark.Location = new Point(ButtonRemark.Location.X, height);
             test.Location = new Point(test.Location.X, height);
             test.Visible = false;
             comboBoxYear.Location = new Point(comboBoxYear.Location.X, (panelControl2.Height - comboBoxYear.Height) / 2);
@@ -1922,6 +1925,16 @@ namespace KaoQin
                     gridView4.Columns[e.Column.ColumnHandle].AppearanceHeader.ForeColor = Color.Red;
                 }
             }
+        }
+
+        private void ButtonRemark_Click(object sender, EventArgs e)
+        {
+            Remark form = new Remark();
+            form.BMMC = gridView1.GetFocusedRowCellValue("BMMC").ToString();
+            form.BMID = gridView1.GetFocusedRowCellValue("BMID").ToString();
+            form.Year = comboBoxYear.Text;
+            form.Month = comboBoxMonth.Text;
+            form.Show();
         }
     }
 }

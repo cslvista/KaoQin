@@ -37,6 +37,7 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ButtonRemark = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.comboBoxYear = new System.Windows.Forms.ComboBox();
@@ -70,7 +71,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1041, 585);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1090, 585);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControl1
@@ -82,7 +83,7 @@
             this.gridControl1.MainView = this.bandedGridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1037, 529);
+            this.gridControl1.Size = new System.Drawing.Size(1086, 529);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView1});
@@ -129,6 +130,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ButtonRemark);
             this.panel1.Controls.Add(this.searchControl1);
             this.panel1.Controls.Add(this.comboBoxMonth);
             this.panel1.Controls.Add(this.comboBoxYear);
@@ -145,9 +147,22 @@
             this.panel1.Location = new System.Drawing.Point(2, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1037, 48);
+            this.panel1.Size = new System.Drawing.Size(1086, 48);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // ButtonRemark
+            // 
+            this.ButtonRemark.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonRemark.Appearance.Options.UseFont = true;
+            this.ButtonRemark.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRemark.Image")));
+            this.ButtonRemark.Location = new System.Drawing.Point(1001, 13);
+            this.ButtonRemark.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonRemark.Name = "ButtonRemark";
+            this.ButtonRemark.Size = new System.Drawing.Size(54, 24);
+            this.ButtonRemark.TabIndex = 45;
+            this.ButtonRemark.Text = "备注";
+            this.ButtonRemark.Click += new System.EventHandler(this.simpleButton1_Click_1);
             // 
             // searchControl1
             // 
@@ -214,7 +229,7 @@
             this.ButtonSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonSave.Appearance.Options.UseFont = true;
             this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
-            this.ButtonSave.Location = new System.Drawing.Point(731, 14);
+            this.ButtonSave.Location = new System.Drawing.Point(730, 14);
             this.ButtonSave.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(54, 24);
@@ -240,7 +255,7 @@
             this.ButtonExport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonExport.Appearance.Options.UseFont = true;
             this.ButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonExport.Image")));
-            this.ButtonExport.Location = new System.Drawing.Point(904, 14);
+            this.ButtonExport.Location = new System.Drawing.Point(902, 14);
             this.ButtonExport.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonExport.Name = "ButtonExport";
             this.ButtonExport.Size = new System.Drawing.Size(80, 24);
@@ -253,7 +268,7 @@
             this.ButtonImport.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonImport.Appearance.Options.UseFont = true;
             this.ButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("ButtonImport.Image")));
-            this.ButtonImport.Location = new System.Drawing.Point(804, 14);
+            this.ButtonImport.Location = new System.Drawing.Point(803, 14);
             this.ButtonImport.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonImport.Name = "ButtonImport";
             this.ButtonImport.Size = new System.Drawing.Size(80, 24);
@@ -309,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 585);
+            this.ClientSize = new System.Drawing.Size(1090, 585);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Schedual";
@@ -349,5 +364,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
+        private DevExpress.XtraEditors.SimpleButton ButtonRemark;
     }
 }

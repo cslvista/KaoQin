@@ -1,6 +1,6 @@
 ﻿namespace KaoQin.rest
 {
-    partial class Rest
+    partial class MonthRestCollect
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Rest));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonthRestCollect));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
@@ -38,7 +38,6 @@
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
-            this.ButtonCal = new DevExpress.XtraEditors.SimpleButton();
             this.gridDep = new DevExpress.XtraGrid.GridControl();
             this.gridViewDep = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -128,7 +127,6 @@
             this.panelControl2.Controls.Add(this.ButtonRefresh);
             this.panelControl2.Controls.Add(this.ButtonAdd);
             this.panelControl2.Controls.Add(this.ButtonAlter);
-            this.panelControl2.Controls.Add(this.ButtonCal);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(223, 3);
             this.panelControl2.Name = "panelControl2";
@@ -170,6 +168,7 @@
             this.ButtonAdd.Size = new System.Drawing.Size(52, 24);
             this.ButtonAdd.TabIndex = 65;
             this.ButtonAdd.Text = "新增";
+            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // ButtonAlter
             // 
@@ -182,19 +181,6 @@
             this.ButtonAlter.Size = new System.Drawing.Size(52, 24);
             this.ButtonAlter.TabIndex = 66;
             this.ButtonAlter.Text = "修改";
-            // 
-            // ButtonCal
-            // 
-            this.ButtonCal.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonCal.Appearance.Options.UseFont = true;
-            this.ButtonCal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCal.Image")));
-            this.ButtonCal.Location = new System.Drawing.Point(296, 14);
-            this.ButtonCal.Margin = new System.Windows.Forms.Padding(2);
-            this.ButtonCal.Name = "ButtonCal";
-            this.ButtonCal.Size = new System.Drawing.Size(78, 24);
-            this.ButtonCal.TabIndex = 63;
-            this.ButtonCal.Text = "休假规则";
-            this.ButtonCal.Click += new System.EventHandler(this.ButtonCal_Click);
             // 
             // gridDep
             // 
@@ -343,15 +329,15 @@
             this.gridColumn10.FieldName = "PBID";
             this.gridColumn10.Name = "gridColumn10";
             // 
-            // Rest
+            // MonthRestCollect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 635);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Rest";
+            this.Name = "MonthRestCollect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "休假设置";
+            this.Text = "每月休假汇总";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Rest_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -389,7 +375,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        public DevExpress.XtraEditors.SimpleButton ButtonCal;
         private DevExpress.XtraEditors.SimpleButton ButtonDelete;
         private DevExpress.XtraEditors.SimpleButton ButtonRefresh;
         private DevExpress.XtraEditors.SimpleButton ButtonAdd;

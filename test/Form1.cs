@@ -26,7 +26,7 @@ namespace test
         {
             textBox1.Text = "MZSYS";
             textBox3.Text = "1";
-            textBox2.Text = "2";
+            textBox2.Text = "1";
 
             button1_Click(null, null);
         }

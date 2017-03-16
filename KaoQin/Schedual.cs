@@ -90,6 +90,7 @@ namespace KaoQin
             ButtonSave.Location = new Point(ButtonSave.Location.X, height);
             ButtonImport.Location = new Point(ButtonImport.Location.X, height);
             ButtonExport.Location = new Point(ButtonExport.Location.X, height);
+            ButtonRemark.Location = new Point(ButtonRemark.Location.X, height);
             searchControl1.Location = new Point(searchControl1.Location.X, (panel1.Height - searchControl1.Height) / 2);
             label3.Location = new Point(searchControl1.Location.X - label3.Width - x, searchControl1.Location.Y + y);
             comboBox1.Location=new Point(comboBox1.Location.X, (panel1.Height - comboBox1.Height) / 2);
@@ -539,7 +540,7 @@ namespace KaoQin
                 {
                     sql.Append(string.Format("update KQ_PB_XB set D1T={0},D2T={1},D3T={2},D4T={3},D5T={4},D6T={5},D7T={6},D8T={7},"
                         + "D9T={8},D10T={9},D11T={10},D12T={11},D13T={12},D14T={13},D15T={14},D16T={15},D17T={16},D18T={17},D19T={18},D20T={19},"
-                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30},sortNo='{31}' where PBID='{32}' and KQID={33};",
+                        + "D21T={20},D22T={21},D23T={22},D24T={23},D25T={24},D26T={25},D27T={26},D28T={27},D29T={28},D30T={29},D31T={30},sortNo='{31}' where PBID='{32}' and KQID='{33}';",
                         Staff_WorkShift_SQL.Rows[i][2].ToString(),
                         Staff_WorkShift_SQL.Rows[i][3].ToString(), Staff_WorkShift_SQL.Rows[i][4].ToString(),
                         Staff_WorkShift_SQL.Rows[i][5].ToString(), Staff_WorkShift_SQL.Rows[i][6].ToString(),
@@ -559,7 +560,7 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][33].ToString(),
                         PBID,Staff_WorkShift_SQL.Rows[i][0].ToString()
                         ));
-                    sql_lastday.Append(string.Format("update KQ_PB_LD set LastDay={0} where PBID='{1}' and KQID={2};", Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString(), PBID, Staff_WorkShift_SQL.Rows[i][0].ToString()));
+                    sql_lastday.Append(string.Format("update KQ_PB_LD set LastDay={0} where PBID='{1}' and KQID='{2}';", Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString(), PBID, Staff_WorkShift_SQL.Rows[i][0].ToString()));
                 }
 
                 try
@@ -704,7 +705,7 @@ namespace KaoQin
                         + "D1T,D2T,D3T,D4T,D5T,D6T,D7T,D8T,D9T,"
                         + "D10T,D11T,D12T,D13T,D14T,D15T,D16T,D17T,D18T,D19T,"
                         + "D20T,D21T,D22T,D23T,D24T,D25T,D26T,D27T,D28T,D29T,D30T,D31T,sortNo)"
-                        + string.Format(" values ('{0}','{1}',{2},{3},{4},{5},{6},{7},{8},{9},{10},"
+                        + string.Format(" values ('{0}','{1}','{2}',{3},{4},{5},{6},{7},{8},{9},{10},"
                         + "{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},"
                         + "{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},'{34}');",
                         ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(), 
@@ -726,7 +727,7 @@ namespace KaoQin
                         Staff_WorkShift_SQL.Rows[i][31].ToString(), Staff_WorkShift_SQL.Rows[i][32].ToString(),
                         Staff_WorkShift_SQL.Rows[i][33].ToString()
                         ));
-                    sql_lastday.Append(string.Format("insert into KQ_PB_LD (PBID,BMID,KQID,YEAR,MONTH,LastDay) values ('{0}','{1}',{2},'{3}','{4}',{5});", ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(),comboBoxYear.Text,comboBoxMonth.Text, Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString()));
+                    sql_lastday.Append(string.Format("insert into KQ_PB_LD (PBID,BMID,KQID,YEAR,MONTH,LastDay) values ('{0}','{1}','{2}','{3}','{4}',{5});", ID, comboBox1.SelectedValue, Staff_WorkShift_SQL.Rows[i][0].ToString(),comboBoxYear.Text,comboBoxMonth.Text, Staff_WorkShift_SQL.Rows[i][2+Timespan.Days].ToString()));
                 }
 
                 try
@@ -1078,6 +1079,16 @@ namespace KaoQin
             }
             catch { }
 
+        }
+
+        private void simpleButton1_Click_1(object sender, EventArgs e)
+        {
+            Remark form = new Remark();
+            form.BMID = comboBox1.SelectedValue.ToString();
+            form.BMMC = comboBox1.Text;
+            form.Year = comboBoxYear.Text;
+            form.Month = comboBoxMonth.Text;
+            form.Show();
         }
     }
 }

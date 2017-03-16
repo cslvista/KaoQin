@@ -320,6 +320,7 @@
             this.ButtonAdd.Size = new System.Drawing.Size(58, 25);
             this.ButtonAdd.TabIndex = 25;
             this.ButtonAdd.Text = "新增";
+            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // ButtonAlter
             // 

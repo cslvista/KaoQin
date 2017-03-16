@@ -217,13 +217,14 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改排班表ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
             // 
             // 修改排班表ToolStripMenuItem
             // 
             this.修改排班表ToolStripMenuItem.Name = "修改排班表ToolStripMenuItem";
-            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.修改排班表ToolStripMenuItem.Text = "修改排班表";
+            this.修改排班表ToolStripMenuItem.Click += new System.EventHandler(this.修改排班表ToolStripMenuItem_Click);
             // 
             // gridView2
             // 

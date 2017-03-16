@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace KaoQin.rest
 {
-    public partial class Rest : Form
+    public partial class MonthRestCollect : Form
     {
         DataTable Department = new DataTable();
-        public Rest()
+        public MonthRestCollect()
         {
             InitializeComponent();
         }
@@ -45,7 +45,13 @@ namespace KaoQin.rest
 
         private void ButtonCal_Click(object sender, EventArgs e)
         {
-            Rules form = new Rules();
+            RestRules form = new RestRules();
+            form.Show(this);
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            MonthInfo form = new MonthInfo();
             form.Show(this);
         }
     }

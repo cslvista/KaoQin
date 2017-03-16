@@ -1,6 +1,6 @@
 ﻿namespace KaoQin.rest
 {
-    partial class Rules
+    partial class RestRules
     {
         /// <summary>
         /// Required designer variable.

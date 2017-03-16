@@ -7,6 +7,6 @@ namespace KaoQin
 {
     class DBLink
     {
-        public static string key = GlobalHelper.GloValue.ZYDB;
+        public static string key = GlobalHelper.GloValue.USER;
     }
 }
