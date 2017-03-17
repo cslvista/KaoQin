@@ -92,7 +92,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 36;
-            this.label1.Text = "所属类别：";
+            this.label1.Text = "班次类别：";
             // 
             // comboBox1
             // 

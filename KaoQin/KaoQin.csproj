@@ -184,11 +184,11 @@
     <Compile Include="rest\Annual.Designer.cs">
       <DependentUpon>Annual.cs</DependentUpon>
     </Compile>
-    <Compile Include="rest\MonthInfo.cs">
+    <Compile Include="rest\MonthRecord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="rest\MonthInfo.Designer.cs">
-      <DependentUpon>MonthInfo.cs</DependentUpon>
+    <Compile Include="rest\MonthRecord.Designer.cs">
+      <DependentUpon>MonthRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="rest\PersonRecord.cs">
       <SubType>Form</SubType>
@@ -346,8 +346,8 @@
     <EmbeddedResource Include="rest\Annual.resx">
       <DependentUpon>Annual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="rest\MonthInfo.resx">
-      <DependentUpon>MonthInfo.cs</DependentUpon>
+    <EmbeddedResource Include="rest\MonthRecord.resx">
+      <DependentUpon>MonthRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rest\PersonRecord.resx">
       <DependentUpon>PersonRecord.cs</DependentUpon>

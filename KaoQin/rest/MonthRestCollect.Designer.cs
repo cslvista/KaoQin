@@ -43,8 +43,8 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridMonthRecord = new DevExpress.XtraGrid.GridControl();
+            this.gridViewMonthRecord = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -60,8 +60,8 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMonthRecord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMonthRecord)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -72,7 +72,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panelControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelControl2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.gridDep, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.gridControl2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.gridMonthRecord, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -144,6 +144,7 @@
             this.ButtonDelete.Size = new System.Drawing.Size(52, 24);
             this.ButtonDelete.TabIndex = 67;
             this.ButtonDelete.Text = "删除";
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // ButtonRefresh
             // 
@@ -181,6 +182,7 @@
             this.ButtonAlter.Size = new System.Drawing.Size(52, 24);
             this.ButtonAlter.TabIndex = 66;
             this.ButtonAlter.Text = "修改";
+            this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
             // 
             // gridDep
             // 
@@ -236,26 +238,27 @@
             this.gridColumn8.FieldName = "BMLB";
             this.gridColumn8.Name = "gridColumn8";
             // 
-            // gridControl2
+            // gridMonthRecord
             // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.gridControl2.Location = new System.Drawing.Point(222, 58);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(2);
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(636, 575);
-            this.gridControl2.TabIndex = 5;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.gridMonthRecord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridMonthRecord.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridMonthRecord.Location = new System.Drawing.Point(222, 58);
+            this.gridMonthRecord.MainView = this.gridViewMonthRecord;
+            this.gridMonthRecord.Margin = new System.Windows.Forms.Padding(2);
+            this.gridMonthRecord.Name = "gridMonthRecord";
+            this.gridMonthRecord.Size = new System.Drawing.Size(636, 575);
+            this.gridMonthRecord.TabIndex = 5;
+            this.gridMonthRecord.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewMonthRecord});
+            this.gridMonthRecord.DoubleClick += new System.EventHandler(this.gridMonthRecord_DoubleClick);
             // 
-            // gridView2
+            // gridViewMonthRecord
             // 
-            this.gridView2.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView2.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView2.Appearance.Row.Options.UseFont = true;
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewMonthRecord.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridViewMonthRecord.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridViewMonthRecord.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridViewMonthRecord.Appearance.Row.Options.UseFont = true;
+            this.gridViewMonthRecord.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn5,
@@ -263,11 +266,11 @@
             this.gridColumn7,
             this.gridColumn9,
             this.gridColumn10});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.Editable = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            this.gridViewMonthRecord.GridControl = this.gridMonthRecord;
+            this.gridViewMonthRecord.Name = "gridViewMonthRecord";
+            this.gridViewMonthRecord.OptionsBehavior.Editable = false;
+            this.gridViewMonthRecord.OptionsView.ShowGroupPanel = false;
+            this.gridViewMonthRecord.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn3, DevExpress.Data.ColumnSortOrder.Descending),
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn4, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
@@ -348,8 +351,8 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridDep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMonthRecord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMonthRecord)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,8 +368,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl gridMonthRecord;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewMonthRecord;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;

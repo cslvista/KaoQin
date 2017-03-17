@@ -40,6 +40,7 @@
             this.ButtonRefresh1 = new DevExpress.XtraEditors.SimpleButton();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.ButtonRemark = new DevExpress.XtraEditors.SimpleButton();
             this.test = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonImport = new DevExpress.XtraEditors.DropDownButton();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -127,7 +128,6 @@
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ButtonRemark = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -291,6 +291,19 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1120, 52);
             this.panelControl2.TabIndex = 5;
+            // 
+            // ButtonRemark
+            // 
+            this.ButtonRemark.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ButtonRemark.Appearance.Options.UseFont = true;
+            this.ButtonRemark.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRemark.Image")));
+            this.ButtonRemark.Location = new System.Drawing.Point(854, 15);
+            this.ButtonRemark.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonRemark.Name = "ButtonRemark";
+            this.ButtonRemark.Size = new System.Drawing.Size(54, 25);
+            this.ButtonRemark.TabIndex = 61;
+            this.ButtonRemark.Text = "备注";
+            this.ButtonRemark.Click += new System.EventHandler(this.ButtonRemark_Click);
             // 
             // test
             // 
@@ -839,7 +852,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(1112, 542);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "敬请期待";
+            this.tabPage4.Text = "休假汇总";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // gridControl5
@@ -1138,19 +1151,6 @@
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            // 
-            // ButtonRemark
-            // 
-            this.ButtonRemark.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ButtonRemark.Appearance.Options.UseFont = true;
-            this.ButtonRemark.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRemark.Image")));
-            this.ButtonRemark.Location = new System.Drawing.Point(854, 15);
-            this.ButtonRemark.Margin = new System.Windows.Forms.Padding(2);
-            this.ButtonRemark.Name = "ButtonRemark";
-            this.ButtonRemark.Size = new System.Drawing.Size(54, 25);
-            this.ButtonRemark.TabIndex = 61;
-            this.ButtonRemark.Text = "备注";
-            this.ButtonRemark.Click += new System.EventHandler(this.ButtonRemark_Click);
             // 
             // Attendance
             // 

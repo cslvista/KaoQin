@@ -29,7 +29,7 @@ namespace KaoQin.rest
 
         private void SearchDepartment()
         {
-            string sql = "select BMID,BMMC,BMLB from KQ_BM where BMID>0";
+            string sql = "select BMID,BMMC from KQ_BM where BMID>0";
 
             try
             {
@@ -51,8 +51,23 @@ namespace KaoQin.rest
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            MonthInfo form = new MonthInfo();
+            MonthRecord form = new MonthRecord();
             form.Show(this);
+        }
+
+        private void gridMonthRecord_DoubleClick(object sender, EventArgs e)
+        {
+            ButtonAlter_Click(sender, e);
+        }
+
+        private void ButtonAlter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

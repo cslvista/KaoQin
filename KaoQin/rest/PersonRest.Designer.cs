@@ -49,18 +49,19 @@
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.comboBoxYear = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.searchDep = new DevExpress.XtraEditors.SearchControl();
+            this.searchPersonRecord = new DevExpress.XtraEditors.SearchControl();
             this.ButtonDelete = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchDep.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPersonRecord.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -104,6 +105,7 @@
             this.gridColumn11,
             this.gridColumn13,
             this.gridColumn14,
+            this.gridColumn6,
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn7,
@@ -174,42 +176,42 @@
             this.gridColumn4.Caption = "备注";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 8;
+            this.gridColumn4.VisibleIndex = 9;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "创建人";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 9;
+            this.gridColumn5.VisibleIndex = 10;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "创建时间";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 10;
+            this.gridColumn7.VisibleIndex = 11;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "修改人";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 11;
+            this.gridColumn8.VisibleIndex = 12;
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "修改时间";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 12;
+            this.gridColumn9.VisibleIndex = 13;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.comboBoxMonth);
             this.panel1.Controls.Add(this.comboBoxYear);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.searchDep);
+            this.panel1.Controls.Add(this.searchPersonRecord);
             this.panel1.Controls.Add(this.ButtonDelete);
             this.panel1.Controls.Add(this.ButtonRefresh);
             this.panel1.Controls.Add(this.ButtonAdd);
@@ -246,6 +248,7 @@
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(55, 25);
             this.comboBoxMonth.TabIndex = 60;
+            this.comboBoxMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxMonth_SelectedIndexChanged);
             // 
             // comboBoxYear
             // 
@@ -257,6 +260,7 @@
             this.comboBoxYear.Name = "comboBoxYear";
             this.comboBoxYear.Size = new System.Drawing.Size(55, 25);
             this.comboBoxYear.TabIndex = 59;
+            this.comboBoxYear.SelectedIndexChanged += new System.EventHandler(this.comboBoxYear_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -269,21 +273,21 @@
             this.label4.TabIndex = 58;
             this.label4.Text = "时间：";
             // 
-            // searchDep
+            // searchPersonRecord
             // 
-            this.searchDep.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.searchDep.Location = new System.Drawing.Point(61, 15);
-            this.searchDep.Margin = new System.Windows.Forms.Padding(2);
-            this.searchDep.Name = "searchDep";
-            this.searchDep.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.searchDep.Properties.Appearance.Options.UseFont = true;
-            this.searchDep.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.searchPersonRecord.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
+            this.searchPersonRecord.Location = new System.Drawing.Point(61, 15);
+            this.searchPersonRecord.Margin = new System.Windows.Forms.Padding(2);
+            this.searchPersonRecord.Name = "searchPersonRecord";
+            this.searchPersonRecord.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.searchPersonRecord.Properties.Appearance.Options.UseFont = true;
+            this.searchPersonRecord.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchDep.Properties.FindDelay = 100;
-            this.searchDep.Properties.NullValuePrompt = "E";
-            this.searchDep.Size = new System.Drawing.Size(100, 24);
-            this.searchDep.TabIndex = 28;
+            this.searchPersonRecord.Properties.FindDelay = 100;
+            this.searchPersonRecord.Properties.NullValuePrompt = "E";
+            this.searchPersonRecord.Size = new System.Drawing.Size(100, 24);
+            this.searchPersonRecord.TabIndex = 28;
             // 
             // ButtonDelete
             // 
@@ -308,6 +312,7 @@
             this.ButtonRefresh.Size = new System.Drawing.Size(58, 25);
             this.ButtonRefresh.TabIndex = 24;
             this.ButtonRefresh.Text = "刷新";
+            this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
             // ButtonAdd
             // 
@@ -355,6 +360,13 @@
             this.label2.TabIndex = 61;
             this.label2.Text = "-";
             // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "其他假";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 8;
+            // 
             // PersonRest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -365,12 +377,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "个人假期记录";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.PersonRest_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchDep.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPersonRecord.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,12 +410,13 @@
         private DevExpress.XtraEditors.SimpleButton ButtonRefresh;
         private DevExpress.XtraEditors.SimpleButton ButtonAdd;
         private DevExpress.XtraEditors.SimpleButton ButtonAlter;
-        private DevExpress.XtraEditors.SearchControl searchDep;
+        private DevExpress.XtraEditors.SearchControl searchPersonRecord;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
     }
 }

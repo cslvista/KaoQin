@@ -142,7 +142,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(809, 541);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(809, 629);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // gridControl1
@@ -153,7 +153,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(203, 489);
+            this.gridControl1.Size = new System.Drawing.Size(203, 577);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -205,7 +205,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(598, 489);
+            this.gridControl2.Size = new System.Drawing.Size(598, 577);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -217,12 +217,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改排班表ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 26);
             // 
             // 修改排班表ToolStripMenuItem
             // 
             this.修改排班表ToolStripMenuItem.Name = "修改排班表ToolStripMenuItem";
-            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改排班表ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.修改排班表ToolStripMenuItem.Text = "修改排班表";
             this.修改排班表ToolStripMenuItem.Click += new System.EventHandler(this.修改排班表ToolStripMenuItem_Click);
             // 
@@ -416,7 +416,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 566);
+            this.ClientSize = new System.Drawing.Size(809, 654);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

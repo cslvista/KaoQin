@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace KaoQin.rest
 {
-    public partial class MonthInfo : Form
+    public partial class MonthRecord : Form
     {
-        public MonthInfo()
+        public MonthRecord()
         {
             InitializeComponent();
         }

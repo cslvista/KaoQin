@@ -39,6 +39,7 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -63,7 +64,6 @@
             this.ButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ButtonAlter = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -140,7 +140,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "部门类别";
+            this.gridColumn1.Caption = "班次类别";
             this.gridColumn1.FieldName = "BMLB";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -221,6 +221,14 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "班次类型";
+            this.gridColumn16.FieldName = "Type";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 2;
             // 
             // gridColumn11
             // 
@@ -478,14 +486,6 @@
             this.ButtonAlter.TabIndex = 21;
             this.ButtonAlter.Text = "修改";
             this.ButtonAlter.Click += new System.EventHandler(this.ButtonAlter_Click);
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "班次类型";
-            this.gridColumn16.FieldName = "Type";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 2;
             // 
             // arrange
             // 

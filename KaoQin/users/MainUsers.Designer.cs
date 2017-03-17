@@ -149,7 +149,7 @@
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "类别";
+            this.gridColumn9.Caption = "班次类别";
             this.gridColumn9.FieldName = "BMLB";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
