@@ -53,7 +53,7 @@ namespace KaoQin
                     return;
                 }
 
-                string sql1 = string.Format("insert into KQ_Remark(ID,BMID,Year,Month,Remark,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", ID, BMID,Year,Month,textBox1.Text.Trim(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
+                string sql1 = string.Format("insert into KQ_Remark(ID,BMID,Year,Month,Remark_TB,Remark_CQ,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", ID, BMID,Year,Month,textBox1.Text.Trim(), textBox2.Text.Trim(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
                 try
                 {
@@ -68,7 +68,7 @@ namespace KaoQin
             {               
                 try
                 {
-                    string sql = string.Format("update KQ_Remark set Remark='{0}',XGR='{1}',XGSJ='{2}' where BMID='{3}' and Year='{4}' and Month='{5}'", textBox1.Text.Trim(), GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(), BMID,Year,Month);
+                    string sql = string.Format("update KQ_Remark set Remark_TB='{0}',Remark_CQ='{1}',XGR='{2}',XGSJ='{3}' where BMID='{4}' and Year='{5}' and Month='{6}'", textBox1.Text.Trim(), textBox2.Text.Trim(),GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(), BMID,Year,Month);
                     GlobalHelper.IDBHelper.ExecuteNonQuery(DBLink.key, sql);
                     
                 }
@@ -110,7 +110,7 @@ namespace KaoQin
                 return;
             }
 
-            string Record = string.Format("{0}修改了{1}{2}{3}的排班备注", GlobalHelper.UserHelper.User["U_NAME"].ToString(), BMMC,Year,Month);
+            string Record = string.Format("{0}修改了{1}{2}{3}的排班与考勤备注", GlobalHelper.UserHelper.User["U_NAME"].ToString(), BMMC,Year,Month);
             string sql1 = string.Format("insert into KQ_LOG (ID,Record,Time) values ('{0}','{1}','{2}')", ID, Record, GlobalHelper.IDBHelper.GetServerDateTime());
             try
             {
@@ -125,21 +125,22 @@ namespace KaoQin
 
         private void Remark_Load(object sender, EventArgs e)
         {
-            this.Text = BMMC + Year + Month + "排班备注";
+            this.Text = BMMC + Year + Month + "调班与出勤备注";
 
             try
             {
-                string sql = string.Format("select ID,Remark from KQ_Remark where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", Year,Month,BMID);
+                string sql = string.Format("select ID,Remark_TB,Remark_CQ from KQ_Remark where YEAR='{0}' and MONTH='{1}' and BMID='{2}'", Year,Month,BMID);
                 remark = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                 if (remark.Rows.Count > 0)
                 {
                     alter = true;
                     textBox1.Text = remark.Rows[0][1].ToString();
+                    textBox2.Text = remark.Rows[0][2].ToString();
                 }                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读取排班主表错误:" + ex.Message);
+                MessageBox.Show("读取备注信息错误:" + ex.Message);
 
             }
         }

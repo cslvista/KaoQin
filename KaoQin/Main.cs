@@ -303,7 +303,6 @@ namespace KaoQin
                     string sql = string.Format("select PBID,BMID,YEAR,MONTH,CJR,CJSJ,XGR,XGSJ from KQ_PB where BMID='{0}'", gridView1.GetFocusedRowCellValue("BMID").ToString());
                     Attendance = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
                     gridControl2.DataSource = Attendance;
-                    gridView2.BestFitColumns();
                 }
                 catch (Exception ex)
                 {

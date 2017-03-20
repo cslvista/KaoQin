@@ -71,8 +71,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.label17 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDep)).BeginInit();
@@ -302,7 +302,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.Location = new System.Drawing.Point(11, 272);
+            this.label16.Location = new System.Drawing.Point(10, 272);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(51, 20);
             this.label16.TabIndex = 86;
@@ -549,6 +549,14 @@
             this.panelControl3.Size = new System.Drawing.Size(283, 44);
             this.panelControl3.TabIndex = 9;
             // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox9.Location = new System.Drawing.Point(62, 12);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(73, 23);
+            this.textBox9.TabIndex = 89;
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -558,14 +566,6 @@
             this.label17.Size = new System.Drawing.Size(37, 20);
             this.label17.TabIndex = 89;
             this.label17.Text = "时间";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox9.Location = new System.Drawing.Point(62, 12);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(73, 23);
-            this.textBox9.TabIndex = 89;
             // 
             // PersonRecord
             // 

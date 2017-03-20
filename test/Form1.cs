@@ -25,7 +25,7 @@ namespace test
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text = "MZSYS";
-            textBox3.Text = "1";
+            textBox3.Text = "MZSYS";
             textBox2.Text = "1";
 
             button1_Click(null, null);

@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Collections;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
@@ -21,6 +22,7 @@ namespace KaoQin
         DataTable Staff_WorkShift = new DataTable();
         DataTable Staff_WorkShift_SQL = new DataTable();
         DataTable Staff_WorkShift_SQL_Copy = new DataTable();
+        DataTable DepartmentType = new DataTable();
         DateTime StartDate;
         DateTime StopDate;
         TimeSpan Timespan;
@@ -190,7 +192,6 @@ namespace KaoQin
             //读取指定部门班次信息
             //先获取此部门的类别
             string sql3 = string.Format("select BMLB from KQ_BM where BMID='{0}'",comboBox1.SelectedValue);
-            DataTable DepartmentType = new DataTable();
             try
             {
                 DepartmentType = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql3);
@@ -470,7 +471,7 @@ namespace KaoQin
 
                 //写入排班主表
                 string sql1 = string.Format("update KQ_PB set XGRID='{0}',XGR='{1}',XGSJ='{2}' where PBID='{3}'", GlobalHelper.UserHelper.User["U_ID"].ToString(),
-                    GlobalHelper.UserHelper.User["U_NAME"].ToString(), Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()),PBID);
+                    GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime(),PBID);
 
                 try
                 {
@@ -631,7 +632,7 @@ namespace KaoQin
                 string sql2 = string.Format("insert into KQ_PB (PBID,BMID,YEAR,MONTH,CJRID,CJR,CJSJ) values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                     ID,comboBox1.SelectedValue, comboBoxYear.Text,
                     comboBoxMonth.Text, GlobalHelper.UserHelper.User["U_ID"].ToString(),
-                    GlobalHelper.UserHelper.User["U_NAME"].ToString(), Convert.ToDateTime(GlobalHelper.IDBHelper.GetServerDateTime()));
+                    GlobalHelper.UserHelper.User["U_NAME"].ToString(), GlobalHelper.IDBHelper.GetServerDateTime());
 
                 try
                 {
@@ -927,6 +928,8 @@ namespace KaoQin
 
             //将Excel文件内容插入DataTable
             int row;
+            bool unknownshift = false;//未知班次
+            Hashtable ShiftName = new Hashtable();
             for (int i = 0; i < Staff_WorkShift.Rows.Count; i++)
             {
                 //找出Excel表格中同名者所在行
@@ -944,6 +947,7 @@ namespace KaoQin
                 }
 
                 //将Excel表格中的排班信息插入DataTable
+                
                 if (row >= 0)
                 {
                     //指定的时间段
@@ -953,11 +957,25 @@ namespace KaoQin
                         //检验Excel中的排班是否和系统中的排班相同
                         for (int n = 0; n < WorkShift.Rows.Count; n++)
                         {
+                            if (dtExcel.Rows[row][k + PBColumn].ToString().Trim() == "")
+                            {
+                                break;
+                            }
+
                             if (dtExcel.Rows[row][k + PBColumn].ToString().Trim()== WorkShift.Rows[n][1].ToString())
                             {
                                 Staff_WorkShift.Rows[i][k+2] = WorkShift.Rows[n][0].ToString();
                                 break;
-                            }                             
+                            } 
+                            
+                            if (n == WorkShift.Rows.Count - 1)
+                            {
+                                unknownshift=true;
+                                if (ShiftName.Contains(dtExcel.Rows[row][k + PBColumn].ToString().Trim()) == false)
+                                {
+                                    ShiftName.Add(dtExcel.Rows[row][k + PBColumn].ToString().Trim(), 0);
+                                }
+                            }                            
                         }                     
                     }
                 }
@@ -1000,6 +1018,21 @@ namespace KaoQin
             }
 
             gridControl1.DataSource = Staff_WorkShift;
+
+            if (unknownshift)
+            {
+                StringBuilder text = new StringBuilder();
+                text.Append("未能识别的班次： \r\n");
+                foreach (DictionaryEntry de in ShiftName)
+                {
+                    text.Append(de.Key.ToString()+ "\r\n");
+                }
+                text.Append("\r\n 请在班次管理中添加以上班次！ \r\n");
+                unkownShift form1 = new unkownShift();
+                form1.unkownshift = text.ToString();
+                form1.LBID = DepartmentType.Rows[0][0].ToString();
+                form1.Show(this);
+            }
         }
 
         private void bandedGridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)

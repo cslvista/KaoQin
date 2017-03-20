@@ -15,6 +15,8 @@ namespace KaoQin.arrangement
         DataTable Type = new DataTable();
         DataTable WorkShift = new DataTable();
         public bool Authority_Shift_Edit = false;
+        public bool PB = false;//从排班管理中进入
+        public string PB_LBID = "";//从排班管理中进入时选择要显示的班次类别ID
         delegate void UpdateUI();
 
         public arrange()
@@ -28,7 +30,19 @@ namespace KaoQin.arrangement
             searchControl1.Properties.NullValuePrompt = "请输入时段名称";
             searchControl2.Properties.NullValuePrompt = "请输入部门类别";
             gridView2.OptionsBehavior.AutoExpandAllGroups = true;
-            toolStripButtonRefresh_Click(null, null);
+            
+            if (PB == false)
+            {
+                toolStripButtonRefresh_Click(null, null);
+            }
+            else
+            {
+                //从排班管理中进入
+                toolStripButtonRefresh.Enabled = false;
+                SearchSingleType();                
+                SearchWorkShift();
+            }
+            
         }
 
         private void UILocation()
@@ -39,6 +53,21 @@ namespace KaoQin.arrangement
             ButtonAlter.Location = new Point(ButtonAlter.Location.X, height);
             ButtonRefresh.Location = new Point(ButtonRefresh.Location.X, height);
             searchControl1.Location = new Point(searchControl1.Location.X, (panelControl2.Height - searchControl1.Height) / 2);
+        }
+
+        private void SearchSingleType()
+        {           
+            try
+            {
+                string sql =string.Format("select ID,BMLB from KQ_BMLB where ID='{0}'",PB_LBID);
+                Type = GlobalHelper.IDBHelper.ExecuteDataTable(DBLink.key, sql);
+                gridControl1.DataSource = Type;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误:" + ex.Message);
+                return;
+            }
         }
 
 

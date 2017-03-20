@@ -44,7 +44,7 @@
             this.btnRestMain.Name = "btnRestMain";
             this.btnRestMain.Size = new System.Drawing.Size(108, 26);
             this.btnRestMain.TabIndex = 49;
-            this.btnRestMain.Text = "每月休假汇总";
+            this.btnRestMain.Text = "每月余休记录";
             this.btnRestMain.Click += new System.EventHandler(this.btnRestMain_Click);
             // 
             // btnPersonRest
